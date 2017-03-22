@@ -23,7 +23,7 @@
     }
 </script>
 
-<style lang='sass'>
+<style lang='sass' scoped>
     .hd{
       width: 100%;
       height: 40px;

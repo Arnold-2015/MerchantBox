@@ -11,7 +11,7 @@ module.exports = {
         // 输出路径是 myProject/dist/static
         path: path.resolve(__dirname, '../dist/static'),
         publicPath: 'static/',
-        filename: '[name].[hash].js',
+        filename: 'main.[hash].js',
         chunkFilename: '[name].[chunkhash].js'
     },
     resolve: {

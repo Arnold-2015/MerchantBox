@@ -1,14 +1,15 @@
 // require.ensure 是 Webpack 的特殊语法，用来设置 code-split point
 const Login = resolve => {
-    require.ensure(['../view/login.vue'], () => {
-        resolve(require('../view/login.vue'));
+    require.ensure(['../view/index.vue'], () => {
+        resolve(require('../view/index.vue'));
     },'login');
 };
 const router = [{
     path: '/',
     name: 'login',
     component: Login
-}, {
+}
+, {
     path: '/index',
     name: 'index',
     component(resolve) {
@@ -23,6 +24,7 @@ const router = [{
 }, {
     path: '*',
     component: Login
-}];
+}
+];
 
 export default router;

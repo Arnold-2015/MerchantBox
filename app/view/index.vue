@@ -8,6 +8,7 @@
                      <span>项目列表</span>
                      <a href="" class="creat-new"><span></span>新建项目</a>
                  </div>
+                 <!-- 项目审核中 -->
                  <div class="pro-item">
                      <div class="pro-info-wrap">
                          <div class="pro-info">
@@ -36,6 +37,84 @@
                                          <span class="key-msg">5份</span>
                                          <span class="key-word">允许超募数</span>
                                      </li>
+                                    
+
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                 </div>
+                 <!-- 项目审核失败 -->
+                 <div class="pro-item">
+                     <div class="pro-info-wrap">
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <span>项目审核失败</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">3000</span>
+                                         <span class="key-word">目标总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">2000</span>
+                                         <span class="key-word">单份金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">30天</span>
+                                         <span class="key-word">招募时间</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">5份</span>
+                                         <span class="key-word">每人限购</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">5份</span>
+                                         <span class="key-word">允许超募数</span>
+                                     </li>
+                                     <div>
+                                         <a href="">编辑项目</a>
+                                     </div>
+
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                 </div>
+                 <!-- 待确认合伙人 -->
+                 <div class="pro-item">
+                     <div class="pro-info-wrap">
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <span>待确认合伙人</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">10%</span>
+                                         <span class="key-word">出让股份</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">20</span>
+                                         <span class="key-word">意向合伙人</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">3000</span>
+                                         <span class="key-word">已募集总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">2000</span>
+                                         <span class="key-word">单份金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">30天</span>
+                                         <span class="key-word">招募剩余时间</span>
+                                     </li>
                                      <div>
                                          <a href="">管理中心</a>
                                          <a href="">预览</a>
@@ -48,16 +127,104 @@
                          <img src="../assets/logo@3x.png" >
                      </div>
                  </div>
-                 
+                 <!-- 招募中 -->
+                 <div class="pro-item">
+                     <div class="pro-info-wrap">
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <span>招募中</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">10%</span>
+                                         <span class="key-word">出让股份</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">20</span>
+                                         <span class="key-word">意向合伙人</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">3000</span>
+                                         <span class="key-word">已募集总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">2000</span>
+                                         <span class="key-word">单份金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">30天</span>
+                                         <span class="key-word">招募剩余时间</span>
+                                     </li>
+                                     <div>
+                                         <a href="">管理中心</a>
+                                         <a href="">预览</a>
+                                     </div>
+
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                 </div>
+                 <!-- 履约中 -->
+                 <div class="pro-item">
+                     <div class="pro-info-wrap">
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <span>履约中</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">0</span>
+                                         <span class="key-word">合伙人 </span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">20</span>
+                                         <span class="key-word">已退出 </span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">0</span>
+                                         <span class="key-word">本金总余额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">20</span>
+                                         <span class="key-word">收益总余额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">30</span>
+                                         <span class="key-word">消费总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">3%</span>
+                                         <span class="key-word">出让股份</span>
+                                     </li>
+                                     <div>
+                                         <a href="">管理中心</a>
+                                         <a href="">预览</a>
+                                     </div>
+
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                 </div>
+
                  
              </div>
          </div>
          <sb></sb>
+         <!-- <qr></qr> -->
     </section>
 </template>
 <script>
     import nb from '../components/navbar.vue'
     import sb from '../components/sidebar.vue'
+    import qr from '../components/qrbar.vue'
     export default {
         filters: {
             
@@ -74,11 +241,11 @@
             
         },
         components:{
-           nb,sb
+           nb,sb,qr
         }
     }
 </script>
-<style lang='sass' scoped>
+<style lang="sass" scoped>
 $base-color:#C49F59;
    section{
            width:100%;
@@ -181,13 +348,14 @@ $base-color:#C49F59;
                                margin-right: 6%;
                                span{
                                    min-width: 70px;
-                                   height: 24px;
-                                   line-height: 24px;
+                                   height: 25px;
+                                   line-height: 25px;
                                    text-align: center;
                                }
                                .key-msg{
                                     font-size: 24px;
                                     font-family: 'DINCondensed-Bold';
+                                    font-weight: bold;
                                     color: #333;
                                }
                                .key-word{
@@ -204,10 +372,11 @@ $base-color:#C49F59;
                                 a{
                                     width: 90px;
                                     height: 25px;
+                                    line-height: 25px;
                                     margin-top: 12px;
                                     color: $base-color;
                                     background: url('../assets/forMore.png')no-repeat center right;
-                                    background-size: 8px;
+                                    background-size: 9.2px;
                                 }
                             }
                             

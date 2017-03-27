@@ -11,8 +11,8 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>项目名称之香蒲滨江店众筹项目</h1>
-                                 <span>招募中</span>
-                                 <a href="" class="creat-new">新建公告</a>
+                                 <span>审核中</span>
+                                 <a href="" class="creat-new">待确认有效合伙人</a>
                              </div>
                              <div class="low-bar">
                                      <li>
@@ -67,6 +67,7 @@
     import qr from '../components/qrbar.vue'
     import issue from '../components/issuelist.vue'
     import prepartner from '../components/prepartnerlist.vue'
+    require('../assets/list.scss')
     export default {
         filters: {
             
@@ -247,6 +248,8 @@ $base-color:#C49F59;
                 }
             }
 
-          } 
+          }
+   
+      
   }
 </style>

@@ -11,29 +11,31 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>项目名称之香蒲滨江店众筹项目</h1>
-                                 <span>招募中</span>
+                                 <span>履约中</span>
                                  <a href="" class="creat-new">新建公告</a>
+                                 <a href="" class="profit-entering">分红录入</a>
+                                 <a href="" class="consume-entering">消费录入</a>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">10%</span>
-                                         <span class="key-word">出让股份</span>
+                                         <span class="key-msg">1</span>
+                                         <span class="key-word">合伙人 </span>
                                      </li>
                                      <li>
                                          <span class="key-msg">20</span>
-                                         <span class="key-word">意向合伙人</span>
+                                         <span class="key-word">已退出 </span>
                                      </li>
                                      <li>
                                          <span class="key-msg">3000</span>
-                                         <span class="key-word">已募集总金额</span>
+                                         <span class="key-word">本金总余额</span>
                                      </li>
                                      <li>
                                          <span class="key-msg">2000</span>
-                                         <span class="key-word">单份金额</span>
+                                         <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">01-01-17</span>
-                                         <span class="key-word">项目开始时间</span>
+                                         <span class="key-msg">01</span>
+                                         <span class="key-word">消费总金额</span>
                                      </li>
                                      <div>
                                          <a href="">预览</a>
@@ -48,13 +50,19 @@
                  </div>
 
                  <ul class="menu-bar">
-                     <li :class="{active:isActive}" @click='setActiveTrue'>意向合伙人列表</li>
-                     <li :class="{active:!isActive}" @click='setActiveFalse'>公告列表</li>
+                     <li :class="{active:isActive==1}" @click='setActive(1)'>合伙人列表</li>
+                     <li :class="{active:isActive==2}" @click='setActive(2)'>分红列表</li>
+                     <li :class="{active:isActive==3}" @click='setActive(3)'>消费列表</li>
+                     <li :class="{active:isActive==4}" @click='setActive(4)'>公告列表</li>
                  </ul>
-                 <!-- 公告列表 -->
-                 <issue v-if="!isActive"></issue>
                  <!-- 合伙人列表 -->
-                 <prepartner v-if="isActive"></prepartner>
+                 <partner v-if="isActive==1"></partner>
+                 <!-- 分红列表 -->
+                 <profit v-if="isActive==2"></profit>
+                 <!-- 消费列表 -->
+                 <consume v-if="isActive==3"></consume>
+                 <!-- 公告列表 -->
+                 <issue v-if="isActive==4"></issue>
              </div>
          </div>
          <sb></sb>
@@ -66,29 +74,30 @@
     import sb from '../components/sidebar.vue'
     import qr from '../components/qrbar.vue'
     import issue from '../components/issuelist.vue'
-    import prepartner from '../components/prepartnerlist.vue'
+    import partner from '../components/partnerlist.vue'
+    import profit from '../components/profitlist.vue'
+    import consume from '../components/consumelist.vue'
+    require('../assets/list.scss')
     export default {
+          data() {
+            return {
+                isActive:1
+            }
+        },
         filters: {
             
         },
         methods:{
-          setActiveTrue(){
-            this.isActive=true
-          },
-          setActiveFalse(){
-            this.isActive=false
+          setActive(i){
+            this.isActive=i
           }
-        },
-        data() {
-            return {
-                isActive:true
-            }
+         
         },
         mounted() {
             
         },
         components:{
-           nb,sb,qr,issue,prepartner
+           nb,sb,qr,issue,partner,profit,consume
         }
     }
 </script>
@@ -150,8 +159,28 @@ $base-color:#C49F59;
                                 margin-top: 30px;
                                 margin-left: 2%;
                             }
+                            .consume-entering,.profit-entering{
+                            	        width:100px;
+                                        height:40px;
+                                        line-height:40px;
+                                        padding-left:20px;
+                                        border-radius:5px;
+                                        color:$base-color;
+                                        float:right;
+                                        text-align: center;
+                                        margin-top:30px;
+                                        margin-right:40px;
+                                        border:1px solid $base-color;
+                     
+                            }
+                            .consume-entering{
+                                background:url('../assets/consume-entering.png')no-repeat center left 20px;
+                            }
+                            .profit-entering{
+                            	background:url('../assets/profit-entering.png')no-repeat center left 20px;
+                            }
                             .creat-new{
-                                        width:150px;
+                                        width:120px;
                                         height:40px;
                                         line-height:40px;
                                         border-radius:5px;
@@ -247,6 +276,8 @@ $base-color:#C49F59;
                 }
             }
 
-          } 
+          }
+   
+      
   }
 </style>

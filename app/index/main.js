@@ -3,7 +3,7 @@ import loading from '../components/loading.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import routes from '../routers/router'
-require('./reset.scss')
+require('../assets/reset.scss')
 Vue.use(VueRouter);
 Vue.use(VueResource);
 

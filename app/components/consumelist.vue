@@ -2,13 +2,8 @@
     <div class="partner-bar">
     
      <div class="search-bar">
-         <select>
-           <option value ="全部">全部</option>
-           <option value ="有效合伙人">有效合伙人</option>
-           <option value="已退出合伙">已退出合伙</option>
-         </select>
-         <input  type="text" placeholder="输入姓名/卡号/手机号" >
-         <a class="search"><img src="../assets/search.png" ></a>
+         <input class="search-key" style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" >
+         <a class="search" style="left:280px"><img src="../assets/search.png" ></a>
          <a class="export">导出列表</a>
      </div>
      <table class="partner-list">
@@ -17,21 +12,17 @@
                     <td class="crowone">姓名</td>
                     <td class="crowtwo">手机号</td>
                     <td class="crowtwo">卡号</td>
-                    <td class="crowone">本金余额</td>
-                    <td class="crowone">占股</td>
-                    <td class="crowone">收益余额</td>
-                    <td class="crowone">收益余额</td>
-                    <td class="crowone">操作</td>
+                    <td class="crowone">消费类型</td>
+                    <td class="crowone">消费金额</td>
+                    <td class="crowtwo">消费时间</td>
                 </tr>
                 <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
                     <td class="crowone">赵钱孙李</td>
                     <td class="crowtwo">15033336666</td>
                     <td class="crowtwo">23444-22243-24222</td>
-                    <td class="crowone">30000</td>
-                    <td class="crowone">1%</td>
-                    <td class="crowone">2017/3/23/14:00</td>
-                    <td class="crowone">2000</td>
-                    <td class="crowone"><a>明细</a><a>退出</a></td>
+                    <td class="crowone">本金</td>
+                    <td class="crowone">2017</td>
+                    <td class="crowtwo">2016-3-23 12:00</td>
                 </tr>
                 
     </table>

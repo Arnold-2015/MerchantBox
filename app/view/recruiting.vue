@@ -67,6 +67,7 @@
     import qr from '../components/qrbar.vue'
     import issue from '../components/issuelist.vue'
     import prepartner from '../components/prepartnerlist.vue'
+    require('../assets/list.scss')
     export default {
         filters: {
             

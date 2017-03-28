@@ -12,9 +12,9 @@
                              <div class="up-bar">
                                  <h1>项目名称之香蒲滨江店众筹项目</h1>
                                  <span>履约中</span>
-                                 <a href="" class="creat-new">新建公告</a>
-                                 <a href="" class="profit-entering">分红录入</a>
-                                 <a href="" class="consume-entering">消费录入</a>
+                                 <a href=""  class="creat-new">新建公告</a>
+                                 <a @click='showProfitChange' class="profit-entering">分红录入</a>
+                                 <a @click='showConsumeChange' class="consume-entering">消费录入</a>
                              </div>
                              <div class="low-bar">
                                      <li>
@@ -38,7 +38,7 @@
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <div>
-                                         <a href="">预览</a>
+                                         <a @click='showQrChange'>预览</a>
                                      </div>
 
                              </div>
@@ -66,7 +66,10 @@
              </div>
          </div>
          <sb></sb>
-         <!-- <qr></qr> -->
+         <qr v-if="this.$store.state.showQr"></qr>
+         <consumebar v-if="this.$store.state.showConsume"></consumebar>
+         <profitbar v-if="this.$store.state.showProfit"></profitbar>
+
     </section>
 </template>
 <script>
@@ -77,11 +80,14 @@
     import partner from '../components/partnerlist.vue'
     import profit from '../components/profitlist.vue'
     import consume from '../components/consumelist.vue'
+    import consumebar from '../components/consumebar.vue'
+    import profitbar from '../components/profitbar.vue'
     require('../assets/list.scss')
     export default {
           data() {
             return {
                 isActive:1
+                
             }
         },
         filters: {
@@ -90,6 +96,15 @@
         methods:{
           setActive(i){
             this.isActive=i
+          },
+          showQrChange(){
+            this.$store.state.showQr = true;
+          },
+          showConsumeChange(){
+            this.$store.state.showConsume = true;
+          },
+          showProfitChange(){
+            this.$store.state.showProfit = true;
           }
          
         },
@@ -97,7 +112,7 @@
             
         },
         components:{
-           nb,sb,qr,issue,partner,profit,consume
+           nb,sb,qr,issue,partner,profit,consume,consumebar,profitbar
         }
     }
 </script>
@@ -174,10 +189,10 @@ $base-color:#C49F59;
                      
                             }
                             .consume-entering{
-                                background:url('../assets/consume-entering.png')no-repeat center left 20px;
+                                background:url('../assets/consume-entering.png')no-repeat center left 10px;
                             }
                             .profit-entering{
-                            	background:url('../assets/profit-entering.png')no-repeat center left 20px;
+                            	background:url('../assets/profit-entering.png')no-repeat center left 10px;
                             }
                             .creat-new{
                                         width:120px;

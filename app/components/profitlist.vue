@@ -21,7 +21,7 @@
                     <td class="crowone">30000</td>
                     <td class="crowone">3/12/2016</td>
                     <td class="crowtwo">3月第一次分红</td>
-                    <td class="crowone"><a>明细</a></td>
+                    <td class="crowone"><router-link to="profitdetail">明细</router-link></td>
                 </tr>
                 
     </table>

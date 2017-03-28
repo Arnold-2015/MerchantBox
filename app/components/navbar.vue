@@ -89,6 +89,7 @@ $base-color:#C49F59;
                 width:56px;
                 height:20px;
                 display:block;
+                font-size:14px;
                 margin:30px auto;
                 color:$base-color;
 

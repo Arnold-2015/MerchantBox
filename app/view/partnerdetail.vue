@@ -5,7 +5,7 @@
              <div class="main">
                  <span class="main-title">主页 / 项目管理 / 管理中心 /合伙人明细</span>
                  <div class="search-bar">
-                        <a class="toback">返回</a>
+                        <router-link class="toback" to="performing">返回</router-link>
                         <div class="info-bar">
                             <span class="title">姓名 赵钱孙李</span>
                             <span>手机号码 12345670000</span>

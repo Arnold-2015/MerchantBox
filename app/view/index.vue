@@ -116,7 +116,7 @@
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
-                                         <a href="">管理中心</a>
+                                         <router-link to="confirming">管理中心</router-link>
                                          <a href="">预览</a>
                                      </div>
 
@@ -157,7 +157,7 @@
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
-                                         <a href="">管理中心</a>
+                                         <router-link to="recruiting">管理中心</router-link>
                                          <a href="">预览</a>
                                      </div>
 
@@ -202,7 +202,7 @@
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <div>
-                                         <a href="">管理中心</a>
+                                         <router-link :to="{ path: 'performing', query: { projectId: '1234' }}">管理中心</router-link>
                                          <a href="">预览</a>
                                      </div>
 

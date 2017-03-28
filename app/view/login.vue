@@ -10,7 +10,7 @@
             <span class="lab">密码</span>
             <input type="tel" name="pw">
             <a class="forget">忘记密码？</a>
-            <div class="login">登录</div>
+            <div class="login" @click='login'>登录</div>
             <a class="nocount">没有账号?</a>
         </div>
         <p class="cr">Copyright © 2016-2017 杭州钒融科技有限公司 . All Rights Reserved </p>
@@ -23,6 +23,13 @@
     export default {
          mounted() {
            
+        },
+        methods:{
+            login(){
+                this.$router.push({
+                    name: 'index'
+                });
+            }
         }
     }
 </script>

@@ -31,7 +31,7 @@
                     <td class="crowone">1%</td>
                     <td class="crowone">2017/3/23/14:00</td>
                     <td class="crowone">2000</td>
-                    <td class="crowone"><a>明细</a><a>退出</a></td>
+                    <td class="crowone"><router-link to="partnerdetail">明细</router-link><a>退出</a></td>
                 </tr>
                 
     </table>

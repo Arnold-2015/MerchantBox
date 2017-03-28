@@ -1,6 +1,7 @@
 <template>
     <div class="qr">
     	<div class="qr-bar">
+            <span @click='showQrChange'></span>
     		<img src="../assets/logo@3x.png">
     		<a class="download">下载二维码</a>
     		<a class='preview'>在线预览</a>
@@ -9,7 +10,20 @@
 </template>
 
 <script> 
- 
+
+    export default {
+          data() {
+            return {
+                isActive:1
+            }
+        },
+        methods:{
+          showQrChange(){
+            this.$store.state.showQr = false;
+          }
+        }
+        
+    }
 </script>
       
 <style lang="sass" scoped>
@@ -26,8 +40,16 @@
     		width: 500px;
     		height: 500px;
     		background: #fff;
-    		margin: 200px auto;
+    		margin: 160px auto;
     		position: relative;
+            span{
+                width:10px;
+                height:10px;
+                background:url('../assets/cancel.png')no-repeat center center;
+                position: absolute;
+                top:10px;
+                right:10px;
+            }
     		img{
     			width: 300px;
     			height: 300px;

@@ -3,6 +3,7 @@ import loading from '../components/loading.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import routes from '../routers/router'
+import store from '../vuex/store.js'
 require('../assets/reset.scss')
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -20,7 +21,8 @@ var app = new Vue({
 	components: {
 		loading
 	},
-	router
+	router,
+	store
 });
 Vue.http.interceptors.push((request, next) => {
 	app.showLoading= true;

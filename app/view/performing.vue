@@ -1,6 +1,6 @@
 <template>
     <section>     
-         <nb></nb>
+         <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
                  <span class="main-title">主页 / 项目管理 / 管理中心</span>
@@ -12,7 +12,7 @@
                              <div class="up-bar">
                                  <h1>项目名称之香蒲滨江店众筹项目</h1>
                                  <span>履约中</span>
-                                 <a href=""  class="creat-new">新建公告</a>
+                                 <a @click='showIssueChange'  class="creat-new">新建公告</a>
                                  <a @click='showProfitChange' class="profit-entering">分红录入</a>
                                  <a @click='showConsumeChange' class="consume-entering">消费录入</a>
                              </div>
@@ -65,10 +65,11 @@
                  <issue v-if="isActive==4"></issue>
              </div>
          </div>
-         <sb></sb>
+         <!-- <sb></sb> -->
          <qr v-if="this.$store.state.showQr"></qr>
          <consumebar v-if="this.$store.state.showConsume"></consumebar>
          <profitbar v-if="this.$store.state.showProfit"></profitbar>
+         <issuebar v-if="this.$store.state.showIssue"></issuebar>
 
     </section>
 </template>
@@ -82,6 +83,7 @@
     import consume from '../components/consumelist.vue'
     import consumebar from '../components/consumebar.vue'
     import profitbar from '../components/profitbar.vue'
+    import issuebar from '../components/issuebar.vue'
     require('../assets/list.scss')
     export default {
           data() {
@@ -105,6 +107,9 @@
           },
           showProfitChange(){
             this.$store.state.showProfit = true;
+          },
+          showIssueChange(){
+            this.$store.state.showIssue = true;
           }
          
         },
@@ -112,7 +117,7 @@
             
         },
         components:{
-           nb,sb,qr,issue,partner,profit,consume,consumebar,profitbar
+           nb,sb,qr,issue,partner,profit,consume,consumebar,profitbar,issuebar
         }
     }
 </script>
@@ -120,7 +125,7 @@
 $base-color:#C49F59;
    section{
            width:100%;
-           height:100%;
+           // height:100%;
    }
   .content{
           width:100%;
@@ -137,6 +142,7 @@ $base-color:#C49F59;
                 line-height:60px;
                 margin-left:40px;
                 color:#999;
+                font-size:12px;
             }
             .pro-item{
                 width: 100%;
@@ -181,6 +187,7 @@ $base-color:#C49F59;
                                         padding-left:20px;
                                         border-radius:5px;
                                         color:$base-color;
+                                        font-size:14px;
                                         float:right;
                                         text-align: center;
                                         margin-top:30px;
@@ -189,10 +196,10 @@ $base-color:#C49F59;
                      
                             }
                             .consume-entering{
-                                background:url('../assets/consume-entering.png')no-repeat center left 10px;
+                                background:url('../assets/consume-entering.png')no-repeat center left 20px;
                             }
                             .profit-entering{
-                            	background:url('../assets/profit-entering.png')no-repeat center left 10px;
+                            	background:url('../assets/profit-entering.png')no-repeat center left 20px;
                             }
                             .creat-new{
                                         width:120px;
@@ -200,6 +207,7 @@ $base-color:#C49F59;
                                         line-height:40px;
                                         border-radius:5px;
                                         color:#fff;
+                                        font-size:14px;
                                         float:right;
                                         text-align: center;
                                         margin-top:30px;

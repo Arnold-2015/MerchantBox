@@ -40,6 +40,7 @@
         background: url('../assets/background.jpg')no-repeat center center;
         background-size: 100% 100%;
         position: absolute;
+        z-index:100;
         left: 0;
         top: 0;
         img{

@@ -5,7 +5,9 @@ const store = new Vuex.Store({
     state:{
         showQr:false,
         showConsume:false,
-        showProfit:false
+        showProfit:false,
+        showIssue:false,
+        showConfirm:false
     }
 });
 export default store;

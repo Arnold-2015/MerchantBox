@@ -1,6 +1,6 @@
 <template>
     <section>     
-         <nb></nb>
+         <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
                  <span class="main-title">主页 / 项目管理 / 管理中心</span>
@@ -12,7 +12,7 @@
                              <div class="up-bar">
                                  <h1>项目名称之香蒲滨江店众筹项目</h1>
                                  <span>审核中</span>
-                                 <a href="" class="creat-new">待确认有效合伙人</a>
+                                 <a @click='showConfirmChange' class="creat-new">待确认有效合伙人</a>
                              </div>
                              <div class="low-bar">
                                      <li>
@@ -36,7 +36,7 @@
                                          <span class="key-word">项目开始时间</span>
                                      </li>
                                      <div>
-                                         <a href="">预览</a>
+                                         <a @click='showQrChange'>预览</a>
                                      </div>
 
                              </div>
@@ -57,8 +57,9 @@
                  <prepartner v-if="isActive"></prepartner>
              </div>
          </div>
-         <sb></sb>
-         <!-- <qr></qr> -->
+         <!-- <sb></sb> -->
+         <qr v-if="this.$store.state.showQr"></qr>
+         <confirmbar v-if="this.$store.state.showConfirm"></confirmbar>
     </section>
 </template>
 <script>
@@ -67,6 +68,7 @@
     import qr from '../components/qrbar.vue'
     import issue from '../components/issuelist.vue'
     import prepartner from '../components/prepartnerlist.vue'
+    import confirmbar from '../components/confirmbar.vue'
     require('../assets/list.scss')
     export default {
         filters: {
@@ -76,8 +78,14 @@
           setActiveTrue(){
             this.isActive=true
           },
+          showQrChange(){
+            this.$store.state.showQr = true;
+          },
           setActiveFalse(){
             this.isActive=false
+          },
+          showConfirmChange(){
+            this.$store.state.showConfirm = true;
           }
         },
         data() {
@@ -89,7 +97,7 @@
             
         },
         components:{
-           nb,sb,qr,issue,prepartner
+           nb,sb,qr,issue,prepartner,confirmbar
         }
     }
 </script>
@@ -97,7 +105,6 @@
 $base-color:#C49F59;
    section{
            width:100%;
-           height:100%;
    }
   .content{
           width:100%;
@@ -114,6 +121,7 @@ $base-color:#C49F59;
                 line-height:60px;
                 margin-left:40px;
                 color:#999;
+                font-size:12px;
             }
             .pro-item{
                 width: 100%;
@@ -157,6 +165,7 @@ $base-color:#C49F59;
                                         line-height:40px;
                                         border-radius:5px;
                                         color:#fff;
+                                        font-size:14px;
                                         float:right;
                                         text-align: center;
                                         margin-top:30px;

@@ -58,12 +58,12 @@ const router = [{
         },'profitdetail');
     }
 },{
-    path: '/partnerdetail',
-    name: 'partnerdetail',
+    path: '/creprofirst',
+    name: 'creprofirst',
     component(resolve) {
-        require.ensure(['../view/partnerdetail.vue'], () => {
-            resolve(require('../view/partnerdetail.vue'));
-        },'partnerdetail');
+        require.ensure(['../view/creprofirst.vue'], () => {
+            resolve(require('../view/creprofirst.vue'));
+        },'creprofirst');
     }
 },{
     path: '/login',

@@ -1,5 +1,7 @@
 import Vue from 'Vue'
 import loading from '../components/loading.vue'
+import nb from '../components/navbar.vue'
+import sb from '../components/sidebar.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import routes from '../routers/router'
@@ -19,7 +21,7 @@ var app = new Vue({
 		showLoading: false
 	},
 	components: {
-		loading
+		loading,nb,sb
 	},
 	router,
 	store

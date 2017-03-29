@@ -1,12 +1,12 @@
 <template>
     <section>     
-         <nb></nb>
+         <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
                  <span class="main-title">主页 / 项目管理</span>
                  <div class="main-nav">
                      <span>项目列表</span>
-                     <a href="" class="creat-new"><span></span>新建项目</a>
+                     <router-link to="creprofirst" class="creat-new"><span></span>新建项目</router-link>
                  </div>
                  <!-- 项目审核中 -->
                  <div class="pro-item">
@@ -76,7 +76,7 @@
                                          <span class="key-word">允许超募数</span>
                                      </li>
                                      <div>
-                                         <a href="">编辑项目</a>
+                                         <router-link to="creprofirst">编辑项目</router-link>
                                      </div>
 
                              </div>
@@ -117,7 +117,7 @@
                                      </li>
                                      <div>
                                          <router-link to="confirming">管理中心</router-link>
-                                         <a href="">预览</a>
+                                         <a @click='showQrChange'>预览</a>
                                      </div>
 
                              </div>
@@ -158,7 +158,7 @@
                                      </li>
                                      <div>
                                          <router-link to="recruiting">管理中心</router-link>
-                                         <a href="">预览</a>
+                                         <a @click='showQrChange'>预览</a>
                                      </div>
 
                              </div>
@@ -203,7 +203,7 @@
                                      </li>
                                      <div>
                                          <router-link :to="{ path: 'performing', query: { projectId: '1234' }}">管理中心</router-link>
-                                         <a href="">预览</a>
+                                         <a @click='showQrChange'>预览</a>
                                      </div>
 
                              </div>
@@ -217,8 +217,8 @@
                  
              </div>
          </div>
-         <sb></sb>
-         <!-- <qr></qr> -->
+         <!-- <sb></sb> -->
+         <qr v-if="this.$store.state.showQr"></qr>
     </section>
 </template>
 <script>
@@ -230,7 +230,9 @@
             
         },
         methods:{
-          
+          showQrChange(){
+            this.$store.state.showQr = true;
+          }
         },
         data() {
             return {
@@ -249,7 +251,6 @@
 $base-color:#C49F59;
    section{
            width:100%;
-           height:100%;
    }
   .content{
           width:100%;
@@ -266,6 +267,7 @@ $base-color:#C49F59;
                 line-height:60px;
                 margin-left:40px;
                 color:#999;
+                font-size:12px;
             }
             .main-nav{
                 width:100%;
@@ -286,6 +288,7 @@ $base-color:#C49F59;
                      line-height:40px;
                      border-radius:5px;
                      color:#fff;
+                     font-size:14px;
                      float:right;
                      margin-top:10px;
                      margin-right:40px;

@@ -1,6 +1,6 @@
 <template>
     <section>     
-         <nb></nb>
+         <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
                  <span class="main-title">主页 / 项目管理 / 管理中心 /合伙人明细</span>
@@ -36,7 +36,7 @@
                 </table>
              </div>
          </div>
-         <sb></sb>
+         <!-- <sb></sb> -->
     </section>
 </template>
 <script>
@@ -67,7 +67,7 @@
 $base-color:#C49F59;
    section{
            width:100%;
-           height:100%;
+           // height:100%;
    }
   .content{
           width:100%;
@@ -84,6 +84,7 @@ $base-color:#C49F59;
                 line-height:60px;
                 margin-left:40px;
                 color:#999;
+                font-size:12px;
             }
             
 

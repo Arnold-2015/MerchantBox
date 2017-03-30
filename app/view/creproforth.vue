@@ -10,8 +10,43 @@
                          <li class="li-active">融资信息</li>
                          <li class="li-active">合同编辑</li>
                      </ul>
-                     <img src="../assets/crestep4.png"  >
+                     <img src="../assets/crestep4.png" >
                  </div>
+                 <div class="clear-fix">
+                 <div class="project-detail ">
+                   <span class="title">合同模板</span>
+                   <div class="compact-item">
+                     <div class="compact"></div>
+                     <span>股权投资：以净利润清算</span>
+                     <a class="preview">预览</a><a class="download">下载</a>
+                   </div>
+                   <div class="compact-item">
+                     <div class="compact"></div>
+                     <span>股权投资：以销售额清算</span>
+                     <a class="preview">预览</a><a class="download">下载</a>
+                   </div>
+                   <div class="compact-item">
+                     <div class="compact"></div>
+                     <span>项目合作：委托经营</span>
+                     <a class="preview">预览</a><a class="download">下载</a>
+                   </div>
+                   <div class="compact-item">
+                     <div class="compact"></div>
+                     <span>项目合作：委托销售</span>
+                     <a class="preview">预览</a><a class="download">下载</a>
+                   </div>
+                   <span class="title">上传合同</span>
+                   <a class="up-compact">上传合同</a>
+                 </div>
+                 <p class="describe">
+                   <span>步骤说明</span>
+                    1、选择合适的合同模板并下载<br>
+                    2、填写好合同中甲方信息<br>
+                    3、上传填写好的合同中，提交审核<br>
+                 </p>
+                 </div>
+                 <router-link to="creprothird" class="prev-step">上一步</router-link>
+                 <router-link to="index" class="next-step">提交审核</router-link>
              </div>
          </div>
     </section>
@@ -84,7 +119,119 @@ $base-color:#C49F59;
                     margin: 10px auto;
                 }
             }
-            
+            .clear-fix:after{
+                      content:".";        
+                      display:block;        
+                      height:0;        
+                      clear:both;        
+                      visibility:hidden; 
+              }
+            .project-detail{
+                width: 70%;
+                min-height: 540px;
+                float: left;
+                background: #fff;
+                margin-left: 40px;
+                margin-top: 20px;
+                border:1px solid #d7d7d7;
+                .compact-item{
+                  width: 380px;
+                  height: 90px;
+                  float: left;
+                  margin: 28px 0 42px 68px;
+                  position: relative;
+                  .compact{
+                    width: 72px;
+                    height: 90px;
+                    background: #D8D8D8;
+                    border: 1px solid #979797;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                  }
+                  span{
+                    position: absolute;
+                    width: 200px;
+                    height: 24px;
+                    line-height: 24px;
+                    left: 100px;
+                    color: #666;
+                  }
+                  .preview{
+                    position: absolute;
+                    left: 100px;
+                    top: 30px;
+                    color: $base-color;
+                  }
+                  .download{
+                    position: absolute;
+                    left: 180px;
+                    top: 30px;
+                    color: $base-color;
+                  }
+                }
+                .title{
+                  display: block;
+                  clear: both;
+                  width: 72px;
+                  height: 24px;
+                  line-height: 24px;
+                  margin-left: 68px;
+                  margin-top: 42px;
+                  color: #333;
+                  font-weight: bold;
+                }
+                .up-compact{
+                  width: 160px;
+                  height: 48px;
+                  line-height: 48px;
+                  background: $base-color;
+                  font-size: 14px;
+                  color: #fff;  
+                  border-radius: 2px;
+                  text-align: center;
+                  margin:20px 68px;
+                }
+              }
+              
+              .describe{
+                float: left;
+                font-size: 14px;
+                color: #666;
+                line-height: 20px;
+                margin-left: 30px;
+                margin-top: 60px;
+                span{
+                    font-size: 18px;
+                    font-weight: bold;  
+                    margin-bottom: 30px;
+                }
+              }
+            .prev-step{
+              float:left;
+              width: 158px;
+              height: 46px;
+              line-height: 46px;
+              background: #fff;
+              font-size: 14px;
+              color: #999;
+              border-radius: 2px;
+              border:1px solid #999;
+              text-align: center;
+              margin:40px 0 0 110px;
+              }
+              .next-step{
+              float:left;
+              width: 160px;
+              height: 48px;
+              line-height: 48px;
+              background: $base-color;
+              font-size: 14px;
+              color: #fff;
+              border-radius: 2px;
+              text-align: center;
+              margin:40px 30px;
+            }
 
           } 
   }

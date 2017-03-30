@@ -66,6 +66,30 @@ const router = [{
         },'creprofirst');
     }
 },{
+    path: '/creprosecond',
+    name: 'creprosecond',
+    component(resolve) {
+        require.ensure(['../view/creprosecond.vue'], () => {
+            resolve(require('../view/creprosecond.vue'));
+        },'creprosecond');
+    }
+},{
+    path: '/creprothird',
+    name: 'creprothird',
+    component(resolve) {
+        require.ensure(['../view/creprothird.vue'], () => {
+            resolve(require('../view/creprothird.vue'));
+        },'creprothird');
+    }
+},{
+    path: '/creproforth',
+    name: 'creproforth',
+    component(resolve) {
+        require.ensure(['../view/creproforth.vue'], () => {
+            resolve(require('../view/creproforth.vue'));
+        },'creproforth');
+    }
+},{
     path: '/login',
     name: 'login',
     component: Login

@@ -2,7 +2,7 @@
     <section>
 
         <img src="../assets/logo@3x.png">
-        <p class="title">六度盒子商家管理平台</>
+        <p class="title">六度盒子商家管理平台<p/>
         <div class="login-bar">
             <span class="login-title">商家登录</span>
             <span class="lab">账号</span>

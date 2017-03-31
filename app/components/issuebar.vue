@@ -5,21 +5,25 @@
                 <p>新建公告</p>
                 <span @click='showIssueChange'></span>    
             </div>
-         
-            <div class="container sale-info">
+            <div class="container">
+                <label :class="{ radioActive:basePicked==1,radioNomal:basePicked!=1 }"><input type="radio" name="project-kind" value="1" v-model="basePicked">普通公告</label>
+                <label :class="{ radioActive:basePicked==2,radioNomal:basePicked!=2 }"><input type="radio" name="project-kind" value="2" v-model="basePicked">延迟分红</label>
+            </div>
+            <div class="container sale-info" v-if="basePicked==2">
+                 
                 <span>延迟至</span>
                 <input type="text" class="data" placeholder="日历选择器">
                 <span class="text">每次分红只可延迟一次,逾期将扣除部分押金</span>
                 
             </div>
-            <div class="container profit-info">
+            <div class="container profit-info" v-if="basePicked==2">                
             	<span>延迟原因</span>
             	<textarea  cols="30" rows="10" ></textarea>
             </div>
-            <!-- <div class="container profit-info">
+            <div class="container profit-info" v-if="basePicked==1">
               <span>公告内容</span>
               <textarea  cols="30" rows="10" ></textarea>
-            </div> -->
+            </div>
             <div class="profit-over">发布</div>
     	</div>
     </div>
@@ -30,7 +34,7 @@
     export default {
           data() {
             return {
-                isActive:1
+                basePicked:1
             }
         },
         methods:{
@@ -72,6 +76,7 @@
                     left: 50px;
                     color: #333;
                 }
+               
            
                 span{
                 width:10px;
@@ -88,7 +93,29 @@
                 width: 580px;
                 position: relative;
                 margin: 0 auto;
-                
+                 label{
+                  height: 48px;
+                  line-height: 48px;
+                  color:#666;
+                  margin-right: 60px;
+                  input{
+                       width: 24px;
+                       height: 24px;
+                       position: relative;
+                       top:6px;
+                       filter: alpha(opacity=0);
+                       opacity: 0;
+                  }
+                 
+                }
+                .radioNomal{
+                       background: url('../assets/radio-nomal.png')no-repeat ;
+                       background-size: 24px 24px;
+                 }
+                 .radioActive{
+                       background: url('../assets/radio-active.png')no-repeat ;
+                       background-size: 24px 24px;
+                  }
             }
  
             .sale-info{

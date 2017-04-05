@@ -10,12 +10,12 @@ const router = [{
     component: Login
 }
 , {
-    path: '/index',
-    name: 'index',
+    path: '/promanage',
+    name: 'promanage',
     component(resolve) {
-        require.ensure(['../view/index.vue'], () => {
-            resolve(require('../view/index.vue'));
-        },'index');
+        require.ensure(['../view/promanage.vue'], () => {
+            resolve(require('../view/promanage.vue'));
+        },'promanage');
     }
 },{
     path: '/confirming',

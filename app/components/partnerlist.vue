@@ -1,7 +1,7 @@
 <template>
     <div class="partner-bar">
     
-     <div class="search-bar">
+     <div class="search-bar" >
          <select>
            <option value ="全部">全部</option>
            <option value ="有效合伙人">有效合伙人</option>

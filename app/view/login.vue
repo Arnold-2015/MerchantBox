@@ -27,7 +27,7 @@
         methods:{
             login(){
                 this.$router.push({
-                    name: 'index'
+                    name: 'promanage'
                 });
             }
         }

@@ -46,7 +46,7 @@
                  </p>
                  </div>
                  <router-link to="creprothird" class="prev-step">上一步</router-link>
-                 <router-link to="index" class="next-step">提交审核</router-link>
+                 <router-link to="promanage" class="next-step">提交审核</router-link>
              </div>
          </div>
     </section>

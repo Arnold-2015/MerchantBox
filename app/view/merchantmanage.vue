@@ -4,8 +4,8 @@
              <div class="main">
                  <span class="main-title">主页 / 商家管理</span>
                  <div class="main-nav">
-                     <span>商家管理列表</span>
-                     <router-link to="creprofirst" class="creat-new"><span></span>新建商家</router-link>
+                     <span>商家管理</span>
+                     <a @click='showMerchantChange' class="creat-new"><span></span>新建商家</a>
                  </div>
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" >
@@ -39,18 +39,21 @@
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
+         <merchant v-if="this.$store.state.showMerchant"></merchant>
     </section>
 </template>
 <script>
     import qr from '../components/qrbar.vue'
+    import merchant from '../components/cremerchant.vue'
+    
     require('../assets/list.scss')
     export default {
         filters: {
             
         },
         methods:{
-          showQrChange(){
-            this.$store.state.showQr = true;
+          showMerchantChange(){
+            this.$store.state.showMerchant = true;
           }
         },
         data() {
@@ -62,7 +65,7 @@
             
         },
         components:{
-           qr
+           qr,merchant
         }
     }
 </script>

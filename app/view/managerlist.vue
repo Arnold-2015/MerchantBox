@@ -5,7 +5,7 @@
                  <span class="main-title">主页 / 管理员账户</span>
                  <div class="main-nav">
                      <span>管理员账户列表</span>
-                     <router-link to="creprofirst" class="creat-new"><span></span>新建管理员</router-link>
+                     <a @click='showManagerChange' class="creat-new"><span></span>新建管理员</a>
                  </div>
                  
                 <table class="partner-list">
@@ -27,18 +27,20 @@
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
+         <manager v-if="this.$store.state.showManager"></manager>
     </section>
 </template>
 <script>
     import qr from '../components/qrbar.vue'
+    import manager from '../components/cremanager.vue'
     require('../assets/list.scss')
     export default {
         filters: {
             
         },
         methods:{
-          showQrChange(){
-            this.$store.state.showQr = true;
+          showManagerChange(){
+            this.$store.state.showManager = true;
           }
         },
         data() {
@@ -50,7 +52,7 @@
             
         },
         components:{
-           qr
+           qr,manager
         }
     }
 </script>

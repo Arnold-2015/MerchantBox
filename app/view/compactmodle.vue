@@ -1,0 +1,1 @@
+compactmodle.vue

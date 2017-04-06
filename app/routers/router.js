@@ -17,6 +17,54 @@ const router = [{
             resolve(require('../view/promanage.vue'));
         },'promanage');
     }
+}, {
+    path: '/merchantmanage',
+    name: 'merchantmanage',
+    component(resolve) {
+        require.ensure(['../view/merchantmanage.vue'], () => {
+            resolve(require('../view/merchantmanage.vue'));
+        },'merchantmanage');
+    }
+}, {
+    path: '/customermanage',
+    name: 'customermanage',
+    component(resolve) {
+        require.ensure(['../view/customermanage.vue'], () => {
+            resolve(require('../view/customermanage.vue'));
+        },'customermanage');
+    }
+}, {
+    path: '/ordermanage',
+    name: 'ordermanage',
+    component(resolve) {
+        require.ensure(['../view/ordermanage.vue'], () => {
+            resolve(require('../view/ordermanage.vue'));
+        },'ordermanage');
+    }
+}, {
+    path: '/compactmanage',
+    name: 'compactmanage',
+    component(resolve) {
+        require.ensure(['../view/compactmanage.vue'], () => {
+            resolve(require('../view/compactmanage.vue'));
+        },'compactmanage');
+    }
+}, {
+    path: '/compactmodle',
+    name: 'compactmodle',
+    component(resolve) {
+        require.ensure(['../view/compactmodle.vue'], () => {
+            resolve(require('../view/compactmodle.vue'));
+        },'compactmodle');
+    }
+}, {
+    path: '/managerlist',
+    name: 'managerlist',
+    component(resolve) {
+        require.ensure(['../view/managerlist.vue'], () => {
+            resolve(require('../view/managerlist.vue'));
+        },'managerlist');
+    }
 },{
     path: '/confirming',
     name: 'confirming',

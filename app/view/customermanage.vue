@@ -4,7 +4,7 @@
              <div class="main">
                  <span class="main-title">主页 / 用户管理</span>
                  <div class="main-nav">
-                     <span>用户管理列表</span>
+                     <span>用户管理</span>
                  </div>
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" >

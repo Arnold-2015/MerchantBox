@@ -281,6 +281,7 @@ $base-color:#C49F59;
                     margin-left:40px;
                     color:#333;
                     font-size:18px;
+                    font-weight:bold;
                 }
                 .creat-new{
                      width:150px;

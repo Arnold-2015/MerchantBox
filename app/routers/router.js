@@ -8,8 +8,7 @@ const router = [{
     path: '/',
     name: 'login',
     component: Login
-}
-, {
+}, {
     path: '/promanage',
     name: 'promanage',
     component(resolve) {
@@ -17,7 +16,15 @@ const router = [{
             resolve(require('../view/promanage.vue'));
         },'promanage');
     }
-}, {
+},  {
+    path: '/superpromanage',
+    name: 'superpromanage',
+    component(resolve) {
+        require.ensure(['../view/superpromanage.vue'], () => {
+            resolve(require('../view/superpromanage.vue'));
+        },'superpromanage');
+    }
+},{
     path: '/merchantmanage',
     name: 'merchantmanage',
     component(resolve) {

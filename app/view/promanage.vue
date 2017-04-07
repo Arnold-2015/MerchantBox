@@ -8,71 +8,35 @@
                      <span>项目列表</span>
                      <router-link to="creprofirst" class="creat-new"><span></span>新建项目</router-link>
                  </div>
-                 <!-- 项目审核中 -->
-                 <div class="pro-item">
+                 
+                 <div class="pro-item" v-for="item in projectList">
+                   <!-- 草稿 -->
+                <div v-if="item.projectStatus==1">
                      <div class="pro-info-wrap">
                          <div class="pro-info">
                              <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
-                                 <span>项目审核中</span>
+                                 <h1>{{item.projectName}}</h1>
+                                 <span>草稿</span>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">3000</span>
+                                         <span class="key-msg">{{item.totalMoney}}</span>
                                          <span class="key-word">目标总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">2000</span>
+                                         <span class="key-msg">{{item.unitPrice}}</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">30天</span>
+                                         <span class="key-msg">{{item.validityPeriod}}</span>
                                          <span class="key-word">招募时间</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">5份</span>
+                                         <span class="key-msg">{{item.copiesLimit}}</span>
                                          <span class="key-word">每人限购</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">5份</span>
-                                         <span class="key-word">允许超募数</span>
-                                     </li>
-                                    
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
-                     </div>
-                 </div>
-                 <!-- 项目审核失败 -->
-                 <div class="pro-item">
-                     <div class="pro-info-wrap">
-                         <div class="pro-info">
-                             <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
-                                 <span>项目审核失败</span>
-                             </div>
-                             <div class="low-bar">
-                                     <li>
-                                         <span class="key-msg">3000</span>
-                                         <span class="key-word">目标总金额</span>
-                                     </li>
-                                     <li>
-                                         <span class="key-msg">2000</span>
-                                         <span class="key-word">单份金额</span>
-                                     </li>
-                                     <li>
-                                         <span class="key-msg">30天</span>
-                                         <span class="key-word">招募时间</span>
-                                     </li>
-                                     <li>
-                                         <span class="key-msg">5份</span>
-                                         <span class="key-word">每人限购</span>
-                                     </li>
-                                     <li>
-                                         <span class="key-msg">5份</span>
+                                         <span class="key-msg">{{item.extraSaleCount}}</span>
                                          <span class="key-word">允许超募数</span>
                                      </li>
                                      <div>
@@ -85,22 +49,101 @@
                      <div class="pro-icon">
                          <img src="../assets/logo@3x.png" >
                      </div>
-                 </div>
-                 <!-- 待确认合伙人 -->
-                 <div class="pro-item">
+                </div>
+                     <!-- 项目审核中 -->
+                 <div v-else-if="item.projectStatus==2">
+                     <div class="pro-info-wrap" >
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>{{item.projectName}}</h1>
+                                 <span>项目审核中</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-word">目标总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-word">单份金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-word">招募时间</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-word">每人限购</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-word">允许超募数</span>
+                                     </li>
+                                    
+
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                </div>
+                    <!-- 项目审核失败 -->
+                <div v-else-if="item.projectStatus==3">
                      <div class="pro-info-wrap">
                          <div class="pro-info">
                              <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <h1>{{item.projectName}}</h1>
+                                 <span>项目审核失败</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-word">目标总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-word">单份金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-word">招募时间</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-word">每人限购</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-word">允许超募数</span>
+                                     </li>
+                                     <div>
+                                         <router-link to="creprofirst">编辑项目</router-link>
+                                     </div>
+
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                </div>
+                 
+                 <!-- 待确认合伙人 -->
+                <div v-else-if="item.projectStatus==5">
+                     <div class="pro-info-wrap">
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>{{item.projectName}}</h1>
                                  <span>待确认合伙人</span>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">10%</span>
+                                         <span class="key-msg">{{item.totalShares}}</span>
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">20</span>
+                                         <span class="key-msg">{{item.wantPartnerCount}}</span>
                                          <span class="key-word">意向合伙人</span>
                                      </li>
                                      <li>
@@ -108,11 +151,11 @@
                                          <span class="key-word">已募集总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">2000</span>
+                                         <span class="key-msg">{{item.unitPrice}}</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">30天</span>
+                                         <span class="key-msg">{{item.validityPeriod}}</span>
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
@@ -126,22 +169,22 @@
                      <div class="pro-icon">
                          <img src="../assets/logo@3x.png" >
                      </div>
-                 </div>
+                </div>
                  <!-- 招募中 -->
-                 <div class="pro-item">
+                <div v-else-if="item.projectStatus==4">
                      <div class="pro-info-wrap">
                          <div class="pro-info">
                              <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <h1>{{item.projectName}}</h1>
                                  <span>招募中</span>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">10%</span>
+                                         <span class="key-msg">{{item.totalShares}}</span>
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">20</span>
+                                         <span class="key-msg">{{item.wantPartnerCount}}</span>
                                          <span class="key-word">意向合伙人</span>
                                      </li>
                                      <li>
@@ -149,11 +192,11 @@
                                          <span class="key-word">已募集总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">2000</span>
+                                         <span class="key-msg">{{item.unitPrice}}</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">30天</span>
+                                         <span class="key-msg">{{item.validityPeriod}}</span>
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
@@ -167,42 +210,42 @@
                      <div class="pro-icon">
                          <img src="../assets/logo@3x.png" >
                      </div>
-                 </div>
+                </div>
                  <!-- 履约中 -->
-                 <div class="pro-item">
+                <div v-else-if="item.projectStatus==6">
                      <div class="pro-info-wrap">
                          <div class="pro-info">
                              <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <h1>{{item.projectName}}</h1>
                                  <span>履约中</span>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">0</span>
+                                         <span class="key-msg">{{item.partnerCount}}</span>
                                          <span class="key-word">合伙人 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">20</span>
+                                         <span class="key-msg">{{item.exitPartnerCount}}</span>
                                          <span class="key-word">已退出 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">0</span>
+                                         <span class="key-msg">{{item.totalPrincipalBalance}}</span>
                                          <span class="key-word">本金总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">20</span>
+                                         <span class="key-msg">{{item.earningTotalBalance}}</span>
                                          <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">30</span>
+                                         <span class="key-msg">{{item.cousumeTotalMoney}}</span>
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">3%</span>
+                                         <span class="key-msg">{{item.totalShares}}</span>
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <div>
-                                         <router-link :to="{ path: 'performing', query: { projectId: '1234' }}">管理中心</router-link>
+                                         <router-link :to="{ path: 'performing', query: { projectId:item.projectId }}">管理中心</router-link>
                                          <a @click='showQrChange'>预览</a>
                                      </div>
 
@@ -210,10 +253,48 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img src="../assets/logo@3x.png">
                      </div>
                  </div>
+                   <!-- 项目失败 -->
+                 <div v-else-if="item.projectStatus==7">
+                     <div class="pro-info-wrap" >
+                         <div class="pro-info">
+                             <div class="up-bar">
+                                 <h1>{{item.projectName}}</h1>
+                                 <span>项目失败</span>
+                             </div>
+                             <div class="low-bar">
+                                     <li>
+                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-word">目标总金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-word">单份金额</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-word">招募时间</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-word">每人限购</span>
+                                     </li>
+                                     <li>
+                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-word">允许超募数</span>
+                                     </li>
+                                    
 
+                             </div>
+                         </div>
+                     </div>
+                     <div class="pro-icon">
+                         <img src="../assets/logo@3x.png" >
+                     </div>
+                </div>
+            </div>
                  
              </div>
          </div>
@@ -229,15 +310,31 @@
         filters: {
             
         },
+        props: ['api'],
+           data() {
+            return {
+                apiurl:this.api,
+                projectList:{}
+            }
+        },
         methods:{
           showQrChange(){
             this.$store.state.showQr = true;
           }
         },
-        data() {
-            return {
-                
+        beforeMount(){
+            console.log(this.userInfo);
+            let options={
+               
             }
+            this.$http.post(this.apiurl+'/project/list',options)
+                .then((response) => {
+                   this.projectList=response.data.result;
+                   console.log(this.projectList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         },
         mounted() {
             

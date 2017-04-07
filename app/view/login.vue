@@ -6,9 +6,9 @@
         <div class="login-bar">
             <span class="login-title">商家登录</span>
             <span class="lab">账号</span>
-            <input type="tel" name="tel">
+            <input type="text" name="tel" v-model='userName'>
             <span class="lab">密码</span>
-            <input type="tel" name="pw">
+            <input type="text" name="pw" v-model='password'>
             <a class="forget">忘记密码？</a>
             <div class="login" @click='login'>登录</div>
             <a class="nocount">没有账号?</a>
@@ -21,14 +21,34 @@
 <script>
 
     export default {
-         mounted() {
-           
+        props: ['api'],
+        data() {
+            return {
+                apiurl:this.api,
+                userName :'15957195346',
+                password :'123456',  
+                userInfo:this.$store.state.userInfo           
+            }
         },
         methods:{
             login(){
-                this.$router.push({
-                    name: 'promanage'
+                let options={
+                    'userName':this.userName,
+                    'password':this.password
+                }
+
+                this.$http.post(this.apiurl+'/merchant/login',options)
+                .then((response) => {
+                   this.$store.state.userInfo= response.data.result;
+                   // console.log(this.$store.state.userInfo);
+                   this.$router.push({
+                    name: 'superpromanage'
                 });
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+                              
             }
         }
     }

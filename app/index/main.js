@@ -12,13 +12,14 @@ Vue.use(VueResource);
 
 // 实例化VueRouter
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes
 });
 var app = new Vue({
 	el: '#app',
 	data: {
-		showLoading: false
+		showLoading: false,
+		api:'http://192.168.7.12:8080'
 	},
 	components: {
 		loading,nb,sb
@@ -26,10 +27,13 @@ var app = new Vue({
 	router,
 	store
 });
+// 拦截器
 Vue.http.interceptors.push((request, next) => {
-	app.showLoading= true;
-	next((response) => {
-		app.showLoading  = false;
-		return response
-	});
-});
+
+  request.headers.set('merchantId', app.$store.state.userInfo.merchantId)
+  request.headers.set('token',app.$store.state.userInfo.token)
+  console.log(request.headers)
+  next(response => {
+    return response
+  })
+})

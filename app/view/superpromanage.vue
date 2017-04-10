@@ -77,7 +77,6 @@
           }
         },
         beforeMount(){
-            console.log(this.userInfo);
             let options={
                 'nickNameOrUserPhone':this.nickNameOrUserPhone,
                 'pageSize':10

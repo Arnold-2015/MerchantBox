@@ -28,9 +28,9 @@
                     <td class="crowone">{{item.nickName}}</td>
                     <td class="crowone">{{item.userPhone}}</td>
                     <td class="crowone">{{item.projectCount}}</td>
-                    <td class="crowone">23456199023456790</td>
-                    <td class="crowtwo">2017</td>
-                    <td class="crowone">快捷发起</td>
+                    <td class="crowone">{{item.idNo}}</td>
+                    <td class="crowtwo">{{item.totalMoney}}</td>
+                    <td class="crowone">{{item.dividendTotalMoney}}</td>
                     <td class="crowone">{{item.status}}</td>
                     <td class="crowtwo"><router-link to="partnerdetail">修改</router-link><a>查看</a></td>
                 </tr>

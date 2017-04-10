@@ -9,8 +9,7 @@ const store = new Vuex.Store({
         showIssue:false,
         showConfirm:false,
         showMerchant:false,
-        showManager:false,
-        userInfo:{}
+        showManager:false
     }
 });
 export default store;

@@ -56,14 +56,29 @@
         filters: {
             
         },
-        methods:{
-          
-        },
+        props: ['api'],
         data() {
             return {
-                active:[false,true]
+                apiurl:this.api,
+                option:{
+                  projectId:this.$store.state.projectId,
+                  contractUrl:''
+                }
+                
             }
         },
+        methods:{
+          forthStep(){
+            let options=this.option;
+            this.$http.post(this.apiurl+'/project/forth',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          }
+        }, 
         mounted() {
             
         },

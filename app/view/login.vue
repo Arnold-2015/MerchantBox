@@ -26,8 +26,7 @@
             return {
                 apiurl:this.api,
                 userName :'15957195346',
-                password :'123456',  
-                userInfo:this.$store.state.userInfo           
+                password :'123456'         
             }
         },
         methods:{
@@ -40,7 +39,8 @@
                 this.$http.post(this.apiurl+'/merchant/login',options)
                 .then((response) => {
                    this.$store.state.userInfo= response.data.result;
-                   // console.log(this.$store.state.userInfo);
+                   localStorage.setItem('merchantId', response.data.result.merchantId)
+                   localStorage.setItem('token', response.data.result.token)
                    this.$router.push({
                     name: 'superpromanage'
                 });

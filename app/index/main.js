@@ -29,10 +29,11 @@ var app = new Vue({
 });
 // 拦截器
 Vue.http.interceptors.push((request, next) => {
-
-  request.headers.set('merchantId', app.$store.state.userInfo.merchantId)
-  request.headers.set('token',app.$store.state.userInfo.token)
-  console.log(request.headers)
+  const merchantId=localStorage.getItem('merchantId')
+  const token=localStorage.getItem('token')
+  request.headers.set('merchantId', merchantId)
+  request.headers.set('token',token)
+  // console.log(request.headers)
   next(response => {
     return response
   })

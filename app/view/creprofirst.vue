@@ -16,14 +16,14 @@
                    <span style="display:block">项目头图</span><img><a>上传图片</a><span class="remind">建议尺寸：750*606像素</span>
                  </div>
                  <div class="info-item">
-                   <span>项目名称</span><input placeholder="请输入您的项目名称" type="text">
+                   <span>项目名称</span><input placeholder="请输入您的项目名称" type="text" v-model='option.projectName'>
                  </div>
                  <div class="info-item">
-                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text">
+                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text" v-model='option.address'>
                  </div>
                  <div class="info-item" >
                    <span style="display:block">项目简介</span><textarea placeholder="请填写说明，例如：
-一家不高冷的葡萄酒体验馆，邀您当合伙人"  cols="30" rows="10"></textarea>
+一家不高冷的葡萄酒体验馆，邀您当合伙人"  cols="30" rows="10" v-model='option.projectDesc'></textarea>
                  </div>
                  <router-link to="creprosecond" class="next-step">下一步</router-link>
              </div>
@@ -35,13 +35,30 @@
         filters: {
             
         },
-        methods:{
-          
-        },
+        props: ['api'],
         data() {
             return {
-                active:[false,true]
+                active:[false,true],
+                apiurl:this.api,
+                option:{}
             }
+        },
+        methods:{
+          upImg(){
+
+          },
+          firstStep(){
+            let options=this.option;
+            this.$http.post(this.apiurl+'/project/first',options)
+                .then((response) => {
+                   this.projectId=response.data.result.projectId;
+                   this.$store.state.projectId=this.projectId;
+                   console.log(this.projectId)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          }
         },
         mounted() {
             

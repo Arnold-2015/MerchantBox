@@ -16,33 +16,35 @@
                  <div class="info-bar container">
                    <div class="info-item">
                    <span>项目类型：</span>
-                   <label :class="{ radioActive:basePicked==1,radioNomal:basePicked!=1 }"><input type="radio" name="project-kind" value="1" v-model="basePicked">股权投资</label>
-                   <label :class="{ radioActive:basePicked==2,radioNomal:basePicked!=2 }"><input type="radio" name="project-kind" value="2" v-model="basePicked">项目合作</label>
+                   <label :class="{ radioActive:option.projectType==1,radioNomal:option.projectType!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.projectType">股权投资</label>
+                   <label :class="{ radioActive:option.projectType==2,radioNomal:option.projectType!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.projectType">项目合作</label>
                    </div>                  
-                   <div class="info-item">
+                   <!-- <div class="info-item">
                    <span>甲方(项目发起人)：</span><input class="base-info" type="text" placeholder="请填写甲方名称">
+                   </div> -->
+                   <div class="info-item" v-if="option.projectType==1">
+                   <span>项目估值(元)：</span><input class="base-info" type="text" placeholder="请填写项目估值" v-model='option.projectValuation'>
                    </div>
-                   <div class="info-item" v-if="basePicked==1">
-                   <span>项目估值(元)：</span><input class="base-info" type="text" placeholder="请填写项目估值">
-                   </div>
-                   <div class="info-item" v-else="basePicked==2">
+                   <!-- <div class="info-item" v-else="basePicked==2">
                    <span>丙方(合作方)：</span><input class="base-info" type="text" placeholder="请填写丙方名称">
+                   </div> -->
+                   <div class="info-item">
+                   <span>目标众筹金额(元)：</span><input class="base-info" type="text" placeholder="请填写目标众筹金额 " v-model='option.totalMoney'><span v-if="option.projectType==1">出让占公司股份： 20%</span>
+                   <!-- <input v-if="basePicked==1" class="base-info" type="text" placeholder="20% "> -->
                    </div>
                    <div class="info-item">
-                   <span>目标众筹金额(元)：</span><input class="base-info" type="text" placeholder="请填写目标众筹金额 "><span v-if="basePicked==1">出让占公司股份： </span>
-                   <input v-if="basePicked==1" class="base-info" type="text" placeholder="20% ">
+                   <span>认购份数(份)：</span><input class="base-info" type="text" placeholder="请填写认购分数 " v-model='option.saleCount'><span>超募份数(份)：</span>
+                   <input class="base-info" type="text" placeholder="14 " v-model='option.saleCount'>
                    </div>
                    <div class="info-item">
-                   <span>认购份数(份)：</span><input class="base-info" type="text" placeholder="请填写认购分数 "><span>超募份数(份)：</span><input class="base-info" type="text" placeholder="14 ">
+                   <span>单份金额(元)：</span><input class="base-info" type="text" placeholder="请输入单份金额" v-model='option.unitPrice'><span>每份占股：</span>
+                   <!-- <input class="base-info" type="text" placeholder="2% "> -->
                    </div>
                    <div class="info-item">
-                   <span>单份金额(元)：</span><input class="base-info" type="text" placeholder="请输入单份金额"><span>每份占股：</span><input class="base-info" type="text" placeholder="2% ">
+                   <span>每人限购份数(份)：</span><input class="base-info" type="text" placeholder="请输入每人限购份数" v-model='option.copiesLimit'>
                    </div>
                    <div class="info-item">
-                   <span>每人限购份数(份)：</span><input class="base-info" type="text" placeholder="请输入每人限购份数">
-                   </div>
-                   <div class="info-item">
-                   <span>融资周期(天)：</span><input class="base-info" type="text" placeholder="30"><span>以项目上线时间为起始时间</span>
+                   <span>融资周期(天)：</span><input class="base-info" type="text" placeholder="30" v-model='option.validityPeriod'><span>以项目上线时间为起始时间</span>
                    </div>
                    <div class="info-item">
                    <span>投资周期：</span>
@@ -57,63 +59,68 @@
                  <div class="info-bar container">
                    <div class="info-item add-border">
                    <span>回报周期: </span>
-                   <label :class="{ radioActive:returnPicked==1,radioNomal:returnPicked!=1 }"><input type="radio" name="project-kind" value="1" v-model="returnPicked">月</label>
-                   <label :class="{ radioActive:returnPicked==2,radioNomal:returnPicked!=2 }"><input type="radio" name="project-kind" value="2" v-model="returnPicked">季度</label>
-                   <label :class="{ radioActive:returnPicked==3,radioNomal:returnPicked!=3 }"><input type="radio" name="project-kind" value="3" v-model="returnPicked">半年</label>
-                   <label :class="{ radioActive:returnPicked==4,radioNomal:returnPicked!=4 }"><input type="radio" name="project-kind" value="4" v-model="returnPicked">年</label>
+                   <label :class="{ radioActive:option.salesProjectVo.returnCycle==1,radioNomal:option.salesProjectVo.returnCycle!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.salesProjectVo.returnCycle">月</label>
+                   <label :class="{ radioActive:option.salesProjectVo.returnCycle==2,radioNomal:option.salesProjectVo.returnCycle!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.salesProjectVo.returnCycle">季度</label>
+                   <label :class="{ radioActive:option.salesProjectVo.returnCycle==3,radioNomal:option.salesProjectVo.returnCycle!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.salesProjectVo.returnCycle">半年</label>
+                   <label :class="{ radioActive:option.salesProjectVo.returnCycle==4,radioNomal:option.salesProjectVo.returnCycle!=4 }"><input type="radio" name="project-kind" value="4" v-model="option.salesProjectVo.returnCycle">年</label>
                    </div>
                    <div class="info-item">
                    <span>销售额阶梯设置</span>
                    </div>
                    <div class="info-item">
-                   <div class="info-wrap"><span>月销售额未达到：</span><input class="return-info" type="text" > 元 </div><span>月销售额回报：</span><input class="return-info" type="text" >%
+                   <div class="info-wrap"><span>月销售额未达到：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesNoReach'> 元 </div><span>月销售额回报：</span>
+                   <input class="return-info" type="text"  v-model='option.salesProjectVo.returnSales'>%
                    </div>
                    <div class="info-item">
-                   <div class="info-wrap"><span>月销售额达到(含)：</span><input class="return-info" type="text" > 至 <input class="return-info" type="text" ></div>
-                   <span>月销售额回报：</span><input class="return-info" type="text" >%
+                   <div class="info-wrap"><span>月销售额达到(含)：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[0].reachMoney'> 至 
+                   <input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[0].reachMoney'></div>
+                   <span>月销售额回报：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[0].returnRate'>%
                    </div>
                    <div class="info-item add-border">
-                   <div class="info-wrap"><span>月销售额达到(含)：</span><input class="return-info" type="text" > 至 <input class="return-info" type="text" ></div>
-                   <span>月销售额回报：</span><input class="return-info" type="text" >%
+                   <div class="info-wrap"><span>月销售额达到(含)：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[1].reachMoney'> 至 
+                   <input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[1].reachMoney'></div>
+                   <span>月销售额回报：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[1].returnRate'>%
                    </div>
                    <div class="info-item add-border">
-                   <span>回报说明 </span><textarea cols="30" rows="10" placeholder="填写店铺目前营业状态；预计月销售额；折合年化利率"></textarea>
+                   <span>回报说明 </span><textarea cols="30" rows="10" placeholder="填写店铺目前营业状态；预计月销售额；折合年化利率" v-model='option.salesProjectVo.returnExplain'></textarea>
                    </div>
                    <div class="info-item ">
                    <span>退出机制 </span>
-                   <textarea cols="30" rows="10" placeholder="例：消费可随时退出、6月后可协商退出、12月后强制退出。退出比例根据净利润/销售额确定"></textarea>
+                   <textarea cols="30" rows="10" placeholder="例：消费可随时退出、6月后可协商退出、12月后强制退出。退出比例根据净利润/销售额确定" v-model='option.salesProjectVo.exitExplain'></textarea>
                    </div>
                  </div>
                  <span class="title">特权设置</span>
                  <div class="info-bar container">
                    <div class="info-item">
                    <span>允许消费方式</span>
-                   <label :class="{ radioActive:consumePicked==1,radioNomal:consumePicked!=1 }"><input type="radio" name="project-kind" value="1" v-model="consumePicked">都支持</label>
-                   <label :class="{ radioActive:consumePicked==2,radioNomal:consumePicked!=2 }"><input type="radio" name="project-kind" value="2" v-model="consumePicked">本金消费</label>
-                   <label :class="{ radioActive:consumePicked==3,radioNomal:consumePicked!=3 }"><input type="radio" name="project-kind" value="3" v-model="consumePicked">收益消费</label>
+                   <label :class="{ radioActive:option.consumeRightVo.consumeType==1,radioNomal:option.consumeRightVo.consumeType!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.consumeRightVo.consumeType">都支持</label>
+                   <label :class="{ radioActive:option.consumeRightVo.consumeType==2,radioNomal:option.consumeRightVo.consumeType!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.consumeRightVo.consumeType">本金消费</label>
+                   <label :class="{ radioActive:option.consumeRightVo.consumeType==3,radioNomal:option.consumeRightVo.consumeType!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.consumeRightVo.consumeType">收益消费</label>
                    </div>
                    <div class="info-item">
-                   <span>本金消费折扣：</span><input class="return-info" type="text" placeholder="1-10"><input class="profit-info" type="text" placeholder="补充说明">
+                   <span>本金消费折扣：</span><input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.principalConsumeDiscount'>
+                   <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.principalConsumeMemo'>
                    </div>
                    <div class="info-item add-border">
-                   <span>收益消费折扣：</span><input class="return-info" type="text" placeholder="1-10"><input class="profit-info" type="text" placeholder="补充说明">
+                   <span>收益消费折扣：</span><input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.earningsDiscount '>
+                   <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.earningsMemo'>
                    </div>
                    <div class="info-item">
-                   <span>特权卡名称：</span><input class="base-info" type="text" placeholder="建议店铺名(不超过9个字)">
+                   <span>特权卡名称：</span><input class="base-info" type="text" placeholder="建议店铺名(不超过9个字)" v-model='option.privilegeCardName'>
                    </div>
                    <div class="info-item add-border">
                    <span>特权卡样式：</span>
                    </div>
                    <div class="info-item">
                    <span>特权卡权益</span><span class="remind">点亮选择你的特权卡权益</span>
-                   <profitpanel></profitpanel>   
+                   <profitpanel :partnerRightVo='option.partnerRightVo'></profitpanel>   
                    </div>
                    <div class="info-item ">
                    <span>合伙人特权说明 </span>
                    <textarea cols="30" rows="10" placeholder="请输入您的合伙人权益卡说明，例：
 1、享受8折优惠
 2、每次来店消费，赠送合伙人专属定制礼品
-3、更多不定期的定制权益，欢迎咨询店长"></textarea>
+3、更多不定期的定制权益，欢迎咨询店长" v-model='option.partnerRightVo.partnerRightDetail'></textarea>
                    </div>
                  </div>
                  <router-link to="creprosecond" class="prev-step">上一步</router-link>
@@ -128,17 +135,38 @@
         filters: {
             
         },
+        props: ['api'],
         data() {
             return {
-                basePicked:1,
-                returnPicked:1,
-                consumePicked:1
+                apiurl:this.api,
+                option:{
+                  projectId:this.$store.state.projectId,
+                  projectType:1,
+                  salesProjectVo:{
+                    returnCycle:1,
+                    salesReachInfos:[{},{}]
+                  },
+                  consumeRightVo:{
+                    consumeType:1
+                  },
+                  partnerRightVo:{
+
+                  }
+                }
             }
         },
         methods:{
-          
+          thirdStep(){
+            let options=this.option;
+            this.$http.post(this.apiurl+'/project/third',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          }
         },
-      
         mounted() {
             
         },

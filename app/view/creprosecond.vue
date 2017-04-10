@@ -26,13 +26,26 @@
         filters: {
             
         },
-        methods:{
-          
-        },
+        props: ['api'],
         data() {
             return {
-                active:[false,true]
+                apiurl:this.api,
+                option:{
+                  projectId:this.$store.state.projectId
+                }
             }
+        },
+        methods:{
+          secondStep(){
+            let options=this.option;
+            this.$http.post(this.apiurl+'/project/second',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          }
         },
         mounted() {
             

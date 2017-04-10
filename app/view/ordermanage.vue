@@ -7,8 +7,8 @@
                      <span>订单管理</span>
                  </div>
                  <div class="search-bar">
-                 <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" >
-                 <a class="search"  style="left:280px"><img src="../assets/search.png" ></a>
+                 <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="nickNameOrUserPhone">
+                 <a class="search"  style="left:280px"><img src="../assets/search.png" @click="search"></a>
                  <a class="export">导出列表</a>
                 </div>
                 <table class="partner-list">
@@ -24,16 +24,16 @@
                     <td class="crowone">支付时间</td>
                     <td class="crowtwo">状态</td>
                 </tr>
-                <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
-                    <td class="crowone">盒友1号</td>
-                    <td class="crowtwo">赵钱孙李</td>
-                    <td class="crowone">赵钱孙李</td>
-                    <td class="crowone">12345670000</td>
-                    <td class="crowtwo">23456199023456790</td>
-                    <td class="crowone">2000</td>
-                    <td class="crowone">2016/03/21</td>
-                    <td class="crowone">认证用户</td>
-                    <td class="crowtwo"><router-link to="partnerdetail">查看</router-link></td>
+                <tr v-for="(item,index) in orderList" :class='{active:active[index%2]}'>
+                    <td class="crowone">{{item.orderCode}}</td>
+                    <td class="crowtwo">{{item.projectName}}</td>
+                    <td class="crowone">{{item.customerRealName}}</td>
+                    <td class="crowone">{{item.phone}}</td>
+                    <td class="crowtwo">{{item.idNo}}</td>
+                    <td class="crowone">{{item.buyCount}}</td>
+                    <td class="crowone">{{item.orderMoney}}</td>
+                    <td class="crowone">{{item.modifyTime}}</td>
+                    <td class="crowtwo">{{item.status}}</td>
                 </tr>
                 
                 </table>
@@ -49,15 +49,46 @@
         filters: {
             
         },
+        props: ['api'],
+        data() {
+            return {
+                active:[false,true],
+                apiurl:this.api,
+                nickNameOrUserPhone:'',
+                orderList:{}
+            }
+        },
         methods:{
           showQrChange(){
             this.$store.state.showQr = true;
+          },
+          search(){
+            let options={
+                'nickNameOrUserPhone':this.nickNameOrUserPhone,
+                'pageSize':10
+            }
+            this.$http.post(this.apiurl+'/order/list',options)
+                .then((response) => {
+                   this.orderList=response.data.result;
+                   console.log(this.orderList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         },
-        data() {
-            return {
-                active:[false,true]
+        beforeMount(){
+            let options={
+                'pageSize':10
             }
+            this.$http.post(this.apiurl+'/order/list',options)
+                .then((response) => {
+                   this.orderList=response.data.result;
+                   console.log(this.orderList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         },
         mounted() {
             

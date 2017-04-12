@@ -67,7 +67,8 @@
           search(){
             let options={
                 'realNameOrUserPhoneOrIDNo':this.realNameOrUserPhoneOrIDNo,
-                'pageSize':10
+                'pageSize':10,
+                'pageNum':1
             }
             alert(this.realNameOrUserPhoneOrIDNo)
             this.$http.post(this.apiurl+'/customer',options)
@@ -83,7 +84,8 @@
        
         beforeMount(){
             let options={
-                'pageSize':10
+                'pageSize':10,
+                'pageNum':1
             }
             this.$http.post(this.apiurl+'/customer',options)
                 .then((response) => {

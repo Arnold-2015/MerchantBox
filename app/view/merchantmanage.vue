@@ -67,7 +67,8 @@
           search(){
             let options={
                 'nickNameOrUserPhone':this.nickNameOrUserPhone,
-                'pageSize':10
+                'pageSize':10,
+                'pageNum':1
             }
             this.$http.post(this.apiurl+'/merchant/list',options)
                 .then((response) => {
@@ -81,7 +82,8 @@
         },
         beforeMount(){
             let options={
-                'pageSize':10
+                'pageSize':10,
+                'pageNum':1
             }
             this.$http.post(this.apiurl+'/merchant/list',options)
                 .then((response) => {

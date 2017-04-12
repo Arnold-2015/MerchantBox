@@ -324,7 +324,8 @@
         },
         beforeMount(){
             let options={
-               
+               'pageSize':10,
+               'pageNum':1
             }
             this.$http.post(this.apiurl+'/project/list',options)
                 .then((response) => {

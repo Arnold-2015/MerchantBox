@@ -2,49 +2,49 @@
    <div class="profit-bar">
                    <div class="special-icon">
                          <div  class="icon " :class="{incon1Active:active1,incon1:!active1}" @click="changeActive(1)">
-                           <input type="checkbox"  value="1" v-model="checkedProfits">
+                           <input type="checkbox"  value="1" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active1}">折扣</p>
                    </div>
                    <div class="special-icon">
                          <div  class="icon " :class="{incon2Active:active2,incon2:!active2}" @click="changeActive(2)">
-                           <input type="checkbox"  value="2" v-model="checkedProfits">
+                           <input type="checkbox"  value="2" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active2}">免单</p>
                    </div>
                    <div class="special-icon">
                          <div  class="icon " :class="{incon3Active:active3,incon3:!active3}" @click="changeActive(3)">
-                           <input type="checkbox"  value="3" v-model="checkedProfits">
+                           <input type="checkbox"  value="3" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active3}">免费车位</p>
                    </div>
                     <div class="special-icon">
                          <div  class="icon " :class="{incon4Active:active4,incon4:!active4}" @click="changeActive(4)">
-                           <input type="checkbox"  value="4" v-model="checkedProfits">
+                           <input type="checkbox"  value="4" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active4}">免排队</p>
                    </div>
                    <div class="special-icon">
                          <div  class="icon " :class="{incon5Active:active5,incon5:!active5}" @click="changeActive(5)">
-                           <input type="checkbox"  value="5" v-model="checkedProfits">
+                           <input type="checkbox"  value="5" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active5}">专属包间</p>
                    </div>
                    <div class="special-icon">
                          <div  class="icon " :class="{incon6Active:active6,incon6:!active6}" @click="changeActive(6)">
-                           <input type="checkbox"  value="6" v-model="checkedProfits">
+                           <input type="checkbox"  value="6" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active6}">定制礼品</p>
                    </div>
                    <div class="special-icon">
                          <div  class="icon " :class="{incon7Active:active7,incon7:!active7}" @click="changeActive(7)">
-                           <input type="checkbox"  value="7" v-model="checkedProfits">
+                           <input type="checkbox"  value="7" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active7}">专属接待</p>
                    </div>
                    <div class="special-icon">
                          <div  class="icon " :class="{incon8Active:active8,incon8:!active8}" @click="changeActive(8)">
-                           <input type="checkbox"  value="8" v-model="checkedProfits">
+                           <input type="checkbox"  value="8" v-model="checkedProfits" @change='setProfits'>
                          </div>
                          <p :class="{pactive:active8}">其他权益</p>
                    </div>
@@ -79,8 +79,13 @@
             this.active6=this.active[6];
             this.active7=this.active[7];
             this.active8=this.active[8];
-          }
+          },
+          setProfits(){
+          this.$store.state.partnerRightList=this.checkedProfits;
+          console.log(this.$store.state.partnerRightList)
         }
+        }
+
         
     }
 </script>

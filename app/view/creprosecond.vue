@@ -14,14 +14,25 @@
                  </div>
                  <span style="font-weight:bold">项目详情</span>
                  <span class="remind">填写品牌故事、店铺相关图片、团队介绍、店铺优势、目前经营状况等信息</span>
-                 <div class="project-detail"></div>
+                 <div class="project-detail">
+                  <quill-editor :options="editorOption">
+                  </quill-editor>
+                 </div>
                  <router-link to="creprofirst" class="prev-step">上一步</router-link>
-                 <router-link to="creprothird" class="next-step">下一步</router-link>
+                 <a  class="next-step" @click='secondStep'>下一步</a>
              </div>
          </div>
     </section>
 </template>
 <script>
+    import Vue from 'Vue'
+    import VueQuillEditor from 'vue-quill-editor'
+    Vue.use(VueQuillEditor)
+    import Quill from 'quill'
+    // import { ImageImport } from '../node_modules/ImageImport.js'
+    // import { ImageResize } from '../node_modules/ImageResize.js'
+    // Quill.register('modules/imageImport', ImageImport)
+    // Quill.register('modules/imageResize', ImageResize)
     export default {
         filters: {
             
@@ -30,8 +41,32 @@
         data() {
             return {
                 apiurl:this.api,
+                editorOption: {
+          modules: {
+            toolbar: [
+              [{ 'size': ['small', false, 'large','huge'] }],
+              ['bold', 'italic'],
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'header': ['1','2','3','4','5','6']}],
+              ['link', 'image'],
+              [{ 'color': [] }], 
+              [{ 'font': [] }],
+              [{ 'align': [] }],
+            ],
+            history: {
+              delay: 1000,
+              maxStack: 50,
+              userOnly: false
+            },
+            // imageImport: true,
+            // imageResize: {
+              // displaySize: true
+            // }
+          }
+        },
                 option:{
-                  projectId:this.$store.state.projectId
+                  projectId:this.$store.state.projectId,
+                  detail:'111'
                 }
             }
         },
@@ -40,7 +75,9 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/project/second',options)
                 .then((response) => {
-                   
+                  this.$router.push({
+                    name: 'creprothird'
+                });
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -58,6 +95,7 @@
 <style lang='sass' scoped>
 $base-color:#C49F59;
    section{ width:100%;}
+   
   .content{
           width:100%;
           min-height:100%;
@@ -117,11 +155,11 @@ $base-color:#C49F59;
               }
               .project-detail{
                 width: 76%;
-                height: 510px;
-                background: #f8f8f8;
+                height: 500px;
+                /*background: #f8f8f8;*/
                 margin-left: 40px;
                 margin-top: 20px;
-                border:1px solid #d7d7d7;
+                /*border:1px solid #d7d7d7;*/
               }
               .prev-step{
               float:left;
@@ -134,7 +172,7 @@ $base-color:#C49F59;
               border-radius: 2px;
               border:1px solid #999;
               text-align: center;
-              margin:40px 0 0 110px;
+              margin:80px 0 0 110px;
               }
               .next-step{
               float:left;
@@ -146,7 +184,7 @@ $base-color:#C49F59;
               color: #fff;
               border-radius: 2px;
               text-align: center;
-              margin:40px 30px;
+              margin:80px 30px 16px 30px;
             }
             
 

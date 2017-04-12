@@ -36,7 +36,9 @@
                      <a class="preview">预览</a><a class="download">下载</a>
                    </div>
                    <span class="title">上传合同</span>
-                   <a class="up-compact">上传合同</a>
+                   <a class="up-compact">上传合同
+                   <input type="file" :accept="accepts" id="upFile" @change='upFile' >
+                   </a>
                  </div>
                  <p class="describe">
                    <span>步骤说明</span>
@@ -46,7 +48,7 @@
                  </p>
                  </div>
                  <router-link to="creprothird" class="prev-step">上一步</router-link>
-                 <router-link to="promanage" class="next-step">提交审核</router-link>
+                 <a class="next-step" @click='forthStep'>提交审核</a>
              </div>
          </div>
     </section>
@@ -60,6 +62,7 @@
         data() {
             return {
                 apiurl:this.api,
+                accepts:'application/pdf',
                 option:{
                   projectId:this.$store.state.projectId,
                   contractUrl:''
@@ -68,11 +71,25 @@
             }
         },
         methods:{
+          upFile(event){
+            var file=event.target.files[0];
+            const formData = new FormData();
+            formData.append('file', file);     
+            this.$http.post(this.apiurl+'/file/upload',formData)
+                .then((response) => {
+                   console.log(response.data);
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
           forthStep(){
             let options=this.option;
-            this.$http.post(this.apiurl+'/project/forth',options)
+            this.$http.post(this.apiurl+'/project/fourth',options)
                 .then((response) => {
-                   
+                   this.$router.push({
+                    name: 'promanage'
+                });
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -197,6 +214,7 @@ $base-color:#C49F59;
                   font-weight: bold;
                 }
                 .up-compact{
+                  position: relative;
                   width: 160px;
                   height: 48px;
                   line-height: 48px;
@@ -206,6 +224,15 @@ $base-color:#C49F59;
                   border-radius: 2px;
                   text-align: center;
                   margin:20px 68px;
+                  input{
+                       position: absolute;
+                       display: inline-block;
+                       opacity: 0;
+                       width: 160px;
+                       height: 48px;
+                       left: 0;
+                       top: 0;
+                  }
                 }
               }
               

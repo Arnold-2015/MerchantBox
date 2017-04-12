@@ -34,9 +34,10 @@
         filters: {
             
         },
+        props: ['api'],
         data() {
             return {
-                parm:'',
+                apiurl:this.api,
                 active:[false,true]
             }
         },

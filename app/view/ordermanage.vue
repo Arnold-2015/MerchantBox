@@ -7,7 +7,7 @@
                      <span>订单管理</span>
                  </div>
                  <div class="search-bar">
-                 <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="nickNameOrUserPhone">
+                 <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="realNameOrPhoneOrProjectName">
                  <a class="search"  style="left:280px"><img src="../assets/search.png" @click="search"></a>
                  <a class="export">导出列表</a>
                 </div>
@@ -54,7 +54,7 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
-                nickNameOrUserPhone:'',
+                realNameOrPhoneOrProjectName:'',
                 orderList:{}
             }
         },
@@ -64,7 +64,7 @@
           },
           search(){
             let options={
-                'nickNameOrUserPhone':this.nickNameOrUserPhone,
+                'realNameOrPhoneOrProjectName':this.realNameOrPhoneOrProjectName,
                 'pageSize':10,
                 'pageNum':1
             }

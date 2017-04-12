@@ -48,7 +48,7 @@
                    </div>
                    <div class="info-item">
                    <span>投资周期：</span>
-                   <select v-model='option.investmentPeriod'>
+                   <select v-model='period'>
                      <option >6个月</option>
                      <option >12个月</option>
                      <option >18个月</option>
@@ -107,16 +107,16 @@
                    <div class="info-item add-border" style="height:300px">
                    <span>特权卡样式：</span>
                    <div class="upbar">
-                     <img style="width:86px;height:86px">
+                     <img style="width:86px;height:86px"   :src='option.privilegeLogo'>
                    <a class="file">上传店铺logo
-                       <input type="file" :accept="accepts" id="upImg" @change='upImg' >
+                       <input type="file" :accept="accepts" id="upImg" @change='upImg(0)' >
                    </a>
                    <span class="tip">建议尺寸：750*606像素</span>
                    </div>
                    <div class="upbar">
-                     <img style="width:160px;height:90px">
+                     <img style="width:160px;height:90px"   :src='option.privilegeBg'>
                    <a class="file" style="left:380px">上传卡片背景
-                       <input type="file" :accept="accepts" id="upImg" @change='upImg' >
+                       <input type="file" :accept="accepts" id="upImg" @change='upImg(1)' >
                    </a>
                    <span class="tip" style="left:350px">建议尺寸：750*606像素</span>
                    </div>
@@ -152,10 +152,13 @@
             return {
                 apiurl:this.api,
                 accepts:'image/jpeg,image/jpg,image/png',
+                period:'6个月',
                 option:{
                   projectId:this.$store.state.projectId,
                   projectType:1,
                   investmentPeriod:1,
+                  privilegeLogo:'',
+                  privilegeBg :'',
                   salesProjectVo:{
                     returnCycle:1,
                     salesReachInfos:[{},{}]
@@ -163,29 +166,42 @@
                   consumeRightVo:{
                     consumeType:1
                   },
-                  partnerRightVo:{
-
-                  }
+                  partnerRightVo:{}
                 }
             }
         },
         methods:{
           add(){this.option.salesProjectVo.salesReachInfos.push({})},
           reduce(){this.option.salesProjectVo.salesReachInfos.pop()},
-          upImg(event){
+          upImg(item){
             var file=event.target.files[0];
             const formData = new FormData();
             formData.append('file', file);     
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
-                   this.$store.state.projectId=response.data.result.projectId;
+                   if(item==0){
+                    this.option.privilegeLogo=response.data.result.msg
+                   }else{
+                    this.option.privilegeBg=response.data.result.msg
+                   }
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
           },
+          periodfilter(value){
+                if(value=='6个月'){
+                  return 1
+                }else if(value=='12个月'){
+                  return 2
+                }else{
+                  return 3
+                }
+            },
           thirdStep(){
             let options=this.option;
+            options.partnerRightVo.partnerRightList=this.$store.state.partnerRightList;
+            options.investmentPeriod=this.periodfilter(this.period);
             this.$http.post(this.apiurl+'/project/third',options)
                 .then((response) => {
                    this.$router.push({

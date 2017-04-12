@@ -77,7 +77,7 @@
             formData.append('file', file);     
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
-                   console.log(response.data);
+                   this.option.contractUrl=response.data.result.msg
                 })
                 .catch(function(response) {
                     console.log(response)

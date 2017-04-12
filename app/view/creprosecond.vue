@@ -15,7 +15,7 @@
                  <span style="font-weight:bold">项目详情</span>
                  <span class="remind">填写品牌故事、店铺相关图片、团队介绍、店铺优势、目前经营状况等信息</span>
                  <div class="project-detail">
-                  <quill-editor :options="editorOption">
+                  <quill-editor :options="editorOption" v-model='option.detail'>
                   </quill-editor>
                  </div>
                  <router-link to="creprofirst" class="prev-step">上一步</router-link>
@@ -29,44 +29,41 @@
     import VueQuillEditor from 'vue-quill-editor'
     Vue.use(VueQuillEditor)
     import Quill from 'quill'
-    // import { ImageImport } from '../node_modules/ImageImport.js'
-    // import { ImageResize } from '../node_modules/ImageResize.js'
-    // Quill.register('modules/imageImport', ImageImport)
-    // Quill.register('modules/imageResize', ImageResize)
+    import { ImageImport } from '../modules/ImageImport.js'
+    import { ImageResize } from '../modules/ImageResize.js'
+    Quill.register('modules/imageImport', ImageImport)
+    Quill.register('modules/imageResize', ImageResize)
     export default {
-        filters: {
-            
-        },
         props: ['api'],
         data() {
             return {
                 apiurl:this.api,
                 editorOption: {
-          modules: {
-            toolbar: [
-              [{ 'size': ['small', false, 'large','huge'] }],
-              ['bold', 'italic'],
-              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              [{ 'header': ['1','2','3','4','5','6']}],
-              ['link', 'image'],
-              [{ 'color': [] }], 
-              [{ 'font': [] }],
-              [{ 'align': [] }],
-            ],
-            history: {
-              delay: 1000,
-              maxStack: 50,
-              userOnly: false
-            },
-            // imageImport: true,
-            // imageResize: {
-              // displaySize: true
-            // }
-          }
-        },
+                   modules: {
+                     toolbar: [
+                       [{ 'size': ['small', false, 'large','huge'] }],
+                       ['bold', 'italic'],
+                       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                       [{ 'header': ['1','2','3','4','5','6']}],
+                       ['link', 'image'],
+                       [{ 'color': [] }], 
+                       [{ 'font': [] }],
+                       [{ 'align': [] }],
+                     ],
+                     history: {
+                       delay: 1000,
+                       maxStack: 50,
+                       userOnly: false
+                     },
+                     imageImport: true,
+                     imageResize: {
+                       displaySize: true
+                     }
+                   }
+                 },
                 option:{
                   projectId:this.$store.state.projectId,
-                  detail:'111'
+                  detail:'请在这里编辑项目详情（图片支持拖拽缩放）'
                 }
             }
         },
@@ -75,6 +72,7 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/project/second',options)
                 .then((response) => {
+                  console.log(this.option.detail)
                   this.$router.push({
                     name: 'creprothird'
                 });
@@ -86,16 +84,12 @@
         },
         mounted() {
             
-        },
-        components:{
-           
         }
     }
 </script>
 <style lang='sass' scoped>
 $base-color:#C49F59;
    section{ width:100%;}
-   
   .content{
           width:100%;
           min-height:100%;

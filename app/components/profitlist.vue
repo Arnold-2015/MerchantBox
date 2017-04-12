@@ -14,13 +14,13 @@
                     <td class="crowtwo">分红说明</td>
                     <td class="crowone">操作</td>
                 </tr>
-                <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
-                    <td class="crowone">0000123455</td>
-                    <td class="crowone">1503</td>
-                    <td class="crowone">23%</td>
-                    <td class="crowone">30000</td>
-                    <td class="crowone">3/12/2016</td>
-                    <td class="crowtwo">3月第一次分红</td>
+                <tr v-for="(item,index) in profitList" :class='{active:active[index%2]}'>
+                    <td class="crowone">{{item.dividendCode}}</td>
+                    <td class="crowone">{{item.totalMoney}}</td>
+                    <td class="crowone">{{item.totalMoney}}</td>
+                    <td class="crowone">{{item.headCount}}</td>
+                    <td class="crowone">{{item.dividendTime}}</td>
+                    <td class="crowtwo">{{item.memo}}</td>
                     <td class="crowone"><router-link to="profitdetail">明细</router-link></td>
                 </tr>
                 
@@ -33,14 +33,31 @@
         filters: {
             
         },
+        props: ['apiurl'],
         data() {
             return {
-                parm:'',
-                active:[false,true]
+                apiurl:this.apiurl,
+                active:[false,true],
+                projectId:'81013538870fdfe011b06c211e601aec'
             }
         },
-        mounted() {
-            
+        methods:{
+          
+        },
+        beforeMount(){
+            let options={
+               'projectId':this.projectId,
+               'pageSize':10,
+               'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/dividend/list',options)
+                .then((response) => {
+                   this.profitList=response.data.result;
+                   console.log(this.profitList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         }
     }
 </script>

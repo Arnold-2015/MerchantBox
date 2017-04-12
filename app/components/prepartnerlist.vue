@@ -35,14 +35,46 @@
         filters: {
             
         },
+        props: ['apiurl'],
         data() {
             return {
-                parm:'',
-                active:[false,true]
+                apiurl:this.apiurl,
+                active:[false,true],
+                projectId:'81013538870fdfe011b06c211e601aec',
+                partnerNameOrCardNoOrPhone:''
             }
         },
-        mounted() {
-            
+        methods:{
+          search(){
+            let options={
+                'nickNameOrUserPhone':this.partnerNameOrCardNoOrPhone,
+                'pageSize':10,
+                'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/consume/list',options)
+                .then((response) => {
+                   this.consumeList=response.data.result;
+                   console.log(this.consumeList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          }
+        },
+        beforeMount(){
+            let options={
+               'projectId':this.projectId,
+               'pageSize':10,
+               'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/consume/list',options)
+                .then((response) => {
+                   this.consumeList=response.data.result;
+                   console.log(this.consumeList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         }
     }
 </script>

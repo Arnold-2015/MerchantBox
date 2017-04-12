@@ -44,6 +44,10 @@ module.exports = {
             { 
                 test: /\.scss$/, 
                 loader: 'style!css!sass?sourceMap'
+            },
+            { 
+                test: /\.css$/, 
+                loader: 'style!css!sass?sourceMap'
             }
                     
         ]

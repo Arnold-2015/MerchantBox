@@ -6,24 +6,25 @@
                 <span @click='showIssueChange'></span>    
             </div>
             <div class="container">
-                <label :class="{ radioActive:basePicked==1,radioNomal:basePicked!=1 }"><input type="radio" name="project-kind" value="1" v-model="basePicked">普通公告</label>
-                <label :class="{ radioActive:basePicked==2,radioNomal:basePicked!=2 }"><input type="radio" name="project-kind" value="2" v-model="basePicked">延迟分红</label>
+                <label :class="{ radioActive:option.operationType==1,radioNomal:option.operationType!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.operationType">普通公告</label>
+                <label :class="{ radioActive:option.operationType==2,radioNomal:option.operationType!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.operationType">延迟分红</label>
             </div>
-            <div class="container sale-info" v-if="basePicked==2">
+            <div class="container sale-info" v-if="option.operationType==2">
                  
                 <span>延迟至</span>
-                <input type="text" class="data" placeholder="日历选择器">
+                <input type="text" class="data" placeholder="日历选择器" v-model='option.delay2Time'>
                 <span class="text">每次分红只可延迟一次,逾期将扣除部分押金</span>
                 
             </div>
-            <div class="container profit-info" v-if="basePicked==2">                
+            <div class="container profit-info" v-if="option.operationType==2">                
             	<span>延迟原因</span>
-            	<textarea  cols="30" rows="10" ></textarea>
+            	<textarea  cols="30" rows="10"  v-model='option.memo'></textarea>
             </div>
-            <div class="container profit-info" v-if="basePicked==1">
+            <div class="container profit-info" v-if="option.operationType==1">
               <span>公告内容</span>
-              <textarea  cols="30" rows="10" ></textarea>
+              <textarea  cols="30" rows="10"  v-model='option.memo'></textarea>
             </div>
+            <label class="shit"><input type="checkbox" checked>短信通知</label>
             <div class="profit-over">发布</div>
     	</div>
     </div>
@@ -34,12 +35,29 @@
     export default {
           data() {
             return {
-                basePicked:1
+                option:{
+                    projectId:'',
+                    operationType:1,
+                    isSmsNotice:1,
+                    delay2Time:'',
+                    memo:''
+                }
+
             }
         },
         methods:{
           showIssueChange(){
             this.$store.state.showIssue = false;
+          },
+          goIssue(){
+            let options=this.option;
+            this.$http.post(this.apiurl+'/projectLog/add',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         }
         
@@ -203,6 +221,15 @@
                         }
                 }
 
+            }
+            .shit{
+              display: block;
+              width: 160px;
+              height: 46px;
+              line-height: 46px;
+              margin: -60px auto 10px;
+              font-size: 12px;
+              color: #333;
             }
             .profit-over{
                 width: 160px;

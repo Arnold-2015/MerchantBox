@@ -5,21 +5,21 @@
      
             <div class="container deal-info">
                 <h1>新建商家</h1>
-                <p><span>商家姓名</span><input type="text" class="data"></p>
-                <p><span>身份证号</span><input type="text" class="data"></p>
-                <p><span>手机号码</span><input type="text" class="data"></p>
-                <p><span>账号密码</span><input type="text" class="data"></p>
+                <p><span>商家姓名</span><input type="text" class="data" v-model='option.nickName'></p>
+                <p><span>身份证号</span><input type="text" class="data" v-model='option.idNo'></p>
+                <p><span>手机号码</span><input type="text" class="data" v-model='option.userPhone'></p>
+                <p><span>账号密码</span><input type="text" class="data" v-model='option.password'></p>
                 <p><span>账号状态</span></p>
                 <div class="pickbar">
-                <label :class="{ radioActive:returnPicked==1,radioNomal:returnPicked!=1 }"><input type="radio" name="project-kind" value="1" v-model="returnPicked">正常</label>
-                <label :class="{ radioActive:returnPicked==2,radioNomal:returnPicked!=2 }"><input type="radio" name="project-kind" value="2" v-model="returnPicked">冻结</label>
+                <label :class="{ radioActive:option.status==1,radioNomal:option.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.status">正常</label>
+                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label>
                 </div>
                 
      
               
             </div>
             <div @click='showMerchantChange' class="consume-cancel">取消</div>
-            <div class="consume-over">确认</div>
+            <div @click='addMerchant' class="consume-over">确认</div>
     	</div>
     </div>
 </template>
@@ -28,13 +28,24 @@
     export default {
           data() {
             return {
-                isActive:1,
-                returnPicked:1
+                option:{
+                   status:1
+                }
             }
         },
         methods:{
           showMerchantChange(){
             this.$store.state.showMerchant = false;
+          },
+          addMerchant(){
+            let options=this.option;
+            this.$http.post(this.apiurl+'/merchant/add',options)
+                .then((response) => {
+                   this.$store.state.showMerchant = false;
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         }
         

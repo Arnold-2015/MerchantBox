@@ -7,10 +7,12 @@
             </div>
          
             <div class="container sale-info">
-                <span>月销售额</span>
-                <input type="text" class="data">
+                <span>销售额</span>
+                <input type="text" class="data" v-model='totalMoney' @blur='getProfitInfo'>
                 <span>销售凭证</span>
-                <a @click="">点击上传</a>
+                <a>点击上传
+                <input type="file" :accept="accepts" id="upImg" @change='upImg' >
+                </a>
                 <div class="saledata">
                 	<li>
                         <span class="key-msg">1%</span>
@@ -36,9 +38,10 @@
             </div>
             <div class="container profit-info">
             	<span>分红说明</span>
-            	<textarea  cols="30" rows="10" placeholder="请填写分红说明"></textarea>
+            	<textarea  cols="30" rows="10" placeholder="请填写分红说明" v-model='memo'></textarea>
             </div>
-            <div class="profit-over">确认分红</div>
+            <label for=""><input type="checkbox" checked>短信通知</label>
+            <div class="profit-over" @click='goDevide'>确认分红</div>
     	</div>
     </div>
 </template>
@@ -46,16 +49,67 @@
 <script> 
    
     export default {
-          data() {
+        filters: {
+            
+        },
+        props: ['apiurl'],
+        data() {
             return {
-                isActive:1
+                isActive:1,
+                accepts:'image/jpeg,image/jpg,image/png',
+                totalMoney:'',
+                memo:'',
+                picUrl:''
             }
         },
         methods:{
           showProfitChange(){
             this.$store.state.showProfit = false;
+          },
+          upImg(event){
+            var file=event.target.files[0];
+            const formData = new FormData();
+            formData.append('file', file);     
+            this.$http.post(this.apiurl+'/file/upload',formData)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          goDevide(){
+            let options={
+                'projectId':'81013538870fdfe011b06c211e601aec',
+                'totalMoney ':this.totalMoney,
+                'picUrl ':this.picUrl,
+                'memo':this.memo,
+                'isSmsNotice':1
+            }
+            this.$http.post(this.apiurl+'/dividend/add',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          getProfitInfo(){
+            let options={
+                'projectId':'81013538870fdfe011b06c211e601aec',
+                'totalMoney ':this.totalMoney
+            }
+            this.$http.post(this.apiurl+'/dividend/add',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         }
+        
+        
         
     }
 </script>
@@ -133,14 +187,23 @@
                         }
                  }
                  a{
-                 	width: 56px;
-                 	height: 60px;
-                    line-height: 60px;
-                 	font-size: 14px;
-                    color: #C49F59;
-                    margin-left: 10px;
-
-                 }
+                position: relative;
+                width: 56px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 14px;
+                color: #C49F59;
+                text-indent: 0;
+                margin-left: 10px;
+                input{
+                position: absolute;
+                width: 56px;
+                height: 60px;
+                right: 0;
+                top: 0;
+                opacity: 0;
+              }
+              }
                  .saledata{
                  	width: 380px;
                  	height: 68px;
@@ -189,6 +252,15 @@
                 }
 
             }
+            label{
+              display: block;
+              width: 160px;
+              height: 46px;
+              line-height: 46px;
+              margin: -60px auto 0;
+              font-size: 12px;
+              color: #333;
+            }
             .profit-over{
                 width: 160px;
                 height: 46px;
@@ -196,7 +268,7 @@
                 color: #fff;
                 font-size: 14px;
                 text-align: center;
-                margin: -20px auto;
+                margin:-5px auto;
                 background: $base-color;
                 border-radius: 2px;
 

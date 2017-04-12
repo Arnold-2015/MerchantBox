@@ -14,7 +14,7 @@
                  </div>
                  <div class="info-item" style="height:180px">
                    <span style="display:block">项目头图</span>
-                   <img>
+                   <img  :src='option.backgroundImg'>
                    <a class="file">选择图片
                        <input type="file" :accept="accepts" id="upImg" @change='upImg' >
                    </a>
@@ -46,9 +46,9 @@ import Vue from 'Vue'
             return {
                 active:[false,true],
                 apiurl:this.api,
-                accepts:'image/jpeg,image/jpg,image/png,image/gif',
+                accepts:'image/jpeg,image/jpg,image/png',
                 option:{
-                  
+                  backgroundImg:''
                 }
             }
         },
@@ -59,7 +59,7 @@ import Vue from 'Vue'
             formData.append('file', file);     
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
-                   this.$store.state.projectId=response.data.result.projectId;
+                   this.option.backgroundImg =response.data.result.msg;
                 })
                 .catch(function(response) {
                     console.log(response)

@@ -56,20 +56,20 @@
                      <li :class="{active:isActive==4}" @click='setActive(4)'>公告列表</li>
                  </ul>
                  <!-- 合伙人列表 -->
-                 <partner v-if="isActive==1"></partner>
+                 <partner v-if="isActive==1"  :apiurl='apiurl'></partner>
                  <!-- 分红列表 -->
-                 <profit v-if="isActive==2"></profit>
+                 <profit v-if="isActive==2"  :apiurl='apiurl'></profit>
                  <!-- 消费列表 -->
-                 <consume v-if="isActive==3"></consume>
+                 <consume v-if="isActive==3"  :apiurl='apiurl'></consume>
                  <!-- 公告列表 -->
-                 <issue v-if="isActive==4"></issue>
+                 <issue v-if="isActive==4"  :apiurl='apiurl'></issue>
              </div>
          </div>
          <!-- <sb></sb> -->
-         <qr v-if="this.$store.state.showQr"></qr>
-         <consumebar v-if="this.$store.state.showConsume"></consumebar>
-         <profitbar v-if="this.$store.state.showProfit"></profitbar>
-         <issuebar v-if="this.$store.state.showIssue"></issuebar>
+         <qr v-if="this.$store.state.showQr" :apiurl='apiurl'></qr>
+         <consumebar v-if="this.$store.state.showConsume" :apiurl='apiurl'></consumebar>
+         <profitbar v-if="this.$store.state.showProfit" :apiurl='apiurl'></profitbar>
+         <issuebar v-if="this.$store.state.showIssue" :apiurl='apiurl'></issuebar>
 
     </section>
 </template>
@@ -86,8 +86,10 @@
     import issuebar from '../components/issuebar.vue'
     require('../assets/list.scss')
     export default {
+          props: ['api'],
           data() {
             return {
+                apiurl:this.api,
                 isActive:1
                 
             }

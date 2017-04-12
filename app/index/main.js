@@ -19,7 +19,7 @@ var app = new Vue({
 	el: '#app',
 	data: {
 		showLoading: false,
-		api:'http://192.168.7.12:8080'
+		api:'http://192.168.10.166:8080'
 	},
 	components: {
 		loading,nb,sb

@@ -6,11 +6,11 @@
                     <td class="crowone">创建时间</td>
                     <td class="crowtow">公告内容</td>
                 </tr>
-                <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
-                    <td class="crowone">赵钱孙李</td>
-                    <td class="crowone">自动生成</td>
-                    <td class="crowone">2016/03/12/14:00</td>
-                    <td class="crowtow">项目已完成80%，还在观望的亲们抓紧啦</td>
+                <tr v-for="(item,index) in issueList" :class='{active:active[index%2]}'>
+                    <td class="crowone">{{item.operatorName}}</td>
+                    <td class="crowone">{{item.operationType}}</td>
+                    <td class="crowone">{{item.creationTime}}</td>
+                    <td class="crowtow">{{item.memo}}</td>
                 </tr>
                 
     </table>
@@ -21,13 +21,32 @@
         filters: {
             
         },
+        props: ['apiurl'],
         data() {
             return {
-                active:[false,true]
+                apiurl:this.apiurl,
+                active:[false,true],
+                projectId:'81013538870fdfe011b06c211e601aec',
+                partnerNameOrCardNoOrPhone:''
             }
         },
-        mounted() {
-            
+        methods:{
+         
+        },
+        beforeMount(){
+            let options={
+               'projectId':this.projectId,
+               'pageSize':10,
+               'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/projectLog/list',options)
+                .then((response) => {
+                   this.issueList=response.data.result;
+                   console.log(this.issueList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         }
     }
 </script>

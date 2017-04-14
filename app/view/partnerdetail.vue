@@ -55,13 +55,14 @@
             }
         },
         beforeMount(){
+          localStorage.setItem('menuTag', 1)
+          this.$emit('changetag')
             let options={
                'pageSize':10,
                'pageNum':1,
-               'projectId':projectId,
-               'realNameOrVipCodeOrUserPhone':realNameOrVipCodeOrUserPhone 
+               'projectId':'22e6b233d5b5f78bf81c11242c0cb046'
             }
-            this.$http.get(this.apiurl+'/partner/baseInfo',options)
+            this.$http.get(this.apiurl+'/partner/detail',options)
                 .then((response) => {
                    this.partnerDetail=response.data.result;
                    console.log(this.partnerDetail)

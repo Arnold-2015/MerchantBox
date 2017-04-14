@@ -81,8 +81,10 @@ import Vue from 'Vue'
                 })
           }
         },
-        mounted(){
+        beforeMount(){
             var projectId;
+            localStorage.setItem('menuTag', 1)
+            this.$emit('changetag')
             if(this.$route.query.projectId){
               projectId=this.$route.query.projectId;
               this.$store.state.projectId=projectId;

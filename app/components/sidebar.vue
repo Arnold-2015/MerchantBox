@@ -1,6 +1,6 @@
 <template>
    <div class="side-bar">
-       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}"><span :class="{active:isActive==1}" @click='setActive(1)'>项目管理</span></router-link>
+       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}"><span :class="{active:isActive==1}" @click='setActive(1)' >项目管理</span></router-link>
        <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"><span :class="{active:isActive==2}" @click='setActive(2)'>商家管理</span></router-link>
        <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"><span :class="{active:isActive==3}" @click='setActive(3)'>用户管理</span></router-link>
        <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"><span :class="{active:isActive==4}" @click='setActive(4)'>订单管理</span></router-link>
@@ -14,9 +14,10 @@
 
 <script>
     export default {
+      props:['menutag'],
         data () {
             return {
-                isActive:1
+                isActive:this.menutag               
             }
         },
         methods:{
@@ -26,7 +27,12 @@
         },
         mounted() {
             
-        }
+        },
+        watch: {
+          menutag(val) {
+              this.isActive = val;//新增tag的watch，监听变更并同步到isActive上
+          }
+         }
     }
 </script>
 

@@ -78,6 +78,8 @@
           }
         },
         beforeMount(){
+            localStorage.setItem('menuTag', 1)
+            this.$emit('changetag')
             let options={
                 'nickNameOrUserPhone':this.nickNameOrUserPhone,
                 'pageSize':10,

@@ -59,7 +59,7 @@
          </div>
          <!-- <sb></sb> -->
          <qr v-if="this.$store.state.showQr"></qr>
-         <confirmbar v-if="this.$store.state.showConfirm"></confirmbar>
+         <confirmbar v-if="this.$store.state.showConfirm" :apiurl='apiurl'></confirmbar>
     </section>
 </template>
 <script>
@@ -99,6 +99,8 @@
         },
        
        beforeMount(){
+            localStorage.setItem('menuTag', 1)
+            this.$emit('changetag')
             this.$http.get(this.apiurl+'/project/'+this.projectId)
                 .then((response) => {
                    this.projectInfo=response.data.result;

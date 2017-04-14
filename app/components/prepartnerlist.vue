@@ -40,7 +40,7 @@
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'81013538870fdfe011b06c211e601aec',
+                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
                 realNameOrPhone :'',
                 prepartnerList:{}
             }
@@ -55,7 +55,7 @@
             }
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
-                   this.prepartnerList=response.data.result;
+                   this.prepartnerList=response.data.result.partnerIntentionList;
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {
@@ -71,7 +71,7 @@
             }
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
-                   this.prepartnerList=response.data.result;
+                   this.prepartnerList=response.data.result.partnerIntentionList;
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {

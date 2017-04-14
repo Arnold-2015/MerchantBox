@@ -9,8 +9,8 @@
 <body >
 	<div id="app">
 	    <nb></nb>
-		<router-view :api='api'></router-view>
-		<sb></sb>
+		<router-view :api='api' @changetag='changeTag'></router-view>
+		<sb :menutag='menuTag'></sb>
 	</div>
 </body>
 </html>

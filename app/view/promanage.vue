@@ -47,7 +47,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src='item.backgroundImg' >
                      </div>
                 </div>
                      <!-- 项目审核中 -->
@@ -85,7 +85,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src='item.backgroundImg' >
                      </div>
                 </div>
                     <!-- 项目审核失败 -->
@@ -125,7 +125,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src='item.backgroundImg' >
                      </div>
                 </div>
                  
@@ -167,7 +167,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src='item.backgroundImg' >
                      </div>
                 </div>
                  <!-- 招募中 -->
@@ -208,7 +208,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src='item.backgroundImg' >
                      </div>
                 </div>
                  <!-- 履约中 -->
@@ -253,7 +253,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png">
+                         <img :src='item.backgroundImg'>
                      </div>
                  </div>
                    <!-- 项目失败 -->
@@ -291,7 +291,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src='item.backgroundImg' >
                      </div>
                 </div>
             </div>
@@ -323,6 +323,8 @@
           }
         },
         beforeMount(){
+            localStorage.setItem('menuTag', 1)
+            this.$emit('changetag')
             let options={
                'pageSize':10,
                'pageNum':1

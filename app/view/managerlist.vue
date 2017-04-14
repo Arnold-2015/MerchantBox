@@ -49,7 +49,8 @@
             }
         },
         mounted() {
-            
+            localStorage.setItem('menuTag', 7)
+            this.$emit('changetag')
         },
         components:{
            qr,manager

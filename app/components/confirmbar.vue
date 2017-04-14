@@ -8,7 +8,7 @@
             <div class="search-bar">
                 <input  type="text" placeholder="输入姓名/卡号/手机号" >
                 <a class="search"><img src="../assets/search.png" ></a> 
-                <p>目标分数30份,当前共33份</p>
+                <p>目标分数{{prepartnerList.totalCount }}份,当前共{{prepartnerList.buyTotalCount  }}份</p>
             </div>
             <div class="confirm-list-bar">
                   <table class="confirm-list">
@@ -19,11 +19,11 @@
                     <td class="crowone">备注</td>
                     <td class="crowtwo">操作</td>
                 </tr>
-                <tr v-for="(n,index) in 20" :class='{active:active[index%2]}'>
-                    <td class="crowone">赵钱孙李</td>
-                    <td class="crowone">12345670000</td>
-                    <td class="crowone">1</td>
-                    <td class="crowone">替补</td>
+                <tr v-for="(item,index) in prepartnerList.partnerIntentionList" :class='{active:active[index%2]}'>
+                    <td class="crowone">{{item.realName }}</td>
+                    <td class="crowone">{{item.phone }}</td>
+                    <td class="crowone">{{item.buyCount }}</td>
+                    <td class="crowone">{{item.memo }}</td>
                     <td class="crowtwo"><a>剔除该合伙人</a></td>
                 </tr>
                 
@@ -37,16 +37,51 @@
 
 <script> 
     export default {
-          data() {
+        props: ['apiurl'],
+        data() {
             return {
-                active:[false,true]
-
+                apiurl:this.apiurl,
+                active:[false,true],
+                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                realNameOrPhone :'',
+                prepartnerList:{}
             }
         },
         methods:{
           showConfirmChange(){
             this.$store.state.showConfirm = false;
+          },
+          search(){
+            let options={
+                'projectId':this.projectId,
+                'realNameOrPhone':this.realNameOrPhone,
+                'pageSize':10,
+                'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/partner/intention/list',options)
+                .then((response) => {
+                   this.prepartnerList=response.data.result.partnerIntentionList;
+                   console.log(this.prepartnerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
+        },
+        beforeMount(){
+            let options={
+               'projectId':this.projectId,
+               'pageSize':10,
+               'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/partner/intention/list',options)
+                .then((response) => {
+                   this.prepartnerList=response.data.result;
+                   console.log(this.prepartnerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         }
         
     }

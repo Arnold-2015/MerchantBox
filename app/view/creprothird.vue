@@ -213,7 +213,9 @@
                 })
           }
         },
-        beforeMount(){        
+        beforeMount(){    
+            localStorage.setItem('menuTag', 1)    
+            this.$emit('changetag')
             var projectId=this.$store.state.projectId;
             if(projectId){
               this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
@@ -224,12 +226,12 @@
                       projectType:data.projectType,
                       projectValuation:data.projectValuation ,
                       totalMoney :data.totalMoney ,
-                      saleCount :saleCount ,
-                      extraSaleCount :extraSaleCount ,
-                      unitPrice :unitPrice ,
-                      copiesLimit :copiesLimit ,
-                      validityPeriod :validityPeriod ,
-                      privilegeCardName :privilegeCardName ,
+                      saleCount :data.saleCount ,
+                      extraSaleCount :data.extraSaleCount ,
+                      unitPrice :data.unitPrice ,
+                      copiesLimit :data.copiesLimit ,
+                      validityPeriod :data.validityPeriod ,
+                      privilegeCardName :data.privilegeCardName ,
                       investmentPeriod:data.investmentPeriod,
                       privilegeLogo:data.privilegeLogo,
                       privilegeBg :data.privilegeBg,

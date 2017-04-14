@@ -83,6 +83,8 @@
         },
        
         beforeMount(){
+            localStorage.setItem('menuTag', 3)
+            this.$emit('changetag')
             let options={
                 'pageSize':10,
                 'pageNum':1

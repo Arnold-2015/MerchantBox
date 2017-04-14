@@ -36,15 +36,19 @@
                 </tr>
                 
                 </table>
+                <paging @getpage='getpage'></paging>
              </div>
+
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
          <merchant v-if="this.$store.state.showMerchant"></merchant>
+         
     </section>
 </template>
 <script>
     import qr from '../components/qrbar.vue'
     import merchant from '../components/cremerchant.vue'
+    import paging from '../components/paging.vue'
     
     require('../assets/list.scss')
     export default {
@@ -78,9 +82,26 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          getpage(){
+            let options={
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/merchant/list',options)
+                .then((response) => {
+                   this.merchantList=response.data.result;
+                   console.log(this.merchantList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         },
+
         beforeMount(){
+            localStorage.setItem('menuTag', 2)
+            this.$emit('changetag')
             let options={
                 'pageSize':10,
                 'pageNum':1
@@ -98,7 +119,7 @@
             
         },
         components:{
-           qr,merchant
+           qr,merchant,paging
         }
     }
 </script>

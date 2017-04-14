@@ -57,8 +57,9 @@
                 active:[false,true]
             }
         },
-        mounted() {
-            
+        beforeMount() {
+            localStorage.setItem('menuTag', 5)
+            this.$emit('changetag')
         },
         components:{
            qr

@@ -19,10 +19,16 @@ var app = new Vue({
 	el: '#app',
 	data: {
 		showLoading: false,
-		api:'http://192.168.7.12:8080'
+		api:'http://192.168.7.12:8080',
+		menuTag:localStorage.getItem('menuTag')
 	},
 	components: {
 		loading,nb,sb
+	},
+	methods:{
+		changeTag(){
+             this.menuTag=localStorage.getItem('menuTag')
+		}
 	},
 	router,
 	store

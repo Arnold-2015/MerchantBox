@@ -24,13 +24,13 @@
                                 <td class="crowone">分红金额</td>
                                 
                             </tr>
-                            <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
-                                <td class="crowone">赵钱孙李</td>
-                                <td class="crowtwo">12345670000</td>
-                                <td class="crowtwo">400040000012345</td>
-                                <td class="crowone">1503</td>
-                                <td class="crowone">23%</td>
-                                <td class="crowone">333</td>
+                            <tr v-for="(item,index) in profitList" :class='{active:active[index%2]}'>
+                                <td class="crowone">{{item.name}}</td>
+                                <td class="crowtwo">{{item.phone}}</td>
+                                <td class="crowtwo">{{item.cardNo}}</td>
+                                <td class="crowone">{{item.principalBalance}}</td>
+                                <td class="crowone">{{item.unitShares}}%</td>
+                                <td class="crowone">{{item.money}}</td>
                                 
                             </tr>
                 
@@ -48,16 +48,29 @@
         filters: {
             
         },
-        methods:{
-          
-        },
+        props: ['api'],
         data() {
             return {
-                active:[false,true]
+                active:[false,true],
+                apiurl:this.api,
+                projectList:{}
             }
         },
-        mounted() {
-            
+        beforeMount(){
+            let options={
+               'pageSize':10,
+               'pageNum':1,
+               'projectId':projectId,
+               'dividendId':dividendId 
+            }
+            this.$http.post(this.apiurl+'/dividend/detail',options)
+                .then((response) => {
+                   this.profitList=response.data.result;
+                   console.log(this.profitList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         },
         components:{
            nb,sb

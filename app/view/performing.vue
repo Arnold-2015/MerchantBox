@@ -10,7 +10,7 @@
                      <div class="pro-info-wrap">
                          <div class="pro-info">
                              <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <h1>{{projectInfo.projectName}}</h1>
                                  <span>履约中</span>
                                  <a @click='showIssueChange'  class="creat-new">新建公告</a>
                                  <a @click='showProfitChange' class="profit-entering">分红录入</a>
@@ -18,23 +18,23 @@
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">1</span>
+                                         <span class="key-msg">{{projectInfo.partnerCount }}</span>
                                          <span class="key-word">合伙人 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">20</span>
+                                         <span class="key-msg">{{projectInfo.exitPartnerCount}}</span>
                                          <span class="key-word">已退出 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">3000</span>
+                                         <span class="key-msg">{{projectInfo.totalPrincipalBalance }}</span>
                                          <span class="key-word">本金总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">2000</span>
+                                         <span class="key-msg">{{projectInfo.earningTotalBalance}}</span>
                                          <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">01</span>
+                                         <span class="key-msg">{{projectInfo.cousumeTotalMoney }}</span>
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <div>
@@ -45,7 +45,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src="projectInfo.projectBgImg" >
                      </div>
                  </div>
 
@@ -90,8 +90,9 @@
           data() {
             return {
                 apiurl:this.api,
-                isActive:1
-                
+                isActive:1,
+                projectId:'81013538870fdfe011b06c211e601aec',
+                projectInfo:{}
             }
         },
         filters: {
@@ -115,8 +116,15 @@
           }
          
         },
-        mounted() {
-            
+        beforeMount(){
+            this.$http.get(this.apiurl+'/project/'+this.projectId)
+                .then((response) => {
+                   this.projectInfo=response.data.result;
+                   console.log(this.projectInfo)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         },
         components:{
            nb,sb,qr,issue,partner,profit,consume,consumebar,profitbar,issuebar

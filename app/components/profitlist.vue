@@ -38,7 +38,8 @@
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'81013538870fdfe011b06c211e601aec'
+                projectId:'81013538870fdfe011b06c211e601aec',
+                profitList:{}
             }
         },
         methods:{

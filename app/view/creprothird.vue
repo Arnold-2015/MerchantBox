@@ -213,8 +213,36 @@
                 })
           }
         },
-        mounted() {
-            
+        beforeMount(){        
+            var projectId=this.$store.state.projectId;
+            if(projectId){
+              this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
+                .then((response) => {
+                  var data=response.data.result;
+                   this.option={
+                      projectId:this.$store.state.projectId,
+                      projectType:data.projectType,
+                      projectValuation:data.projectValuation ,
+                      totalMoney :data.totalMoney ,
+                      saleCount :saleCount ,
+                      extraSaleCount :extraSaleCount ,
+                      unitPrice :unitPrice ,
+                      copiesLimit :copiesLimit ,
+                      validityPeriod :validityPeriod ,
+                      privilegeCardName :privilegeCardName ,
+                      investmentPeriod:data.investmentPeriod,
+                      privilegeLogo:data.privilegeLogo,
+                      privilegeBg :data.privilegeBg,
+                      salesProjectVo:data.salesProjectVo,
+                      consumeRightVo:data.consumeRightVo,
+                      partnerRightVo:data.partnerRightVo
+                    }
+                   console.log(this.option)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+              }
         },
         components:{
            profitpanel

@@ -81,8 +81,32 @@ import Vue from 'Vue'
                 })
           }
         },
-        mounted() {
-            
+        mounted(){
+            var projectId;
+            if(this.$route.query.projectId){
+              projectId=this.$route.query.projectId;
+              this.$store.state.projectId=projectId;
+            }else{
+              projectId=this.$store.state.projectId;
+            };
+            if(projectId!=null){
+              this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
+                .then((response) => {
+                  var data=response.data.result;
+                  console.log(data.backgroundImg)
+                   this.option={
+                      projectId:projectId,
+                      backgroundImg:data.backgroundImg,
+                      projectName:data.projectName,
+                      address:data.address,
+                      projectDesc:data.projectDesc 
+                   }
+                   console.log(this.option)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+              }
         },
         components:{
            

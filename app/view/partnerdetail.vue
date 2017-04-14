@@ -7,13 +7,12 @@
                  <div class="search-bar">
                         <router-link class="toback" to="performing">返回</router-link>
                         <div class="info-bar">
-                            <span class="title">姓名 赵钱孙李</span>
-                            <span>手机号码 12345670000</span>
-                            <span>卡号 123456789123456</span>
-                            <span>占股 1%</span>
-                            <span>本金余额 2000</span>
-                            <span>收益余额 2000</span>
-                            <span>消费总额 2000</span>
+                            <span class="title">姓名 {{partnerDetail.realName}}</span>
+                            <span>手机号码 {{partnerDetail.phone }}</span>
+                            <span>卡号 {{partnerDetail.vipCode}}</span>
+                            <span>本金余额 {{partnerDetail.principalBalance}}</span>
+                            <span>收益余额 {{partnerDetail.earning }}</span>
+                            <span>消费总额 {{partnerDetail.cunsume}}</span>
                         </div>
                  </div>
                  <table class="partner-list">
@@ -47,16 +46,29 @@
         filters: {
             
         },
-        methods:{
-          
-        },
+        props: ['api'],
         data() {
             return {
-                active:[false,true]
+                active:[false,true],
+                apiurl:this.api,
+                partnerDetail:{}
             }
         },
-        mounted() {
-            
+        beforeMount(){
+            let options={
+               'pageSize':10,
+               'pageNum':1,
+               'projectId':projectId,
+               'realNameOrVipCodeOrUserPhone':realNameOrVipCodeOrUserPhone 
+            }
+            this.$http.get(this.apiurl+'/partner/baseInfo',options)
+                .then((response) => {
+                   this.partnerDetail=response.data.result;
+                   console.log(this.partnerDetail)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         },
         components:{
            nb,sb

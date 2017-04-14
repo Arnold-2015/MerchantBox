@@ -87,6 +87,7 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/project/fourth',options)
                 .then((response) => {
+                   this.$store.state.projectId=null;
                    this.$router.push({
                     name: 'promanage'
                 });
@@ -96,8 +97,22 @@
                 })
           }
         }, 
-        mounted() {
-            
+        beforeMount(){        
+            var projectId=this.$store.state.projectId;
+            if(projectId){
+              this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
+                .then((response) => {
+                  var data=response.data.result;
+                   this.option={
+                      projectId:this.$store.state.projectId,
+                      contractUrl:data.contractUrl 
+                   }
+                   console.log(this.option)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+              }
         },
         components:{
            

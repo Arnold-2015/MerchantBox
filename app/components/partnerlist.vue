@@ -7,8 +7,8 @@
            <option value ="有效合伙人">有效合伙人</option>
            <option value="已退出合伙">已退出合伙</option>
          </select>
-         <input  type="text" placeholder="输入姓名/卡号/手机号" >
-         <a class="search"><img src="../assets/search.png" ></a>
+         <input  type="text" placeholder="输入姓名/卡号/手机号" v-model='realNameOrPhoneOrVipCardNo'>
+         <a class="search"><img src="../assets/search.png" @click='search'></a>
          <a class="export">导出列表</a>
      </div>
      <table class="partner-list">
@@ -20,17 +20,17 @@
                     <td class="crowone">本金余额</td>
                     <td class="crowone">占股</td>
                     <td class="crowone">收益余额</td>
-                    <td class="crowone">收益余额</td>
+                    <td class="crowone">消费金额</td>
                     <td class="crowone">操作</td>
                 </tr>
-                <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
-                    <td class="crowone">赵钱孙李</td>
-                    <td class="crowtwo">15033336666</td>
-                    <td class="crowtwo">23444-22243-24222</td>
-                    <td class="crowone">30000</td>
-                    <td class="crowone">1%</td>
-                    <td class="crowone">2017/3/23/14:00</td>
-                    <td class="crowone">2000</td>
+                <tr v-for="(item,index) in partnerList" :class='{active:active[index%2]}'>
+                    <td class="crowone">{{item.realName}}</td>
+                    <td class="crowtwo">{{item.phone }}</td>
+                    <td class="crowtwo">{{item.vipCardNo}}</td>
+                    <td class="crowone">{{item.principalBalance}}</td>
+                    <td class="crowone">{{item.shares}}</td>
+                    <td class="crowone">{{item.earningBalance}}</td>
+                    <td class="crowone">{{item.consumeTotal}}</td>
                     <td class="crowone"><router-link to="partnerdetail">明细</router-link><a>退出</a></td>
                 </tr>
                 
@@ -49,20 +49,22 @@
                 apiurl:this.apiurl,
                 active:[false,true],
                 projectId:'81013538870fdfe011b06c211e601aec',
-                partnerNameOrCardNoOrPhone:''
+                realNameOrPhoneOrVipCardNo:'',
+                partnerList:{}
             }
         },
         methods:{
           search(){
             let options={
-                'nickNameOrUserPhone':this.partnerNameOrCardNoOrPhone,
+                'projectId':this.projectId,
+                'realNameOrPhoneOrVipCardNo':this.realNameOrPhoneOrVipCardNo,
                 'pageSize':10,
                 'pageNum':1
             }
-            this.$http.post(this.apiurl+'/consume/list',options)
+            this.$http.post(this.apiurl+'/partner/list',options)
                 .then((response) => {
-                   this.consumeList=response.data.result;
-                   console.log(this.consumeList)
+                   this.partnerList=response.data.result;
+                   console.log(this.partnerList)
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -72,13 +74,14 @@
         beforeMount(){
             let options={
                'projectId':this.projectId,
+               'status':'',
                'pageSize':10,
                'pageNum':1
             }
-            this.$http.post(this.apiurl+'/consume/list',options)
+            this.$http.post(this.apiurl+'/partner/list',options)
                 .then((response) => {
-                   this.consumeList=response.data.result;
-                   console.log(this.consumeList)
+                   this.partnerList=response.data.result;
+                   console.log(this.partnerList)
                 })
                 .catch(function(response) {
                     console.log(response)

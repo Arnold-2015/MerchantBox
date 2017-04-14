@@ -63,7 +63,7 @@
                  },
                 option:{
                   projectId:this.$store.state.projectId,
-                  detail:'请在这里编辑项目详情（图片支持拖拽缩放）'
+                  detail:''
                 }
             }
         },
@@ -82,8 +82,22 @@
                 })
           }
         },
-        mounted() {
-            
+        beforeMount(){        
+            var projectId=this.$store.state.projectId;
+            if(projectId){
+              this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
+                .then((response) => {
+                  var data=response.data.result;
+                   this.option={
+                      projectId:this.$store.state.projectId,
+                      detail:data.detail 
+                   }
+                   console.log(this.option)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+              }
         }
     }
 </script>

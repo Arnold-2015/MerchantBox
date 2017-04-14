@@ -27,7 +27,8 @@
                 apiurl:this.apiurl,
                 active:[false,true],
                 projectId:'81013538870fdfe011b06c211e601aec',
-                partnerNameOrCardNoOrPhone:''
+                partnerNameOrCardNoOrPhone:'',
+                issueList:{}
             }
         },
         methods:{

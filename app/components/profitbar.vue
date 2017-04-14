@@ -15,23 +15,23 @@
                 </a>
                 <div class="saledata">
                 	<li>
-                        <span class="key-msg">1%</span>
+                        <span class="key-msg">{{sumInfo.returnRate }}</span>
                         <span class="key-word">回报率</span>
                     </li>                
                     <li>
-                        <span class="key-msg">15%</span>
+                        <span class="key-msg">{{sumInfo.estimatedAnnualizedReturnRate}}</span>
                         <span class="key-word">本次年化</span>
                     </li>
                     <li>
-                        <span class="key-msg">20,000</span>
+                        <span class="key-msg">{{sumInfo.participateMoney }}</span>
                         <span class="key-word">分红金额</span>
                     </li>
                     <li>
-                        <span class="key-msg">100</span>
+                        <span class="key-msg">{{sumInfo.eachMoney }}</span>
                         <span class="key-word">每份金额</span>
                     </li>
                     <li>
-                        <span class="key-msg">30</span>
+                        <span class="key-msg">{{sumInfo.participateNumberOfPeople}}</span>
                         <span class="key-word">分红人数</span>
                     </li>
                 </div>
@@ -59,7 +59,9 @@
                 accepts:'image/jpeg,image/jpg,image/png',
                 totalMoney:'',
                 memo:'',
-                picUrl:''
+                picUrl:'',
+                sumInfo:{}
+
             }
         },
         methods:{
@@ -99,9 +101,9 @@
                 'projectId':'81013538870fdfe011b06c211e601aec',
                 'totalMoney ':this.totalMoney
             }
-            this.$http.post(this.apiurl+'/dividend/add',options)
+            this.$http.post(this.apiurl+'/dividend/sumInfo',options)
                 .then((response) => {
-                   
+                   this.sumInfo=response.data.result
                 })
                 .catch(function(response) {
                     console.log(response)

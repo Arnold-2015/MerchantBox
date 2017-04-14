@@ -10,29 +10,29 @@
                      <div class="pro-info-wrap">
                          <div class="pro-info">
                              <div class="up-bar">
-                                 <h1>项目名称之香蒲滨江店众筹项目</h1>
+                                 <h1>{{projectInfo.projectName }}</h1>
                                  <span>招募中</span>
                                  <a @click='showIssueChange' class="creat-new">新建公告</a>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">10%</span>
+                                         <span class="key-msg">{{projectInfo.totalShares}}</span>
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">20</span>
+                                         <span class="key-msg">{{projectInfo.wantPartnerCount }}</span>
                                          <span class="key-word">意向合伙人</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">3000</span>
+                                         <span class="key-msg">{{projectInfo.hadCrowdFundingMoney }}</span>
                                          <span class="key-word">已募集总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">2000</span>
+                                         <span class="key-msg">{{projectInfo.unitPrice }}</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">01-01-17</span>
+                                         <span class="key-msg">{{projectInfo.validityPeriod }}</span>
                                          <span class="key-word">项目开始时间</span>
                                      </li>
                                      <div>
@@ -43,7 +43,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img src="../assets/logo@3x.png" >
+                         <img :src="projectInfo.projectBgImg" >
                      </div>
                  </div>
 
@@ -52,9 +52,9 @@
                      <li :class="{active:!isActive}" @click='setActiveFalse'>公告列表</li>
                  </ul>
                  <!-- 公告列表 -->
-                 <issue v-if="!isActive"></issue>
+                 <issue v-if="!isActive" :apiurl='apiurl'></issue>
                  <!-- 合伙人列表 -->
-                 <prepartner v-if="isActive"></prepartner>
+                 <prepartner v-if="isActive" :apiurl='apiurl'></prepartner>
              </div>
          </div>
          <!-- <sb></sb> -->
@@ -74,6 +74,15 @@
         filters: {
             
         },
+        props: ['api'],
+        data() {
+            return {
+                isActive:true,
+                apiurl:this.api,
+                projectId:'81013538870fdfe011b06c211e601aec',
+                projectInfo:{}
+            }
+        },
         methods:{
           setActiveTrue(){
             this.isActive=true
@@ -88,13 +97,16 @@
             this.$store.state.showIssue = true;
           }
         },
-        data() {
-            return {
-                isActive:true
-            }
-        },
-        mounted() {
-            
+       
+       beforeMount(){
+            this.$http.get(this.apiurl+'/project/'+this.projectId)
+                .then((response) => {
+                   this.projectInfo=response.data.result;
+                   console.log(this.projectInfo)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         },
         components:{
            nb,sb,qr,issue,prepartner,issuebar

@@ -40,7 +40,7 @@
                                          <span class="key-word">允许超募数</span>
                                      </li>
                                      <div>
-                                         <router-link to="creprofirst">编辑项目</router-link>
+                                         <router-link :to="{ path: 'creprofirst', query: { projectId:item.projectId }}">编辑项目</router-link>
                                      </div>
 
                              </div>

@@ -57,18 +57,22 @@
             }
         },
         beforeMount(){
+
           localStorage.setItem('menuTag', 1)
+
           this.$emit('changetag')
+
             let options={
                'pageSize':10,
                'pageNum':1,
                'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
-               'dividendId':dividendId 
+               'dividendId':'2b8a4fac2756ffe18b2685fa714f10a9' 
             }
+
             this.$http.post(this.apiurl+'/dividend/detail',options)
                 .then((response) => {
-                   this.profitList=response.data.result;
-                   console.log(this.profitList)
+                   this.profitDetail=response.data.result;
+                   console.log(this.profitDetail)
                 })
                 .catch(function(response) {
                     console.log(response)

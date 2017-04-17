@@ -24,13 +24,13 @@
                     <td class="crowone">{{item.phone }}</td>
                     <td class="crowone">{{item.buyCount }}</td>
                     <td class="crowone">{{item.memo }}</td>
-                    <td class="crowtwo"><a>剔除该合伙人</a></td>
+                    <td class="crowtwo"><a href="javascript:;" @click='delPartner(item.orderId)'>剔除该合伙人</a></td>
                 </tr>
                 
                 </table>
             </div>
-            <div class="success">开始履约</div>
-            <div class="failed">认筹失败</div>
+            <div class="success" @click='startup(6)'>开始履约</div>
+            <div class="failed" @click='startup(7)'>认筹失败</div>
     	</div>
     </div>
 </template>
@@ -55,8 +55,8 @@
             let options={
                 'projectId':this.projectId,
                 'realNameOrPhone':this.realNameOrPhone,
-                'pageSize':10,
-                'pageNum':1
+                'orderStatus':2
+
             }
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
@@ -66,13 +66,35 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          delPartner(orderId){
+
+            this.$http.delete(this.apiurl+'/partner/orderId/'+orderId)
+                .then((response) => {
+                  // window.location.reload()
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          startup(status){
+             let options={
+               'projectId':this.projectId,
+               'status':status
+            }
+            this.$http.post(this.apiurl+'/project/startup',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         },
         beforeMount(){
             let options={
                'projectId':this.projectId,
-               'pageSize':10,
-               'pageNum':1
+               'orderStatus':2
             }
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {

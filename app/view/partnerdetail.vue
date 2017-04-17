@@ -12,7 +12,7 @@
                             <span>卡号 {{partnerDetail.vipCode}}</span>
                             <span>本金余额 {{partnerDetail.principalBalance}}</span>
                             <span>收益余额 {{partnerDetail.earning }}</span>
-                            <span>消费总额 {{partnerDetail.cunsume}}</span>
+                            <span>消费总额 {{partnerDetail.consumeTotal}}</span>
                         </div>
                  </div>
                  <table class="partner-list">
@@ -24,12 +24,12 @@
                                 <td class="crowone">时间</td>
                                 <td class="crowtwo">备注</td>
                             </tr>
-                            <tr v-for="(n,index) in 6" :class='{active:active[index%2]}'>
-                                <td class="crowone">0000123455</td>
-                                <td class="crowone">1503</td>
-                                <td class="crowone">23%</td>
-                                <td class="crowone">3/12/2016</td>
-                                <td class="crowtwo">3月第一次分红</td>
+                            <tr v-for="(item,index) in partnerDetail.partnerDetailAccountFlowList " :class='{active:active[index%2]}'>
+                                <td class="crowone">{{item.projectAccountFlowId }}</td>
+                                <td class="crowone">{{item.businessMoney}}</td>
+                                <td class="crowone">{{item.businessType }}</td>
+                                <td class="crowone">{{item.creationTime }}</td>
+                                <td class="crowtwo">{{item.memo }}</td>
                             </tr>
                 
                 </table>
@@ -57,12 +57,8 @@
         beforeMount(){
           localStorage.setItem('menuTag', 1)
           this.$emit('changetag')
-            let options={
-               'pageSize':10,
-               'pageNum':1,
-               'projectId':'22e6b233d5b5f78bf81c11242c0cb046'
-            }
-            this.$http.get(this.apiurl+'/partner/detail',options)
+            
+            this.$http.get(this.apiurl+'/partner/22e6b233d5b5f78bf81c11242c0cb046/bc84772f06de086e24589a6fe26295d8/detail')
                 .then((response) => {
                    this.partnerDetail=response.data.result;
                    console.log(this.partnerDetail)

@@ -8,7 +8,8 @@ const store = new Vuex.Store({
         showProfit:false,
         showIssue:false,
         showConfirm:false,
-        showMerchant:false,
+        showCreMerchant:false,
+        showRevMerchant:false,
         showManager:false
     }
 });

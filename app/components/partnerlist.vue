@@ -31,7 +31,7 @@
                     <td class="crowone">{{item.shares}}</td>
                     <td class="crowone">{{item.earningBalance}}</td>
                     <td class="crowone">{{item.consumeTotal}}</td>
-                    <td class="crowone"><router-link to="partnerdetail">明细</router-link><a>退出</a></td>
+                    <td class="crowone"><router-link to="partnerdetail">明细</router-link><a href="javascript:;" @click='delPartner(item.partnerId)'>退出</a></td>
                 </tr>
                 
     </table>
@@ -65,6 +65,15 @@
                 .then((response) => {
                    this.partnerList=response.data.result;
                    console.log(this.partnerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          delPartner(partnerId){
+            this.$http.delete(this.apiurl+'/partner/partnerId/'+partnerId)
+                .then((response) => {
+                  // window.location.reload()
                 })
                 .catch(function(response) {
                     console.log(response)

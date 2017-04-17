@@ -5,7 +5,7 @@
                  <span class="main-title">主页 / 商家管理</span>
                  <div class="main-nav">
                      <span>商家管理</span>
-                     <a @click='showMerchantChange' class="creat-new"><span></span>新建商家</a>
+                     <a href="javascript:;" @click='showCreMerchantChange' class="creat-new"><span></span>新建商家</a>
                  </div>
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="nickNameOrUserPhone">
@@ -32,7 +32,7 @@
                     <td class="crowtwo">{{item.totalMoney}}</td>
                     <td class="crowone">{{item.dividendTotalMoney}}</td>
                     <td class="crowone">{{item.status}}</td>
-                    <td class="crowtwo"><router-link to="partnerdetail">修改</router-link><a>查看</a></td>
+                    <td class="crowtwo"><a href="javascript:;" @click='showRevMerchantChange(item.merchantId)'>修改</a><a href="javascript:;">查看</a></td>
                 </tr>
                 
                 </table>
@@ -41,13 +41,15 @@
 
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
-         <merchant v-if="this.$store.state.showMerchant"></merchant>
+         <cremerchant v-if="this.$store.state.showCreMerchant" :apiurl='apiurl'></cremerchant>
+         <revmerchant v-if="this.$store.state.showRevMerchant" :apiurl='apiurl' :merchantinfo='merchantinfo'></revmerchant>
          
     </section>
 </template>
 <script>
     import qr from '../components/qrbar.vue'
-    import merchant from '../components/cremerchant.vue'
+    import cremerchant from '../components/cremerchant.vue'
+    import revmerchant from '../components/revmerchant.vue'
     import paging from '../components/paging.vue'
     
     require('../assets/list.scss')
@@ -61,12 +63,25 @@
                 active:[false,true],
                 apiurl:this.api,
                 nickNameOrUserPhone:'',
-                merchantList:{}
+                merchantList:{},
+                merchantinfo:null
             }
         },
         methods:{
-          showMerchantChange(){
-            this.$store.state.showMerchant = true;
+          showCreMerchantChange(){
+            this.$store.state.showCreMerchant = true;
+          },
+          showRevMerchantChange(merchantId){
+
+            this.$store.state.showRevMerchant = true;
+            this.$http.get(this.apiurl+'/merchant/'+merchantId)
+                .then((response) => {
+                   this.merchantinfo=response.data.result;
+                   console.log(this.merchantinfo)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           },
           search(){
             let options={
@@ -119,7 +134,7 @@
             
         },
         components:{
-           qr,merchant,paging
+           qr,cremerchant,revmerchant,paging
         }
     }
 </script>

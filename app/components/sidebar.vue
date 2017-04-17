@@ -4,9 +4,9 @@
        <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"><span :class="{active:isActive==2}" @click='setActive(2)'>商家管理</span></router-link>
        <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"><span :class="{active:isActive==3}" @click='setActive(3)'>用户管理</span></router-link>
        <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"><span :class="{active:isActive==4}" @click='setActive(4)'>订单管理</span></router-link>
-       <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span :class="{active:isActive==5}" @click='setActive(5)'>合同管理</span></router-link>
-       <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span :class="{active:isActive==6}" @click='setActive(6)'>合同模版</span></router-link>
-       <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span :class="{active:isActive==7}" @click='setActive(7)'>管理员账户</span></router-link>
+       <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span :class="{active:isActive==5}" @click='setActive(5)'>合同管理</span></router-link> -->
+       <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span :class="{active:isActive==6}" @click='setActive(6)'>合同模版</span></router-link> -->
+       <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span :class="{active:isActive==7}" @click='setActive(7)'>管理员账户</span></router-link> -->
        <router-link to="" class="side-bottom"><span>设置</span></div>     
    </div>
 

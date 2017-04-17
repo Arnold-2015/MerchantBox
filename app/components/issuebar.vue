@@ -6,26 +6,26 @@
                 <span @click='showIssueChange'></span>    
             </div>
             <div class="container">
-                <label :class="{ radioActive:option.operationType==1,radioNomal:option.operationType!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.operationType">普通公告</label>
-                <label :class="{ radioActive:option.operationType==2,radioNomal:option.operationType!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.operationType">延迟分红</label>
+                <label :class="{ radioActive:option.operationType==6,radioNomal:option.operationType!=6 }"><input type="radio" name="project-kind" value="6" v-model="option.operationType">普通公告</label>
+                <label :class="{ radioActive:option.operationType==5,radioNomal:option.operationType!=5 }"><input type="radio" name="project-kind" value="5" v-model="option.operationType">延迟分红</label>
             </div>
-            <div class="container sale-info" v-if="option.operationType==2">
+            <div class="container sale-info" v-if="option.operationType==5">
                  
                 <span>延迟至</span>
                 <input type="text" class="data" placeholder="日历选择器" v-model='option.delay2Time'>
                 <span class="text">每次分红只可延迟一次,逾期将扣除部分押金</span>
                 
             </div>
-            <div class="container profit-info" v-if="option.operationType==2">                
+            <div class="container profit-info" v-if="option.operationType==5">                
             	<span>延迟原因</span>
             	<textarea  cols="30" rows="10"  v-model='option.memo'></textarea>
             </div>
-            <div class="container profit-info" v-if="option.operationType==1">
+            <div class="container profit-info" v-if="option.operationType==6">
               <span>公告内容</span>
               <textarea  cols="30" rows="10"  v-model='option.memo'></textarea>
             </div>
             <label class="shit"><input type="checkbox" checked>短信通知</label>
-            <div class="profit-over">发布</div>
+            <div class="profit-over" @click='goIssue'>发布</div>
     	</div>
     </div>
 </template>
@@ -33,11 +33,12 @@
 <script> 
    
     export default {
-          data() {
+        props: ['apiurl'],
+        data() {
             return {
                 option:{
-                    projectId:'',
-                    operationType:1,
+                    projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                    operationType:6,
                     isSmsNotice:1,
                     delay2Time:'',
                     memo:''
@@ -53,7 +54,7 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/projectLog/add',options)
                 .then((response) => {
-                   
+                   this.$store.state.showIssue = false
                 })
                 .catch(function(response) {
                     console.log(response)

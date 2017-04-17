@@ -57,9 +57,9 @@
             return {
                 isActive:1,
                 accepts:'image/jpeg,image/jpg,image/png',
-                totalMoney:'',
+                totalMoney:null,
                 memo:'',
-                picUrl:'',
+                picUrl:null,
                 sumInfo:{}
 
             }
@@ -74,7 +74,7 @@
             formData.append('file', file);     
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
-                   
+                   this.picUrl=response.data.result.msg
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -82,9 +82,9 @@
           },
           goDevide(){
             let options={
-                'projectId':'81013538870fdfe011b06c211e601aec',
-                'totalMoney ':this.totalMoney,
-                'picUrl ':this.picUrl,
+                'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
+                'totalMoney':this.totalMoney,
+                'picUrl':this.picUrl,
                 'memo':this.memo,
                 'isSmsNotice':1
             }
@@ -97,11 +97,11 @@
                 })
           },
           getProfitInfo(){
-            let options={
-                'projectId':'81013538870fdfe011b06c211e601aec',
-                'totalMoney ':this.totalMoney
-            }
-            this.$http.post(this.apiurl+'/dividend/sumInfo',options)
+            // let options={
+            //     'projectId':'81013538870fdfe011b06c211e601aec',
+            //     'totalMoney ':this.totalMoney
+            // }
+            this.$http.get(this.apiurl+'/dividend/22e6b233d5b5f78bf81c11242c0cb046/totalMoney/'+this.totalMoney)
                 .then((response) => {
                    this.sumInfo=response.data.result
                 })

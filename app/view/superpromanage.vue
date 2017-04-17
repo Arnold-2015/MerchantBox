@@ -25,14 +25,14 @@
                     <td class="crowtwo">操作</td>
                 </tr>
                 <tr v-for="(item,index) in projectList" :class='{active:active[index%2]}'>
-                    <td class="crowone">{{index}}</td>
+                    <td class="crowone">{{item.projectCode }}</td>
                     <td class="crowtwo">{{item.projectName}}</td>
-                    <td class="crowone">赵钱孙李</td>
-                    <td class="crowone">12445678900</td>
-                    <td class="crowone">2017/3/23/14:00</td>
-                    <td class="crowone">快捷发起</td>
+                    <td class="crowone">{{item.merchantName }}</td>
+                    <td class="crowone">{{item.merchantPhone }}</td>
+                    <td class="crowone">{{item.creationTime }}</td>
+                    <td class="crowone">{{item.source}}</td>
                     <td class="crowone">{{item.projectStatus }}</td>
-                    <td class="crowtwo"><router-link to="partnerdetail">明细</router-link><a>退出</a></td>
+                    <td class="crowtwo"><a href="javascript:;" @click=''>审核</a><a href="javascript:;" @click=''>修改</a><a href="javascript:;" @click='delProject(item.projectId)'>删除</a></td>
                 </tr>
                 
                 </table>
@@ -71,6 +71,15 @@
                 .then((response) => {
                    this.projectList=response.data.result;
                    console.log(this.projectList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          delProject(projectId){
+            this.$http.delete(this.apiurl+'/project/'+projectId)
+                .then((response) => {
+                   window.location.reload()
                 })
                 .catch(function(response) {
                     console.log(response)

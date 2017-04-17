@@ -4,45 +4,44 @@
     		
      
             <div class="container deal-info">
-                <h1>新建商家</h1>
-                <p><span>商家姓名</span><input type="text" class="data" v-model='option.nickName'></p>
-                <p><span>身份证号</span><input type="text" class="data" v-model='option.idNo'></p>
-                <p><span>手机号码</span><input type="text" class="data" v-model='option.userPhone'></p>
-                <p><span>账号密码</span><input type="text" class="data" v-model='option.password'></p>
+                <h1>修改商家</h1>
+                <p><span>商家姓名</span><input type="text" class="data" v-model='merchantinfo.nickName'></p>
+                <p><span>身份证号</span><input type="text" class="data" v-model='merchantinfo.idNo'></p>
+                <p><span>手机号码</span><input type="text" class="data" v-model='merchantinfo.userPhone'></p>
+                <p><span>账号密码</span><input type="text" class="data" v-model='merchantinfo.password'></p>
                 <p><span>账号状态</span></p>
                 <div class="pickbar">
-                <label :class="{ radioActive:option.status==1,radioNomal:option.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.status">正常</label>
-                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label>
+                <label :class="{ radioActive:merchantinfo.status==1,radioNomal:merchantinfo.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="merchantinfo.status">正常</label>
+                <label :class="{ radioActive:merchantinfo.status==2,radioNomal:merchantinfo.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="merchantinfo.status">冻结</label>
                 </div>
                 
      
               
             </div>
-            <div @click='showCreMerchantChange' class="consume-cancel">取消</div>
-            <div @click='addMerchant' class="consume-over" @click='addMerchant'>确认</div>
+            <div @click='showRevMerchantChange' class="consume-cancel">取消</div>
+            <div @click='revMerchant' class="consume-over" >确认</div>
     	</div>
     </div>
 </template>
 
 <script> 
     export default {
-        props: ['apiurl'],
+        props: ['apiurl','merchantinfo'],
         data() {
             return {
-                option:{
-                   status:1
-                }
+
             }
         },
         methods:{
-          showCreMerchantChange(){
-            this.$store.state.showCreMerchant = false;
+          showRevMerchantChange(){
+            this.$store.state.showRevMerchant = false;
           },
-          addMerchant(){
-            let options=this.option;
-            this.$http.post(this.apiurl+'/merchant/add',options)
+          revMerchant(){
+            let options=this.merchantinfo;
+            this.$http.put(this.apiurl+'/merchant',options)
                 .then((response) => {
-                   this.$store.state.showCreMerchant = false;
+                   this.$store.state.showRevMerchant = false;
+                   window.location.reload()
                 })
                 .catch(function(response) {
                     console.log(response)

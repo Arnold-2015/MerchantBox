@@ -35,12 +35,14 @@ var app = new Vue({
 });
 // 拦截器
 Vue.http.interceptors.push((request, next) => {
+	app.showLoading=true;
   const merchantId=localStorage.getItem('merchantId')
   const token=localStorage.getItem('token')
   request.headers.set('merchantId', merchantId)
   request.headers.set('token',token)
   // console.log(request.headers)
   next(response => {
-    return response
+  	app.showLoading=false;
+    // return response
   })
 })

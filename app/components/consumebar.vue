@@ -3,43 +3,171 @@
     	<div class="consume-bar">
     		<div class="title">
                 <p>消费录入</p> 
-                <input  type="text" placeholder="输入姓名/卡号/手机号" >
-                <a class="search"><img src="../assets/search.png" ></a> 
+                <input  type="text" placeholder="输入姓名/卡号/手机号" v-model='realNameOrVipCodeOrUserPhone'>
+                <a class="search"><img src="../assets/search.png" @click='search'></a> 
                 <span @click='showConsumeChange'></span>    
             </div>
             <div class="container user-info">
-                <p>赵钱孙李</p>
-                <span>手机：13423459808</span>
-                <span>卡号：400004000030000</span>
-                <span>收益余额：100元</span>
-                <span>本金余额：10000元</span>
+                <p>合伙人：{{partnerInfo.realName}}</p>
+                <span>手机：{{partnerInfo.phone }}</span>
+                <span>卡号：{{partnerInfo.vipCode}}</span>
+                <span>收益余额：{{partnerInfo.earning }}元</span>
+                <span>本金余额：{{partnerInfo.principalBalance }}元</span>
             </div>
             <div class="container deal-info">
-                <p>消费金额<input type="text" class="data"></p>
-                <p>结算方式</p>
-                <p>应付金额<span>800元</span></p>
-                <div class="deal-bar">
-                    
+                <p>消费金额<input type="text" class="data" v-model="consumeTotal" @keyup='calculateTopay'></p>
+                <p style="float:left">结算方式</p>
+                <div class="consume-choose">
+                <label :class="{ radioActive:consumeType==2,radioNomal:consumeType!=2 }"><input type="radio" name="project-kind" value="2" v-model="consumeType" @click='calculateTopay'>收益消费
+                <span v-if='!changediscount'>{{incomdiscount}}折</span><span v-if='changediscount'><input type="text" v-model='incomdiscount' @blur='discount(0)'>折</span></label>
+                <label :class="{ radioActive:consumeType==3,radioNomal:consumeType!=3 }"><input type="radio" name="project-kind" value="3" v-model="consumeType" @click='calculateTopay'>本金消费
+                <span v-if='!changediscount'>{{basediscount}}折</span><span v-if='changediscount'><input type="text" v-model='basediscount' @blur='discount(0)'>折</span></label>
+                <a href="javascript:;" @click='discount(1)'>修改折扣</a>
                 </div>
-                <p>验证码<input type="text" class="data"><a class="getcode" id="getcode">获取验证码</a></p>
+                <p style="clear:both">应付金额<span>{{topay}}</span></p>
+                <div class="deal-bar">
+                    {{consumeType | consumeType}}   {{nowtopay}} 元<span v-if='showWarn'>收益余额不足,请提醒消费者使用其它消费方式</span>
+                </div>
+                <p>验证码<input type="text" class="data" v-model='verificationCode'><a href="javascript:;" class="getcode" id="getcode" @click='getcode'>获取验证码</a></p>
             </div>
-            <div class="consume-over">确认消费</div>
+            <div class="consume-over" @click='goconsume'>确认消费</div>
     	</div>
     </div>
 </template>
 
 <script> 
     export default {
-          data() {
+        filters: {
+            consumeType:function(consumeType){
+                return consumeType==2?'收益消费':'本金消费'
+            }
+        },
+        props: ['apiurl'],
+        data() {
             return {
-                isActive:1
+                isActive:1,
+                consumeType:2,
+                topay:0,
+                incomdiscount:0,
+                basediscount:0,
+                changediscount:0,
+                showWarn:0,
+                baseleft:0,
+                incomeleft:0,
+                nowtopay:0,
+                consumeTotal:null,
+                verificationCode:null,
+                realNameOrVipCodeOrUserPhone:null,
+                partnerInfo:{}
             }
         },
         methods:{
           showConsumeChange(){
             this.$store.state.showConsume = false;
+          },
+          search(){
+            this.$http.get(this.apiurl+'/partner/'+this.$route.query.projectId+'/'+this.realNameOrVipCodeOrUserPhone)
+                .then((response) => {
+                   this.partnerInfo=response.data.result;
+                   this.baseleft=this.partnerInfo.principalBalance;
+                   this.incomeleft=this.partnerInfo.earning;
+                   if(this.partnerInfo.consumeRightList[0].consumeType==2){
+                    this.incomdiscount=this.partnerInfo.consumeRightList[0].consumeDiscoun;
+                   }else{
+                    this.basediscount=this.partnerInfo.consumeRightList[0].consumeDiscoun
+                   }
+                   if(this.partnerInfo.consumeRightList[1].consumeType==2){
+                    this.incomdiscount=this.partnerInfo.consumeRightList[1].consumeDiscoun;
+                   }else{
+                    this.basediscount=this.partnerInfo.consumeRightList[1].consumeDiscoun
+                   }
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          discount(i){
+             this.changediscount=i;
+             if(this.consumeType==2) {
+              this.topay=(this.consumeTotal)*(this.incomdiscount)/10;
+              if(this.topay>this.incomeleft){
+                this.nowtopay=this.incomeleft;
+                this.showWarn=1;
+              }else{
+                this.nowtopay=this.topay;
+                this.showWarn=0;
+              }
+              
+            }else {
+              this.topay=(this.consumeTotal)*(this.basediscount)/10;
+              if(this.topay>this.baseleft){
+                this.nowtopay=this.baseleft;
+                this.showWarn=1;
+              }else{
+                this.nowtopay=this.topay;
+                this.showWarn=0;
+              }
+            }
+          },
+          calculateTopay(){
+            if(this.consumeType==2) {
+              this.topay=(this.consumeTotal)*(this.incomdiscount)/10;
+              if(this.topay>this.incomeleft){
+                this.nowtopay=this.incomeleft;
+                this.showWarn=1;
+              }else{
+                this.nowtopay=this.topay;
+                this.showWarn=0;
+              }
+              
+            }else {
+              this.topay=(this.consumeTotal)*(this.basediscount)/10;
+              if(this.topay>this.baseleft){
+                this.nowtopay=this.baseleft;
+                this.showWarn=1;
+              }else{
+                this.nowtopay=this.topay;
+                this.showWarn=0;
+              }
+            }
+
+          },
+          getcode(){
+            let options={
+                'phone':this.partnerInfo.phone
+            }
+            this.$http.post(this.apiurl+'/consume/smsCode',options)
+                .then((response) => {
+                   
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+          },
+          goconsume(){
+            let options={
+                'verificationCode':this.verificationCode,
+                'phone':this.partnerInfo.phone,
+                'consumeType':this.consumeType,
+                'money':this.consumeTotal,
+                'customerId':this.partnerInfo.customerId,
+                'projectId':this.$route.query.projectId
+            }
+            this.$http.post(this.apiurl+'/consume/add',options)
+                .then((response) => {
+                  if(response.data.statusCode==200){
+                   this.$store.state.showConsume = false;
+                   window.location.reload()
+                  }else{
+                    alert('核销失败，请重试')
+                  }
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         }
+
         
     }
 </script>
@@ -166,7 +294,7 @@
                     height: 60px;
                     line-height: 60px;
                     margin-left: 20px;
-                    color: #333;
+                    color: #666;
                  }
                  .getcode{
                          display: inline-block;
@@ -183,6 +311,72 @@
                          background: #fff;
                      }
                 }
+                .consume-choose{
+                   float: left;
+                   margin-left: 20px;
+                   a{
+                     font-size: 14px;
+                     color: #999999;
+                   }
+                }
+                 label{
+                  height: 60px;
+                  line-height: 60px;
+                  color:#666;
+                  margin-right: 10px;
+                  input{
+                       width: 24px;
+                       height: 24px;
+                       position: relative;
+                       margin: 0;
+                       filter: alpha(opacity=0);
+                       opacity: 0;
+                  }
+                 span{
+                  display: inline-block;
+                  font-size: 14px;
+                  color: #999;
+                  width: 40px;
+                  text-align: center;
+                  input{
+                    width: 20px;
+                    height: 14px;
+                    border:1px solid #D7D7D7;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #999999;
+                    opacity: 1;
+                    &:focus{
+                            border: 1px solid #C09D5B;
+                            outline:none
+                        }
+                  }
+                 }
+                }
+                .radioNomal{
+                       background: url('../assets/radio-nomal.png')no-repeat left center;
+                       background-size: 16px 16px;
+                 }
+                .radioActive{
+                       background: url('../assets/radio-active.png')no-repeat left center;
+                       background-size: 16px 16px;
+                  }
+              .deal-bar{
+                min-width: 400px;
+                height: 36px;
+                line-height: 36px;
+                background: #FAFAFA;
+                margin-left: 90px;
+                font-size: 14px;
+                color: #666666;
+                padding-left: 20px;
+                span{
+                  display: inline-block;
+                  padding-left: 20px;
+                  font-size:12px;
+                  color: #c45959;
+                }
+              }
             }
             .consume-over{
                 width: 160px;

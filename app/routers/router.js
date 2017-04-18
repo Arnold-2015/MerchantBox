@@ -33,6 +33,14 @@ const router = [{
         },'merchantmanage');
     }
 }, {
+    path: '/merchantdetail',
+    name: 'merchantdetail',
+    component(resolve) {
+        require.ensure(['../view/merchantdetail.vue'], () => {
+            resolve(require('../view/merchantdetail.vue'));
+        },'merchantdetail');
+    }
+}, {
     path: '/customermanage',
     name: 'customermanage',
     component(resolve) {
@@ -41,6 +49,14 @@ const router = [{
         },'customermanage');
     }
 }, {
+    path: '/customerdetail',
+    name: 'customerdetail',
+    component(resolve) {
+        require.ensure(['../view/customerdetail.vue'], () => {
+            resolve(require('../view/customerdetail.vue'));
+        },'customerdetail');
+    }
+},{
     path: '/ordermanage',
     name: 'ordermanage',
     component(resolve) {
@@ -55,6 +71,14 @@ const router = [{
         require.ensure(['../view/compactmanage.vue'], () => {
             resolve(require('../view/compactmanage.vue'));
         },'compactmanage');
+    }
+},{
+    path: '/compactdetail',
+    name: 'compactdetail',
+    component(resolve) {
+        require.ensure(['../view/compactdetail.vue'], () => {
+            resolve(require('../view/compactdetail.vue'));
+        },'compactdetail');
     }
 }, {
     path: '/compactmodle',

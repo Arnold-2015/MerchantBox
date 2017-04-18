@@ -33,7 +33,7 @@
                     <td class="crowone">{{item.investmentMoney}}</td>
                     <td class="crowone">{{item.creationTime}}</td>
                     <td class="crowone">{{item.authStatus | authStatus}}</td>
-                    <td class="crowtwo"><router-link to="partnerdetail">查看</router-link></td>
+                    <td class="crowtwo"><router-link :to="{ path: 'customerdetail', query: { customerId:item.customerId }}">查看</router-link></td>
                 </tr>
                 
                 </table>
@@ -70,8 +70,7 @@
                 'pageSize':10,
                 'pageNum':1
             }
-            alert(this.realNameOrUserPhoneOrIDNo)
-            this.$http.post(this.apiurl+'/customer',options)
+            this.$http.post(this.apiurl+'/customer/list',options)
                 .then((response) => {
                    this.customerList=response.data.result;
                    console.log(this.customerList)
@@ -89,7 +88,7 @@
                 'pageSize':10,
                 'pageNum':1
             }
-            this.$http.post(this.apiurl+'/customer',options)
+            this.$http.post(this.apiurl+'/customer/list',options)
                 .then((response) => {
                    this.customerList=response.data.result;
                    console.log(this.customerList)

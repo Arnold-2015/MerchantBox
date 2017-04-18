@@ -12,9 +12,9 @@
                              <div class="up-bar">
                                  <h1>{{projectInfo.projectName}}</h1>
                                  <span>履约中</span>
-                                 <a @click='showIssueChange'  class="creat-new">新建公告</a>
-                                 <a @click='showProfitChange' class="profit-entering">分红录入</a>
-                                 <a @click='showConsumeChange' class="consume-entering">消费录入</a>
+                                 <a @click='showIssueChange'  class="creat-new" :apiurl='apiurl'>新建公告</a>
+                                 <a @click='showProfitChange' class="profit-entering" :apiurl='apiurl'>分红录入</a>
+                                 <a @click='showConsumeChange' class="consume-entering" :apiurl='apiurl'>消费录入</a>
                              </div>
                              <div class="low-bar">
                                      <li>

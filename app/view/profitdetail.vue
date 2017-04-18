@@ -24,7 +24,7 @@
                                 <td class="crowone">分红金额</td>
                                 
                             </tr>
-                            <tr v-for="(item,index) in profitList" :class='{active:active[index%2]}'>
+                            <tr v-for="(item,index) in profitDetail" :class='{active:active[index%2]}'>
                                 <td class="crowone">{{item.name}}</td>
                                 <td class="crowtwo">{{item.phone}}</td>
                                 <td class="crowtwo">{{item.cardNo}}</td>
@@ -41,8 +41,7 @@
     </section>
 </template>
 <script>
-    import nb from '../components/navbar.vue'
-    import sb from '../components/sidebar.vue'
+
     require('../assets/list.scss')
     export default {
         filters: {
@@ -53,7 +52,7 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
-                projectList:{}
+                profitDetail:{}
             }
         },
         beforeMount(){
@@ -66,7 +65,7 @@
                'pageSize':10,
                'pageNum':1,
                'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
-               'dividendId':'2b8a4fac2756ffe18b2685fa714f10a9' 
+               'dividendId':'0bbc881586cf4ca71356e5bc24ee718b' 
             }
 
             this.$http.post(this.apiurl+'/dividend/detail',options)
@@ -79,7 +78,7 @@
                 })
         },
         components:{
-           nb,sb
+
         }
     }
 </script>

@@ -2,9 +2,9 @@
     <div class="qr">
     	<div class="qr-bar">
             <span @click='showQrChange'></span>
-    		<img src="../assets/logo@3x.png">
-    		<a class="download">下载二维码</a>
-    		<a class='preview'>在线预览</a>
+    		<img :src="qrcode">
+    		<a class="download" :href='qrcode' download='二维码'>下载二维码</a>
+    		<a class='preview' :href='previewurl'>在线预览</a>
     	</div>
     </div>
 </template>
@@ -12,9 +12,10 @@
 <script> 
 
     export default {
-          data() {
+        props:['previewurl','qrcode'],
+        data(){
             return {
-                isActive:1
+                
             }
         },
         methods:{

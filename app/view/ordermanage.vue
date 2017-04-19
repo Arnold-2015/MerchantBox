@@ -15,25 +15,25 @@
 
                 <tr class='title'>
                     <td class="crowone">流水号</td>
-                    <td class="crowtwo">项目名称</td>
+                    <td class="crowone">项目名称</td>
                     <td class="crowone">真实姓名</td>
                     <td class="crowone">手机号码</td>
                     <td class="crowtwo">身份证号码</td>
                     <td class="crowone">份数</td>
                     <td class="crowone">投资金额</td>
                     <td class="crowone">支付时间</td>
-                    <td class="crowtwo">状态</td>
+                    <td class="crowone">状态</td>
                 </tr>
                 <tr v-for="(item,index) in orderList" :class='{active:active[index%2]}'>
                     <td class="crowone">{{item.orderCode}}</td>
-                    <td class="crowtwo">{{item.projectName}}</td>
+                    <td class="crowone">{{item.projectName}}</td>
                     <td class="crowone">{{item.customerRealName}}</td>
                     <td class="crowone">{{item.phone}}</td>
                     <td class="crowtwo">{{item.idNo}}</td>
                     <td class="crowone">{{item.buyCount}}</td>
                     <td class="crowone">{{item.orderMoney}}</td>
                     <td class="crowone">{{item.modifyTime}}</td>
-                    <td class="crowtwo">{{item.status}}</td>
+                    <td class="crowone">{{item.status}}</td>
                 </tr>
                 
                 </table>

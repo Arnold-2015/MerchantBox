@@ -39,10 +39,14 @@
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
+         <reviewfast v-if='this.$store.state.showreviewfast'></reviewfast>
+         <reviewmerchant v-if='this.$store.state.showreviewmerchant'></reviewmerchant>
     </section>
 </template>
 <script>
     import qr from '../components/qrbar.vue'
+    import reviewmerchant from '../components/reviewmerchant.vue'
+    import reviewfast from '../components/reviewfast.vue'
     require('../assets/list.scss')
     export default {
         filters: {
@@ -107,7 +111,7 @@
             
         },
         components:{
-           qr
+           qr,reviewmerchant,reviewfast
         }
     }
 </script>

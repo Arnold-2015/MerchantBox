@@ -237,7 +237,7 @@
                                          <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.cousumeTotalMoney}}</span>
+                                         <span class="key-msg">{{item.consumeTotalMoney}}</span>
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <li>

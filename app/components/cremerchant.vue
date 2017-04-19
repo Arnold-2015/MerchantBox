@@ -5,15 +5,18 @@
      
             <div class="container deal-info">
                 <h1>新建商家</h1>
-                <p><span>商家姓名</span><input type="text" class="data" v-model='option.nickName'></p>
-                <p><span>身份证号</span><input type="text" class="data" v-model='option.idNo'></p>
-                <p><span>手机号码</span><input type="text" class="data" v-model='option.userPhone'></p>
+                <p><span>商家姓名（甲方)</span><input type="text" class="data" v-model='option.nickName'></p>
+                <p><span>商家身份证号</span><input type="text" class="data" v-model='option.idNo'></p>
+                <p><span>手机号码（账号)</span><input type="text" class="data" v-model='option.userPhone'></p>
                 <p><span>账号密码</span><input type="text" class="data" v-model='option.password'></p>
-                <p><span>账号状态</span></p>
-                <div class="pickbar">
+                <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='option.nickName'></p>
+                <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='option.idNo'></p>
+                <p><span>项目联系人姓名</span><input type="text" class="data" v-model='option.userPhone'></p>
+                <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='option.password'></p>
+                <p><span>账号状态</span>
                 <label :class="{ radioActive:option.status==1,radioNomal:option.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.status">正常</label>
-                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label>
-                </div>
+                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label></p>
+               
                 
      
               
@@ -65,12 +68,13 @@
     	z-index: 100;
     	.consume-bar{
     		width: 680px;
-    		height: 600px;
+    		height: 640px;
     		background: #fff;
-    		margin: 150px auto;
+        border-radius: 4px;
+    		margin: 8% auto;
     		position: relative;  		
             .container{
-                width: 520px;
+                width: 580px;
                 position: relative;
                 top: 40px;
                 margin: 0 auto;
@@ -90,10 +94,10 @@
                  color: #333333;
                  height: 28px;
                  line-height: 28px;
-                 margin-top: 40px;
+                 margin-top: 20px;
                  .data{
-                    width: 300px;
-                    height: 40px;
+                    width: 200px;
+                    height: 30px;
                     background: #F6F6F6;
                     border: 1px solid #D7D7D7;
                     color:#666;
@@ -107,21 +111,15 @@
                  }
                  span{
                     display: inline-block;
-                    width: 100px;
+                    width: 220px;
                     height: 28px;
                     line-height: 28px;
-                    margin-left: 20px;
+                    margin-left: 0px;
                     color: #333;
                  }
                  
                 }
-                .pickbar{
-                 	width: 400px;
-                 	float: left;
-                 	margin-top: -28px;
-                 	margin-left: 200px;
-                    label{
-                  display: inline-block;
+                label{
                   height: 36px;
                   line-height: 36px;
                   color:#666;
@@ -130,7 +128,6 @@
                        width: 36px;
                        height: 36px;
                        position: relative;
-                       top:6px;
                        filter: alpha(opacity=0);
                        opacity: 0;
                   }
@@ -138,13 +135,13 @@
                 }
                  .radioNomal{
                        background: url('../assets/radio-nomal.png')no-repeat left center ;
-                       background-size: 20px 20px;
+                       background-size: 16px 16px;
                  }
                  .radioActive{
                        background: url('../assets/radio-active.png')no-repeat left center;
-                       background-size: 20px 20px;
+                       background-size: 16px 16px;
                   }
-                 }
+                 
                   
             }
             .consume-cancel{

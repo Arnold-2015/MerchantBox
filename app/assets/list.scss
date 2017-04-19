@@ -5,6 +5,7 @@ $base-color:#C49F59;
         background: #fff;
         position: relative;
         font-size:18px;
+        border-top:1px solid #f6f6f6;
         .toback{
             width:40px;
             height:60px;
@@ -125,12 +126,12 @@ $base-color:#C49F59;
             	margin-left: 10px;
             }  
         }
-        .crowone{
-            width: 11%;
-        }
-        .crowtow{
-            width: 14%;
-        }
+        // .crowone{
+        //     width: 11%;
+        // }
+        // .crowtow{
+        //     width: 20%;
+        // }
         .active{
             background:#fff;
         }

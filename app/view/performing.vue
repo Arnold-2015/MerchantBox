@@ -66,7 +66,7 @@
              </div>
          </div>
          <!-- <sb></sb> -->
-         <qr v-if="this.$store.state.showQr" :apiurl='apiurl'></qr>
+         <qr v-if="this.$store.state.showQr"  :previewurl='projectInfo.projectPreviewUrl' :qrcode='qrCode'></qr>
          <consumebar v-if="this.$store.state.showConsume" :apiurl='apiurl'></consumebar>
          <profitbar v-if="this.$store.state.showProfit" :apiurl='apiurl'></profitbar>
          <issuebar v-if="this.$store.state.showIssue" :apiurl='apiurl'></issuebar>
@@ -90,9 +90,10 @@
           data() {
             return {
                 apiurl:this.api,
-                isActive:1,
+                isActive:this.$store.state.isActive,
                 projectId:'81013538870fdfe011b06c211e601aec',
-                projectInfo:{}
+                projectInfo:{},
+                qrCode:null
             }
         },
         filters: {
@@ -100,7 +101,8 @@
         },
         methods:{
           setActive(i){
-            this.isActive=i
+            this.isActive=i;
+            this.$store.state.isActive=i;
           },
           showQrChange(){
             this.$store.state.showQr = true;
@@ -127,6 +129,7 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+           
         },
         components:{
            nb,sb,qr,issue,partner,profit,consume,consumebar,profitbar,issuebar
@@ -294,9 +297,11 @@ $base-color:#C49F59;
             .menu-bar{
                 width: 97%;
                 height: 60px;
+                line-height:60px;
                 margin-top: 9px;
                 background: #FAFAFA;
                 padding-left: 3%;
+                display: block;
                 li{
                     min-width: 160px;
                     height: 60px;

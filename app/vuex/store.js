@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
+        isActive:1,
         showQr:false,
         showConsume:false,
         showProfit:false,
@@ -10,7 +11,9 @@ const store = new Vuex.Store({
         showConfirm:false,
         showCreMerchant:false,
         showRevMerchant:false,
-        showManager:false
+        showManager:false,
+        showreviewfast:false,
+        showreviewmerchant:true
     }
 });
 export default store;

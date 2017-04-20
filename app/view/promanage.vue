@@ -295,7 +295,7 @@
                      </div>
                 </div>
             </div>
-                 
+                 <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
          <!-- <sb></sb> -->
@@ -306,6 +306,7 @@
     import nb from '../components/navbar.vue'
     import sb from '../components/sidebar.vue'
     import qr from '../components/qrbar.vue'
+    import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -314,13 +315,30 @@
            data() {
             return {
                 apiurl:this.api,
-                projectList:{}
+                projectList:{},
+                pages:null
             }
         },
         methods:{
           showQrChange(){
             this.$store.state.showQr = true;
+          },
+          getpage(){
+            let options={
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/project/list',options)
+                .then((response) => {
+                   this.projectList=response.data.result.projectLists;
+                   console.log(this.projectList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
           }
+
         },
         beforeMount(){
             localStorage.setItem('menuTag', 1)
@@ -331,7 +349,8 @@
             }
             this.$http.post(this.apiurl+'/project/list',options)
                 .then((response) => {
-                   this.projectList=response.data.result;
+                   this.projectList=response.data.result.projectLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.projectList)
                 })
                 .catch(function(response) {
@@ -342,7 +361,7 @@
             
         },
         components:{
-           nb,sb,qr
+           nb,sb,qr,paging
         }
     }
 </script>

@@ -2,7 +2,7 @@
     <div class="nav-bar">
       <span class="nav-icon"></span>
       <span class="nav-title">六度盒子商家版</span>
-      <img src="../assets/logo.png" class="user-avarta">
+      <img :src="avarta" class="user-avarta">
       <span class="setting-icon" @click='changeWillShow'></span>
       <div class="setting-bar" v-if='willShow'>
         <a href="">账号设置</a>
@@ -11,11 +11,27 @@
     </div>
 </template>
 <script>
-
+import Vue from 'Vue'
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
+// 拦截器
+Vue.http.interceptors.push((request, next) => {
+  const merchantId=localStorage.getItem('merchantId')
+  const token=localStorage.getItem('token')
+  request.headers.set('merchantId', merchantId)
+  request.headers.set('token',token)
+  console.log(request.headers)
+  next(response => {
+    return response
+  })
+})
     export default {
+      props: ['api'],
         data() {
             return {
-                willShow:false
+                willShow:false,
+                avarta:null,
+                apiurl:this.api
             }
         },
         methods:{
@@ -28,8 +44,14 @@
           }
           
         },
-        mounted() {
-           
+        beforeMount() {
+            this.$http.get(this.apiurl+'/merchant')
+                .then((response) => {
+                   this.avarta = response.data.result.headImgUrl ;
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         }
     }
 </script>

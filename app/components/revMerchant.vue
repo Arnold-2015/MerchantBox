@@ -5,15 +5,17 @@
      
             <div class="container deal-info">
                 <h1>修改商家</h1>
-                <p><span>商家姓名</span><input type="text" class="data" v-model='merchantinfo.nickName'></p>
-                <p><span>身份证号</span><input type="text" class="data" v-model='merchantinfo.idNo'></p>
-                <p><span>手机号码</span><input type="text" class="data" v-model='merchantinfo.userPhone'></p>
+                <p><span>商家姓名（甲方)</span><input type="text" class="data" v-model='merchantinfo.nickName'></p>
+                <p><span>商家身份证号</span><input type="text" class="data" v-model='merchantinfo.idNo'></p>
+                <p><span>手机号码（账号)</span><input type="text" class="data" v-model='merchantinfo.userPhone'></p>
                 <p><span>账号密码</span><input type="text" class="data" v-model='merchantinfo.password'></p>
-                <p><span>账号状态</span></p>
-                <div class="pickbar">
+                <!-- <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='merchantinfo.thirdPartyName'></p>
+                <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='merchantinfo.thirdPartyCode'></p>
+                <p><span>项目联系人姓名</span><input type="text" class="data" v-model='merchantinfo.linkManName'></p>
+                <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='merchantinfo.linkManPhone'></p> -->
+                 <p><span>账号状态</span>
                 <label :class="{ radioActive:merchantinfo.status==1,radioNomal:merchantinfo.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="merchantinfo.status">正常</label>
-                <label :class="{ radioActive:merchantinfo.status==2,radioNomal:merchantinfo.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="merchantinfo.status">冻结</label>
-                </div>
+                <label :class="{ radioActive:merchantinfo.status==2,radioNomal:merchantinfo.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="merchantinfo.status">冻结</label></p>
                 
      
               
@@ -55,21 +57,22 @@
 <style lang='sass' scoped>
     $base-color:#C49F59;
     .consume{
-    	width: 100%;
-    	height: 100%;
-    	position: fixed;
-    	top:0;
-    	left:0;
-    	background: rgba(0,0,0,0.50);
-    	z-index: 100;
-    	.consume-bar{
-    		width: 680px;
-    		height: 600px;
-    		background: #fff;
-    		margin: 150px auto;
-    		position: relative;  		
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top:0;
+      left:0;
+      background: rgba(0,0,0,0.50);
+      z-index: 100;
+      .consume-bar{
+        width: 680px;
+        height: 540px;
+        background: #fff;
+        border-radius: 4px;
+        margin: 8% auto;
+        position: relative;     
             .container{
-                width: 520px;
+                width: 580px;
                 position: relative;
                 top: 40px;
                 margin: 0 auto;
@@ -77,22 +80,22 @@
             }
 
             .deal-info{
-            	width: 520px;
-            	min-height: 400px;
-            	margin-top: 60px;
-            	h1{
-                	font-size: 24px;
-                	margin-top: 60px;
+              width: 520px;
+              min-height: 400px;
+              margin-top: 60px;
+              h1{
+                  font-size: 24px;
+                  margin-top: 60px;
                 }
                 p{
                  font-size: 20px;
                  color: #333333;
-                 height: 28px;
-                 line-height: 28px;
-                 margin-top: 40px;
+                 height: 50px;
+                 line-height: 50px;
+                 margin-top: 20px;
                  .data{
-                    width: 300px;
-                    height: 40px;
+                    width: 200px;
+                    height: 50px;
                     background: #F6F6F6;
                     border: 1px solid #D7D7D7;
                     color:#666;
@@ -106,21 +109,15 @@
                  }
                  span{
                     display: inline-block;
-                    width: 100px;
+                    width: 220px;
                     height: 28px;
                     line-height: 28px;
-                    margin-left: 20px;
+                    margin-left: 0px;
                     color: #333;
                  }
                  
                 }
-                .pickbar{
-                 	width: 400px;
-                 	float: left;
-                 	margin-top: -28px;
-                 	margin-left: 200px;
-                    label{
-                  display: inline-block;
+                label{
                   height: 36px;
                   line-height: 36px;
                   color:#666;
@@ -129,7 +126,6 @@
                        width: 36px;
                        height: 36px;
                        position: relative;
-                       top:6px;
                        filter: alpha(opacity=0);
                        opacity: 0;
                   }
@@ -137,17 +133,17 @@
                 }
                  .radioNomal{
                        background: url('../assets/radio-nomal.png')no-repeat left center ;
-                       background-size: 20px 20px;
+                       background-size: 16px 16px;
                  }
                  .radioActive{
                        background: url('../assets/radio-active.png')no-repeat left center;
-                       background-size: 20px 20px;
+                       background-size: 16px 16px;
                   }
-                 }
+                 
                   
             }
             .consume-cancel{
-            	width: 159px;
+              width: 159px;
                 height: 45px;
                 position: absolute;
                 left: 150px;
@@ -174,7 +170,7 @@
                 border-radius: 2px;
             }
 
-    	}
+      }
     }
 
    

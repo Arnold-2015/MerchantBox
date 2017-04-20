@@ -7,9 +7,9 @@
                  <div class="search-bar">
                         <router-link class="toback" to="performing">返回</router-link>
                         <div class="info-bar">
-                            <span class="title">2017年3月21日 分红明细</span>
-                            <span>分红总金额 10,000元</span>
-                            <span>分红人数 15人</span>
+                            <span class="title">{{profitDetail.dividendTime}} 分红明细</span>
+                            <span>分红总金额 {{profitDetail.dividendTotalMoney}}元</span>
+                            <span>分红人数 {{profitDetail.dividendTotalCount}}人</span>
                         </div>
                         <a class="export">导出列表</a>
                  </div>
@@ -24,24 +24,25 @@
                                 <td class="crowone">分红金额</td>
                                 
                             </tr>
-                            <tr v-for="(item,index) in profitDetail" :class='{active:active[index%2]}'>
-                                <td class="crowone">{{item.name}}</td>
+                            <tr v-for="(item,index) in profitDetail.dividendDetailList" :class='{active:active[index%2]}'>
+                                <td class="crowone">{{item.realName}}</td>
                                 <td class="crowtwo">{{item.phone}}</td>
-                                <td class="crowtwo">{{item.cardNo}}</td>
+                                <td class="crowtwo">{{item.vipCardNo}}</td>
                                 <td class="crowone">{{item.principalBalance}}</td>
                                 <td class="crowone">{{item.unitShares}}%</td>
-                                <td class="crowone">{{item.money}}</td>
+                                <td class="crowone">{{item.participateMoney }}</td>
                                 
                             </tr>
                 
                 </table>
+                <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
          <!-- <sb></sb> -->
     </section>
 </template>
 <script>
-
+    import paging from '../components/paging.vue'
     require('../assets/list.scss')
     export default {
         filters: {
@@ -52,8 +53,28 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
-                profitDetail:{}
+                profitDetail:{},
+                pages:null
             }
+        },
+        methods:{
+         getpage(){
+            let options={
+                'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
+                'dividendId':'0bbc881586cf4ca71356e5bc24ee718b',
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/dividend/detail',options)
+                .then((response) => {
+                   this.profitDetail=response.data.result;
+                   console.log(this.profitDetail)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
+          }
         },
         beforeMount(){
 
@@ -71,6 +92,7 @@
             this.$http.post(this.apiurl+'/dividend/detail',options)
                 .then((response) => {
                    this.profitDetail=response.data.result;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.profitDetail)
                 })
                 .catch(function(response) {
@@ -78,7 +100,7 @@
                 })
         },
         components:{
-
+               paging
         }
     }
 </script>

@@ -5,10 +5,10 @@
                  <span class="main-title">主页 / 商家管理 / 商家明细</span>
                  <div class="search-bar">
                         <div class="info-bar">
-                            <span>{{customerdetail.realName}}</span>
-                            <span>参与项目数 {{customerdetail.participateProjectNum }}</span>
-                            <span>累计投资金额 {{customerdetail.investmentMoney }}</span>
-                            <span>累计分红 {{customerdetail.investmentMoney }}</span>
+                            <span>{{merchantdetail.nickName}}</span>
+                            <span>参与项目数 {{merchantdetail.projectCount  }}</span>
+                            <span>累计投资金额 {{merchantdetail.totalMoney  }}</span>
+                            <span>累计分红 {{merchantdetail.dividendTotalMoney  }}</span>
                             
                         </div>
                  </div>
@@ -21,21 +21,23 @@
                                 <td class="crowone">累计分红</td>
                                 <td class="crowone">状态</td>
                             </tr>
-                            <tr v-for="(item,index) in customerdetail.customerOrderList  " :class='{active:active[index%2]}'>
-                                <td class="crowone">{{item.projectName}}</td>
-                                <td class="crowone">{{item.buyCount }}</td>
-                                <td class="crowone">{{item.principalBalance }}</td>
-                                <td class="crowone">{{item.vipCode }}</td>
-                                <td class="crowone">{{item.principal}}</td>
+                            <tr v-for="(item,index) in merchantdetail.merchantDetailProjectInfoList  " :class='{active:active[index%2]}'>
+                                <td class="crowone">{{item.projectName  }}</td>
+                                <td class="crowone">{{item.totalMoney  }}</td>
+                                <td class="crowone">{{item.realMoney  }}</td>
+                                <td class="crowone">{{item.totalDividend   }}</td>
+                                <td class="crowone">{{item.projectStatus }}</td>
                             </tr>
                 
                 </table>
+                <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
     </section>
 </template>
 <script>
     require('../assets/list.scss')
+     import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -45,29 +47,49 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
-                customerdetail:{}
+                merchantdetail:{},
+                pages:null
             }
+        },
+        methods:{
+         getpage(){
+            let options={
+                'merchantId':this.$route.query.merchantId,
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/merchant/detailAndProjectList',options)
+                .then((response) => {
+                   this.merchantdetail=response.data.result;
+                   console.log(this.merchantdetail)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
+          }
         },
         beforeMount(){
           localStorage.setItem('menuTag', 2)
           this.$emit('changetag')
             
             let options={
-                'customerId':'0c0ef3d6188dba0b634de4e65c880846',
+                'merchantId':this.$route.query.merchantId,
                 'pageSize':10,
                 'pageNum':1
             }
-            this.$http.post(this.apiurl+'/customer/detail',options)
+            this.$http.post(this.apiurl+'/merchant/detailAndProjectList',options)
                 .then((response) => {
-                   this.customerdetail=response.data.result;
-                   console.log(this.customerdetail)
+                   this.merchantdetail=response.data.result;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
+                   console.log(this.merchantdetail)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
         },
         components:{
-
+            paging
         }
     }
 </script>

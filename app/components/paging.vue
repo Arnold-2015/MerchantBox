@@ -19,12 +19,12 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','allpage'],
         data() {
             return {
                current:1,
                showItem:3,
-               allpage:6,
+               allpage:null,
                index:''
             }
         },
@@ -71,7 +71,7 @@
         position: relative;
         width: 100%;
         height: 80px;
-        margin-top: 10px;
+        margin-top: 20px;
         background: #fff;
       }
       ul{

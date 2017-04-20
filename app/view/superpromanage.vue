@@ -36,6 +36,7 @@
                 </tr>
                 
                 </table>
+                <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
@@ -47,6 +48,7 @@
     import qr from '../components/qrbar.vue'
     import reviewmerchant from '../components/reviewmerchant.vue'
     import reviewfast from '../components/reviewfast.vue'
+    import paging from '../components/paging.vue'
     require('../assets/list.scss')
     export default {
         filters: {
@@ -58,7 +60,8 @@
                 active:[false,true],
                 apiurl:this.api,
                 projectNameOrMerchantNameOrMerchantPhone:'',
-                projectList:{}
+                projectList:{},
+                pages:null
             }
         },
         methods:{
@@ -73,7 +76,7 @@
             }
             this.$http.post(this.apiurl+'/project/list',options)
                 .then((response) => {
-                   this.projectList=response.data.result;
+                   this.projectList=response.data.result.projectLists;
                    console.log(this.projectList)
                 })
                 .catch(function(response) {
@@ -88,19 +91,36 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          getpage(){
+            let options={
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/project/list',options)
+                .then((response) => {
+                   this.projectList=response.data.result.projectLists;
+                   console.log(this.projectList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
           }
+
         },
         beforeMount(){
             localStorage.setItem('menuTag', 1)
             this.$emit('changetag')
             let options={
-                'nickNameOrUserPhone':this.nickNameOrUserPhone,
+                // 'nickNameOrUserPhone':this.nickNameOrUserPhone,
                 'pageSize':10,
                 'pageNum':1
             }
             this.$http.post(this.apiurl+'/project/list',options)
                 .then((response) => {
-                   this.projectList=response.data.result;
+                   this.projectList=response.data.result.projectLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.projectList)
                 })
                 .catch(function(response) {
@@ -111,7 +131,7 @@
             
         },
         components:{
-           qr,reviewmerchant,reviewfast
+           qr,reviewmerchant,reviewfast,paging
         }
     }
 </script>

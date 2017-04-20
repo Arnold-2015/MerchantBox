@@ -15,28 +15,28 @@
                 <table class="partner-list">
 
                 <tr class='title'>
-                    <td class="crowone">商家姓名</td>
-                    <td class="crowone">手机号码</td>
+                    <td class="crowone">商家（甲方）</td>
+                    <td class="crowone">手机号码</td>                   
+                    <td class="crowone">丙方名称</td>
+                    <td class="crowone">联系人姓名</td>
+                    <td class="crowone">联系人手机号码</td>
                     <td class="crowone">拥有项目</td>
-                    <td class="crowone">身份证号</td>
-                    <td class="crowtwo">累计募集金额</td>
-                    <td class="crowone">累计分红</td>
                     <td class="crowone">状态</td>
                     <td class="crowtwo">操作</td>
                 </tr>
                 <tr v-for="(item,index) in merchantList" :class='{active:active[index%2]}'>
                     <td class="crowone">{{item.nickName}}</td>
                     <td class="crowone">{{item.userPhone}}</td>
+                    <td class="crowone">{{item.thirdPartyName}}</td>
+                    <td class="crowone">{{item.linkManName}}</td>
+                    <td class="crowtwo">{{item.linkManPhone}}</td>
                     <td class="crowone">{{item.projectCount}}</td>
-                    <td class="crowone">{{item.idNo}}</td>
-                    <td class="crowtwo">{{item.totalMoney}}</td>
-                    <td class="crowone">{{item.dividendTotalMoney}}</td>
                     <td class="crowone">{{item.status}}</td>
-                    <td class="crowtwo"><a href="javascript:;" @click='showRevMerchantChange(item.merchantId)'>修改</a><a href="javascript:;">查看</a></td>
+                    <td class="crowtwo"><a href="javascript:;" @click='showRevMerchantChange(item.merchantId)'>修改</a><router-link :to="{ path: 'merchantdetail', query: { merchantId:item.merchantId }}">查看</router-link></td>
                 </tr>
                 
                 </table>
-                <paging @getpage='getpage'></paging>
+                <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
 
          </div>
@@ -64,7 +64,8 @@
                 apiurl:this.api,
                 nickNameOrUserPhone:'',
                 merchantList:{},
-                merchantinfo:null
+                merchantinfo:null,
+                pages:null
             }
         },
         methods:{
@@ -91,7 +92,7 @@
             }
             this.$http.post(this.apiurl+'/merchant/list',options)
                 .then((response) => {
-                   this.merchantList=response.data.result;
+                   this.merchantList=response.data.result.merchantLists;
                    console.log(this.merchantList)
                 })
                 .catch(function(response) {
@@ -105,7 +106,7 @@
             }
             this.$http.post(this.apiurl+'/merchant/list',options)
                 .then((response) => {
-                   this.merchantList=response.data.result;
+                   this.merchantList=response.data.result.merchantLists;
                    console.log(this.merchantList)
                 })
                 .catch(function(response) {
@@ -123,7 +124,8 @@
             }
             this.$http.post(this.apiurl+'/merchant/list',options)
                 .then((response) => {
-                   this.merchantList=response.data.result;
+                   this.merchantList=response.data.result.merchantLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.merchantList)
                 })
                 .catch(function(response) {

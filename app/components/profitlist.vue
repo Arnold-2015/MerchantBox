@@ -25,10 +25,12 @@
                 </tr>
                 
     </table>
+    <paging @getpage='getpage' :allpage='pages'></paging>
     </div>
 </template>
 <script>
     // require('../assets/list.scss')
+    import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -39,11 +41,27 @@
                 apiurl:this.apiurl,
                 active:[false,true],
                 projectId:'22e6b233d5b5f78bf81c11242c0cb046',
-                profitList:{}
+                profitList:{},
+                pages:null
             }
         },
         methods:{
-          
+          getpage(){
+            let options={
+                'projectId':this.projectId,
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/dividend/list',options)
+                .then((response) => {
+                   this.profitList=response.data.result.dividendLists;
+                   console.log(this.profitList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
+          }
         },
         beforeMount(){
             let options={
@@ -53,12 +71,16 @@
             }
             this.$http.post(this.apiurl+'/dividend/list',options)
                 .then((response) => {
-                   this.profitList=response.data.result;
+                   this.profitList=response.data.result.dividendLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.profitList)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+        },
+        components:{
+           paging
         }
     }
 </script>

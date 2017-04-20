@@ -1,4 +1,5 @@
 <template>
+<div>
      <table class="partner-list">
                 <tr class='title'>
                     <td class="crowone">操作人</td>
@@ -11,12 +12,13 @@
                     <td class="crowone">{{item.operationType}}</td>
                     <td class="crowone">{{item.creationTime}}</td>
                     <td class="crowtow">{{item.memo}}</td>
-                </tr>
-                
+                </tr>               
     </table>
+    <paging @getpage='getpage' :allpage='pages'></paging>
+<div>
 </template>
 <script>
-
+    import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -28,11 +30,27 @@
                 active:[false,true],
                 projectId:'22e6b233d5b5f78bf81c11242c0cb046',
                 partnerNameOrCardNoOrPhone:'',
-                issueList:{}
+                issueList:{},
+                pages:null
             }
         },
         methods:{
-         
+         getpage(){
+            let options={
+                'projectId':this.projectId,
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/projectLog/list',options)
+                .then((response) => {
+                   this.issueList=response.data.result.projectLogLists;
+                   console.log(this.issueList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
+          }
         },
         beforeMount(){
             let options={
@@ -42,12 +60,17 @@
             }
             this.$http.post(this.apiurl+'/projectLog/list',options)
                 .then((response) => {
-                   this.issueList=response.data.result;
+                   this.issueList=response.data.result.projectLogLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.issueList)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+        },
+        components:{
+           paging
         }
+
     }
 </script>

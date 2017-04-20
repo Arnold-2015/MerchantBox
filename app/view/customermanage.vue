@@ -37,6 +37,7 @@
                 </tr>
                 
                 </table>
+                <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
@@ -44,6 +45,7 @@
 </template>
 <script>
     import qr from '../components/qrbar.vue'
+    import paging from '../components/paging.vue'
     require('../assets/list.scss')
     export default {
         filters: {
@@ -57,7 +59,8 @@
                 active:[false,true],
                 apiurl:this.api,
                 realNameOrUserPhoneOrIDNo:'',
-                customerList:{}
+                customerList:{},
+                pages:null
             }
         },
         methods:{
@@ -72,12 +75,27 @@
             }
             this.$http.post(this.apiurl+'/customer/list',options)
                 .then((response) => {
-                   this.customerList=response.data.result;
+                   this.customerList=response.data.result.customerLists;
                    console.log(this.customerList)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          getpage(){
+            let options={
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/customer/list',options)
+                .then((response) => {
+                   this.customerList=response.data.result.customerLists;
+                   console.log(this.customerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
           }
         },
        
@@ -90,7 +108,8 @@
             }
             this.$http.post(this.apiurl+'/customer/list',options)
                 .then((response) => {
-                   this.customerList=response.data.result;
+                   this.customerList=response.data.result.customerLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.customerList)
                 })
                 .catch(function(response) {
@@ -101,7 +120,7 @@
             
         },
         components:{
-           qr
+           qr,paging
         }
     }
 </script>

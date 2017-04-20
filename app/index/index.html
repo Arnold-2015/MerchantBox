@@ -8,10 +8,10 @@
 </head>
 <body >
 	<div id="app">
-	    <nb></nb>
+	    <nb :api='api'></nb>
 		<router-view :api='api' @changetag='changeTag'></router-view>
 		<sb :menutag='menuTag'></sb>
-		<!-- <loading v-if='showLoading'></loading> -->
+		<loading v-if='showLoading'></loading>
 	</div>
 </body>
 </html>

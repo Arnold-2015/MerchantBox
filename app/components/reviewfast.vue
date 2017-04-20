@@ -3,7 +3,7 @@
       <div class="consume-bar">
             <div class="title">
                 <p>项目审核</p>
-                <span @click='showProfitChange'></span>    
+                <span @click='showreviewfastChange'></span>    
             </div>
             <div class="container">
               <div class="left-bar">
@@ -54,30 +54,13 @@
         props: ['apiurl'],
         data() {
             return {
-                isActive:1,
-                accepts:'image/jpeg,image/jpg,image/png',
-                totalMoney:null,
-                memo:'',
-                picUrl:null,
-                sumInfo:{}
+                
 
             }
         },
         methods:{
-          showProfitChange(){
-            this.$store.state.showProfit = false;
-          },
-          upImg(event){
-            var file=event.target.files[0];
-            const formData = new FormData();
-            formData.append('file', file);     
-            this.$http.post(this.apiurl+'/file/upload',formData)
-                .then((response) => {
-                   this.picUrl=response.data.result.msg
-                })
-                .catch(function(response) {
-                    console.log(response)
-                })
+          showreviewfastChange(){
+            this.$store.state.showreviewfast = false;
           },
           goDevide(){
             let options={
@@ -94,23 +77,9 @@
                 .catch(function(response) {
                     console.log(response)
                 })
-          },
-          getProfitInfo(){
-            // let options={
-            //     'projectId':'81013538870fdfe011b06c211e601aec',
-            //     'totalMoney ':this.totalMoney
-            // }
-            this.$http.get(this.apiurl+'/dividend/22e6b233d5b5f78bf81c11242c0cb046/totalMoney/'+this.totalMoney)
-                .then((response) => {
-                   this.sumInfo=response.data.result
-                })
-                .catch(function(response) {
-                    console.log(response)
-                })
           }
         }
-        
-        
+            
         
     }
 </script>

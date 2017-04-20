@@ -8,7 +8,7 @@
             <div class="search-bar">
                 <input  type="text" placeholder="输入姓名/卡号/手机号" >
                 <a class="search"><img src="../assets/search.png" ></a> 
-                <p>目标分数{{prepartnerList.totalCount }}份,当前共{{prepartnerList.buyTotalCount  }}份</p>
+                <p>目标分数{{totalCount }}份,当前共{{buyTotalCount  }}份</p>
             </div>
             <div class="confirm-list-bar">
                   <table class="confirm-list">
@@ -19,7 +19,7 @@
                     <td class="crowone">备注</td>
                     <td class="crowtwo">操作</td>
                 </tr>
-                <tr v-for="(item,index) in prepartnerList.partnerIntentionList" :class='{active:active[index%2]}'>
+                <tr v-for="(item,index) in prepartnerList" :class='{active:active[index%2]}'>
                     <td class="crowone">{{item.realName }}</td>
                     <td class="crowone">{{item.phone }}</td>
                     <td class="crowone">{{item.buyCount }}</td>
@@ -44,7 +44,9 @@
                 active:[false,true],
                 projectId:'22e6b233d5b5f78bf81c11242c0cb046',
                 realNameOrPhone :'',
-                prepartnerList:{}
+                prepartnerList:{},
+                totalCount:null,
+                buyTotalCount:null
             }
         },
         methods:{
@@ -61,6 +63,7 @@
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
                    this.prepartnerList=response.data.result.partnerIntentionList;
+                   
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {
@@ -98,7 +101,9 @@
             }
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
-                   this.prepartnerList=response.data.result;
+                   this.prepartnerList=response.data.result.partnerIntentionList;
+                   this.totalCount =response.data.result.totalCount;
+                   this.buyTotalCount  =response.data.result.buyTotalCount ;
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {

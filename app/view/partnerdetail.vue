@@ -58,7 +58,7 @@
           localStorage.setItem('menuTag', 1)
           this.$emit('changetag')
             
-            this.$http.get(this.apiurl+'/partner/22e6b233d5b5f78bf81c11242c0cb046/bc84772f06de086e24589a6fe26295d8/detail')
+            this.$http.get(this.apiurl+'/partner/'+this.$route.query.projectId+'/'+this.$route.query.partnerId+'/detail')
                 .then((response) => {
                    this.partnerDetail=response.data.result;
                    console.log(this.partnerDetail)

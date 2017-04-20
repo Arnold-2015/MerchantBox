@@ -32,11 +32,12 @@
                     <td class="crowtwo">{{item.idNo}}</td>
                     <td class="crowone">{{item.buyCount}}</td>
                     <td class="crowone">{{item.orderMoney}}</td>
-                    <td class="crowone">{{item.modifyTime}}</td>
+                    <td class="crowone">{{item.creationTime}}</td>
                     <td class="crowone">{{item.status}}</td>
                 </tr>
                 
                 </table>
+                <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
@@ -44,6 +45,7 @@
 </template>
 <script>
     import qr from '../components/qrbar.vue'
+    import paging from '../components/paging.vue'
     require('../assets/list.scss')
     export default {
         filters: {
@@ -55,7 +57,8 @@
                 active:[false,true],
                 apiurl:this.api,
                 realNameOrPhoneOrProjectName:'',
-                orderList:{}
+                orderList:{},
+                pages:null
             }
         },
         methods:{
@@ -70,13 +73,29 @@
             }
             this.$http.post(this.apiurl+'/order/list',options)
                 .then((response) => {
-                   this.orderList=response.data.result;
+                   this.orderList=response.data.result.orderLists ;
                    console.log(this.orderList)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          getpage(){
+            let options={
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/order/list',options)
+                .then((response) => {
+                   this.orderList=response.data.result.orderLists ;
+                   console.log(this.orderList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
           }
+
         },
         beforeMount(){
             localStorage.setItem('menuTag', 4)
@@ -87,7 +106,8 @@
             }
             this.$http.post(this.apiurl+'/order/list',options)
                 .then((response) => {
-                   this.orderList=response.data.result;
+                   this.orderList=response.data.result.orderLists ;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.orderList)
                 })
                 .catch(function(response) {
@@ -98,7 +118,7 @@
             
         },
         components:{
-           qr
+           qr,paging
         }
     }
 </script>

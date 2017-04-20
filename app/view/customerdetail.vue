@@ -37,6 +37,7 @@
                             </tr>
                 
                 </table>
+             <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
          <!-- <sb></sb> -->
@@ -44,6 +45,7 @@
 </template>
 <script>
     require('../assets/list.scss')
+    import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -54,8 +56,27 @@
                 active:[false,true],
                 apiurl:this.api,
                 customerId:this.$route.query.customerId,
-                customerdetail:{}
+                customerdetail:{},
+                pages:null
             }
+        },
+        methods:{
+         getpage(){
+            let options={
+                'customerId':this.customerId,
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/customer/detail',options)
+                .then((response) => {
+                   this.customerdetail=response.data.result;
+                   console.log(this.customerdetail)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
+          }
         },
         beforeMount(){
           localStorage.setItem('menuTag', 3)
@@ -69,6 +90,7 @@
             this.$http.post(this.apiurl+'/customer/detail',options)
                 .then((response) => {
                    this.customerdetail=response.data.result;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.customerdetail)
                 })
                 .catch(function(response) {
@@ -76,7 +98,7 @@
                 })
         },
         components:{
-
+             paging
         }
     }
 </script>

@@ -27,10 +27,11 @@
                 </tr>
                 
     </table>
+    <paging @getpage='getpage' :allpage='pages'></paging>
     </div>
 </template>
 <script>
-
+    import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -42,7 +43,8 @@
                 active:[false,true],
                 projectId:'22e6b233d5b5f78bf81c11242c0cb046',
                 realNameOrPhone :'',
-                prepartnerList:{}
+                prepartnerList:{},
+                pages:null
             }
         },
         methods:{
@@ -61,6 +63,22 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          getpage(){
+            let options={
+                'projectId':this.projectId,
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+          this.$http.post(this.apiurl+'/partner/intention/list',options)
+                .then((response) => {
+                   this.prepartnerList=response.data.result.partnerIntentionList;
+                   console.log(this.prepartnerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
           }
         },
         beforeMount(){
@@ -72,11 +90,15 @@
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
                    this.prepartnerList=response.data.result.partnerIntentionList;
+                   this.pages=Math.ceil(response.data.result.buyTotalCount /10);
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+        },
+         components:{
+           paging
         }
     }
 </script>

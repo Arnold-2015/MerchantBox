@@ -31,14 +31,16 @@
                     <td class="crowone">{{item.shares}}</td>
                     <td class="crowone">{{item.earningBalance}}</td>
                     <td class="crowone">{{item.consumeTotal}}</td>
-                    <td class="crowone"><router-link to="partnerdetail">明细</router-link><a href="javascript:;" @click='delPartner(item.partnerId)'>退出</a></td>
+                    <td class="crowone"><router-link :to="{ path: 'partnerdetail', query: { partnerId:item.partnerId,projectId:projectId }}">明细</router-link><a href="javascript:;" @click='delPartner(item.partnerId)'>退出</a></td>
                 </tr>
                 
     </table>
+    <paging @getpage='getpage' :allpage='pages'></paging>
     </div>
 </template>
 <script>
     // require('../assets/list.scss')
+    import paging from '../components/paging.vue'
     export default {
         filters: {
             
@@ -50,7 +52,8 @@
                 active:[false,true],
                 projectId:'22e6b233d5b5f78bf81c11242c0cb046',
                 realNameOrPhoneOrVipCardNo:'',
-                partnerList:{}
+                partnerList:{},
+                pages:null
             }
         },
         methods:{
@@ -63,7 +66,7 @@
             }
             this.$http.post(this.apiurl+'/partner/list',options)
                 .then((response) => {
-                   this.partnerList=response.data.result;
+                   this.partnerList=response.data.result.partnerLists;
                    console.log(this.partnerList)
                 })
                 .catch(function(response) {
@@ -78,6 +81,23 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          getpage(){
+            let options={
+                'projectId':this.projectId,
+                'pageSize':10,
+                'pageNum':this.$store.state.pageNum
+            }
+            this.$http.post(this.apiurl+'/partner/list',options)
+                .then((response) => {
+                   this.partnerList=response.data.result.partnerLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
+                   console.log(this.partnerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+
           }
         },
         beforeMount(){
@@ -89,12 +109,16 @@
             }
             this.$http.post(this.apiurl+'/partner/list',options)
                 .then((response) => {
-                   this.partnerList=response.data.result;
+                   this.partnerList=response.data.result.partnerLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.partnerList)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+        },
+        components:{
+           paging
         }
     }
 </script>

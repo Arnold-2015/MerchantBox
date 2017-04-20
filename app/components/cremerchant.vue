@@ -9,13 +9,13 @@
                 <p><span>商家身份证号</span><input type="text" class="data" v-model='option.idNo'></p>
                 <p><span>手机号码（账号)</span><input type="text" class="data" v-model='option.userPhone'></p>
                 <p><span>账号密码</span><input type="text" class="data" v-model='option.password'></p>
-                <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='option.nickName'></p>
-                <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='option.idNo'></p>
-                <p><span>项目联系人姓名</span><input type="text" class="data" v-model='option.userPhone'></p>
-                <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='option.password'></p>
-                <p><span>账号状态</span>
+                <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='option.thirdPartyName '></p>
+                <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='option.thirdPartyCode '></p>
+                <p><span>项目联系人姓名</span><input type="text" class="data" v-model='option.linkManName '></p>
+                <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='option.linkManPhone'></p>
+                <!-- <p><span>账号状态</span>
                 <label :class="{ radioActive:option.status==1,radioNomal:option.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.status">正常</label>
-                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label></p>
+                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label></p> -->
                
                 
      
@@ -32,9 +32,7 @@
         props: ['apiurl'],
         data() {
             return {
-                option:{
-                   status:1
-                }
+                option:{}
             }
         },
         methods:{

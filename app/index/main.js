@@ -40,7 +40,7 @@ Vue.http.interceptors.push((request, next) => {
   const token=localStorage.getItem('token')
   request.headers.set('merchantId', merchantId)
   request.headers.set('token',token)
-  // console.log(request.headers)
+  console.log(request.headers)
   next(response => {
   	app.showLoading=false;
     // return response

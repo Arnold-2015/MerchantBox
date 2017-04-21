@@ -13,7 +13,8 @@ const store = new Vuex.Store({
         showRevMerchant:false,
         showManager:false,
         showreviewfast:false,
-        showreviewmerchant:false
+        showreviewmerchant:false,
+        shownoverify:false
     }
 });
 export default store;

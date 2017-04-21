@@ -24,7 +24,7 @@
                    <span>项目名称</span><input placeholder="请输入您的项目名称" type="text" v-model='option.projectName'>
                  </div>
                  <div class="info-item">
-                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text" v-model='option.address'>
+                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text" v-model='option.address' @blur='search'>
                  </div>
                  <div class="info-item" >
                    <span style="display:block">项目简介</span><textarea placeholder="请填写说明，例如：
@@ -64,6 +64,21 @@ import Vue from 'Vue'
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          search(){
+              var localSearch = new BMap.LocalSearch();
+              
+　　         var keyword = this.option.address;
+　　         localSearch.search('杭州市');
+             var LocalResult=localSearch.getResults();
+
+// 　　　　     var poi = searchResult.getPoi(0);
+             console.log(LocalResult);
+// 　　　　     document.getElementById("result_").value = poi.point.lng + "," + poi.point.lat; //获取经度和纬度，将结果显示在文本框中
+
+　　     
+
+     
           },
           firstStep(){
             let options=this.option;

@@ -71,12 +71,13 @@ $base-color:#C49F59;
             position: absolute;
             left: 401px;
             top: 12px;
-            img{
+            a{
                 width: 18px;
                 height: 18px;
                 position: absolute;
                 left:11px;
                 top: 11px;
+                background:url('../assets/search.png');
             }
         }
         .export{

@@ -60,7 +60,7 @@
         }     
     }
 </script>
-<style>
+<style lang='sass' scoped>
     li{
       list-style:none;
     }

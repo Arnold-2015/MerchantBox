@@ -9,36 +9,36 @@
               <div class="left-bar">
               <div class=" sale-info">
               <p>项目信息</p>
-               <span>项目来源&nbsp&nbsp&nbsp&nbsp商家发起</span>
-               <span>项目名称&nbsp&nbsp&nbsp&nbspFE狼人杀项目</span>
-               <span>项目详情&nbsp&nbsp&nbsp&nbsp<a href="javascript:;">线上预览</a></span>
+               <span>项目来源&nbsp&nbsp&nbsp&nbsp{{verifyInfo.source }}</span>
+               <span>项目名称&nbsp&nbsp&nbsp&nbsp{{verifyInfo.projectName}}</span>
+               <span>项目详情&nbsp&nbsp&nbsp&nbsp<a href="">线上预览</a></span>
                </div>
-                <img src="../assets/logo.png" >
+                <img :src="verifyInfo.qrCodeUrl" >
               <div class=" profit-info">
               <p>项目配置</p>
-              <div class="item">配置平台手续费用比例<input class='percent' type="text">%</div>
-              <div class="item">配置众筹金额冻结比例<input class='percent' type="text">%</div>
+              <div class="item">配置平台手续费用比例<input class='percent' type="text" v-model='payRate '>%</div>
+              <div class="item">配置众筹金额冻结比例<input class='percent' type="text" v-model='frozenRate '>%</div>
               </div>
             </div>
             <div class="right-bar">
               <div class=" profit-info">
               <p>用户信息</p>
-              <div class="item"><span>商家姓名(甲方)</span>狼人杀项目</div>
-              <div class="item"><span>身份证号</span>狼人杀项目</div>
-              <div class="item"><span>商家手机号</span>狼人杀项目</div>
-              <div class="item"><span>账号密码</span>狼人杀项目</div>
-              <div class="item"><span>丙方(甲方所属企业名称)</span>狼人杀项目</div>
-              <div class="item"><span>丙方组织机构代码</span>狼人杀项目</div>
-              <div class="item"><span>项目联系人姓名</span>狼人杀项目</div>
-              <div class="item"><span>项目联系人手机号码</span>狼人杀项目</div>
+              <div class="item"><span>商家姓名(甲方)</span>{{verifyInfo.merchantName }}</div>
+              <div class="item"><span>身份证号</span>{{verifyInfo.idNo }}</div>
+              <div class="item"><span>商家手机号</span>{{verifyInfo.merchantPhone }}</div>
+              <div class="item"><span>账号密码</span>******</div>
+              <div class="item"><span>丙方(甲方所属企业名称)</span>{{verifyInfo.thirdPartyName }}</div>
+              <div class="item"><span>丙方组织机构代码</span>{{verifyInfo.thirdPartyCode }}</div>
+              <div class="item"><span>项目联系人姓名</span>{{verifyInfo.linkManName}}</div>
+              <div class="item"><span>项目联系人手机号码</span>{{verifyInfo.linkManPhone}}</div>
             </div>
             </div>
             </div>
             
             
             <div class="operate">
-              <div class="review-no" @click='goDevide'>不通过</div>
-              <div class="review-yes" @click='goDevide'>审核通过</div>
+              <div class="review-no" @click='noverify'>不通过</div>
+              <div class="review-yes" @click='goverify'>审核通过</div>
             </div>
             
       </div>
@@ -51,30 +51,55 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
-                
-
+                verifyInfo:null,
+                payRate:null,
+                frozenRate:null,
+                merchantId:null
             }
         },
         methods:{
           showreviewmerchantChange(){
             this.$store.state.showreviewmerchant = false;
           },
-          getProfitInfo(){
-            // let options={
-            //     'projectId':'81013538870fdfe011b06c211e601aec',
-            //     'totalMoney ':this.totalMoney
-            // }
-            this.$http.get(this.apiurl+'/dividend/22e6b233d5b5f78bf81c11242c0cb046/totalMoney/'+this.totalMoney)
+          goverify(){
+            let options={
+                'merchantId':this.merchantId,
+                'frozenRate':this.frozenRate,
+                'payRate':this.payRate,
+                'status':4
+            }
+            this.$http.put(this.apiurl+'/project/'+this.projectid+'/status',options)
                 .then((response) => {
-                   this.sumInfo=response.data.result
+                   if(response.data.statusCode ==200){
+                    this.$store.state.showreviewmerchant = false;
+                    window.location.reload()
+                   }else{
+                    alert('审核失败')
+                   }
+                   
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          noverify(){
+            this.$store.state.showreviewmerchant = false;
+            this.$store.state.shownoverify = true;
           }
+        },
+        beforeMount(){
+
+            this.$http.get(this.apiurl+'/project/'+this.projectid+'/verifyInfo')
+                .then((response) => {
+                   this.verifyInfo=response.data.result;
+                   this.merchantId=response.data.result.merchantId;
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
         }     
         
     }
@@ -108,7 +133,7 @@
                     line-height: 24px;
                     position: absolute;
                     top: 18px;
-                    left: 50px;
+                    left: 40px;
                     color: #333;
                     font-weight: bold;
                 }

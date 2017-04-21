@@ -56,7 +56,7 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>{{item.projectName}}</h1>
-                                 <span>项目审核中</span>
+                                 <span>项目待审核</span>
                              </div>
                              <div class="low-bar">
                                      <li>

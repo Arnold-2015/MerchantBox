@@ -9,7 +9,7 @@
                  </div>
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="projectNameOrMerchantNameOrMerchantPhone">
-                 <a class="search"  style="left:280px"><img src="../assets/search.png" @click="search"></a>
+                 <div class="search"  style="left:280px" ><a  @click="search"></a></div>
                  <a class="export">导出列表</a>
                 </div>
                 <table class="partner-list">
@@ -32,7 +32,18 @@
                     <td class="crowone">{{item.creationTime }}</td>
                     <td class="crowone">{{item.source}}</td>
                     <td class="crowone">{{item.projectStatus }}</td>
-                    <td class="crowtwo"><a href="javascript:;" @click=''>审核</a><a href="javascript:;" @click=''>修改</a><a href="javascript:;" @click='delProject(item.projectId)'>删除</a></td>
+                    <td class="crowtwo">
+                    <a v-if='item.projectStatus!=1&&item.projectStatus!=2' href="javascript:;"  @click='showQrChange'>预览</a>
+                    <a v-if='(item.projectStatus==1||item.projectStatus==2)&&item.source!=1' href="javascript:;" @click='showreviewmerchantChange(item.projectId)'>审核</a>
+                    <a v-if='(item.projectStatus==1||item.projectStatus==2)&&item.source==1' href="javascript:;" @click='showreviewfastChange(item.projectId)'>审核</a>
+                    <router-link  href="javascript:;" :to="{ path: 'creprofirst', query: { projectId:item.projectId }}">修改</router-link>
+                    <a v-if='item.projectStatus==1||item.projectStatus==2||item.projectStatus==3' href="javascript:;" @click='delProject(item.projectId)'>删除</a>
+                    <router-link  v-if='item.projectStatus==4' href="javascript:;" :to="{ path: 'recruiting', query: { projectId:item.projectId }}">管理</router-link>
+                    <router-link  v-if='item.projectStatus==5' href="javascript:;" :to="{ path: 'confirming', query: { projectId:item.projectId }}">管理</router-link>
+                    <router-link  v-if='item.projectStatus==6' href="javascript:;" :to="{ path: 'performing', query: { projectId:item.projectId }}">管理</router-link>
+                    
+                    
+                    </td>
                 </tr>
                 
                 </table>
@@ -40,14 +51,16 @@
              </div>
          </div>
          <qr v-if="this.$store.state.showQr"></qr>
-         <reviewfast v-if='this.$store.state.showreviewfast'></reviewfast>
-         <reviewmerchant v-if='this.$store.state.showreviewmerchant'></reviewmerchant>
+         <reviewfast v-if='this.$store.state.showreviewfast' :apiurl='apiurl' :projectid='projectId'></reviewfast>
+         <reviewmerchant v-if='this.$store.state.showreviewmerchant' :apiurl='apiurl' :projectid='projectId'></reviewmerchant>
+         <noverify v-if='this.$store.state.shownoverify' :apiurl='apiurl' :projectid='projectId'></noverify>
     </section>
 </template>
 <script>
     import qr from '../components/qrbar.vue'
     import reviewmerchant from '../components/reviewmerchant.vue'
     import reviewfast from '../components/reviewfast.vue'
+    import noverify from '../components/noverify.vue'
     import paging from '../components/paging.vue'
     require('../assets/list.scss')
     export default {
@@ -67,6 +80,14 @@
         methods:{
           showQrChange(){
             this.$store.state.showQr = true;
+          },
+          showreviewmerchantChange(projectId){
+            this.$store.state.showreviewmerchant = true;
+            this.projectId=projectId;
+          },
+          showreviewfastChange(projectId){
+            this.$store.state.showreviewfast = true;
+            this.projectId=projectId;
           },
           search(){
             let options={
@@ -131,7 +152,7 @@
             
         },
         components:{
-           qr,reviewmerchant,reviewfast,paging
+           qr,reviewmerchant,reviewfast,paging,noverify
         }
     }
 </script>

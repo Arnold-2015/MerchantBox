@@ -2,8 +2,8 @@
     <div class="qr">
     	<div class="qr-bar">
             <span @click='showQrChange'></span>
-    		<img :src="qrcode">
-    		<a class="download" :href='qrcode' download='二维码'>下载二维码</a>
+    		<img src="http://pic.6dbox.cn/box201703171730165335.png">
+    		<a class="download" href='http://pic.6dbox.cn/box201703171730165335.png' download='二维码'>下载二维码</a>
     		<a class='preview' :href='previewurl'>在线预览</a>
     	</div>
     </div>

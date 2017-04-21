@@ -57,7 +57,7 @@
     section{
         width: 100%;
         height: 100%;
-        background: url('../assets/background.jpg')no-repeat center center;
+        background: url('../assets/bac.jpg')no-repeat center center;
         background-size: 100% 100%;
         position: absolute;
         z-index:100;

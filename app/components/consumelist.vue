@@ -3,8 +3,8 @@
     
      <div class="search-bar">
          <input class="search-key" style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model='partnerNameOrCardNoOrPhone'>
-         <a class="search" style="left:280px"><img src="../assets/search.png" @click="search"></a>
-         <a class="export">导出列表</a>
+         <div class="search"  style="left:280px" ><a  @click="search"></a></div>
+         <a href='javascript:;' class="export" @click='excel'>导出列表</a>
      </div>
      <table class="partner-list">
 
@@ -36,12 +36,12 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                projectId:this.projectid,
                 partnerNameOrCardNoOrPhone:'',
                 consumeList:{},
                 pages:null
@@ -78,6 +78,10 @@
                     console.log(response)
                 })
 
+          },
+          excel(){
+            window.location.href=this.apiurl+'/consume/list/excel?projectId='+this.projectId+'&partnerNameOrCardNoOrPhone='+this.partnerNameOrCardNoOrPhone;
+                
           }
         },
         beforeMount(){

@@ -7,7 +7,7 @@
             </div>
             <div class="search-bar">
                 <input  type="text" placeholder="输入姓名/卡号/手机号" >
-                <a class="search"><img src="../assets/search.png" ></a> 
+                <div class="search"  style="left:280px" ><a  @click="search"></a></div>
                 <p>目标分数{{totalCount }}份,当前共{{buyTotalCount  }}份</p>
             </div>
             <div class="confirm-list-bar">
@@ -37,12 +37,12 @@
 
 <script> 
     export default {
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                projectId:this.projectid,
                 realNameOrPhone :'',
                 prepartnerList:{},
                 totalCount:null,
@@ -149,8 +149,8 @@
                 height:10px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
-                top:10px;
-                right:10px;
+                top:20px;
+                right:20px;
                    }
             }
     		.search-bar{

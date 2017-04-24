@@ -160,7 +160,7 @@
                                      </li>
                                      <div>
                                          <router-link to="confirming">管理中心</router-link>
-                                         <a @click='showQrChange'>预览</a>
+                                         <a href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                                      </div>
 
                              </div>
@@ -201,7 +201,7 @@
                                      </li>
                                      <div>
                                          <router-link to="recruiting">管理中心</router-link>
-                                         <a @click='showQrChange'>预览</a>
+                                         <a href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                                      </div>
 
                              </div>
@@ -246,7 +246,7 @@
                                      </li>
                                      <div>
                                          <router-link :to="{ path: 'performing', query: { projectId:item.projectId }}">管理中心</router-link>
-                                         <a @click='showQrChange'>预览</a>
+                                         <a href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                                      </div>
 
                              </div>
@@ -299,7 +299,7 @@
              </div>
          </div>
          <!-- <sb></sb> -->
-         <qr v-if="this.$store.state.showQr"></qr>
+         <qr v-if="this.$store.state.showQr" :projectid='projectId' :qrCode='qrCode'></qr>
     </section>
 </template>
 <script>
@@ -315,12 +315,16 @@
            data() {
             return {
                 apiurl:this.api,
+                projectId:null,
+                qrCode:null,
                 projectList:{},
                 pages:null
             }
         },
         methods:{
-          showQrChange(){
+          showQrChange(projectId,qrCode){
+            this.projectId=projectId;
+            this.qrCode=qrCode;
             this.$store.state.showQr = true;
           },
           getpage(){

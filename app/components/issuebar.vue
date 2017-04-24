@@ -33,11 +33,11 @@
 <script> 
    
     export default {
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 option:{
-                    projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                    projectId:this.projectid,
                     operationType:6,
                     isSmsNotice:1,
                     delay2Time:'',
@@ -102,8 +102,8 @@
                 height:10px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
-                top:10px;
-                right:10px;
+                top:20px;
+                right:20px;
                    }
 
  

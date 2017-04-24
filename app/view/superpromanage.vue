@@ -10,7 +10,7 @@
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="projectNameOrMerchantNameOrMerchantPhone">
                  <div class="search"  style="left:280px" ><a  @click="search"></a></div>
-                 <a class="export">导出列表</a>
+                 <a href='javascript:;' class="export" @click='excel'>导出列表</a>
                 </div>
                 <table class="partner-list">
 
@@ -33,7 +33,7 @@
                     <td class="crowone">{{item.source}}</td>
                     <td class="crowone">{{item.projectStatus }}</td>
                     <td class="crowtwo">
-                    <a v-if='item.projectStatus!=1&&item.projectStatus!=2' href="javascript:;"  @click='showQrChange'>预览</a>
+                    <a v-if='item.projectStatus!=1&&item.projectStatus!=2' href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                     <a v-if='(item.projectStatus==1||item.projectStatus==2)&&item.source!=1' href="javascript:;" @click='showreviewmerchantChange(item.projectId)'>审核</a>
                     <a v-if='(item.projectStatus==1||item.projectStatus==2)&&item.source==1' href="javascript:;" @click='showreviewfastChange(item.projectId)'>审核</a>
                     <router-link  href="javascript:;" :to="{ path: 'creprofirst', query: { projectId:item.projectId }}">修改</router-link>
@@ -50,7 +50,7 @@
                 <paging @getpage='getpage' :allpage='pages'></paging>
              </div>
          </div>
-         <qr v-if="this.$store.state.showQr"></qr>
+         <qr v-if="this.$store.state.showQr" :projectid='projectId' :qrCode='qrCode'></qr>
          <reviewfast v-if='this.$store.state.showreviewfast' :apiurl='apiurl' :projectid='projectId'></reviewfast>
          <reviewmerchant v-if='this.$store.state.showreviewmerchant' :apiurl='apiurl' :projectid='projectId'></reviewmerchant>
          <noverify v-if='this.$store.state.shownoverify' :apiurl='apiurl' :projectid='projectId'></noverify>
@@ -72,13 +72,19 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
+                source:0,
+                projectStatus:0,
+                projectId:null,
+                qrCode:null,
                 projectNameOrMerchantNameOrMerchantPhone:'',
                 projectList:{},
                 pages:null
             }
         },
         methods:{
-          showQrChange(){
+          showQrChange(projectId,qrCode){
+            this.projectId=projectId;
+            this.qrCode=qrCode;
             this.$store.state.showQr = true;
           },
           showreviewmerchantChange(projectId){
@@ -127,6 +133,10 @@
                     console.log(response)
                 })
 
+          },
+          excel(){
+            window.location.href=this.apiurl+'/project/list/excel?projectStatus='+this.projectStatus+'&source='+this.source+'&projectNameOrMerchantNameOrMerchantPhone='+this.projectNameOrMerchantNameOrMerchantPhone;
+                
           }
 
         },

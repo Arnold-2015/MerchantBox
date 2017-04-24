@@ -142,8 +142,8 @@
                 }
            
                 span{
-                width:10px;
-                height:10px;
+                width:20px;
+                height:20px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
                 top:10px;

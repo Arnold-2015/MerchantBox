@@ -10,7 +10,7 @@
                          <li class="li-active">融资信息</li>
                          <li>合同编辑</li>
                      </ul>
-                     <img src="../assets/crestep3.png" >
+                     <a ></a>
                  </div>
                  <span class="title">基本信息</span>
                  <div class="info-bar container">
@@ -294,9 +294,13 @@ $base-color:#C49F59;
                         color: $base-color;
                     }
                 }
-                img{
+               a{
                     width: 468px;
+                    height: 20px;
                     margin: 10px auto;
+                    display: block;
+                    background: url('../assets/crestep3.png') no-repeat ;
+                    background-size: 468px 15px;
                 }
             }
             .title{

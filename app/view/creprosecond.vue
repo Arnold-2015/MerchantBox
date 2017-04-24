@@ -10,7 +10,7 @@
                          <li>融资信息</li>
                          <li>合同编辑</li>
                      </ul>
-                     <img src="../assets/crestep2.png" >
+                     <a></a>
                  </div>
                  <span style="font-weight:bold">项目详情</span>
                  <span class="remind">填写品牌故事、店铺相关图片、团队介绍、店铺优势、目前经营状况等信息</span>
@@ -146,9 +146,13 @@ $base-color:#C49F59;
                         color: $base-color;
                     }
                 }
-                img{
+                a{
                     width: 468px;
+                    height: 20px;
                     margin: 10px auto;
+                    display: block;
+                    background: url('../assets/crestep2.png') no-repeat ;
+                    background-size: 468px 15px;
                 }
             }
             span{
@@ -166,10 +170,12 @@ $base-color:#C49F59;
               .project-detail{
                 width: 76%;
                 height: 500px;
-                /*background: #f8f8f8;*/
                 margin-left: 40px;
                 margin-top: 20px;
-                /*border:1px solid #d7d7d7;*/
+                .quill-editor{
+                  height: 500px;
+                  display: block;
+                }
               }
               .prev-step{
               float:left;

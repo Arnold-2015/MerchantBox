@@ -2,9 +2,9 @@
     <div class="qr">
     	<div class="qr-bar">
             <span @click='showQrChange'></span>
-    		<img src="http://pic.6dbox.cn/box201703171730165335.png">
-    		<a class="download" href='http://pic.6dbox.cn/box201703171730165335.png' download='二维码'>下载二维码</a>
-    		<a class='preview' :href='previewurl'>在线预览</a>
+    		<img :src="qrcode">
+    		<a class="download" :href='qrcode' download='二维码'>下载二维码</a>
+    		<a class='preview' :href='previewurl' target='_blank' >在线预览</a>
     	</div>
     </div>
 </template>
@@ -12,10 +12,10 @@
 <script> 
 
     export default {
-        props:['previewurl','qrcode'],
+        props:['projectid','qrcode'],
         data(){
             return {
-                
+                previewurl:'http://www.6dbox.cn/6dhezi/page/projectDetail.html?projectId='+this.projectid
             }
         },
         methods:{
@@ -48,8 +48,8 @@
                 height:10px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
-                top:10px;
-                right:10px;
+                top:20px;
+                right:20px;
             }
     		img{
     			width: 300px;

@@ -9,8 +9,8 @@
                  </div>
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="nickNameOrUserPhone">
-                 <a class="search"  style="left:280px"><img src="../assets/search.png" @click="search"></a>
-                 <a class="export">导出列表</a>
+                 <div class="search"  style="left:280px" ><a  @click="search"></a></div>
+                 <a href='javascript:;' class="export" @click='excel'>导出列表</a>
                 </div>
                 <table class="partner-list">
 
@@ -63,6 +63,7 @@
                 active:[false,true],
                 apiurl:this.api,
                 nickNameOrUserPhone:'',
+                status:0,
                 merchantList:{},
                 merchantinfo:null,
                 pages:null
@@ -112,6 +113,10 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          },
+          excel(){
+            window.location.href=this.apiurl+'/merchant/list/excel?status='+this.status+'&nickNameOrUserPhone='+this.nickNameOrUserPhone;
+                
           }
         },
 

@@ -10,7 +10,7 @@
                          <li>融资信息</li>
                          <li>合同编辑</li>
                      </ul>
-                     <img src="../assets/crestep1.png" >
+                     <a ></a>
                  </div>
                  <div class="info-item" style="height:180px">
                    <span style="display:block">项目头图</span>
@@ -24,7 +24,7 @@
                    <span>项目名称</span><input placeholder="请输入您的项目名称" type="text" v-model='option.projectName'>
                  </div>
                  <div class="info-item">
-                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text" v-model='option.address' @blur='search'>
+                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text" v-model='option.address' >
                  </div>
                  <div class="info-item" >
                    <span style="display:block">项目简介</span><textarea placeholder="请填写说明，例如：
@@ -48,7 +48,13 @@ import Vue from 'Vue'
                 apiurl:this.api,
                 accepts:'image/jpeg,image/jpg,image/png',
                 option:{
-                  backgroundImg:''
+                  backgroundImg:'',
+                  province :'',
+                  city :'',
+                  area :'',
+                  latitude :'',
+                  longitude :'',
+                  projectId:''
                 }
             }
         },
@@ -66,19 +72,8 @@ import Vue from 'Vue'
                 })
           },
           search(){
-              var localSearch = new BMap.LocalSearch();
               
-　　         var keyword = this.option.address;
-　　         localSearch.search('杭州市');
-             var LocalResult=localSearch.getResults();
-
-// 　　　　     var poi = searchResult.getPoi(0);
-             console.log(LocalResult);
-// 　　　　     document.getElementById("result_").value = poi.point.lng + "," + poi.point.lat; //获取经度和纬度，将结果显示在文本框中
-
-　　     
-
-     
+ 
           },
           firstStep(){
             let options=this.option;
@@ -116,7 +111,12 @@ import Vue from 'Vue'
                       backgroundImg:data.backgroundImg,
                       projectName:data.projectName,
                       address:data.address,
-                      projectDesc:data.projectDesc 
+                      projectDesc:data.projectDesc,
+                      province :'',
+                      city :'',
+                      area :'',
+                      latitude :'',
+                      longitude :'' 
                    }
                    console.log(this.option)
                 })
@@ -172,9 +172,13 @@ $base-color:#C49F59;
                         color: $base-color;
                     }
                 }
-                img{
+                a{
                     width: 468px;
+                    height: 20px;
                     margin: 10px auto;
+                    display: block;
+                    background: url('../assets/crestep1.png') no-repeat;
+                    background-size: 468px 15px;
                 }
             }
             .info-item{

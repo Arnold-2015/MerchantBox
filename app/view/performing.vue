@@ -56,20 +56,20 @@
                      <li :class="{active:isActive==4}" @click='setActive(4)'>公告列表</li>
                  </ul>
                  <!-- 合伙人列表 -->
-                 <partner v-if="isActive==1"  :apiurl='apiurl'></partner>
+                 <partner v-if="isActive==1"  :apiurl='apiurl' :projectid='projectId'></partner>
                  <!-- 分红列表 -->
-                 <profit v-if="isActive==2"  :apiurl='apiurl'></profit>
+                 <profit v-if="isActive==2"  :apiurl='apiurl' :projectid='projectId'></profit>
                  <!-- 消费列表 -->
-                 <consume v-if="isActive==3"  :apiurl='apiurl'></consume>
+                 <consume v-if="isActive==3"  :apiurl='apiurl' :projectid='projectId'></consume>
                  <!-- 公告列表 -->
-                 <issue v-if="isActive==4"  :apiurl='apiurl'></issue>
+                 <issue v-if="isActive==4"  :apiurl='apiurl' :projectid='projectId'></issue>
              </div>
          </div>
          <!-- <sb></sb> -->
          <qr v-if="this.$store.state.showQr"  :previewurl='projectInfo.projectPreviewUrl' :qrcode='qrCode'></qr>
-         <consumebar v-if="this.$store.state.showConsume" :apiurl='apiurl'></consumebar>
-         <profitbar v-if="this.$store.state.showProfit" :apiurl='apiurl'></profitbar>
-         <issuebar v-if="this.$store.state.showIssue" :apiurl='apiurl'></issuebar>
+         <consumebar v-if="this.$store.state.showConsume" :apiurl='apiurl' :projectid='projectId'></consumebar>
+         <profitbar v-if="this.$store.state.showProfit" :apiurl='apiurl' :projectid='projectId'></profitbar>
+         <issuebar v-if="this.$store.state.showIssue" :apiurl='apiurl' :projectid='projectId'></issuebar>
 
     </section>
 </template>
@@ -91,7 +91,7 @@
             return {
                 apiurl:this.api,
                 isActive:this.$store.state.isActive,
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                projectId:this.$route.query.projectId,
                 projectInfo:{},
                 qrCode:null
             }

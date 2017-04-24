@@ -52,7 +52,7 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 isActive:1,
@@ -60,6 +60,7 @@
                 totalMoney:null,
                 memo:'',
                 picUrl:null,
+                projectId:this.projectid,
                 sumInfo:{}
 
             }
@@ -82,7 +83,7 @@
           },
           goDevide(){
             let options={
-                'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
+                'projectId':this.projectId,
                 'totalMoney':this.totalMoney,
                 'picUrl':this.picUrl,
                 'memo':this.memo,
@@ -101,7 +102,7 @@
             //     'projectId':'81013538870fdfe011b06c211e601aec',
             //     'totalMoney ':this.totalMoney
             // }
-            this.$http.get(this.apiurl+'/dividend/22e6b233d5b5f78bf81c11242c0cb046/totalMoney/'+this.totalMoney)
+            this.$http.get(this.apiurl+'/dividend/'+this.projectId+'/totalMoney/'+this.totalMoney)
                 .then((response) => {
                    this.sumInfo=response.data.result
                 })
@@ -152,8 +153,8 @@
                 height:10px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
-                top:10px;
-                right:10px;
+                top:20px;
+                right:20px;
                    }
  
             }

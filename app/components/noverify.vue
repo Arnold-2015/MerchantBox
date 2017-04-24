@@ -101,8 +101,8 @@
                 height:10px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
-                top:10px;
-                right:10px;
+                top:20px;
+                right:20px;
                    }
  
             }

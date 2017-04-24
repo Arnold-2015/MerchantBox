@@ -8,8 +8,8 @@
            <option value="已退出合伙">已退出合伙</option>
          </select>
          <input  type="text" placeholder="输入姓名/卡号/手机号" v-model='realNameOrPhoneOrVipCardNo'>
-         <a class="search"><img src="../assets/search.png" @click='search'></a>
-         <a class="export">导出列表</a>
+         <div class="search" ><a  @click="search"></a></div>
+         <a href='javascript:;' class="export" @click='excel'>导出列表</a>
      </div>
      <table class="partner-list">
 
@@ -45,13 +45,14 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                projectId:this.projectid,
                 realNameOrPhoneOrVipCardNo:'',
+                status:0,
                 partnerList:{},
                 pages:null
             }
@@ -98,6 +99,10 @@
                     console.log(response)
                 })
 
+          },
+          excel(){
+             window.location.href=this.apiurl+'/partner/list/excel?projectId='+this.projectId+'&status='+this.status+'&realNameOrPhoneOrVipCardNo='+this.realNameOrPhoneOrVipCardNo;
+                
           }
         },
         beforeMount(){

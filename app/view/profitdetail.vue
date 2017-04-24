@@ -11,7 +11,7 @@
                             <span>分红总金额 {{profitDetail.dividendTotalMoney}}元</span>
                             <span>分红人数 {{profitDetail.dividendTotalCount}}人</span>
                         </div>
-                        <a class="export">导出列表</a>
+                        <a href='javascript:;' class="export" @click='excel'>导出列表</a>
                  </div>
                  <table class="partner-list">
 
@@ -53,6 +53,8 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
+                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                dividendId:'0bbc881586cf4ca71356e5bc24ee718b',
                 profitDetail:{},
                 pages:null
             }
@@ -60,8 +62,8 @@
         methods:{
          getpage(){
             let options={
-                'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
-                'dividendId':'0bbc881586cf4ca71356e5bc24ee718b',
+                'projectId':this.projectId,
+                'dividendId':this.dividendId,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }
@@ -74,6 +76,10 @@
                     console.log(response)
                 })
 
+          },
+          excel(){
+            window.location.href=this.apiurl+'/dividend/detail/excel?projectId='+this.projectId+'&dividendId='+this.dividendId;
+                
           }
         },
         beforeMount(){
@@ -85,8 +91,8 @@
             let options={
                'pageSize':10,
                'pageNum':1,
-               'projectId':'22e6b233d5b5f78bf81c11242c0cb046',
-               'dividendId':'0bbc881586cf4ca71356e5bc24ee718b' 
+               'projectId':this.projectId,
+               'dividendId':this.dividendId
             }
 
             this.$http.post(this.apiurl+'/dividend/detail',options)

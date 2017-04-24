@@ -4,7 +4,7 @@
     		<div class="title">
                 <p>消费录入</p> 
                 <input  type="text" placeholder="输入姓名/卡号/手机号" v-model='realNameOrVipCodeOrUserPhone'>
-                <a class="search"><img src="../assets/search.png" @click='search'></a> 
+                <div class="search"><a  @click="search"></a></div>
                 <span @click='showConsumeChange'></span>    
             </div>
             <div class="container user-info">
@@ -228,21 +228,22 @@
                     position: absolute;
                     left: 541px;
                     top: 12px;
-                    img{
-                        width: 18px;
-                        height: 18px;
-                        position: absolute;
-                        left:11px;
-                        top: 11px;
-                    }
+                    a{
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                left:10px;
+                top: 11px;
+                background:url('../assets/search.png')no-repeat center center;
+            }
                 }
                 span{
                 width:10px;
                 height:10px;
                 background:url('../assets/cancel.png')no-repeat center center;
                 position: absolute;
-                top:10px;
-                right:10px;
+                top:20px;
+                right:20px;
                    }
  
             }

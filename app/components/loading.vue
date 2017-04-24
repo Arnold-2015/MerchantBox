@@ -1,6 +1,6 @@
 <template>
     	<div class="loading">
-    		<img src="../assets/load.gif">
+    		<a></a>
     	</div>
 </template>
 
@@ -19,11 +19,14 @@
     	left: 0;
     	top: 0;
     }
-    .loading img{
+    .loading a{
         width: 150px;
         height: 150px;
+        display: block;
         margin: 300px auto;
-        opacity: 0.8
+        opacity: 0.8;
+        background: url('../assets/load.gif')no-repeat center center;
+        background-size:150px 150px;
     }
    
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="partner-bar">
      <div class="search-bar">
-         <a class="export">导出列表</a>
+         <a href='javascript:;' class="export" @click='excel'>导出列表</a>
      </div>
      <table class="partner-list">
 
@@ -35,12 +35,12 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                projectId:this.projectid,
                 profitList:{},
                 pages:null
             }
@@ -61,6 +61,10 @@
                     console.log(response)
                 })
 
+          },
+          excel(){
+           window.location.href=this.apiurl+'/dividend/list/excel?projectId='+this.projectId;
+                
           }
         },
         beforeMount(){

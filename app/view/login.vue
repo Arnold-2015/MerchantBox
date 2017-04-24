@@ -1,7 +1,7 @@
 <template>
     <section>
 
-        <img src="../assets/logo@3x.png">
+        <div class='logo' ></div>
         <p class="title">六度盒子商家管理平台<p/>
         <div class="login-bar">
             <span class="login-title">商家登录</span>
@@ -57,17 +57,19 @@
     section{
         width: 100%;
         height: 100%;
-        background: url('../assets/bac.jpg')no-repeat center center;
+        background: url('../assets/bac.png') no-repeat center center;
         background-size: 100% 100%;
         position: absolute;
         z-index:100;
         left: 0;
         top: 0;
-        img{
+        .logo{
             width: 38px;
             height: 40px;
             margin: 5% auto 0;
             left: 48%;
+            background:url('../assets/logo@3x.png')no-repeat center center;
+            background-size:38px 40px;
         }
         .title{
             width: 300px;

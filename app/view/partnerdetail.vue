@@ -14,6 +14,7 @@
                             <span>收益余额 {{partnerDetail.earning }}</span>
                             <span>消费总额 {{partnerDetail.consumeTotal}}</span>
                         </div>
+                        <a href='javascript:;' class="export" @click='excel'>导出列表</a>
                  </div>
                  <table class="partner-list">
 
@@ -53,6 +54,12 @@
                 apiurl:this.api,
                 partnerDetail:{}
             }
+        },
+        methods:{
+          excel(){
+            window.location.href=this.apiurl+'/partner/'+this.$route.query.projectId+'/'+this.$route.query.partnerId+'/detail/excel';
+                
+          }
         },
         beforeMount(){
           localStorage.setItem('menuTag', 1)

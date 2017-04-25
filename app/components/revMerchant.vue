@@ -173,5 +173,46 @@
       }
     }
 
+
+
+ @media (min-width: 768px) and (max-width: 1368px) {
+   .consume{
+      .consume-bar{
+        height: 360px;    
+            .container{
+                top: 20px;
+                
+            }
+
+            .deal-info{
+              min-height: 400px;
+              margin-top: 20px;
+              h1{
+                  font-size: 16px;
+                  margin-top: 10px;
+                }
+                p{
+                 font-size: 14px;
+                 height: 20px;
+                 line-height: 20px;
+                 margin-top: 20px;        
+                 .data{
+                    height: 30px;      
+                 }  
+                }  
+                            
+            }
+            .consume-cancel{
+                height: 32px;
+                line-height: 32px;
+            }
+            .consume-over{
+                height: 34px;
+                line-height: 34px;
+            }
+
+      }
+    }
+} 
    
 </style>

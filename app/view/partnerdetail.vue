@@ -5,9 +5,9 @@
              <div class="main">
                  <span class="main-title">主页 / 项目管理 / 管理中心 /合伙人明细</span>
                  <div class="search-bar">
-                        <router-link class="toback" to="performing">返回</router-link>
+                        <!-- <router-link class="toback" to="performing">返回</router-link> -->
                         <div class="info-bar">
-                            <span class="title">姓名 {{partnerDetail.realName}}</span>
+                            <span class="title">{{partnerDetail.realName}}</span>
                             <span>手机号码 {{partnerDetail.phone }}</span>
                             <span>卡号 {{partnerDetail.vipCode}}</span>
                             <span>本金余额 {{partnerDetail.principalBalance}}</span>
@@ -102,8 +102,50 @@ $base-color:#C49F59;
                 color:#999;
                 font-size:12px;
             }
+             .search-bar  .info-bar {
+               left:0;
+               span{
+                font-size:18px;
+                font-weight:bold;
+               }
+            }
+
+          } 
+  }
+
+    @media (min-width: 768px) and (max-width: 1368px) {
+$base-color:#C49F59;
+   section{
+           width:100%;
+           // height:100%;
+   }
+  .content{
+          width:100%;
+          min-height:100%;
+          float:left;
+          margin-top:-60px;
+          .main{
+            height:100%;
+            margin-left:60px;
+            margin-top:60px;
+            .main-title{
+                width:100%;
+                height:40px;
+                line-height:40px;
+                margin-left:24px;
+                color:#999;
+                font-size:12px;
+            }
+           .search-bar  .info-bar {
+               left:0;
+               span{
+                font-size:16px;
+                font-weight:bold;
+               }
+            }
             
 
           } 
   }
+}
 </style>

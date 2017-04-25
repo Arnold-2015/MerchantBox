@@ -274,4 +274,165 @@ $base-color:#C49F59;
 
           } 
   }
+
+  @media (min-width: 768px) and (max-width: 1368px) {
+
+$base-color:#C49F59;
+   section{
+           width:100%;
+   }
+  .content{
+          width:100%;
+          min-height:100%;
+          float:left;
+          margin-top:-60px;
+          .main{
+            height:100%;
+            margin-left:60px;
+            margin-top:60px;
+            .main-title{
+                width:100%;
+                height:40px;
+                line-height:40px;
+                margin-left:24px;
+                color:#999;
+                font-size:12px;
+            }
+            .pro-item{
+                width: 100%;
+                height: 120px;
+                background: #fff;
+                .pro-info-wrap{
+                    width: 100%;
+                    height: 100%;
+                    float:left;
+                    .pro-info{
+                        height: 100%;
+                        margin-left: 140px;
+                        position: relative;
+                        .up-bar{
+                            position: relative;
+                            width: 100%;
+                            height: 45px;
+                            border-bottom: 1px solid #f6f6f6;
+                            h1{
+                                min-width: 140px;
+                                height: 22px;
+                                font-size: 16px;
+                                color: #333;
+                                float: left;
+                                margin-top: 12px;
+                                margin-left: 15px;
+                            }
+                            span{
+                                min-width: 90px;
+                                height: 20px;
+                                line-height: 20px;
+                                font-size: 14px;
+                                color: #9DA4B7;
+                                float: left;
+                                margin-top: 12px;
+                                margin-left: 2%;
+                            }
+                            .creat-new{
+                                        width:100px;
+                                        height:26px;
+                                        line-height:26px;
+                                        border-radius:2px;
+                                        color:#fff;
+                                        font-size:12px;
+                                        float:right;
+                                        text-align: center;
+                                        margin-top:12px;
+                                        margin-right:20px;
+                                        background:$base-color;
+                                }
+                    }
+                        .low-bar{
+                            position: relative;
+                            width: 100%;
+                            height: 75px; 
+                            li{
+                               position: relative;
+                               float: left;
+                               left: 15px;
+                               top: 12px;
+                               min-width: 70px;
+                               margin-right: 6%;
+                               span{
+                                   min-width: 70px;
+                                   height: 25px;
+                                   line-height: 25px;
+                                   text-align: center;
+                               }
+                               .key-msg{
+                                    font-size: 20px;
+                                    font-family: 'DINCondensed-Bold';
+                                    font-weight: bold;
+                                    color: #333;
+                               }
+                               .key-word{
+                                    font-size: 12px;
+                                    color: #999;
+                               }
+                                }
+                            div{
+                                width: 90px;
+                                height: 80px;
+                                position: absolute;
+                                top: 25px;
+                                right: 30px;
+                                a{
+                                    width: 60px;
+                                    height: 25px;
+                                    line-height: 25px;
+                                    text-align: right;
+                                    padding-right: 25px;
+                                    margin-top: 12px;
+                                    color: $base-color;
+                                    background: url('../assets/forMore.png')no-repeat center right;
+                                    background-size: 8px;
+                                }
+                            }
+                            
+                        }
+                    }
+
+                }
+                .pro-icon{
+                    width: 140px;
+                    height: 120px;
+                    float: left;
+                    margin-left: -100%;
+                    border-right: 2px solid #f6f6f6;
+                    img{
+                        width: 80px;
+                        height: 80px;
+                        margin:20px auto;
+                    }
+                }
+            }
+            .menu-bar{
+                width: 97%;
+                height: 40px;
+                margin-top: 9px;
+                background: #FAFAFA;
+                padding-left: 3%;
+                li{
+                    min-width: 160px;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    float: left;
+                    font-size: 12px;
+                    color: #333333;
+                }
+                .active{
+                    background: #fff;
+                }
+            }
+
+          }    
+  }
+}
 </style>

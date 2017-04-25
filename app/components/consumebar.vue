@@ -394,5 +394,98 @@
     	}
     }
 
-   
+ 
+
+ @media (min-width: 768px) and (max-width: 1368px) {
+$base-color:#C49F59;
+    .consume{
+    
+      .consume-bar{
+        width: 680px;
+        height: 450px;
+        margin: 8% auto;
+        .title{
+                height: 40px;
+                p{
+                    width: 72px;
+                    height: 12px;
+                    line-height: 12px;
+                    top: 14px;
+                }
+                input{
+                    width: 300px;
+                    height: 24px;
+                    left: 270px;
+                    top: 6px;
+                    font-size: 12px;
+                }
+                .search{
+                    width: 40px;
+                    height: 28px;
+                    background: $base-color;
+                    position: absolute;
+                    left: 541px;
+                    top: 6px;
+                    a{
+                     left:10px;
+                     top: 6px;
+                     }
+                }
+                span{
+                top:16px;
+                   }
+ 
+            }
+            .container{
+                width: 580px;           
+            }
+            .user-info{
+                height: 120px;
+                p{
+                 font-size: 14px;
+                 color: #333333;
+                 height: 40px;
+                 line-height: 40px;
+                }
+                span{
+                    height: 30px;
+                    line-height: 30px;
+                }
+            }
+            .deal-info{
+                p{
+                 font-size: 14px;
+                 height: 40px;
+                 line-height: 40px;
+                 .data{
+                    width: 130px;
+                    height: 24px;
+                    font-size: 12px;
+                 }
+                }
+                .consume-choose{
+                   a{
+                     font-size: 12px;
+                   }
+                }
+                 label{
+                  height: 40px;
+                  line-height: 40px;
+                  input{
+                       width: 24px;
+                       height: 24px;
+                  }
+                 span{
+                  font-size: 12px;
+                 }
+                }
+            }
+            .consume-over{
+                height: 36px;
+                line-height: 36px;
+            }
+
+      }
+    }
+}  
 </style>

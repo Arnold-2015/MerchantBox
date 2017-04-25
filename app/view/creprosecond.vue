@@ -206,4 +206,26 @@ $base-color:#C49F59;
 
           } 
   }
+
+    @media (min-width: 768px) and (max-width: 1368px) {
+  .content{
+          width:100%;
+          min-height:100%;
+          float:left;
+          margin-top:-60px;
+          .main{
+            height:100%;
+            margin-left:60px;
+            margin-top:60px;
+            .main-title{
+                width:100%;
+                height:40px;
+                line-height:40px;
+                /*margin-left:24px;*/
+                color:#999;
+                font-size:12px;
+            }
+}
+}
+}
 </style>

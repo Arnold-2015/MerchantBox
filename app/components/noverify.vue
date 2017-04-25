@@ -46,12 +46,10 @@
             }
             this.$http.put(this.apiurl+'/project/'+this.projectid+'/status',options)
                 .then((response) => {
-                   if(response.data.statusCode ==200){
+                   
                     this.$store.state.shownoverify = false;
-                    window.location.reload()
-                   }else{
-                    alert('系统繁忙')
-                   }
+                    // window.location.reload()
+                 
                    
                 })
                 .catch(function(response) {
@@ -166,5 +164,21 @@
                             outline:none
                         }
                 }
-   
+ 
+ @media (min-width: 768px) and (max-width: 1368px) {
+.consume{
+      .consume-bar{
+        width: 720px;
+        height: 450px;
+            .container{
+                width: 680px;            
+            }
+      }
+    }
+          textarea{
+                  width: 640px;
+                  height: 200px;
+                  font-size: 12px;
+                }
+}  
 </style>

@@ -41,7 +41,7 @@
     		width: 500px;
     		height: 500px;
     		background: #fff;
-    		margin: 160px auto;
+    		margin: 8% auto;
     		position: relative;
             span{
                 width:10px;

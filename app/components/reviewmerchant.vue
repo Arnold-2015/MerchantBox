@@ -73,12 +73,10 @@
             }
             this.$http.put(this.apiurl+'/project/'+this.projectid+'/status',options)
                 .then((response) => {
-                   if(response.data.statusCode ==200){
+                  
                     this.$store.state.showreviewmerchant = false;
                     window.location.reload()
-                   }else{
-                    alert('审核失败')
-                   }
+                 
                    
                 })
                 .catch(function(response) {
@@ -268,5 +266,77 @@
       }
     }
 
-   
+  @media (min-width: 768px) and (max-width: 1368px) {
+ .consume{
+      .consume-bar{
+        width: 760px;
+        height: 450px;
+            .title{
+                height: 40px;
+                p{
+                    font-size: 16px;
+                    top: 12px;
+                }
+ 
+            }
+            .left-bar{
+              width: 260px;
+              height: 320px;
+              img{
+                width: 72px;
+                height: 72px;
+                margin-left: 80px;
+              }
+            }
+            .right-bar{
+              width: 420px;
+              height: 320px;
+            }
+            .container{
+                width: 680px;             
+            }
+ 
+            .sale-info{
+                p{
+                 font-size: 14px;
+                }
+                span{
+                  font-size: 12px;
+                  color: #999;
+                  height: 24px;
+                  line-height: 24px;
+                  a{
+                    font-size: 12px;
+                  }
+                }
+            }
+            .profit-info{
+              margin-top: 20px;
+              p{
+                 font-size: 14px;
+                }
+              .item{
+                  font-size: 12px;
+                  height: 30px;
+                  line-height: 30px;
+                  input{
+                    width: 140px;
+                    height: 20px;
+                    line-height: 20px;
+                 }
+                }
+            }
+            .review-no{
+              height: 34px;
+              line-height: 34px;
+              margin:20px 0 0 190px;
+              }
+              .review-yes{
+              height: 36px;
+              line-height: 36px;
+            }
+
+      }
+    }
+}  
 </style>

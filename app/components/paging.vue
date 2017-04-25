@@ -124,4 +124,23 @@
         color:#fff;
         font-size: 14px;
       }
+
+
+@media (min-width: 768px) and (max-width: 1368px) {
+     .pagination {
+        height: 60px;
+        margin-top: 10px;
+      }
+      ul{
+          height: 32px;
+          top: 14px;
+      }
+      .pagination li a{
+        height: 32px;
+        line-height: 32px;
+      }
+      .pagination li input{
+        height: 30px;
+      }
+}
 </style>

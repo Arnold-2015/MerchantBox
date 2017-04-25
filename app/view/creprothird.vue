@@ -313,7 +313,7 @@ $base-color:#C49F59;
                 font-weight: bold;
               }
               .info-bar{
-                width: 1100px;
+                width: 820px;
                 min-height:700px;
                 background: #fff;
                 margin-left: 40px;
@@ -352,11 +352,11 @@ $base-color:#C49F59;
                 }
                  .radioNomal{
                        background: url('../assets/radio-nomal.png')no-repeat ;
-                       background-size: 24px 24px;
+                       background-size: 16px 16px;
                  }
                  .radioActive{
                        background: url('../assets/radio-active.png')no-repeat ;
-                       background-size: 24px 24px;
+                       background-size: 16px 16px;
                   }
                 input{   
                   height: 48px;
@@ -426,13 +426,13 @@ $base-color:#C49F59;
                   color: #666;
                 }
                 .base-info{
-                  width: 250px;
+                  width: 180px;
                 }
                 .return-info{
                   width: 132px;
                 }
                 .profit-info{
-                  width: 480px;
+                  width: 380px;
                 }
 
                 .remind{
@@ -442,7 +442,7 @@ $base-color:#C49F59;
                 margin-top: 10px;
               }
                 textarea{
-                  width: 800px;
+                  width: 600px;
                   height: 136px;
                   display: block;
                   padding: 10px;
@@ -506,4 +506,26 @@ $base-color:#C49F59;
 
           } 
   }
+
+    @media (min-width: 768px) and (max-width: 1368px) {
+  .content{
+          width:100%;
+          min-height:100%;
+          float:left;
+          margin-top:-60px;
+          .main{
+            height:100%;
+            margin-left:60px;
+            margin-top:60px;
+            .main-title{
+                width:100%;
+                height:40px;
+                line-height:40px;
+                /*margin-left:24px;*/
+                color:#999;
+                font-size:12px;
+            }
+}
+}
+}
 </style>

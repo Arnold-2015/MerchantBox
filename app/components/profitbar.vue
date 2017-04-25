@@ -129,9 +129,9 @@
     	z-index: 100;
     	.consume-bar{
     		width: 680px;
-    		height: 530px;
+    		height: 500px;
     		background: #fff;
-    		margin: 150px auto;
+    		margin: 8% auto;
     		position: relative;
     		.title{
                 width: 100%;
@@ -240,7 +240,7 @@
                 }
                 textarea{
                 	width: 460px;
-                	height: 136px;
+                	height: 100px;
                 	position: relative;
                 	left: 100px;
                 	top: -80px;

@@ -77,9 +77,9 @@
     	z-index: 100;
     	.consume-bar{
     		width: 680px;
-    		height: 530px;
+    		height: 480px;
     		background: #fff;
-    		margin: 150px auto;
+    		margin: 8% auto;
     		position: relative;
     		.title{
                 width: 100%;
@@ -129,11 +129,11 @@
                 }
                 .radioNomal{
                        background: url('../assets/radio-nomal.png')no-repeat ;
-                       background-size: 24px 24px;
+                       background-size: 16px 16px;
                  }
                  .radioActive{
                        background: url('../assets/radio-active.png')no-repeat ;
-                       background-size: 24px 24px;
+                       background-size: 16px 16px;
                   }
             }
  
@@ -208,7 +208,7 @@
                 }
                 textarea{
                 	width: 460px;
-                	height: 136px;
+                	height: 100px;
                 	position: relative;
                 	left: 100px;
                 	top: -80px;

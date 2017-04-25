@@ -103,7 +103,7 @@ $base-color:#C49F59;
               width:150px;
               height:120px;
               border-radius:2px;
-              background:#fff;
+              background:#000;
               position: absolute;
               right:45px;
               top:105px;
@@ -113,9 +113,59 @@ $base-color:#C49F59;
                 display:block;
                 font-size:14px;
                 margin:30px auto;
-                color:$base-color;
+                color:#fff;
 
               }
     }
   }
+
+
+  @media (min-width: 768px) and (max-width: 1368px) {
+ $base-color:#C49F59;
+  .nav-bar{
+    height:60px;
+    .nav-icon{
+              width:30px;
+              height:30px;
+              left:16px;
+              top:16px;
+              background-size:30px 30px;
+    }
+    .nav-title{
+              width:120px;
+              height:22px;
+              left:72px;
+              top:20px;
+              font-size:16px;
+
+    }
+    .user-avarta{
+              width:30px;
+              height:30px;
+              right:76px;
+              top:15px;
+    }
+    .setting-icon{
+              width:16px;
+              height:16px;
+              right:30px;
+              top:22px;
+              background-size:16px 16px;
+    }
+    .setting-bar{
+              width:120px;
+              height:80px;
+              right:30px;
+              top:75px;
+              a{
+                width:56px;
+                height:12px;
+                font-size:12px;
+                margin:20px auto;
+
+              }
+    }
+  }
+
+}
 </style>

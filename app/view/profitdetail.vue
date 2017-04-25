@@ -5,7 +5,7 @@
              <div class="main">
                  <span class="main-title">主页 / 项目管理 / 管理中心 / 明细</span>
                  <div class="search-bar">
-                        <router-link class="toback" to="performing">返回</router-link>
+                        <!-- <router-link class="toback" to="performing">返回</router-link> -->
                         <div class="info-bar">
                             <span class="title">{{profitDetail.dividendTime}} 分红明细</span>
                             <span>分红总金额 {{profitDetail.dividendTotalMoney}}元</span>
@@ -133,8 +133,52 @@ $base-color:#C49F59;
                 color:#999;
                 font-size:12px;
             }
+             .search-bar  .info-bar {
+               left:0;
+               span{
+                font-size:18px;
+                font-weight:bold;
+               }
+            }
+
+          } 
+  }
+
+
+
+  @media (min-width: 768px) and (max-width: 1368px) {
+$base-color:#C49F59;
+   section{
+           width:100%;
+           // height:100%;
+   }
+  .content{
+          width:100%;
+          min-height:100%;
+          float:left;
+          margin-top:-60px;
+          .main{
+            height:100%;
+            margin-left:60px;
+            margin-top:60px;
+            .main-title{
+                width:100%;
+                height:40px;
+                line-height:40px;
+                margin-left:24px;
+                color:#999;
+                font-size:12px;
+            }
+           .search-bar  .info-bar {
+               left:0;
+               span{
+                font-size:16px;
+                font-weight:bold;
+               }
+            }
             
 
           } 
   }
+}
 </style>

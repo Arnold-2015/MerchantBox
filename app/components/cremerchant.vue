@@ -66,7 +66,7 @@
     	z-index: 100;
     	.consume-bar{
     		width: 680px;
-    		height: 640px;
+    		height: 560px;
     		background: #fff;
         border-radius: 4px;
     		margin: 8% auto;
@@ -117,28 +117,7 @@
                  }
                  
                 }
-                label{
-                  height: 36px;
-                  line-height: 36px;
-                  color:#666;
-                  margin-right: 46px;
-                  input{
-                       width: 36px;
-                       height: 36px;
-                       position: relative;
-                       filter: alpha(opacity=0);
-                       opacity: 0;
-                  }
-                 
-                }
-                 .radioNomal{
-                       background: url('../assets/radio-nomal.png')no-repeat left center ;
-                       background-size: 16px 16px;
-                 }
-                 .radioActive{
-                       background: url('../assets/radio-active.png')no-repeat left center;
-                       background-size: 16px 16px;
-                  }
+                
                  
                   
             }
@@ -173,5 +152,40 @@
     	}
     }
 
-   
+ @media (min-width: 768px) and (max-width: 1368px) {
+   .consume{
+      .consume-bar{
+        height: 440px;    
+            .container{
+                top: 20px;
+                
+            }
+
+            .deal-info{
+              min-height: 400px;
+              margin-top: 20px;
+              h1{
+                  font-size: 16px;
+                  margin-top: 10px;
+                }
+                p{
+                 font-size: 14px;
+                 height: 20px;
+                 line-height: 20px;
+                 margin-top: 20px;        
+                 
+                }               
+            }
+            .consume-cancel{
+                height: 32px;
+                line-height: 32px;
+            }
+            .consume-over{
+                height: 34px;
+                line-height: 34px;
+            }
+
+      }
+    }
+}  
 </style>

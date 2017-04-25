@@ -7,7 +7,7 @@
             </div>
             <div class="search-bar">
                 <input  type="text" placeholder="输入姓名/卡号/手机号" >
-                <div class="search"  style="left:280px" ><a  @click="search"></a></div>
+                <div class="search"  style="left:291px" ><a  @click="search"></a></div>
                 <p>目标分数{{totalCount }}份,当前共{{buyTotalCount  }}份</p>
             </div>
             <div class="confirm-list-bar">
@@ -126,9 +126,9 @@
     	z-index: 100;
     	.confirm-bar{
     		width: 680px;
-    		height: 600px;
+    		height: 490px;
     		background: #fff;
-    		margin: 150px auto;
+    		margin: 8% auto;
     		position: relative;
             .title{
                 width: 100%;
@@ -185,28 +185,12 @@
                             outline:none
                         }
                 }
-                .search{
-                    display:block;
-                    width: 40px;
-                    height: 40px;
-                    background: $base-color;
-                    position: absolute;
-                    left: 291px;
-                    top: 12px;
-                    img{
-                        width: 18px;
-                        height: 18px;
-                        position: absolute;
-                        left:11px;
-                        top: 11px;
-                    }
-                }
-                
+                               
  
             }
            .confirm-list-bar{
             width: 640px;
-            height: 354px;
+            height: 260px;
             margin: 10px auto;
             border:1px solid #d7d7d7;
             overflow: scroll;
@@ -217,8 +201,8 @@
                           border-collapse:collapse;
                           tr{
                               width: 100%;
-                              height: 40px;
-                              line-height: 40px;
+                              height: 30px;
+                              line-height: 30px;
                               color: #666;
                               background: #FAFAFA;
                           }
@@ -227,13 +211,13 @@
                               color: #333;
                           }
                           td{
-                              height: 40px;
-                              line-height: 40px;
+                              height: 30px;
+                              line-height: 30px;
                               color: #666;
                               text-align: center;  
                               a{
-                                  height: 40px;
-                                  line-height: 40px;
+                                  height: 30px;
+                                  line-height: 30px;
                                   font-size: 14px;
                                   color: $base-color;
                                   margin-left: 10px;
@@ -275,5 +259,13 @@
     	}
     }
 
-   
+ @media (min-width: 768px) and (max-width: 1368px) {
+ .confirm .confirm-bar .search-bar{
+            
+                input{
+                    height: 30px;          
+                }
+                               
+            }
+}  
 </style>

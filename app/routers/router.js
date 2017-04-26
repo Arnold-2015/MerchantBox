@@ -5,7 +5,7 @@ const Login = resolve => {
     },'login');
 };
 const router = [{
-    path: '/',
+    path: '',
     name: 'login',
     component: Login
 }, {

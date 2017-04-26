@@ -4,6 +4,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
         isActive:1,
+        shownv:false,
         showQr:false,
         showConsume:false,
         showProfit:false,

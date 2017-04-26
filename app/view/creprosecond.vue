@@ -85,6 +85,7 @@
         beforeMount(){    
             localStorage.setItem('menuTag', 1)  
             this.$emit('changetag')  
+            this.$emit('changenv')
             var projectId=this.$store.state.projectId;
             if(projectId){
               this.$http.get(this.apiurl+'/project/'+projectId+'/properties')

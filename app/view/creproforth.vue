@@ -14,7 +14,7 @@
                  </div>
                  <div class="clear-fix">
                  <div class="project-detail ">
-                   <span class="title">合同模板</span>
+             <!--       <span class="title">合同模板</span>
                    <div class="compact-item">
                      <div class="compact"></div>
                      <span>股权投资：以净利润清算</span>
@@ -34,7 +34,7 @@
                      <div class="compact"></div>
                      <span>项目合作：委托销售</span>
                      <a class="preview">预览</a><a class="download">下载</a>
-                   </div>
+                   </div> -->
                    <span class="title">上传合同</span>
                    <a class="up-compact">上传合同
                    <input type="file" :accept="accepts" id="upFile" @change='upFile' >
@@ -100,6 +100,7 @@
         beforeMount(){ 
             localStorage.setItem('menuTag', 1)      
             this.$emit('changetag') 
+            this.$emit('changenv')
             var projectId=this.$store.state.projectId;
             if(projectId){
               this.$http.get(this.apiurl+'/project/'+projectId+'/properties')

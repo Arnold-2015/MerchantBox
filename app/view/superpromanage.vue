@@ -4,7 +4,7 @@
              <div class="main">
                  <span class="main-title">主页 / 项目管理</span>
                  <div class="main-nav">
-                     <span>项目管理列表</span>
+                     <span>项目管理</span>
                      <router-link to="creprofirst" class="creat-new"><span></span>新建项目</router-link>
                  </div>
                  <div class="search-bar">
@@ -143,6 +143,7 @@
         beforeMount(){
             localStorage.setItem('menuTag', 1)
             this.$emit('changetag')
+            this.$emit('changenv')
             let options={
                 // 'nickNameOrUserPhone':this.nickNameOrUserPhone,
                 'pageSize':10,

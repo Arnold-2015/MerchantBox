@@ -51,6 +51,7 @@
         mounted() {
             localStorage.setItem('menuTag', 7)
             this.$emit('changetag')
+            this.$emit('changenv')
         },
         components:{
            qr,manager

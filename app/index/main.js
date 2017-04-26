@@ -19,7 +19,8 @@ var app = new Vue({
 	el: '#app',
 	data: {
 		showLoading: false,
-		api:'http://192.168.7.12:8080',
+		shownv:false,
+		api:'http://test.6dbox.cn:8008',
 		menuTag:localStorage.getItem('menuTag')
 	},
 	components: {
@@ -28,6 +29,9 @@ var app = new Vue({
 	methods:{
 		changeTag(){
              this.menuTag=localStorage.getItem('menuTag')
+		},
+		changenv(){
+             this.shownv=true;
 		}
 	},
 	router,

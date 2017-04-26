@@ -72,7 +72,7 @@
         beforeMount(){
           localStorage.setItem('menuTag', 2)
           this.$emit('changetag')
-            
+            this.$emit('changenv')
             let options={
                 'merchantId':this.$route.query.merchantId,
                 'pageSize':10,

@@ -9,9 +9,9 @@
 </head>
 <body >
 	<div id="app">
-	    <nb :api='api'></nb>
-		<router-view :api='api' @changetag='changeTag'></router-view>
-		<sb :menutag='menuTag'></sb>
+	    <nb :api='api' v-if='shownv'></nb>
+		<router-view :api='api' @changetag='changeTag' @changenv='changenv'></router-view>
+		<sb :menutag='menuTag' v-if='shownv'></sb>
 		<loading v-if='showLoading'></loading>
 	</div>
 </body>

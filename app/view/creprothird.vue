@@ -76,7 +76,7 @@
                    <span>月销售额回报：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].returnRate'>%    
                    </div>
 
-                   <div class="info-item add-border"><span class="add" @click='add'>增加一列</span>  <span class="reduce" @click='reduce'>删除一列</span></div>
+                   <div class="info-item add-border"><a href='javascript:;' class="add" @click='add'>增加一列</a>  <a href='javascript:;' class="reduce" @click='reduce'>删除一列</a></div>
                    <div class="info-item add-border">
                    <span>回报说明 </span><textarea cols="30" rows="10" placeholder="填写店铺目前营业状态；预计月销售额；折合年化利率" v-model='option.salesProjectVo.returnExplain'></textarea>
                    </div>
@@ -102,19 +102,19 @@
                    <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.earningsMemo'>
                    </div>
                    <div class="info-item">
-                   <span>特权卡名称：</span><input class="base-info" type="text" placeholder="建议店铺名(不超过9个字)" v-model='option.privilegeCardName'>
+                   <span>特权卡名称：</span><input class="base-info" type="text" placeholder="建议店铺名" v-model='option.privilegeCardName'>
                    </div>
                    <div class="info-item add-border" style="height:300px">
                    <span>特权卡样式：</span>
                    <div class="upbar">
-                     <img style="width:86px;height:86px"   :src='option.privilegeLogo'>
+                     <img style="width:86px;height:86px"   :src='privilegeLogo'>
                    <a class="file">上传店铺logo
                        <input type="file" :accept="accepts" id="upImg" @change='upImg(0)' >
                    </a>
                    <span class="tip">建议尺寸：750*606像素</span>
                    </div>
                    <div class="upbar">
-                     <img style="width:160px;height:90px"   :src='option.privilegeBg'>
+                     <img style="width:160px;height:90px"   :src='privilegeBg'>
                    <a class="file" style="left:380px">上传卡片背景
                        <input type="file" :accept="accepts" id="upImg" @change='upImg(1)' >
                    </a>
@@ -153,6 +153,8 @@
                 apiurl:this.api,
                 accepts:'image/jpeg,image/jpg,image/png',
                 period:'6个月',
+                privilegeLogo:'',
+                privilegeBg :'',
                 option:{
                   projectId:this.$store.state.projectId,
                   projectType:1,
@@ -181,8 +183,10 @@
                 .then((response) => {
                    if(item==0){
                     this.option.privilegeLogo=response.data.result.msg
+                    this.privilegeLogo="http://pic.6dbox.cn/"+response.data.result.msg
                    }else{
                     this.option.privilegeBg=response.data.result.msg
+                    this.privilegeBg="http://pic.6dbox.cn/"+response.data.result.msg
                    }
                 })
                 .catch(function(response) {
@@ -216,11 +220,14 @@
         beforeMount(){    
             localStorage.setItem('menuTag', 1)    
             this.$emit('changetag')
+            this.$emit('changenv')
             var projectId=this.$store.state.projectId;
             if(projectId){
               this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
                 .then((response) => {
                   var data=response.data.result;
+                  this.privilegeLogo="http://pic.6dbox.cn/"+data.privilegeLogo;
+                  this.privilegeBg="http://pic.6dbox.cn/"+data.privilegeBg;
                    this.option={
                       projectId:this.$store.state.projectId,
                       projectType:data.projectType,
@@ -334,6 +341,10 @@ $base-color:#C49F59;
                 }
                 .add,.reduce{
                   color: $base-color;
+                  display: inline-block;
+                  width: 100px;
+                  margin-left: 30px;
+                  margin-top: 30px;
                 }
                 label{
                   height: 48px;

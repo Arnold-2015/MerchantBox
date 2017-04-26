@@ -1,23 +1,23 @@
  <template>
  <div>
    <div class="side-bar-default">
-       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}"><span :class="{active:isActive==1}" @click='setActive(1)' >项目管理</span></router-link>
-       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"><span :class="{active:isActive==2}" @click='setActive(2)'>商家管理</span></router-link>
-       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"><span :class="{active:isActive==3}" @click='setActive(3)'>用户管理</span></router-link>
-       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"><span :class="{active:isActive==4}" @click='setActive(4)'>订单管理</span></router-link>
-       <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span :class="{active:isActive==5}" @click='setActive(5)'>合同管理</span></router-link> -->
-       <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span :class="{active:isActive==6}" @click='setActive(6)'>合同模版</span></router-link> -->
-       <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span :class="{active:isActive==7}" @click='setActive(7)'>管理员账户</span></router-link> -->
+       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}"><span class='promanage' :class="{activepromanage:isActive==1}" @click='setActive(1)' >项目管理</span></router-link>
+       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"><span class='merchantmanage' :class="{activemerchantmanage:isActive==2}" @click='setActive(2)'>商家管理</span></router-link>
+       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"><span class='customermanage' :class="{activecustomermanage:isActive==3}" @click='setActive(3)'>用户管理</span></router-link>
+       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"><span class='ordermanage' :class="{activeordermanage:isActive==4}" @click='setActive(4)'>订单管理</span></router-link>
+       <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span class='compactmanage' :class="{activecompactmanage:isActive==5}" @click='setActive(5)'>合同管理</span></router-link> -->
+       <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span class='compactmodel' :class="{activecompactmodel:isActive==6}" @click='setActive(6)'>合同模版</span></router-link> -->
+       <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span class='managerlist' :class="{activemanagerlist:isActive==7}" @click='setActive(7)'>账户管理</span></router-link> -->
        <!-- <router-link to="" class="side-bottom"><span>设置</span></div>      -->
    </div>
     <div class="side-bar">
-       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}"><span :class="{active:isActive==1}" @click='setActive(1)' ></span></router-link>
-       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"><span :class="{active:isActive==2}" @click='setActive(2)'></span></router-link>
-       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"><span :class="{active:isActive==3}" @click='setActive(3)'></span></router-link>
-       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"><span :class="{active:isActive==4}" @click='setActive(4)'></span></router-link>
-       <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span :class="{active:isActive==5}" @click='setActive(5)'>合同管理</span></router-link> -->
-       <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span :class="{active:isActive==6}" @click='setActive(6)'>合同模版</span></router-link> -->
-       <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span :class="{active:isActive==7}" @click='setActive(7)'>管理员账户</span></router-link> -->
+       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}" ><span class='promanage' :class="{activepromanage:isActive==1}" @click='setActive(1)' ></span></router-link>
+       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"><span class='merchantmanage' :class="{activemerchantmanage:isActive==2}" @click='setActive(2)'></span></router-link>
+       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"><span class='customermanage' :class="{activecustomermanage:isActive==3}" @click='setActive(3)'></span></router-link>
+       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"><span class='ordermanage' :class="{activeordermanage:isActive==4}" @click='setActive(4)'></span></router-link>
+       <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span class='compactmanage' :class="{activecompactmanage:isActive==5}" @click='setActive(5)'></span></router-link> -->
+       <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span class='compactmodel' :class="{activecompactmodel:isActive==6}" @click='setActive(6)'></span></router-link> -->
+       <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span class='managerlist' :class="{activemanagerlist:isActive==7}" @click='setActive(7)'></span></router-link> -->
        <!-- <router-link to="" class="side-bottom"><span>设置</span></div>      -->
    </div>
 <div>
@@ -76,11 +76,73 @@
                   color:#d7d7d7;
                   line-height: 60px;
                   text-align: center;
-                  background:url('../assets/icon_proManage.png') no-repeat center left 30px;
+                  
+               }
+               .promanage{
+                  background:url('../assets/icon_project.png') no-repeat center left 30px;
                   background-size:16px 16px;
                }
-               .active{
+               .merchantmanage{
+                  background:url('../assets/icon_shop.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+               }
+               .customermanage{
+                  background:url('../assets/icon_user.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+               }
+               .ordermanage{
+                  background:url('../assets/icon_order.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+               }
+               .compactmanage{
+                  background:url('../assets/icon_contract.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+               }
+               .compactmodel{
+                  background:url('../assets/icon_template.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+               }
+               .managerlist{
+                  background:url('../assets/icon_admin.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+               }
+               .activepromanage{
                 color:$base-color;
+               }
+               .activepromanage{
+                  background:url('../assets/icon_project_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
+               }
+               .activemerchantmanage{
+                  background:url('../assets/icon_shop_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
+               }
+               .activecustomermanage{
+                  background:url('../assets/icon_user_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
+               }
+               .activeordermanage{
+                  background:url('../assets/icon_order_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
+               }
+               .activecompactmanage{
+                  background:url('../assets/icon_contract_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
+               }
+               .activecompactmodel{
+                  background:url('../assets/icon_template_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
+               }
+               .activemanagerlist{
+                  background:url('../assets/icon_admin_gold.png') no-repeat center left 30px;
+                  background-size:16px 16px;
+                  color:$base-color;
                }
           }
           .bactive{
@@ -133,11 +195,63 @@
                   color:#d7d7d7;
                   line-height: 60px;
                   text-align: center;
-                  background:url('../assets/icon_proManage.png') no-repeat center center;
-                  background-size:12px 12px;
                }
-               .active{
-                color:$base-color;
+               .promanage{
+                  background:url('../assets/icon_project.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+               .merchantmanage{
+                  background:url('../assets/icon_shop.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+               .customermanage{
+                  background:url('../assets/icon_user.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+               .ordermanage{
+                  background:url('../assets/icon_order.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+               .compactmanage{
+                  background:url('../assets/icon_contract.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+               .compactmodel{
+                  background:url('../assets/icon_template.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+               .managerlist{
+                  background:url('../assets/icon_admin.png') no-repeat center center;
+                  background-size:16px 16px;
+               }
+      
+                .activepromanage{
+                  background:url('../assets/icon_project_gold.png') no-repeat center center;
+                  
+               }
+               .activemerchantmanage{
+                  background:url('../assets/icon_shop_gold.png') no-repeat center center;
+                  
+               }
+               .activecustomermanage{
+                  background:url('../assets/icon_user_gold.png') no-repeat center center;
+                  
+               }
+               .activeordermanage{
+                  background:url('../assets/icon_order_gold.png') no-repeat center center;
+                  
+               }
+               .activecompactmanage{
+                  background:url('../assets/icon_contract_gold.png') no-repeat center center;
+                  
+               }
+               .activecompactmodel{
+                  background:url('../assets/icon_template_gold.png') no-repeat center center;
+                  
+               }
+               .activemanagerlist{
+                  background:url('../assets/icon_admin_gold.png') no-repeat center center;
+                  
                }
           }
           .bactive{

@@ -14,7 +14,7 @@
                  </div>
                  <div class="info-item" style="height:180px">
                    <span style="display:block">项目头图</span>
-                   <img  :src='option.backgroundImg'>
+                   <img  :src='backgroundImg'>
                    <a class="file">选择图片
                        <input type="file" :accept="accepts" id="upImg" @change='upImg' >
                    </a>
@@ -24,7 +24,7 @@
                    <span>项目名称</span><input placeholder="请输入您的项目名称" type="text" v-model='option.projectName'>
                  </div>
                  <div class="info-item">
-                   <span>项目地址</span><input placeholder="请输入您的项目名称" type="text" v-model='option.address' >
+                   <span>项目地址</span><input placeholder="请输入您的项目地址" type="text" v-model='option.address' >
                  </div>
                  <div class="info-item" >
                    <span style="display:block">项目简介</span><textarea placeholder="请填写说明，例如：
@@ -47,6 +47,7 @@ import Vue from 'Vue'
                 active:[false,true],
                 apiurl:this.api,
                 accepts:'image/jpeg,image/jpg,image/png',
+                backgroundImg:'',
                 option:{
                   backgroundImg:'',
                   province :'',
@@ -66,6 +67,7 @@ import Vue from 'Vue'
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
                    this.option.backgroundImg =response.data.result.msg;
+                   this.backgroundImg ="http://pic.6dbox.cn/"+response.data.result.msg;
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -95,6 +97,7 @@ import Vue from 'Vue'
             var projectId;
             localStorage.setItem('menuTag', 1)
             this.$emit('changetag')
+            this.$emit('changenv')
             if(this.$route.query.projectId){
               projectId=this.$route.query.projectId;
               this.$store.state.projectId=projectId;
@@ -105,7 +108,7 @@ import Vue from 'Vue'
               this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
                 .then((response) => {
                   var data=response.data.result;
-                  console.log(data.backgroundImg)
+                  this.backgroundImg="http://pic.6dbox.cn/"+data.backgroundImg
                    this.option={
                       projectId:projectId,
                       backgroundImg:data.backgroundImg,

@@ -14,7 +14,6 @@
             <a class="nocount">没有账号?</a>
         </div>
         <p class="cr">Copyright © 2016-2017 杭州钒融科技有限公司 . All Rights Reserved </p>
-    
         
     </section>
 </template>
@@ -24,6 +23,7 @@
         props: ['api'],
         data() {
             return {
+                showLoading:true,
                 apiurl:this.api,
                 userName :'15957195346',
                 password :'123456'         
@@ -50,7 +50,11 @@
                 })
                               
             }
-        }
+        },
+        mounted(){
+        this.$emit('changenv');
+        window.history.pushState(null, null, ' '); 
+    }
     }
 </script>
 <style lang="sass" scoped>

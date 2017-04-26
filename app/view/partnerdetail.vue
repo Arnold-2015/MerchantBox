@@ -64,7 +64,7 @@
         beforeMount(){
           localStorage.setItem('menuTag', 1)
           this.$emit('changetag')
-            
+            this.$emit('changenv')
             this.$http.get(this.apiurl+'/partner/'+this.$route.query.projectId+'/'+this.$route.query.partnerId+'/detail')
                 .then((response) => {
                    this.partnerDetail=response.data.result;

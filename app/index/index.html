@@ -8,7 +8,7 @@
 	<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=dKnNiZGqfPFyraZ4l46YPKXWC0G70xtF"></script> -->
 </head>
 <body >
-	<div id="app">
+	<div id="app" >
 	    <nb :api='api' v-if='shownv'></nb>
 		<router-view :api='api' @changetag='changeTag' @changenv='changenv'></router-view>
 		<sb :menutag='menuTag' v-if='shownv'></sb>

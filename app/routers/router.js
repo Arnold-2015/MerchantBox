@@ -169,6 +169,14 @@ const router = [{
         },'creproforth');
     }
 },{
+    path: '/setting',
+    name: 'setting',
+    component(resolve) {
+        require.ensure(['../view/setting.vue'], () => {
+            resolve(require('../view/setting.vue'));
+        },'setting');
+    }
+},{
     path: '/login',
     name: 'login',
     component: Login

@@ -5,10 +5,10 @@
      
             <div class="container deal-info">
                 <h1>新建商家</h1>
-                <p><span>商家姓名（甲方)</span><input type="text" class="data" v-model='option.nickName'></p>
+                <p><span>商家姓名（甲方)</span><input type="text" class="data" v-model='option.realName'></p>
                 <p><span>商家身份证号</span><input type="text" class="data" v-model='option.idNo'></p>
                 <p><span>手机号码（账号)</span><input type="text" class="data" v-model='option.userPhone'></p>
-                <p><span>账号密码</span><input type="text" class="data" v-model='option.password'></p>
+                <p><span>账号密码</span><input type="password" class="data" v-model='option.password'></p>
                 <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='option.thirdPartyName '></p>
                 <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='option.thirdPartyCode '></p>
                 <p><span>项目联系人姓名</span><input type="text" class="data" v-model='option.linkManName '></p>
@@ -43,7 +43,12 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/merchant/add',options)
                 .then((response) => {
+                    if(response.data.statusCode==200){
                    this.$store.state.showCreMerchant = false;
+                   window.location.reload()
+               }else{
+                alert('创建商家失败，请重试')
+               }
                 })
                 .catch(function(response) {
                     console.log(response)

@@ -72,11 +72,15 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/project/second',options)
                 .then((response) => {
+                  if(response.data.statusCode==200){
                   console.log(this.option.detail)
                   this.$router.push({
                     name: 'creprothird'
                 });
-                })
+                }else{
+                  alert('创建失败，请重试')
+                }
+              })
                 .catch(function(response) {
                     console.log(response)
                 })

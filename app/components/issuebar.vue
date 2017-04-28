@@ -12,7 +12,7 @@
             <div class="container sale-info" v-if="option.operationType==5">
                  
                 <span>延迟至</span>
-                <input type="text" class="data" placeholder="日历选择器" v-model='option.delay2Time'>
+                <input type="text" class="data" placeholder="2017-04-30" v-model='option.delay2Time'>
                 <span class="text">每次分红只可延迟一次,逾期将扣除部分押金</span>
                 
             </div>
@@ -54,7 +54,12 @@
             let options=this.option;
             this.$http.post(this.apiurl+'/projectLog/add',options)
                 .then((response) => {
-                   this.$store.state.showIssue = false
+                  if(response.data.statusCode==200){
+                   this.$store.state.showIssue = false;
+                   window.location.reload()
+                 }else{
+                  alert('发布公告失败，请重试')
+                 }
                 })
                 .catch(function(response) {
                     console.log(response)

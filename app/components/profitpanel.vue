@@ -54,6 +54,7 @@
 <script> 
 
     export default {
+          props: ['partnerrightlist'],
           data() {
             return {
                 active:[true,false,false,false,false,false,false,false,false],
@@ -65,7 +66,7 @@
                 active6:false,
                 active7:false,
                 active8:false,
-                checkedProfits:[]
+                checkedProfits:this.partnerrightlist
             }
         },
         methods:{
@@ -84,6 +85,9 @@
           this.$store.state.partnerRightList=this.checkedProfits;
           console.log(this.$store.state.partnerRightList)
         }
+        },
+        mounted(){
+           this.$store.state.partnerRightList=this.checkedProfits;
         }
 
         

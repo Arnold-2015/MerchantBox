@@ -159,7 +159,7 @@
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
-                                         <router-link to="confirming">管理中心</router-link>
+                                         <router-link :to="{ path: 'confirming', query: { projectId:item.projectId }}">管理中心</router-link>
                                          <a href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                                      </div>
 
@@ -200,7 +200,7 @@
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
-                                         <router-link to="recruiting">管理中心</router-link>
+                                         <router-link :to="{ path: 'recruiting', query: { projectId:item.projectId }}">管理中心</router-link>
                                          <a href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                                      </div>
 
@@ -299,7 +299,7 @@
              </div>
          </div>
          <!-- <sb></sb> -->
-         <qr v-if="this.$store.state.showQr" :projectid='projectId' :qrCode='qrCode'></qr>
+         <qr v-if="this.$store.state.showQr" :projectid='projectId' :qrcode='qrCode'></qr>
     </section>
 </template>
 <script>

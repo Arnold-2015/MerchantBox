@@ -12,6 +12,7 @@
                      </ul>
                      <a ></a>
                  </div>
+                 
                  <div class="info-item" style="height:180px">
                    <span style="display:block">项目头图</span>
                    <img  :src='backgroundImg'>
@@ -31,6 +32,7 @@
 一家不高冷的葡萄酒体验馆，邀您当合伙人"  cols="30" rows="10" v-model='option.projectDesc'></textarea>
                  </div>
                  <a  class="next-step" @click='firstStep'>下一步</a>
+                 
              </div>
          </div>
     </section>
@@ -81,13 +83,17 @@ import Vue from 'Vue'
             let options=this.option;
             this.$http.post(this.apiurl+'/project/first',options)
                 .then((response) => {
+                  if(response.data.statusCode==200){
                    this.projectId=response.data.result.projectId;
                    this.$store.state.projectId=this.projectId;
                    console.log(this.projectId);
                    this.$router.push({
                     name: 'creprosecond'
                 });
-                })
+                }else{
+                  alert('创建失败，请重试')
+                }
+              })
                 .catch(function(response) {
                     console.log(response)
                 })

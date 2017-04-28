@@ -11,7 +11,7 @@
               <p>项目信息</p>
                <span>项目来源&nbsp&nbsp&nbsp&nbsp{{verifyInfo.source }}</span>
                <span>项目名称&nbsp&nbsp&nbsp&nbsp{{verifyInfo.projectName}}</span>
-               <span>项目详情&nbsp&nbsp&nbsp&nbsp<a href="">线上预览</a></span>
+               <span>项目详情&nbsp&nbsp&nbsp&nbsp<a :href='previewurl' target='_blank'>线上预览</a></span>
                </div>
                 <img :src="verifyInfo.qrCodeUrl" >
               <div class=" profit-info">
@@ -57,7 +57,8 @@
                 verifyInfo:null,
                 payRate:null,
                 frozenRate:null,
-                merchantId:null
+                merchantId:null,
+                previewurl:'http://www.6dbox.cn/6dtest/page/projectDetail.html?projectId='+this.projectid
             }
         },
         methods:{
@@ -73,10 +74,12 @@
             }
             this.$http.put(this.apiurl+'/project/'+this.projectid+'/status',options)
                 .then((response) => {
-                  
+                  if(response.data.statusCode==200){
                     this.$store.state.showreviewmerchant = false;
                     window.location.reload()
-                 
+                 }else{
+                  alert('审核失败，请重试')
+                 }
                    
                 })
                 .catch(function(response) {

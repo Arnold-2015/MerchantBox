@@ -91,7 +91,11 @@
             }
             this.$http.post(this.apiurl+'/dividend/add',options)
                 .then((response) => {
-                   
+                   if(response.data.statusCode==200){
+                    window.location.reload()
+                   }else{
+                    alert('分红失败，请重试')
+                   }
                 })
                 .catch(function(response) {
                     console.log(response)

@@ -15,7 +15,7 @@
                 </tr>               
     </table>
     <paging @getpage='getpage' :allpage='pages'></paging>
-<div>
+</div>
 </template>
 <script>
     import paging from '../components/paging.vue'

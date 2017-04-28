@@ -36,12 +36,12 @@
         filters: {
             
         },
-        props: ['apiurl'],
+        props: ['apiurl','projectid'],
         data() {
             return {
                 apiurl:this.apiurl,
                 active:[false,true],
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
+                projectId:this.projectid,
                 realNameOrPhone :'',
                 prepartnerList:{},
                 pages:null

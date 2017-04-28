@@ -36,7 +36,7 @@
                                          <span class="key-word">项目开始时间</span>
                                      </li>
                                      <div>
-                                         <a @click='showQrChange'>预览</a>
+                                         <a href='javascript:;' @click='showQrChange(projectInfo.qrCode)'>预览</a>
                                      </div>
 
                              </div>
@@ -58,7 +58,7 @@
              </div>
          </div>
          <!-- <sb></sb> -->
-         <qr v-if="this.$store.state.showQr"></qr>
+         <qr v-if="this.$store.state.showQr" :projectid='projectId' :qrcode='qrCode'></qr>
          <confirmbar v-if="this.$store.state.showConfirm" :apiurl='apiurl'></confirmbar>
     </section>
 </template>
@@ -78,8 +78,9 @@
         data() {
             return {
                 isActive:true,
+                qrCode:null,
                 apiurl:this.api,
-                projectId:'81013538870fdfe011b06c211e601aec',
+                projectId:this.$route.query.projectId,
                 projectInfo:{}
             }
         },
@@ -90,7 +91,8 @@
           setActiveFalse(){
             this.isActive=false
           },
-          showQrChange(){
+          showQrChange(qrCode){
+            this.qrCode=qrCode;
             this.$store.state.showQr = true;
           },
           showConfirmChange(){

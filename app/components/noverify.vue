@@ -46,9 +46,12 @@
             }
             this.$http.put(this.apiurl+'/project/'+this.projectid+'/status',options)
                 .then((response) => {
-                   
+                   if(response.data.statusCode==200){
                     this.$store.state.shownoverify = false;
-                    // window.location.reload()
+                    window.location.reload()
+                    }else{
+                      alert('操作失败，请稍后重试')
+                    }
                  
                    
                 })

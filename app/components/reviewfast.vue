@@ -77,10 +77,12 @@
             options.status =4;
             this.$http.put(this.apiurl+'/project/'+this.projectid+'/status',options)
                 .then((response) => {
-                 
+                 if(response.data.statusCode==200){
                     this.$store.state.showreviewmerchant = false;
                     window.location.reload()
-                  
+                  }else{
+                    alert('审核失败，请重试')
+                  }
                    
                 })
                 .catch(function(response) {

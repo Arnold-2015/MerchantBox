@@ -5,8 +5,8 @@
       <img :src="avarta" class="user-avarta">
       <span class="setting-icon" @click='changeWillShow'></span>
       <div class="setting-bar" v-if='willShow'>
-        <a href="">账号设置</a>
-        <a href="">退出账号</a>
+        <router-link to='setting' @click.native='changeWillShow'>账号设置</router-link>
+        <router-link to='login' @click.native='changeWillShow'>退出账号</router-link>
       </div>
     </div>
 </template>

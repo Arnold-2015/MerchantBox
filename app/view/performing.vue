@@ -38,7 +38,7 @@
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <div>
-                                         <a @click='showQrChange'>预览</a>
+                                         <a href='javascript:;' @click='showQrChange(projectInfo.qrCode)'>预览</a>
                                      </div>
 
                              </div>
@@ -66,7 +66,7 @@
              </div>
          </div>
          <!-- <sb></sb> -->
-         <qr v-if="this.$store.state.showQr"  :previewurl='projectInfo.projectPreviewUrl' :qrcode='qrCode'></qr>
+         <qr v-if="this.$store.state.showQr"  :projectid='projectId' :qrcode='qrCode'></qr>
          <consumebar v-if="this.$store.state.showConsume" :apiurl='apiurl' :projectid='projectId'></consumebar>
          <profitbar v-if="this.$store.state.showProfit" :apiurl='apiurl' :projectid='projectId'></profitbar>
          <issuebar v-if="this.$store.state.showIssue" :apiurl='apiurl' :projectid='projectId'></issuebar>
@@ -110,8 +110,9 @@
           showConsumeChange(){
             this.$store.state.showConsume = true;
           },
-          showProfitChange(){
-            this.$store.state.showProfit = true;
+          showQrChange(qrCode){
+            this.qrCode=qrCode;
+            this.$store.state.showQr = true;
           },
           showIssueChange(){
             this.$store.state.showIssue = true;

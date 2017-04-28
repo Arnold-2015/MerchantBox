@@ -74,7 +74,11 @@
 
             this.$http.delete(this.apiurl+'/partner/orderId/'+orderId)
                 .then((response) => {
-                  // window.location.reload()
+                  if(response.data.statusCode==200){
+                  window.location.reload()
+                }else{
+                  alert('剔除失败，请稍后重试')
+                }
                 })
                 .catch(function(response) {
                     console.log(response)

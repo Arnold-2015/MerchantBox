@@ -12,6 +12,7 @@
                      </ul>
                      <a ></a>
                  </div>
+                 <div style="width:1000px;margin:0 auto;">
                  <span class="title">基本信息</span>
                  <div class="info-bar container">
                    <div class="info-item">
@@ -125,7 +126,7 @@
                    </div>
                    <div class="info-item">
                    <span>特权卡权益</span><span class="remind">点亮选择你的特权卡权益</span>
-                   <profitpanel :partnerRightVo='option.partnerRightVo'></profitpanel>   
+                   <profitpanel :partnerrightlist='option.partnerRightVo.partnerRightList'></profitpanel>   
                    </div>
                    <div class="info-item ">
                    <span>合伙人特权说明 </span>
@@ -137,6 +138,7 @@
                  </div>
                  <router-link to="creprosecond" class="prev-step">上一步</router-link>
                  <a  class="next-step" @click='thirdStep'>下一步</a>
+                 </div>
              </div>
          </div>
     </section>
@@ -168,7 +170,9 @@
                   consumeRightVo:{
                     consumeType:1
                   },
-                  partnerRightVo:{}
+                  partnerRightVo:{
+                    partnerRightList:[]
+                  }
                 }
             }
         },
@@ -208,10 +212,14 @@
             options.investmentPeriod=this.periodfilter(this.period);
             this.$http.post(this.apiurl+'/project/third',options)
                 .then((response) => {
+                  if(response.data.statusCode==200){
                    this.$router.push({
                     name: 'creproforth'
                 });
-                })
+                }else{
+                  alert('失败，请完善信息')
+                }
+              })
                 .catch(function(response) {
                     console.log(response)
                 })
@@ -226,8 +234,10 @@
               this.$http.get(this.apiurl+'/project/'+projectId+'/properties')
                 .then((response) => {
                   var data=response.data.result;
-                  this.privilegeLogo="http://pic.6dbox.cn/"+data.privilegeLogo;
-                  this.privilegeBg="http://pic.6dbox.cn/"+data.privilegeBg;
+                  
+                  if(data.totalMoney!=0){
+                   this.privilegeLogo="http://pic.6dbox.cn/"+data.privilegeLogo;
+                   this.privilegeBg="http://pic.6dbox.cn/"+data.privilegeBg;
                    this.option={
                       projectId:this.$store.state.projectId,
                       projectType:data.projectType,
@@ -247,6 +257,7 @@
                       partnerRightVo:data.partnerRightVo
                     }
                    console.log(this.option)
+                 }
                 })
                 .catch(function(response) {
                     console.log(response)

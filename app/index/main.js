@@ -47,6 +47,11 @@ Vue.http.interceptors.push((request, next) => {
   console.log(request.headers)
   next(response => {
   	app.showLoading=false;
-    // return response
+    if(response.data.errorCode==null) {return response}
+    	else if(response.data.errorCode.code==3000){
+    		alert('登录信息已过期，请重新登录');
+    		window.location.href='http://test.6dbox.cn'
+    	}
+
   })
 })

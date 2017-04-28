@@ -8,7 +8,7 @@
             <span class="lab">账号</span>
             <input type="text" name="tel" v-model='userName'>
             <span class="lab">密码</span>
-            <input type="text" name="pw" v-model='password'>
+            <input type="password" name="pw" v-model='password'>
             <a class="forget">忘记密码？</a>
             <div class="login" @click='login'>登录</div>
             <a class="nocount">没有账号?</a>

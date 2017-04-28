@@ -159,7 +159,7 @@
                    this.$store.state.showConsume = false;
                    window.location.reload()
                   }else{
-                    alert('核销失败，请重试')
+                    alert('核销失败，请稍后重试')
                   }
                 })
                 .catch(function(response) {

@@ -31,7 +31,7 @@
                     <td class="crowtwo">{{item.idNo}}</td>
                     <td class="crowone">{{item.participateProjectNum}}</td>
                     <td class="crowone">{{item.investmentMoney}}</td>
-                    <td class="crowone">{{item.creationTime}}</td>
+                    <td class="crowone">{{item.creationTime | fmtDate}}</td>
                     <td class="crowone">{{item.authStatus | authStatus}}</td>
                     <td class="crowtwo"><router-link :to="{ path: 'customerdetail', query: { customerId:item.customerId }}">查看</router-link></td>
                 </tr>
@@ -46,11 +46,15 @@
 <script>
     import qr from '../components/qrbar.vue'
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     require('../assets/list.scss')
     export default {
         filters: {
-            authStatus:function(value){
+            authStatus(value){
                 return value==1?'认证用户':'普通用户'
+            },
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd')
             }
         },
         props: ['api'],
@@ -139,7 +143,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -199,7 +203,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

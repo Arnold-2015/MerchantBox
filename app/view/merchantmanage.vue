@@ -5,7 +5,7 @@
                  <span class="main-title">主页 / 商家管理</span>
                  <div class="main-nav">
                      <span>商家管理</span>
-                     <a href="javascript:;" @click='showCreMerchantChange' class="creat-new"><span></span>新建商家</a>
+                     <a href="javascript:;" @click='showCreMerchantChange' class="creat-new btn-yes"><span></span>新建商家</a>
                  </div>
                  <div class="search-bar">
                  <input  style="left:40px" type="text" placeholder="输入姓名/卡号/手机号" v-model="nickNameOrUserPhone">
@@ -155,7 +155,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -199,6 +199,12 @@ $base-color:#C49F59;
                         background:url('../assets/btn_creat.png')no-repeat left  center;
                      }
                 }
+                .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
             }
  
             }
@@ -215,7 +221,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

@@ -22,7 +22,7 @@
                     <td class="crowtwo">{{item.partnerVipCardNo}}</td>
                     <td class="crowone">{{item.consumeType}}</td>
                     <td class="crowone">{{item.consumeMoney}}</td>
-                    <td class="crowtwo">{{item.consumeTime}}</td>
+                    <td class="crowtwo">{{item.consumeTime |fmtDate}}</td>
                 </tr>
                 
     </table>
@@ -32,9 +32,13 @@
 <script>
     // require('../assets/list.scss')
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
+
     export default {
         filters: {
-            
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
+            }
         },
         props: ['apiurl','projectid'],
         data() {

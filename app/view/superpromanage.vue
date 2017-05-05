@@ -29,9 +29,9 @@
                     <td class="crowtwo">{{item.projectName}}</td>
                     <td class="crowone">{{item.merchantName }}</td>
                     <td class="crowone">{{item.merchantPhone }}</td>
-                    <td class="crowone">{{item.creationTime }}</td>
+                    <td class="crowone">{{item.creationTime | fmtDate}}</td>
                     <td class="crowone">{{item.source}}</td>
-                    <td class="crowone">{{item.projectStatus }}</td>
+                    <td class="crowone">{{item.projectStatus | getStatus}}</td>
                     <td class="crowtwo">
                     <a v-if='item.projectStatus!=1&&item.projectStatus!=2' href="javascript:;"  @click='showQrChange(item.projectId,item.qrCode)'>预览</a>
                     <a v-if='(item.projectStatus==1||item.projectStatus==2)&&item.source!=1' href="javascript:;" @click='showreviewmerchantChange(item.projectId)'>审核</a>
@@ -62,10 +62,16 @@
     import reviewfast from '../components/reviewfast.vue'
     import noverify from '../components/noverify.vue'
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     require('../assets/list.scss')
     export default {
         filters: {
-            
+            getStatus(status){
+                return utils.getProStatus(status)
+            },
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd')
+            }
         },
         props: ['api'],
         data() {
@@ -176,7 +182,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -220,6 +226,12 @@ $base-color:#C49F59;
                         background:url('../assets/btn_creat.png')no-repeat left  center;
                      }
                 }
+                .creat-new:hover{
+                    background:#BA9246;
+                }
+                .creat-new:active{
+                    background:#020204;
+                }
             }
  
             }
@@ -236,7 +248,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

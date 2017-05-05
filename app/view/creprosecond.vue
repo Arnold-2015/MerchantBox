@@ -18,8 +18,8 @@
                   <quill-editor :options="editorOption" v-model='option.detail'>
                   </quill-editor>
                  </div>
-                 <router-link to="creprofirst" class="prev-step">上一步</router-link>
-                 <a  class="next-step" @click='secondStep'>下一步</a>
+                 <router-link to="creprofirst" class="prev-step btn-no">上一步</router-link>
+                 <a  class="next-step btn-yes" @click='secondStep'>下一步</a>
              </div>
          </div>
     </section>
@@ -60,6 +60,7 @@
                        displaySize: true
                      }
                    }
+
                  },
                 option:{
                   projectId:this.$store.state.projectId,
@@ -69,22 +70,27 @@
         },
         methods:{
           secondStep(){
+            if(this.option.detail){
             let options=this.option;
             this.$http.post(this.apiurl+'/project/second',options)
                 .then((response) => {
                   if(response.data.statusCode==200){
                   console.log(this.option.detail)
+                  this.$alert(true,'操作成功')
                   this.$router.push({
                     name: 'creprothird'
                 });
                 }else{
-                  alert('创建失败，请重试')
+                  this.$alert(false,'系统错误，请稍后重试')
                 }
               })
                 .catch(function(response) {
                     console.log(response)
                 })
-          }
+          }else{
+          this.$alert(false,'请填写项目详情')
+        }
+        }
         },
         beforeMount(){    
             localStorage.setItem('menuTag', 1)  
@@ -115,7 +121,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           background: #fff;
           .main{
             height:100%;
@@ -208,7 +214,19 @@ $base-color:#C49F59;
               margin:80px 30px 16px 30px;
             }
             
-
+             .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
+            }
           } 
   }
 
@@ -217,7 +235,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

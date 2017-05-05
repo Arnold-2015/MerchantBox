@@ -3,8 +3,8 @@
       <span class="nav-icon"></span>
       <span class="nav-title">六度盒子商家版</span>
       <img :src="avarta" class="user-avarta">
-      <span class="setting-icon" @click='changeWillShow'></span>
-      <div class="setting-bar" v-if='willShow'>
+      <span class="setting-icon" @mouseover='changeWillShow(true)' ></span>
+      <div class="setting-bar" v-if='willShow'  @mouseleave='changeWillShow(false)'>
         <router-link to='setting' @click.native='changeWillShow'>账号设置</router-link>
         <router-link to='login' @click.native='changeWillShow'>退出账号</router-link>
       </div>
@@ -26,32 +26,27 @@ Vue.http.interceptors.push((request, next) => {
   })
 })
     export default {
-      props: ['api'],
+      props: ['api','avarta'],
         data() {
             return {
                 willShow:false,
-                avarta:null,
                 apiurl:this.api
             }
         },
         methods:{
-          changeWillShow(){
-            if(this.willShow==true){
-              this.willShow=false;
-            }else{
-              this.willShow=true;
-            }
+          changeWillShow(i){
+              this.willShow=i;
           }
           
         },
         beforeMount() {
-            this.$http.get(this.apiurl+'/merchant')
-                .then((response) => {
-                   this.avarta = response.data.result.headImgUrl ;
-                })
-                .catch(function(response) {
-                    console.log(response)
-                })
+            // this.$http.get(this.apiurl+'/merchant')
+            //     .then((response) => {
+            //        this.avarta = response.data.result.headImgUrl ;
+            //     })
+            //     .catch(function(response) {
+            //         console.log(response)
+            //     })
         }
     }
 </script>
@@ -61,7 +56,9 @@ $base-color:#C49F59;
     background:#020204;
     width:100%;
     height:120px;
-    position: relative;
+    position: fixed;
+    left:0;
+    top:0;
     z-index:10;
     .nav-icon{
               width:40px;
@@ -96,14 +93,14 @@ $base-color:#C49F59;
               position: absolute;
               right:50px;
               top:50px;
-              background:url('../assets/setting.png') no-repeat;
+              background:url('../assets/setting.png') no-repeat center top 0;
               background-size:20px 20px;
     }
     .setting-bar{
               width:150px;
               height:120px;
               border-radius:2px;
-              background:#000;
+              background:#fff;
               position: absolute;
               right:45px;
               top:105px;
@@ -113,7 +110,7 @@ $base-color:#C49F59;
                 display:block;
                 font-size:14px;
                 margin:30px auto;
-                color:#fff;
+                color:$base-color;
 
               }
     }

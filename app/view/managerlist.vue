@@ -67,7 +67,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;

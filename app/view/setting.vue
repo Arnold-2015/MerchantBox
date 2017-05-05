@@ -83,14 +83,14 @@
 $base-color:#C49F59;
    section{
            width:100%;
-           height:1%;
+           /*height:100%;*/
    }
   .content{
           width:100%;
-          height:10000%;
+          height:100%;
           float:left;
-          margin-top:-120px;
-          // margin-bottom:-120px;
+          margin-top:120px;
+          /*margin-bottom:-120px;*/
           background:#fff;
           .main{
             height:100%;
@@ -100,7 +100,7 @@ $base-color:#C49F59;
                 width:100%;
                 height:60px;
                 line-height:60px;
-                // padding-left:40px;
+                padding-left:40px;
                 color:#999;
                 font-size:12px;
                 background:#f6f6f6;
@@ -171,7 +171,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;
@@ -180,7 +180,7 @@ $base-color:#C49F59;
                 width:100%;
                 height:40px;
                 line-height:40px;
-                // padding-left:24px;
+                padding-left:24px;
                 color:#999;
                 font-size:12px;
             }

@@ -30,7 +30,7 @@
                 </div>
                 <p>验证码<input type="text" class="data" v-model='verificationCode'><a href="javascript:;" class="getcode" id="getcode" @click='getcode'>获取验证码</a></p>
             </div>
-            <div class="consume-over" @click='goconsume'>确认消费</div>
+            <div class="consume-over btn-yes" @click='goconsume'>确认消费</div>
     	</div>
     </div>
 </template>
@@ -157,9 +157,9 @@
                 .then((response) => {
                   if(response.data.statusCode==200){
                    this.$store.state.showConsume = false;
-                   window.location.reload()
+                   this.$alert(true,'核销成功');
                   }else{
-                    alert('核销失败，请稍后重试')
+                    this.$alert(false,'核销失败，请稍后重试');
                   }
                 })
                 .catch(function(response) {
@@ -389,6 +389,12 @@
                 margin: 20px auto;
                 background: $base-color;
                 border-radius: 2px;
+            }
+              .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
             }
 
     	}

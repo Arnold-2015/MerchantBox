@@ -13,16 +13,19 @@
                 <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='option.thirdPartyCode '></p>
                 <p><span>项目联系人姓名</span><input type="text" class="data" v-model='option.linkManName '></p>
                 <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='option.linkManPhone'></p>
-                <!-- <p><span>账号状态</span>
-                <label :class="{ radioActive:option.status==1,radioNomal:option.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.status">正常</label>
-                <label :class="{ radioActive:option.status==2,radioNomal:option.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.status">冻结</label></p> -->
+                <!-- <p><span>商家角色</span>
+                <label :class="{ radioActive:option.role==1,radioNomal:option.role!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.role">正常</label>
+                <label :class="{ radioActive:option.role==2,radioNomal:option.role!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.role">冻结</label>
+                <label :class="{ radioActive:option.role==3,radioNomal:option.role!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.role">狗屎</label>
+                <label :class="{ radioActive:option.role==4,radioNomal:option.role!=4 }"><input type="radio" name="project-kind" value="4" v-model="option.role">狗屎</label>
+                </p> -->
                
                 
      
               
             </div>
-            <div @click='showCreMerchantChange' class="consume-cancel">取消</div>
-            <div @click='addMerchant' class="consume-over" @click='addMerchant'>确认</div>
+            <div @click='showCreMerchantChange' class="consume-cancel btn-no">取消</div>
+            <div @click='addMerchant' class="consume-over btn-yes" @click='addMerchant'>确认</div>
     	</div>
     </div>
 </template>
@@ -32,7 +35,9 @@
         props: ['apiurl'],
         data() {
             return {
-                option:{}
+                option:{
+                  role:1
+                }
             }
         },
         methods:{
@@ -45,9 +50,12 @@
                 .then((response) => {
                     if(response.data.statusCode==200){
                    this.$store.state.showCreMerchant = false;
-                   window.location.reload()
+                   this.$alert(true,'创建商家成功');
+                   timer = setTimeout(() => {
+                      window.location.reload()
+                    }, 1000);
                }else{
-                alert('创建商家失败，请重试')
+                this.$alert(false,'创建失败，请重试')
                }
                 })
                 .catch(function(response) {
@@ -71,7 +79,7 @@
     	z-index: 100;
     	.consume-bar{
     		width: 680px;
-    		height: 560px;
+    		height: 600px;
     		background: #fff;
         border-radius: 4px;
     		margin: 8% auto;
@@ -122,7 +130,28 @@
                  }
                  
                 }
-                
+                label{
+                  height: 36px;
+                  line-height: 36px;
+                  color:#666;
+                  margin-right: 6px;
+                  input{
+                       width: 16px;
+                       height: 36px;
+                       position: relative;
+                       filter: alpha(opacity=0);
+                       opacity: 0;
+                  }
+                 
+                }
+                 .radioNomal{
+                       background: url('../assets/radio-nomal.png')no-repeat left center ;
+                       background-size: 16px 16px;
+                 }
+                 .radioActive{
+                       background: url('../assets/radio-active.png')no-repeat left center;
+                       background-size: 16px 16px;
+                  }
                  
                   
             }
@@ -153,6 +182,19 @@
                 background: $base-color;
                 border-radius: 2px;
             }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
+            }
 
     	}
     }
@@ -160,7 +202,7 @@
  @media (min-width: 768px) and (max-width: 1368px) {
    .consume{
       .consume-bar{
-        height: 440px;    
+        height: 500px;    
             .container{
                 top: 20px;
                 

@@ -9,10 +9,10 @@
                 <p><span>商家身份证号</span><input type="text" class="data" v-model='merchantinfo.idNo'></p>
                 <p><span>手机号码（账号)</span><input type="text" class="data" v-model='merchantinfo.userPhone'></p>
                 <p><span>账号密码</span><input type="password" class="data" v-model='merchantinfo.password'></p>
-                <!-- <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='merchantinfo.thirdPartyName'></p>
+                <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='merchantinfo.thirdPartyName'></p>
                 <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='merchantinfo.thirdPartyCode'></p>
                 <p><span>项目联系人姓名</span><input type="text" class="data" v-model='merchantinfo.linkManName'></p>
-                <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='merchantinfo.linkManPhone'></p> -->
+                <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='merchantinfo.linkManPhone'></p>
                  <p><span>账号状态</span>
                 <label :class="{ radioActive:merchantinfo.status==1,radioNomal:merchantinfo.status!=1 }"><input type="radio" name="project-kind" value="1" v-model="merchantinfo.status">正常</label>
                 <label :class="{ radioActive:merchantinfo.status==2,radioNomal:merchantinfo.status!=2 }"><input type="radio" name="project-kind" value="2" v-model="merchantinfo.status">冻结</label></p>
@@ -20,8 +20,8 @@
      
               
             </div>
-            <div @click='showRevMerchantChange' class="consume-cancel">取消</div>
-            <div @click='revMerchant' class="consume-over" >确认</div>
+            <div @click='showRevMerchantChange' class="consume-cancel btn-no">取消</div>
+            <div @click='revMerchant' class="consume-over btn-yes" >确认</div>
     	</div>
     </div>
 </template>
@@ -44,9 +44,12 @@
                 .then((response) => {
                   if(response.data.statusCode==200){
                    this.$store.state.showRevMerchant = false;
-                   window.location.reload()
+                   this.$alert(true,'修改商家成功');
+                   timer = setTimeout(() => {
+                      window.location.reload()
+                    }, 1000);
                  }else{
-                  alert('操作失败，请重试')
+                  this.$alert(false,'修改失败，请重试')
                  }
                 })
                 .catch(function(response) {
@@ -70,7 +73,7 @@
       z-index: 100;
       .consume-bar{
         width: 680px;
-        height: 540px;
+        height: 600px;
         background: #fff;
         border-radius: 4px;
         margin: 8% auto;
@@ -94,12 +97,12 @@
                 p{
                  font-size: 20px;
                  color: #333333;
-                 height: 50px;
-                 line-height: 50px;
+                 height: 28px;
+                 line-height: 28px;
                  margin-top: 20px;
                  .data{
                     width: 200px;
-                    height: 50px;
+                    height: 30px;
                     background: #F6F6F6;
                     border: 1px solid #D7D7D7;
                     color:#666;
@@ -173,16 +176,27 @@
                 background: $base-color;
                 border-radius: 2px;
             }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
+            }
 
       }
     }
 
-
-
  @media (min-width: 768px) and (max-width: 1368px) {
    .consume{
       .consume-bar{
-        height: 360px;    
+        height: 500px;    
             .container{
                 top: 20px;
                 
@@ -200,11 +214,8 @@
                  height: 20px;
                  line-height: 20px;
                  margin-top: 20px;        
-                 .data{
-                    height: 30px;      
-                 }  
-                }  
-                            
+                 
+                }               
             }
             .consume-cancel{
                 height: 32px;
@@ -217,6 +228,5 @@
 
       }
     }
-} 
-   
+}  
 </style>

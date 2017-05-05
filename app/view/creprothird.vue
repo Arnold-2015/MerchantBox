@@ -24,28 +24,46 @@
                    <span>甲方(项目发起人)：</span><input class="base-info" type="text" placeholder="请填写甲方名称">
                    </div> -->
                    <div class="info-item" v-if="option.projectType==1">
-                   <span>项目估值(元)：</span><input class="base-info" type="text" placeholder="请填写项目估值" v-model='option.projectValuation'>
+                   <span>项目估值(元)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请填写项目估值" v-model='option.projectValuation'> -->
+                   <input v-validate:projectValuation="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('projectValuation') }" name="projectValuation" type="text" placeholder="请填写项目估值" v-model='option.projectValuation'>
+
                    </div>
                    <!-- <div class="info-item" v-else="basePicked==2">
                    <span>丙方(合作方)：</span><input class="base-info" type="text" placeholder="请填写丙方名称">
                    </div> -->
                    <div class="info-item">
-                   <span>目标众筹金额(元)：</span><input class="base-info" type="text" placeholder="请填写目标众筹金额 " v-model='option.totalMoney'><span v-if="option.projectType==1">出让占公司股份： 20%</span>
+                   <span>目标众筹金额(元)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请填写目标众筹金额 "  v-model='totalMoney'> -->
+                   <input v-validate:totalMoney="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('totalMoney') }" name="totalMoney" type="text" placeholder="请填写目标众筹金额" v-model='totalMoney'>
+                   <!-- <span v-if="option.projectType==1">出让占公司股份：{{}} %</span> -->
                    <!-- <input v-if="basePicked==1" class="base-info" type="text" placeholder="20% "> -->
                    </div>
                    <div class="info-item">
-                   <span>认购份数(份)：</span><input class="base-info" type="text" placeholder="请填写认购分数 " v-model='option.saleCount'><span>超募份数(份)：</span>
-                   <input class="base-info" type="text" placeholder="14 " v-model='option.saleCount'>
+                   <span>认购份数(份)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请填写认购份数 " v-model='saleCount'> -->
+                   <input v-validate:saleCount="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('saleCount') }" name="saleCount" type="text" placeholder="请填写认购份数" v-model='saleCount'>
+                   <span>超募份数(份)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请填写超募份数" v-model='option.extraSaleCount'> -->
+                   <input v-validate:extraSaleCount="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('extraSaleCount') }" name="extraSaleCount" type="text" placeholder="请填写超募份数" v-model='option.extraSaleCount'>
                    </div>
                    <div class="info-item">
-                   <span>单份金额(元)：</span><input class="base-info" type="text" placeholder="请输入单份金额" v-model='option.unitPrice'><span>每份占股：</span>
+                   <span>单份金额(元)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请输入单份金额" v-model='option.unitPrice'> -->
+                    <input v-validate:unitPrice="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('unitPrice') }" name="unitPrice" type="text" placeholder="请输入单份金额" v-model='option.unitPrice'>
+                   <!-- <span>每份占股：</span> -->
                    <!-- <input class="base-info" type="text" placeholder="2% "> -->
                    </div>
                    <div class="info-item">
-                   <span>每人限购份数(份)：</span><input class="base-info" type="text" placeholder="请输入每人限购份数" v-model='option.copiesLimit'>
+                   <span>每人限购份数(份)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请输入每人限购份数" v-model='option.copiesLimit'> -->
+                    <input v-validate:copiesLimit="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('copiesLimit') }" name="copiesLimit" type="text" placeholder="请输入每人限购份数" v-model='option.copiesLimit'>
                    </div>
                    <div class="info-item">
-                   <span>融资周期(天)：</span><input class="base-info" type="text" placeholder="30" v-model='option.validityPeriod'><span>以项目上线时间为起始时间</span>
+                   <span>融资周期(天)：</span>
+                   <!-- <input class="base-info" type="text" placeholder="请输入融资周期" v-model='option.validityPeriod'> -->
+                   <input v-validate:validityPeriod="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('validityPeriod') }" name="validityPeriod" type="text" placeholder="请输入融资周期" v-model='option.validityPeriod'>
+                   <span>以项目上线时间为起始时间</span>
                    </div>
                    <div class="info-item">
                    <span>投资周期：</span>
@@ -69,21 +87,34 @@
                    <span>销售额阶梯设置</span>
                    </div>
                    <div class="info-item">
-                   <div class="info-wrap"><span>月销售额未达到：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesNoReach'></div><span>月销售额回报：</span>
-                   <input class="return-info" type="text"  v-model='option.salesProjectVo.returnSales'>%
+                   <div class="info-wrap">
+                   <span>销售额未达到：</span>
+                   <!-- <input class="return-info" type="text"  v-model='option.salesProjectVo.salesNoReach'> -->
+                   <input v-validate:salesNoReach="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('salesNoReach') }" name="salesNoReach" type="text"  v-model='option.salesProjectVo.salesNoReach'>
+                   </div><span>销售额回报：</span>
+                   <!-- <input class="return-info" type="text"  v-model='option.salesProjectVo.returnSales'>% -->
+                   <input v-validate:returnSales="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('returnSales') }" name="returnSales" type="text"  v-model='option.salesProjectVo.returnSales'>%
                    </div>
                    <div class="info-item" v-for='(item,index) in option.salesProjectVo.salesReachInfos'>
-                   <div class="info-wrap"><span>月销售额达到(含)：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].reachMoney'></div>
-                   <span>月销售额回报：</span><input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].returnRate'>%    
+                   <div class="info-wrap"><span>销售额达到(含)：</span>
+                   <!-- <input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].reachMoney'> -->
+                   <input v-validate:reachMoney="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('reachMoney') }" name="reachMoney" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].reachMoney'>
+                   </div>
+                   <span>销售额回报：</span>
+                   <!-- <input class="return-info" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].returnRate'>%   -->
+                   <input v-validate:returnRate="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('returnRate') }" name="returnRate" type="text"  v-model='option.salesProjectVo.salesReachInfos[index].returnRate'>%  
                    </div>
 
                    <div class="info-item add-border"><a href='javascript:;' class="add" @click='add'>增加一列</a>  <a href='javascript:;' class="reduce" @click='reduce'>删除一列</a></div>
                    <div class="info-item add-border">
-                   <span>回报说明 </span><textarea cols="30" rows="10" placeholder="填写店铺目前营业状态；预计月销售额；折合年化利率" v-model='option.salesProjectVo.returnExplain'></textarea>
+                   <span>回报说明 </span>
+                   <!-- <textarea cols="30" rows="10" placeholder="填写店铺目前营业状态；预计月销售额；折合年化利率" v-model='option.salesProjectVo.returnExplain'></textarea> -->
+                    <textarea v-validate:returnExplain="'required'" :class="{'input': true, 'is-danger': errors.has('returnExplain') }" name="returnExplain" type="text" placeholder="填写店铺目前营业状态；预计月销售额；折合年化利率" v-model='option.salesProjectVo.returnExplain' ></textarea>
                    </div>
                    <div class="info-item ">
                    <span>退出机制 </span>
-                   <textarea cols="30" rows="10" placeholder="例：消费可随时退出、6月后可协商退出、12月后强制退出。退出比例根据净利润/销售额确定" v-model='option.salesProjectVo.exitExplain'></textarea>
+                   <!-- <textarea cols="30" rows="10" placeholder="例：消费可随时退出、6月后可协商退出、12月后强制退出。退出比例根据净利润/销售额确定" v-model='option.salesProjectVo.exitExplain'></textarea> -->
+                   <textarea v-validate:exitExplain="'required'" :class="{'input': true, 'is-danger': errors.has('exitExplain') }" name="exitExplain" type="text"  placeholder="例：消费可随时退出、6月后可协商退出、12月后强制退出。退出比例根据净利润/销售额确定" v-model='option.salesProjectVo.exitExplain'></textarea>
                    </div>
                  </div>
                  <span class="title">特权设置</span>
@@ -95,28 +126,36 @@
                    <label :class="{ radioActive:option.consumeRightVo.consumeType==3,radioNomal:option.consumeRightVo.consumeType!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.consumeRightVo.consumeType">收益消费</label>
                    </div>
                    <div class="info-item">
-                   <span>本金消费折扣：</span><input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.principalConsumeDiscount'>
-                   <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.principalConsumeMemo'>
+                   <span>本金消费折扣：</span>
+                   <!-- <input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.principalConsumeDiscount'> -->
+                   <input v-validate:principalConsumeDiscount="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('principalConsumeDiscount') }" name="principalConsumeDiscount" type="text" placeholder="1-10" v-model='option.consumeRightVo.principalConsumeDiscount'>
+                   <!-- <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.principalConsumeMemo'> -->
+                   <input v-validate:principalConsumeMemo="'required'" class="profit-info" :class="{'input': true, 'is-danger': errors.has('principalConsumeMemo') }"placeholder="补充说明"  name="principalConsumeMemo" type="text"  v-model='option.consumeRightVo.principalConsumeMemo'>
                    </div>
                    <div class="info-item add-border">
-                   <span>收益消费折扣：</span><input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.earningsDiscount '>
-                   <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.earningsMemo'>
+                   <span>收益消费折扣：</span>
+                   <!-- <input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.earningsDiscount '> -->
+                   <input v-validate:earningsDiscount="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('earningsDiscount') }" name="earningsDiscount" type="text" placeholder="1-10" v-model='option.consumeRightVo.earningsDiscount '>
+                   <!-- <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.earningsMemo'> -->
+                   <input v-validate:privilegeCardName="'required'" class="profit-info" :class="{'input': true, 'is-danger': errors.has('privilegeCardName') }" placeholder="补充说明" name="privilegeCardName" type="text"  v-model='option.consumeRightVo.earningsMemo'>
                    </div>
                    <div class="info-item">
-                   <span>特权卡名称：</span><input class="base-info" type="text" placeholder="建议店铺名" v-model='option.privilegeCardName'>
+                   <span>特权卡名称：</span>
+                   <!-- <input class="base-info" type="text" placeholder="建议店铺名" v-model='option.privilegeCardName'> -->
+                   <input v-validate:privilegeCardName="'required'" class="base-info" :class="{'input': true, 'is-danger': errors.has('privilegeCardName') }" placeholder="建议店铺名" name="privilegeCardName" type="text"  v-model='option.privilegeCardName'>
                    </div>
                    <div class="info-item add-border" style="height:300px">
                    <span>特权卡样式：</span>
                    <div class="upbar">
                      <img style="width:86px;height:86px"   :src='privilegeLogo'>
-                   <a class="file">上传店铺logo
+                   <a class="file btn-yes">上传店铺logo
                        <input type="file" :accept="accepts" id="upImg" @change='upImg(0)' >
                    </a>
                    <span class="tip">建议尺寸：750*606像素</span>
                    </div>
                    <div class="upbar">
                      <img style="width:160px;height:90px"   :src='privilegeBg'>
-                   <a class="file" style="left:380px">上传卡片背景
+                   <a class="file btn-yes" style="left:380px">上传卡片背景
                        <input type="file" :accept="accepts" id="upImg" @change='upImg(1)' >
                    </a>
                    <span class="tip" style="left:350px">建议尺寸：750*606像素</span>
@@ -125,19 +164,24 @@
                    
                    </div>
                    <div class="info-item">
-                   <span>特权卡权益</span><span class="remind">点亮选择你的特权卡权益</span>
+                   <span>特权卡权益</span><span class="remind">点亮你的特权卡权益</span>
                    <profitpanel :partnerrightlist='option.partnerRightVo.partnerRightList'></profitpanel>   
                    </div>
                    <div class="info-item ">
                    <span>合伙人特权说明 </span>
-                   <textarea cols="30" rows="10" placeholder="请输入您的合伙人权益卡说明，例：
+                   <!-- <textarea cols="30" rows="10" placeholder="请输入您的合伙人权益卡说明，例：
+1、享受8折优惠
+2、每次来店消费，赠送合伙人专属定制礼品
+3、更多不定期的定制权益，欢迎咨询店长" v-model='option.partnerRightVo.partnerRightDetail'></textarea> -->
+
+<textarea v-validate:partnerRightDetail="'required'" :class="{'input': true, 'is-danger': errors.has('partnerRightDetail') }" name="partnerRightDetail" type="text"  placeholder="请输入您的合伙人权益卡说明，例：
 1、享受8折优惠
 2、每次来店消费，赠送合伙人专属定制礼品
 3、更多不定期的定制权益，欢迎咨询店长" v-model='option.partnerRightVo.partnerRightDetail'></textarea>
                    </div>
                  </div>
-                 <router-link to="creprosecond" class="prev-step">上一步</router-link>
-                 <a  class="next-step" @click='thirdStep'>下一步</a>
+                 <router-link to="creprosecond" class="prev-step btn-no">上一步</router-link>
+                 <a  class="next-step btn-yes" @click='validateBeforeSubmit'>下一步</a>
                  </div>
              </div>
          </div>
@@ -157,6 +201,8 @@
                 period:'6个月',
                 privilegeLogo:'',
                 privilegeBg :'',
+                totalMoney:'',
+                saleCount:'',
                 option:{
                   projectId:this.$store.state.projectId,
                   projectType:1,
@@ -176,6 +222,14 @@
                 }
             }
         },
+         watch: {
+          totalMoney(val) {
+              this.option.unitPrice = this.totalMoney/this.saleCount;//新增tag的watch，监听变更并同步到isActive上
+          },
+          saleCount(val){
+            this.option.unitPrice = this.totalMoney/this.saleCount;//新增tag的watch，监听变更并同步到isActive上
+          }
+         },
         methods:{
           add(){this.option.salesProjectVo.salesReachInfos.push({})},
           reduce(){this.option.salesProjectVo.salesReachInfos.pop()},
@@ -188,9 +242,11 @@
                    if(item==0){
                     this.option.privilegeLogo=response.data.result.msg
                     this.privilegeLogo="http://pic.6dbox.cn/"+response.data.result.msg
+                    this.$alert(true,'上传成功')
                    }else{
                     this.option.privilegeBg=response.data.result.msg
                     this.privilegeBg="http://pic.6dbox.cn/"+response.data.result.msg
+                    this.$alert(true,'上传成功')
                    }
                 })
                 .catch(function(response) {
@@ -206,24 +262,54 @@
                   return 3
                 }
             },
-          thirdStep(){
+            validateBeforeSubmit() {
+            this.$validator.validateAll().then(() => {
+
+                // alert('From Submitted!');
+            this.option.totalMoney=this.totalMoney;
+            this.option.saleCount=this.saleCount;
             let options=this.option;
             options.partnerRightVo.partnerRightList=this.$store.state.partnerRightList;
             options.investmentPeriod=this.periodfilter(this.period);
             this.$http.post(this.apiurl+'/project/third',options)
                 .then((response) => {
                   if(response.data.statusCode==200){
+                   this.$alert(true,'操作成功')
                    this.$router.push({
                     name: 'creproforth'
                 });
                 }else{
-                  alert('失败，请完善信息')
+                  this.$alert(false,'系统错误，请稍后重试')
                 }
               })
                 .catch(function(response) {
                     console.log(response)
                 })
+
+            }).catch(() => {
+                this.$alert(false,'您有项目未填写完整')
+            })
           }
+          // thirdStep(){
+          //   this.option.totalMoney=this.totalMoney;
+          //   this.option.saleCount=this.saleCount;
+          //   let options=this.option;
+          //   options.partnerRightVo.partnerRightList=this.$store.state.partnerRightList;
+          //   options.investmentPeriod=this.periodfilter(this.period);
+          //   this.$http.post(this.apiurl+'/project/third',options)
+          //       .then((response) => {
+          //         if(response.data.statusCode==200){
+          //          this.$router.push({
+          //           name: 'creproforth'
+          //       });
+          //       }else{
+          //         alert('失败，请完善信息')
+          //       }
+          //     })
+          //       .catch(function(response) {
+          //           console.log(response)
+          //       })
+          // }
         },
         beforeMount(){    
             localStorage.setItem('menuTag', 1)    
@@ -238,12 +324,12 @@
                   if(data.totalMoney!=0){
                    this.privilegeLogo="http://pic.6dbox.cn/"+data.privilegeLogo;
                    this.privilegeBg="http://pic.6dbox.cn/"+data.privilegeBg;
+                   this.totalMoney =data.totalMoney ,
+                   this.saleCount =data.saleCount ,
                    this.option={
                       projectId:this.$store.state.projectId,
                       projectType:data.projectType,
-                      projectValuation:data.projectValuation ,
-                      totalMoney :data.totalMoney ,
-                      saleCount :data.saleCount ,
+                      projectValuation:data.projectValuation ,                      
                       extraSaleCount :data.extraSaleCount ,
                       unitPrice :data.unitPrice ,
                       copiesLimit :data.copiesLimit ,
@@ -276,7 +362,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           background: #fff;
           .main{
             height:100%;
@@ -433,6 +519,12 @@ $base-color:#C49F59;
                 opacity: 0;
               }
               }
+              .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
                .tip{
                 font-size: 12px;
                 color: #999;
@@ -450,6 +542,9 @@ $base-color:#C49F59;
                 .base-info{
                   width: 180px;
                 }
+                .is-danger{
+                border: 1px solid #E56B6B;
+              }
                 .return-info{
                   width: 132px;
                 }
@@ -524,8 +619,20 @@ $base-color:#C49F59;
               text-align: center;
               margin:40px 30px;
             }
-            
-
+             .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
+            }
+             
           } 
   }
 
@@ -534,7 +641,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

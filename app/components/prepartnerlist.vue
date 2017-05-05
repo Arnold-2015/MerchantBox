@@ -21,8 +21,8 @@
                     <td class="crowone">{{item.phone}}</td>
                     <td class="crowone">{{item.buyCount}}</td>
                     <td class="crowone">{{item.investMoney}}</td>
-                    <td class="crowone">{{item.creationTime}}</td>
-                    <td class="crowone">{{item.orderStatus}}</td>
+                    <td class="crowone">{{item.creationTime |fmtDate}}</td>
+                    <td class="crowone">{{item.orderStatus |status}}</td>
                     <td class="crowtow">{{item.memo}}</td>
                 </tr>
                 
@@ -32,9 +32,15 @@
 </template>
 <script>
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     export default {
         filters: {
-            
+            status(value){
+                return value==1?'待支付':'已支付'
+            },
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
+            }
         },
         props: ['apiurl','projectid'],
         data() {

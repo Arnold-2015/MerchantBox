@@ -41,7 +41,7 @@
             	<textarea  cols="30" rows="10" placeholder="请填写分红说明" v-model='memo'></textarea>
             </div>
             <label for=""><input type="checkbox" checked>短信通知</label>
-            <div class="profit-over" @click='goDevide'>确认分红</div>
+            <div class="profit-over btn-yes" @click='goDevide'>确认分红</div>
     	</div>
     </div>
 </template>
@@ -75,7 +75,8 @@
             formData.append('file', file);     
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
-                   this.picUrl=response.data.result.msg
+                   this.picUrl=response.data.result.msg;
+                   this.$alert(true,'上传成功');
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -92,9 +93,10 @@
             this.$http.post(this.apiurl+'/dividend/add',options)
                 .then((response) => {
                    if(response.data.statusCode==200){
-                    window.location.reload()
+                    this.$store.state.showProfit = false;
+                    this.$alert(true,'分红成功');
                    }else{
-                    alert('分红失败，请重试')
+                    this.$alert(false,'分红失败，请重试');
                    }
                 })
                 .catch(function(response) {
@@ -279,6 +281,12 @@
                 background: $base-color;
                 border-radius: 2px;
 
+            }
+              .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
             }
 
     	}

@@ -9,8 +9,8 @@
                 </tr>
                 <tr v-for="(item,index) in issueList" :class='{active:active[index%2]}'>
                     <td class="crowone">{{item.operatorName}}</td>
-                    <td class="crowone">{{item.operationType}}</td>
-                    <td class="crowone">{{item.creationTime}}</td>
+                    <td class="crowone">{{item.operationType |operationType}}</td>
+                    <td class="crowone">{{item.creationTime |fmtDate}}</td>
                     <td class="crowtow">{{item.memo}}</td>
                 </tr>               
     </table>
@@ -19,9 +19,15 @@
 </template>
 <script>
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     export default {
         filters: {
-            
+            operationType(value){
+                return value==1?'延迟分红':'普通公告'
+            },
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
+            }
         },
         props: ['apiurl','projectid'],
         data() {

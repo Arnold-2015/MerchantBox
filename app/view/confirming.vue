@@ -11,8 +11,8 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>{{projectInfo.projectName }}</h1>
-                                 <span>审核中</span>
-                                 <a @click='showConfirmChange' class="creat-new">待确认有效合伙人</a>
+                                 <span>确认中</span>
+                                 <a @click='showConfirmChange' class="creat-new btn-yes">待确认有效合伙人</a>
                              </div>
                              <div class="low-bar">
                                      <li>
@@ -20,20 +20,20 @@
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.wantPartnerCount }}</span>
+                                         <span class="key-msg">{{projectInfo.wantPartnerCount }}人</span>
                                          <span class="key-word">意向合伙人</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.hadCrowdFundingMoney }}</span>
+                                         <span class="key-msg">{{projectInfo.hadCrowdFundingMoney }}元</span>
                                          <span class="key-word">已募集总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.unitPrice }}</span>
+                                         <span class="key-msg">{{projectInfo.unitPrice }}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.validityPeriod }}</span>
-                                         <span class="key-word">项目开始时间</span>
+                                         <span class="key-msg">{{projectInfo.validityPeriod}}天</span>
+                                         <span class="key-word">项目招募时间</span>
                                      </li>
                                      <div>
                                          <a href='javascript:;' @click='showQrChange(projectInfo.qrCode)'>预览</a>
@@ -52,14 +52,14 @@
                      <li :class="{active:!isActive}" @click='setActiveFalse'>公告列表</li>
                  </ul>
                  <!-- 公告列表 -->
-                 <issue v-if="!isActive" :apiurl='apiurl'></issue>
+                 <issue v-if="!isActive" :apiurl='apiurl' :projectid='projectId'></issue>
                  <!-- 合伙人列表 -->
-                 <prepartner v-if="isActive" :apiurl='apiurl'></prepartner>
+                 <prepartner v-if="isActive" :apiurl='apiurl' :projectid='projectId'></prepartner>
              </div>
          </div>
          <!-- <sb></sb> -->
          <qr v-if="this.$store.state.showQr" :projectid='projectId' :qrcode='qrCode'></qr>
-         <confirmbar v-if="this.$store.state.showConfirm" :apiurl='apiurl'></confirmbar>
+         <confirmbar v-if="this.$store.state.showConfirm" :apiurl='apiurl' :projectid='projectId'></confirmbar>
     </section>
 </template>
 <script>
@@ -69,10 +69,13 @@
     import issue from '../components/issuelist.vue'
     import prepartner from '../components/prepartnerlist.vue'
     import confirmbar from '../components/confirmbar.vue'
+    import utils from '../modules/utils.js'
     require('../assets/list.scss')
     export default {
         filters: {
-            
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd')
+            }
         },
         props: ['api'],
         data() {
@@ -127,7 +130,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -189,6 +192,19 @@ $base-color:#C49F59;
                                         margin-right:40px;
                                         background:$base-color;
                                 }
+                                .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
+            }
                     }
                         .low-bar{
                             position: relative;
@@ -289,7 +305,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

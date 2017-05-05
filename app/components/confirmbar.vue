@@ -29,8 +29,8 @@
                 
                 </table>
             </div>
-            <div class="success" @click='startup(6)'>开始履约</div>
-            <div class="failed" @click='startup(7)'>认筹失败</div>
+            <div class="success btn-yes" @click='startup(6)'>开始履约</div>
+            <div class="failed btn-no" @click='startup(7)'>认筹失败</div>
     	</div>
     </div>
 </template>
@@ -75,9 +75,12 @@
             this.$http.delete(this.apiurl+'/partner/orderId/'+orderId)
                 .then((response) => {
                   if(response.data.statusCode==200){
-                  window.location.reload()
+                  this.$alert(true,'剔除成功');
+                   timer = setTimeout(() => {
+                      window.location.reload()
+                    }, 2000);
                 }else{
-                  alert('剔除失败，请稍后重试')
+                  this.$alert(false,'剔除失败，请稍后重试')
                 }
                 })
                 .catch(function(response) {
@@ -91,7 +94,13 @@
             }
             this.$http.post(this.apiurl+'/project/startup',options)
                 .then((response) => {
-                   
+                   this.$alert(true,'操作成功');
+                   this.$store.state.showConfirm = false;
+                   timer = setTimeout(() => {
+                      this.$router.push({
+                    name: 'promanage'
+                });
+                    }, 1000);
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -259,6 +268,19 @@
                 background: #fff;
                 color: #999;
                 border:1px solid #999;
+            }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
             }
     	}
     }

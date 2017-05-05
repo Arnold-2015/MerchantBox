@@ -20,23 +20,23 @@
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-msg">{{item.totalMoney}}元</span>
                                          <span class="key-word">目标总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-msg">{{item.unitPrice}}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-msg">{{item.validityPeriod}}天</span>
                                          <span class="key-word">招募时间</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-msg">{{item.copiesLimit}}份</span>
                                          <span class="key-word">每人限购</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-msg">{{item.extraSaleCount}}份</span>
                                          <span class="key-word">允许超募数</span>
                                      </li>
                                      <div>
@@ -56,30 +56,32 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>{{item.projectName}}</h1>
-                                 <span>项目待审核</span>
+                                 <span>待审核</span>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-msg">{{item.totalMoney}}元</span>
                                          <span class="key-word">目标总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-msg">{{item.unitPrice}}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-msg">{{item.validityPeriod}}天</span>
                                          <span class="key-word">招募时间</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-msg">{{item.copiesLimit}}份</span>
                                          <span class="key-word">每人限购</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-msg">{{item.extraSaleCount}}份</span>
                                          <span class="key-word">允许超募数</span>
                                      </li>
-                                    
+                                     <div>
+                                         <router-link :to="{ path: 'creprofirst', query: { projectId:item.projectId }}">编辑项目</router-link>
+                                     </div>
 
                              </div>
                          </div>
@@ -94,27 +96,27 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>{{item.projectName}}</h1>
-                                 <span>项目审核失败</span>
+                                 <span>审核失败</span>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-msg">{{item.totalMoney}}元</span>
                                          <span class="key-word">目标总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-msg">{{item.unitPrice}}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-msg">{{item.validityPeriod}}天</span>
                                          <span class="key-word">招募时间</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-msg">{{item.copiesLimit}}份</span>
                                          <span class="key-word">每人限购</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-msg">{{item.extraSaleCount}}份</span>
                                          <span class="key-word">允许超募数</span>
                                      </li>
                                      <div>
@@ -135,7 +137,7 @@
                          <div class="pro-info">
                              <div class="up-bar">
                                  <h1>{{item.projectName}}</h1>
-                                 <span>待确认合伙人</span>
+                                 <span>确认中</span>
                              </div>
                              <div class="low-bar">
                                      <li>
@@ -143,19 +145,19 @@
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.wantPartnerCount}}</span>
+                                         <span class="key-msg">{{item.wantPartnerCount}}人</span>
                                          <span class="key-word">意向合伙人</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">3000</span>
+                                         <span class="key-msg">{{item.hadCrowdFundingMoney}}元</span>
                                          <span class="key-word">已募集总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-msg">{{item.unitPrice}}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-msg">{{item.validityPeriod}}天</span>
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
@@ -184,19 +186,19 @@
                                          <span class="key-word">出让股份</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.wantPartnerCount}}</span>
+                                         <span class="key-msg">{{item.wantPartnerCount}}人</span>
                                          <span class="key-word">意向合伙人</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">3000</span>
+                                         <span class="key-msg">{{item.hadCrowdFundingMoney}}元</span>
                                          <span class="key-word">已募集总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-msg">{{item.unitPrice}}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-msg">{{item.validityPeriod}}天</span>
                                          <span class="key-word">招募剩余时间</span>
                                      </li>
                                      <div>
@@ -221,23 +223,23 @@
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">{{item.partnerCount}}</span>
+                                         <span class="key-msg">{{item.partnerCount}}人</span>
                                          <span class="key-word">合伙人 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.exitPartnerCount}}</span>
+                                         <span class="key-msg">{{item.exitPartnerCount}}人</span>
                                          <span class="key-word">已退出 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.totalPrincipalBalance}}</span>
+                                         <span class="key-msg">{{item.totalPrincipalBalance}}元</span>
                                          <span class="key-word">本金总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.earningTotalBalance}}</span>
+                                         <span class="key-msg">{{item.earningTotalBalance}}元</span>
                                          <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.consumeTotalMoney}}</span>
+                                         <span class="key-msg">{{item.consumeTotalMoney}}元</span>
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <li>
@@ -266,23 +268,23 @@
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">{{item.totalMoney}}</span>
+                                         <span class="key-msg">{{item.totalMoney}}元</span>
                                          <span class="key-word">目标总金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.unitPrice}}</span>
+                                         <span class="key-msg">{{item.unitPrice}}元</span>
                                          <span class="key-word">单份金额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.validityPeriod}}</span>
+                                         <span class="key-msg">{{item.validityPeriod}}天</span>
                                          <span class="key-word">招募时间</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.copiesLimit}}</span>
+                                         <span class="key-msg">{{item.copiesLimit}}份</span>
                                          <span class="key-word">每人限购</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{item.extraSaleCount}}</span>
+                                         <span class="key-msg">{{item.extraSaleCount}}份</span>
                                          <span class="key-word">允许超募数</span>
                                      </li>
                                     
@@ -379,7 +381,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -422,6 +424,12 @@ $base-color:#C49F59;
                         height:40px;
                         background:url('../assets/btn_creat.png')no-repeat left  center;
                      }
+                }
+                .creat-new:hover{
+                    background:#BA9246;
+                }
+                .creat-new:active{
+                    background:#020204;
                 }
             }
             .pro-item{
@@ -541,7 +549,7 @@ $base-color:#C49F59;
            width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

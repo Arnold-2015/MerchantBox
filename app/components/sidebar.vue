@@ -1,20 +1,37 @@
  <template>
  <div class="wrap">
    <div class="side-bar-default">
-       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}" ><span class='promanage' :class="{activepromanage:isActive==1}" @click='setActive(1)' >项目管理</span></router-link>
-       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}" ><span class='merchantmanage' :class="{activemerchantmanage:isActive==2}" @click='setActive(2)'>商家管理</span></router-link>
-       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}" ><span class='customermanage' :class="{activecustomermanage:isActive==3}" @click='setActive(3)'>用户管理</span></router-link>
-       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}" ><span class='ordermanage' :class="{activeordermanage:isActive==4}" @click='setActive(4)'>订单管理</span></router-link>
+       <router-link to="superpromanage" class="side-item" :class="{bactive:isActive==1}"  v-if='role=="ADMIN"'>
+       <span class='promanage' :class="{activepromanage:isActive==1 ||active==1}" @click='setActive(1)' @mouseenter='changeActive(1)' @mouseleave='changeActive(0)'>项目管理</span></router-link>
+       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}"  v-if='role!="ADMIN"'>
+       <span class='promanage' :class="{activepromanage:isActive==1 ||active==1}" @click='setActive(1)' @mouseenter='changeActive(1)' @mouseleave='changeActive(0)'>项目管理</span></router-link>
+       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}"  v-if='role=="ADMIN"'>
+       <span class='merchantmanage' :class="{activemerchantmanage:isActive==2 ||active==2}" @click='setActive(2)' @mouseenter='changeActive(2)' @mouseleave='changeActive(0)'>商家管理</span></router-link>
+       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}"  v-if='role=="ADMIN"'>
+       <span class='customermanage' :class="{activecustomermanage:isActive==3 ||active==3}" @click='setActive(3)' @mouseenter='changeActive(3)' @mouseleave='changeActive(0)'>用户管理</span></router-link>
+       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}"  v-if='role=="ADMIN"'>
+       <span class='ordermanage' :class="{activeordermanage:isActive==4||active==4}" @click='setActive(4)' @mouseenter='changeActive(4)' @mouseleave='changeActive(0)'>订单管理</span></router-link>
        <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span class='compactmanage' :class="{activecompactmanage:isActive==5}" @click='setActive(5)'>合同管理</span></router-link> -->
        <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span class='compactmodel' :class="{activecompactmodel:isActive==6}" @click='setActive(6)'>合同模版</span></router-link> -->
        <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span class='managerlist' :class="{activemanagerlist:isActive==7}" @click='setActive(7)'>账户管理</span></router-link> -->
        <!-- <router-link to="" class="side-bottom"><span>设置</span></div>      -->
    </div>
     <div class="side-bar">
-       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}" @mouseover.native='showItem(1)' @mouseleave.native='showItem(0)'><span class='promanage' :class="{activepromanage:isActive==1}" @click='setActive(1)' ></span><div class='showItem' v-if='showitem==1'>项目管理</div></router-link>
-       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}" @mouseover.native='showItem(2)' @mouseleave.native='showItem(0)'><span class='merchantmanage' :class="{activemerchantmanage:isActive==2}" @click='setActive(2)'></span><div class='showItem' v-if='showitem==2'>商家管理</div></router-link>
-       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}" @mouseover.native='showItem(3)' @mouseleave.native='showItem(0)'><span class='customermanage' :class="{activecustomermanage:isActive==3}" @click='setActive(3)'></span><div class='showItem' v-if='showitem==3'>用户管理</div></router-link>
-       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}" @mouseover.native='showItem(4)' @mouseleave.native='showItem(0)'><span class='ordermanage' :class="{activeordermanage:isActive==4}" @click='setActive(4)'></span><div class='showItem' v-if='showitem==4'>订单管理</div></router-link>
+       <router-link to="superpromanage" class="side-item" :class="{bactive:isActive==1}" @mouseover.native='showItem(1)' @mouseleave.native='showItem(0)' v-if='role=="ADMIN"'>
+       <span class='promanage' :class="{activepromanage:isActive==1||active==1}" @click='setActive(1)'  @mouseenter='changeActive(1)' @mouseleave='changeActive(0)'></span>
+       <div class='showItem' v-if='showitem==1'>项目管理</div></router-link>
+       <router-link to="promanage" class="side-item" :class="{bactive:isActive==1}" @mouseover.native='showItem(1)' @mouseleave.native='showItem(0)' v-if='role!="ADMIN"'>
+       <span class='promanage' :class="{activepromanage:isActive==1||active==1}" @click='setActive(1)'  @mouseenter='changeActive(1)' @mouseleave='changeActive(0)'></span>
+       <div class='showItem' v-if='showitem==1'>项目管理</div></router-link>
+       <router-link to="merchantmanage" class="side-item" :class="{bactive:isActive==2}" @mouseover.native='showItem(2)' @mouseleave.native='showItem(0)' v-if='role=="ADMIN"'>
+       <span class='merchantmanage' :class="{activemerchantmanage:isActive==2||active==2}" @click='setActive(2)' @mouseenter='changeActive(2)' @mouseleave='changeActive(0)'></span>
+       <div class='showItem' v-if='showitem==2'>商家管理</div></router-link>
+       <router-link to="customermanage" class="side-item" :class="{bactive:isActive==3}" @mouseover.native='showItem(3)' @mouseleave.native='showItem(0)' v-if='role=="ADMIN"'>
+       <span class='customermanage' :class="{activecustomermanage:isActive==3||active==3}" @click='setActive(3)' @mouseenter='changeActive(3)' @mouseleave='changeActive(0)'></span>
+       <div class='showItem' v-if='showitem==3'>用户管理</div></router-link>
+       <router-link to="ordermanage" class="side-item" :class="{bactive:isActive==4}" @mouseover.native='showItem(4)' @mouseleave.native='showItem(0)' v-if='role=="ADMIN"'>
+       <span class='ordermanage' :class="{activeordermanage:isActive==4||active==4}" @click='setActive(4)' @mouseenter='changeActive(4)' @mouseleave='changeActive(0)'></span>
+       <div class='showItem' v-if='showitem==4'>订单管理</div></router-link>
        <!-- <router-link to="compactmanage" class="side-item" :class="{bactive:isActive==5}"><span class='compactmanage' :class="{activecompactmanage:isActive==5}" @click='setActive(5)'></span></router-link> -->
        <!-- <router-link to="creproforth" class="side-item" :class="{bactive:isActive==6}"><span class='compactmodel' :class="{activecompactmodel:isActive==6}" @click='setActive(6)'></span></router-link> -->
        <!-- <router-link to="managerlist" class="side-item" :class="{bactive:isActive==7}"><span class='managerlist' :class="{activemanagerlist:isActive==7}" @click='setActive(7)'></span></router-link> -->
@@ -25,16 +42,20 @@
 
 <script>
     export default {
-      props:['menutag'],
+      props:['menutag','role'],
         data () {
             return {
                 isActive:this.menutag,
+                active:0,
                 showitem:0              
             }
         },
         methods:{
            setActive(i){
             this.isActive=i;
+          },
+          changeActive(i){
+            this.active=i;
           },
           showItem(i){
             this.showitem=i;
@@ -59,17 +80,19 @@
   }
   .wrap{
     height:100%;
-    margin-top:-120px
+    margin-top:-120px;
   }
   .side-bar-default{
          width: 200px;
          height: 100%;
          background: #4A4A4A; 
-         position: relative;
+         position: fixed;
          overflow: hidden;
-         float:left;
-         margin-left:-100%;
-         margin-top:-120px;
+         left:0;
+         top:0;
+         /*float:left;*/
+         /*margin-left:-100%;*/
+         /*margin-top:-120px;*/
          /*padding-bottom: 200000px;*/
         /*margin-bottom: -200000px;*/
          .side-item{
@@ -187,12 +210,14 @@
          width: 60px;
          height: 100%;
          background: #4A4A4A; 
-         position: relative;
+         position: fixed;
+         left:0;
+         top:0;
          /*overflow: hidden;*/
          display: block;
-         float:left;
+        /* float:left;
          margin-left:-100%;
-         margin-top:-60px;
+         margin-top:-60px;*/
          /*padding-bottom: 200000px;*/
          /*margin-bottom: -200000px;*/
          .side-item{

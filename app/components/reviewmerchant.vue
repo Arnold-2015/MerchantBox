@@ -37,8 +37,8 @@
             
             
             <div class="operate">
-              <div class="review-no" @click='noverify'>不通过</div>
-              <div class="review-yes" @click='goverify'>审核通过</div>
+              <div class="review-no  btn-no" @click='noverify'>不通过</div>
+              <div class="review-yes btn-yes" @click='goverify'>审核通过</div>
             </div>
             
       </div>
@@ -76,9 +76,12 @@
                 .then((response) => {
                   if(response.data.statusCode==200){
                     this.$store.state.showreviewmerchant = false;
-                    window.location.reload()
+                    this.$alert(true,'项目已通过审核')
+                    timer = setTimeout(() => {
+                      window.location.reload()
+                    }, 1000);
                  }else{
-                  alert('审核失败，请重试')
+                  this.$alert(false,'审核失败，请重试')
                  }
                    
                 })
@@ -264,6 +267,19 @@
               border-radius: 2px;
               text-align: center;
               margin:20px 30px 16px 30px;
+            }
+              .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
             }
 
       }

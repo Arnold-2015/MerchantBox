@@ -16,22 +16,26 @@
                  <div class="info-item" style="height:180px">
                    <span style="display:block">项目头图</span>
                    <img  :src='backgroundImg'>
-                   <a class="file">选择图片
+                   <a class="file btn-yes">选择图片
                        <input type="file" :accept="accepts" id="upImg" @change='upImg' >
                    </a>
                    <span class="remind">建议尺寸：750*606像素</span>
                  </div>
                  <div class="info-item">
-                   <span>项目名称</span><input placeholder="请输入您的项目名称" type="text" v-model='option.projectName'>
+                   <span>项目名称</span>
+                   <input v-validate:projectname="'required'" :class="{'input': true, 'is-danger': errors.has('projectname') }" name="projectname" type="text" placeholder="请输入您的项目名称" v-model='option.projectName'>
                  </div>
+   
                  <div class="info-item">
-                   <span>项目地址</span><input placeholder="请输入您的项目地址" type="text" v-model='option.address' >
+                   <span>项目地址</span>
+                   <input v-validate:address="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" name="address" type="text" placeholder="请输入您的项目地址"   id='address'>
                  </div>
                  <div class="info-item" >
-                   <span style="display:block">项目简介</span><textarea placeholder="请填写说明，例如：
-一家不高冷的葡萄酒体验馆，邀您当合伙人"  cols="30" rows="10" v-model='option.projectDesc'></textarea>
+                   <span style="display:block">项目简介</span>
+                   <textarea v-validate:projectDesc="'required'" :class="{'input': true, 'is-danger': errors.has('projectDesc') }" name="projectDesc" type="text" placeholder="请填写说明，例如：
+一家不高冷的葡萄酒体验馆，邀您当合伙人" v-model='option.projectDesc' id='projectDesc'></textarea>
                  </div>
-                 <a  class="next-step" @click='firstStep'>下一步</a>
+                 <a  class="next-step btn-yes" @click='validateBeforeSubmit'>下一步</a>
                  
              </div>
          </div>
@@ -52,11 +56,12 @@ import Vue from 'Vue'
                 backgroundImg:'',
                 option:{
                   backgroundImg:'',
+                  address:null,
                   province :'',
                   city :'',
                   area :'',
-                  latitude :'',
-                  longitude :'',
+                  latitude :null,
+                  longitude :null,
                   projectId:''
                 }
             }
@@ -70,6 +75,7 @@ import Vue from 'Vue'
                 .then((response) => {
                    this.option.backgroundImg =response.data.result.msg;
                    this.backgroundImg ="http://pic.6dbox.cn/"+response.data.result.msg;
+                   this.$alert(true,'上传成功')
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -79,25 +85,63 @@ import Vue from 'Vue'
               
  
           },
-          firstStep(){
+          validateBeforeSubmit() {
+            this.$validator.validateAll().then(() => {
+
+                if(this.option.address==null){
+                this.option.address=localStorage.getItem('address');
+                this.option.longitude=localStorage.getItem('longitude');
+                this.option.latitude=localStorage.getItem('latitude');
+            }
             let options=this.option;
+          
             this.$http.post(this.apiurl+'/project/first',options)
                 .then((response) => {
                   if(response.data.statusCode==200){
                    this.projectId=response.data.result.projectId;
                    this.$store.state.projectId=this.projectId;
                    console.log(this.projectId);
+                   this.$alert(true,'操作成功')
                    this.$router.push({
                     name: 'creprosecond'
                 });
                 }else{
-                  alert('创建失败，请重试')
+                  this.$alert(false,'系统错误，请稍后重试')
                 }
               })
                 .catch(function(response) {
                     console.log(response)
                 })
+
+            }).catch(() => {
+                this.$alert(false,'您有项目未填写完整')
+            })
           }
+          // firstStep(){
+          //     if(this.option.address==null){
+          //       this.option.address=localStorage.getItem('address');
+          //       this.option.longitude=localStorage.getItem('longitude');
+          //       this.option.latitude=localStorage.getItem('latitude');
+          //   }
+          //   let options=this.option;
+          
+          //   this.$http.post(this.apiurl+'/project/first',options)
+          //       .then((response) => {
+          //         if(response.data.statusCode==200){
+          //          this.projectId=response.data.result.projectId;
+          //          this.$store.state.projectId=this.projectId;
+          //          console.log(this.projectId);
+          //          this.$router.push({
+          //           name: 'creprosecond'
+          //       });
+          //       }else{
+          //         alert('创建失败，请重试')
+          //       }
+          //     })
+          //       .catch(function(response) {
+          //           console.log(response)
+          //       })
+          // }
         },
         beforeMount(){
             var projectId;
@@ -124,15 +168,53 @@ import Vue from 'Vue'
                       province :'',
                       city :'',
                       area :'',
-                      latitude :'',
-                      longitude :'' 
+                      latitude :data.latitude,
+                      longitude :data.longitude
                    }
+                   document.getElementById('address').value=data.address
                    console.log(this.option)
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
               }
+        },
+        mounted(){
+           // 百度地图API功能
+    function G(id) {
+        return document.getElementById(id);
+    }
+
+    var map = new BMap.Map("l-map");
+    map.setCurrentCity("杭州"); // 初始化地图,设置城市和地图级别。
+    var ac = new BMap.Autocomplete(     //建立一个自动完成的对象
+            {
+                "input": "address"
+                , "location": map
+            });
+
+    var myValue;
+    ac.addEventListener("onconfirm", function (e) {
+        var _value = e.item.value;
+        myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        localStorage.setItem('address', myValue)
+        setPlace();
+    });
+    function setPlace() {
+        map.clearOverlays();
+        function myFun() {
+            var pp = local.getResults().getPoi(0).point;
+            localStorage.setItem('longitude', pp.lng)
+            localStorage.setItem('latitude', pp.lat)
+        }
+        var local = new BMap.LocalSearch(map, {
+            onSearchComplete: myFun,
+            renderOptions: { map: map }
+
+        });
+        local.search(myValue,{forceLocal:false,customData:null});
+    }
+
         },
         components:{
            
@@ -146,7 +228,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           background: #fff;
           .main{
             height:100%;
@@ -236,6 +318,7 @@ $base-color:#C49F59;
                 opacity: 0;
               }
               }
+
               input{
                   width: 600px;
                   height: 48px;
@@ -251,7 +334,9 @@ $base-color:#C49F59;
                           outline:none
                       }
               }
-              
+              .is-danger{
+                border: 1px solid #E56B6B;
+              }
               textarea{
                   width: 600px;
                   height: 136px;
@@ -280,6 +365,12 @@ $base-color:#C49F59;
               text-align: center;
               margin:0 0 42px 108px;
             }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
 
           } 
   }
@@ -289,7 +380,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;
@@ -302,6 +393,15 @@ $base-color:#C49F59;
                 color:#999;
                 font-size:12px;
             }
+            .info-item{
+             img{
+              left:170px;
+             }
+             textarea{
+                  left: 170px;
+                }
+            }
+
 }
 }
 }

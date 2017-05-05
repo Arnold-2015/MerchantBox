@@ -19,7 +19,7 @@
                     <td class="crowone">{{item.totalMoney}}</td>
                     <td class="crowone">{{item.totalMoney}}</td>
                     <td class="crowone">{{item.headCount}}</td>
-                    <td class="crowone">{{item.dividendTime}}</td>
+                    <td class="crowone">{{item.dividendTime |fmtDate}}</td>
                     <td class="crowtwo">{{item.memo}}</td>
                     <td class="crowone"><router-link to="profitdetail">明细</router-link></td>
                 </tr>
@@ -31,9 +31,12 @@
 <script>
     // require('../assets/list.scss')
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     export default {
         filters: {
-            
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
+            }
         },
         props: ['apiurl','projectid'],
         data() {

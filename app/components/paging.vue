@@ -76,7 +76,7 @@
       }
       ul{
           position: relative;
-          width: 700px;
+          width: 800px;
           height: 42px;
           margin: 0 auto;
           top: 20px;

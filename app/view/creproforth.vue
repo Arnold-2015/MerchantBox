@@ -36,7 +36,7 @@
                      <a class="preview">预览</a><a class="download">下载</a>
                    </div> -->
                    <span class="title">上传合同</span>
-                   <a class="up-compact">上传合同
+                   <a class="up-compact btn-yes">上传合同
                    <input type="file" :accept="accepts" id="upFile" @change='upFile' >
                    </a>
                  </div>
@@ -47,8 +47,8 @@
                     3、上传填写好的合同中，提交审核<br>
                  </p>
                  </div>
-                 <router-link to="creprothird" class="prev-step">上一步</router-link>
-                 <a class="next-step" @click='forthStep'>提交审核</a>
+                 <router-link to="creprothird" class="prev-step btn-no">上一步</router-link>
+                 <a class="next-step btn-yes" @click='forthStep'>提交审核</a>
              </div>
          </div>
     </section>
@@ -78,16 +78,19 @@
             this.$http.post(this.apiurl+'/file/upload',formData)
                 .then((response) => {
                    this.option.contractUrl=response.data.result.msg
+                   this.$alert(true,'上传成功')
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
           },
           forthStep(){
+            if(this.option.contractUrl){
             let options=this.option;
             this.$http.post(this.apiurl+'/project/fourth',options)
                 .then((response) => {
                    this.$store.state.projectId=null;
+                   this.$alert(true,'项目已提交审核')
                    this.$router.push({
                     name: 'promanage'
                 });
@@ -95,7 +98,10 @@
                 .catch(function(response) {
                     console.log(response)
                 })
+          }else{
+            this.$alert(false,'请上传项目合同')
           }
+        }
         }, 
         beforeMount(){ 
             localStorage.setItem('menuTag', 1)      
@@ -129,7 +135,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           background: #fff;
           .main{
             height:100%;
@@ -256,6 +262,12 @@ $base-color:#C49F59;
                        top: 0;
                   }
                 }
+                .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
               }
               
               .describe{
@@ -296,6 +308,19 @@ $base-color:#C49F59;
               text-align: center;
               margin:40px 30px;
             }
+             .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
+            }
 
           } 
   }
@@ -305,7 +330,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

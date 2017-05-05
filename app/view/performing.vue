@@ -12,29 +12,29 @@
                              <div class="up-bar">
                                  <h1>{{projectInfo.projectName}}</h1>
                                  <span>履约中</span>
-                                 <a @click='showIssueChange'  class="creat-new" :apiurl='apiurl'>新建公告</a>
-                                 <a @click='showProfitChange' class="profit-entering" :apiurl='apiurl'>分红录入</a>
-                                 <a @click='showConsumeChange' class="consume-entering" :apiurl='apiurl'>消费录入</a>
+                                 <a @click='showIssueChange'  class="creat-new btn-yes" :apiurl='apiurl'>新建公告</a>
+                                 <a @click='showProfitChange' class="profit-entering btn-yes" :apiurl='apiurl'>分红录入</a>
+                                 <a @click='showConsumeChange' class="consume-entering btn-yes" :apiurl='apiurl'>消费录入</a>
                              </div>
                              <div class="low-bar">
                                      <li>
-                                         <span class="key-msg">{{projectInfo.partnerCount }}</span>
+                                         <span class="key-msg">{{projectInfo.partnerCount }}人</span>
                                          <span class="key-word">合伙人 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.exitPartnerCount}}</span>
+                                         <span class="key-msg">{{projectInfo.exitPartnerCount}}人</span>
                                          <span class="key-word">已退出 </span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.totalPrincipalBalance }}</span>
+                                         <span class="key-msg">{{projectInfo.totalPrincipalBalance }}元</span>
                                          <span class="key-word">本金总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.earningTotalBalance}}</span>
+                                         <span class="key-msg">{{projectInfo.earningTotalBalance}}元</span>
                                          <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.cousumeTotalMoney }}</span>
+                                         <span class="key-msg">{{projectInfo.cousumeTotalMoney }}元</span>
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <div>
@@ -116,8 +116,10 @@
           },
           showIssueChange(){
             this.$store.state.showIssue = true;
+          },
+         showProfitChange(){
+            this.$store.state.showProfit = true;
           }
-         
         },
         beforeMount(){
             localStorage.setItem('menuTag', 1)
@@ -148,7 +150,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -231,6 +233,12 @@ $base-color:#C49F59;
                                         margin-right:40px;
                                         background:$base-color;
                                 }
+                                 .creat-new:hover{
+                    background:#BA9246;
+                }
+                .creat-new:active{
+                    background:#020204;
+                }
                     }
                         .low-bar{
                             position: relative;
@@ -335,7 +343,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;
@@ -387,8 +395,8 @@ $base-color:#C49F59;
                           
                             .creat-new,.consume-entering,.profit-entering{
                                         width:100px;
-                                        height:26px;
-                                        line-height:26px;
+                                        height:24px;
+                                        line-height:24px;
                                         border-radius:2px;
                                         color:#fff;
                                         font-size:12px;
@@ -397,9 +405,15 @@ $base-color:#C49F59;
                                         margin-top:12px;
                                         margin-right:20px;
                                         padding:0;
-                                        border:1px solid $base-color;
+                                        // border:1px solid $base-color;
                                         background:$base-color;
                                 }
+                                  .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
                     }
                         .low-bar{
                             position: relative;

@@ -32,8 +32,8 @@
                     <td class="crowtwo">{{item.idNo}}</td>
                     <td class="crowone">{{item.buyCount}}</td>
                     <td class="crowone">{{item.orderMoney}}</td>
-                    <td class="crowone">{{item.creationTime}}</td>
-                    <td class="crowone">{{item.status}}</td>
+                    <td class="crowone">{{item.creationTime | fmtDate}}</td>
+                    <td class="crowone">{{item.status | status}}</td>
                 </tr>
                 
                 </table>
@@ -46,10 +46,16 @@
 <script>
     import qr from '../components/qrbar.vue'
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     require('../assets/list.scss')
     export default {
         filters: {
-            
+            status(value){
+                return value==1?'待支付':'已支付'
+            },
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
+            }
         },
         props: ['api'],
         data() {
@@ -137,7 +143,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -197,7 +203,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

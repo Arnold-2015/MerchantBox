@@ -25,7 +25,7 @@
               <textarea  cols="30" rows="10"  v-model='option.memo'></textarea>
             </div>
             <label class="shit"><input type="checkbox" checked>短信通知</label>
-            <div class="profit-over" @click='goIssue'>发布</div>
+            <div class="profit-over btn-yes" @click='goIssue'>发布</div>
     	</div>
     </div>
 </template>
@@ -56,9 +56,10 @@
                 .then((response) => {
                   if(response.data.statusCode==200){
                    this.$store.state.showIssue = false;
-                   window.location.reload()
+                    this.$alert(true,'发布公告成功');
+                  
                  }else{
-                  alert('发布公告失败，请重试')
+                 this.$alert(false,'发布公告失败，请重试');
                  }
                 })
                 .catch(function(response) {
@@ -248,6 +249,19 @@
                 background: $base-color;
                 border-radius: 2px;
 
+            }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
+             .btn-no:hover{
+                  color:#333;
+                }
+            .btn-no:active{
+                color:#333;
+                border:1px solid #333;
             }
 
     	}

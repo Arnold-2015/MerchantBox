@@ -16,7 +16,7 @@
             
             
             <div class="operate">
-              <div class="review-yes" @click='noverify'>确认</div>
+              <div class="review-yes btn-yes" @click='noverify'>确认</div>
             </div>
             
       </div>
@@ -50,7 +50,7 @@
                     this.$store.state.shownoverify = false;
                     window.location.reload()
                     }else{
-                      alert('操作失败，请稍后重试')
+                      this.$alert(false,'操作失败，请稍后重试')
                     }
                  
                    
@@ -150,6 +150,12 @@
               border-radius: 2px;
               text-align: center;
               margin:20px auto;
+            }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
             }
 
       }

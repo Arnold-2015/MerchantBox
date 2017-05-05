@@ -29,7 +29,7 @@
                                 <td class="crowone">{{item.projectAccountFlowId }}</td>
                                 <td class="crowone">{{item.businessMoney}}</td>
                                 <td class="crowone">{{item.businessType }}</td>
-                                <td class="crowone">{{item.creationTime }}</td>
+                                <td class="crowone">{{item.creationTime | fmtDate}}</td>
                                 <td class="crowtwo">{{item.memo }}</td>
                             </tr>
                 
@@ -42,10 +42,13 @@
 <script>
     import nb from '../components/navbar.vue'
     import sb from '../components/sidebar.vue'
+    import utils from '../modules/utils.js'
     require('../assets/list.scss')
     export default {
         filters: {
-            
+            fmtDate(date){
+                return utils.fmtDate(new Date(date),'yyyy-MM-dd')
+            }
         },
         props: ['api'],
         data() {
@@ -89,7 +92,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-120px;
+          margin-top:120px;
           .main{
             height:100%;
             margin-left:200px;
@@ -123,7 +126,7 @@ $base-color:#C49F59;
           width:100%;
           min-height:100%;
           float:left;
-          margin-top:-60px;
+          margin-top:60px;
           .main{
             height:100%;
             margin-left:60px;

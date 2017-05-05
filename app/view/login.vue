@@ -9,9 +9,11 @@
             <input type="text" name="tel" v-model='userName'>
             <span class="lab">密码</span>
             <input type="password" name="pw" v-model='password'>
-            <a class="forget">忘记密码？</a>
-            <div class="login" @click='login'>登录</div>
-            <a class="nocount">没有账号?</a>
+            <a href="javascript:;" class="forget" @mouseover='changeforget(1)' @mouseleave='changeforget(0)'>忘记密码？</a>
+            <p class="help" v-if='forget'>请联系 13345815600 (同是微信账号)</p>
+            <div class="login btn-yes" @click='login'>登录</div>
+            <a href="javascript:;" class="nocount" @mouseover='changenocount(1)' @mouseleave='changenocount(0)'>没有账号?</a>
+            <p class="help" v-if='nocount'>请联系 13345815600 (同是微信账号)</p>
         </div>
         <p class="cr">Copyright © 2016-2017 杭州钒融科技有限公司 . All Rights Reserved </p>
         
@@ -26,10 +28,18 @@
                 showLoading:true,
                 apiurl:this.api,
                 userName :'15957195346',
-                password :'123456'         
+                password :'123456',
+                forget:0,
+                nocount:0         
             }
         },
         methods:{
+            changeforget(i){
+                this.forget=i
+            },
+            changenocount(i){
+                this.nocount=i
+            },
             login(){
                 let options={
                     'userName':this.userName,
@@ -41,9 +51,33 @@
                    this.$store.state.userInfo= response.data.result;
                    localStorage.setItem('merchantId', response.data.result.merchantId)
                    localStorage.setItem('token', response.data.result.token)
-                   this.$router.push({
+                   // 获取用户身份
+                   this.$http.get(this.apiurl+'/merchant')
+                      .then((response) => {
+                   localStorage.setItem('avarta', response.data.result.headImgUrl)
+                   localStorage.setItem('role', response.data.result.role)
+                   this.$emit('changeavartaandrole')
+
+                       // 获取用户权限
+                   this.$http.get(this.apiurl+'/merchant/menu/'+localStorage.getItem('merchantId'))
+                .then((response) => {
+                // 判断用户身份
+                if(localStorage.getItem('role')=='ADMIN'){
+                    this.$router.push({
                     name: 'superpromanage'
                 });
+                }else{
+                    this.$router.push({
+                    name: 'promanage'
+                });
+                }
+                   
+
+                })
+                  })
+  
+               
+                        
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -124,7 +158,7 @@
             }
             a{
                 display: block;
-                width: 60px;
+                width: 80px;
                 height: 20px;
                 line-height: 20px;
                 font-size: 12px;
@@ -145,6 +179,12 @@
                 text-align: center;
                 margin: 8px auto 20px;
             }
+            .btn-yes:hover{
+                    background:#BA9246;
+                }
+            .btn-yes:active{
+                background:#020204;
+            }
         }
         .cr{
             width: 100%;
@@ -155,6 +195,17 @@
             opacity: 0.6;
             position: absolute;
             bottom: 20px;
+        }
+        .help{
+            width:240px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+            font-size:12px;
+            background:#fff;
+            border:1px solid #d7d7d7;
+            position: absolute;
+            margin-left:20px;
         }
 
     }

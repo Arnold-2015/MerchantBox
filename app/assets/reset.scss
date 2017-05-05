@@ -11,7 +11,7 @@ body,div,p,a,span,h1,h2,h3,img,button，ul,li{
 	margin: 0;
 	padding: 0;
 	border: none;
-	font-family:"Microsoft Yahei";
+	font-family:"Microsoft YaHei";
 	color: #000;
 	display: block;
 }
@@ -46,8 +46,38 @@ a,button,input,textarea{
 	height:100%;
 }
 
+.alert-no-show{
+	width:240px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+    background:#E56B6B;
+    border-radius:30px;
+    color:#fff;
+    position: fixed;
+    left: 45%;
+    top:124px;
+    z-index:10000;
+}
+.alert-yes-show{
+	width:240px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+    background:#d0a34e;
+    border-radius:30px;
+    color:#fff;
+    position: fixed;
+    left: 45%;
+    top:124px;
+    z-index:10000;
+}
 @media (min-width: 768px) and (max-width: 1368px) {
  html,body{
     font-size:12px;
  }
+ .alert-no-show,.alert-yes-show{
+    top:64px;
+}
+
 }

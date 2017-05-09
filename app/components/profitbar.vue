@@ -40,7 +40,7 @@
             	<span>分红说明</span>
             	<textarea  cols="30" rows="10" placeholder="请填写分红说明" v-model='memo'></textarea>
             </div>
-            <label for=""><input type="checkbox" checked>短信通知</label>
+            <input  class="fuck" type="checkbox" v-model='isSmsNotice' > <label class="shit">短信通知</label>
             <div class="profit-over btn-yes" @click='goDevide'>确认分红</div>
     	</div>
     </div>
@@ -61,6 +61,7 @@
                 memo:'',
                 picUrl:null,
                 projectId:this.projectid,
+                isSmsNotice:1,
                 sumInfo:{}
 
             }
@@ -88,7 +89,7 @@
                 'totalMoney':this.totalMoney,
                 'picUrl':this.picUrl,
                 'memo':this.memo,
-                'isSmsNotice':1
+                'isSmsNotice':this.isSmsNotice
             }
             this.$http.post(this.apiurl+'/dividend/add',options)
                 .then((response) => {
@@ -238,6 +239,7 @@
                  }
             }
             .profit-info{
+              height: 180px;
             	span{
                  font-size: 18px;
                  color: #333333;
@@ -261,15 +263,25 @@
                 }
 
             }
-            label{
+            .shit{
               display: block;
-              width: 160px;
+              width: 80px;
               height: 46px;
               line-height: 46px;
-              margin: -60px auto 0;
+              margin: -60px 0 30px 40px;
               font-size: 12px;
               color: #333;
             }
+            .fuck{
+              /*display: block;*/
+              width: 14px;
+              height: 14px;
+              line-height: 14px;
+              margin: -60px 0 30px 20px;
+              font-size: 12px;
+              color: #333;
+            }
+           
             .profit-over{
                 width: 160px;
                 height: 46px;
@@ -277,7 +289,7 @@
                 color: #fff;
                 font-size: 14px;
                 text-align: center;
-                margin:-5px auto;
+                margin:-30px auto;
                 background: $base-color;
                 border-radius: 2px;
 

@@ -24,7 +24,7 @@
               <span>公告内容</span>
               <textarea  cols="30" rows="10"  v-model='option.memo'></textarea>
             </div>
-            <label class="shit"><input type="checkbox" checked>短信通知</label>
+            <input  class="fuck" type="checkbox" v-model='option.isSmsNotice'  > <label class="shit">短信通知</label>
             <div class="profit-over btn-yes" @click='goIssue'>发布</div>
     	</div>
     </div>
@@ -231,13 +231,23 @@
             }
             .shit{
               display: block;
-              width: 160px;
+              width: 80px;
               height: 46px;
               line-height: 46px;
-              margin: -60px auto 10px;
+              margin: -60px 0 30px 40px;
               font-size: 12px;
               color: #333;
             }
+            .fuck{
+              /*display: block;*/
+              width: 14px;
+              height: 14px;
+              line-height: 14px;
+              margin: -60px 0 30px 20px;
+              font-size: 12px;
+              color: #333;
+            }
+
             .profit-over{
                 width: 160px;
                 height: 46px;

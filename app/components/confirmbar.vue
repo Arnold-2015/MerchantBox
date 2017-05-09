@@ -24,7 +24,8 @@
                     <td class="crowone">{{item.phone }}</td>
                     <td class="crowone">{{item.buyCount }}</td>
                     <td class="crowone">{{item.memo }}</td>
-                    <td class="crowtwo"><a href="javascript:;" @click='delPartner(item.orderId)'>剔除该合伙人</a></td>
+                    <td class="crowtwo" v-if='item.tag==1'><a href="javascript:;" @click='reducePartner(item.orderId,index)' >剔除该合伙人</a></td>
+                    <td class="crowtwo" v-if='item.tag==0'><a href="javascript:;" @click='addPartner(item.orderId,index)' style='color:#E56B6B'>恢复该合伙人</a></td>
                 </tr>
                 
                 </table>
@@ -36,6 +37,7 @@
 </template>
 
 <script> 
+    import utils from '../modules/utils.js'
     export default {
         props: ['apiurl','projectid'],
         data() {
@@ -46,7 +48,9 @@
                 realNameOrPhone :'',
                 prepartnerList:{},
                 totalCount:null,
-                buyTotalCount:null
+                buyTotalCount:null,
+                boughtOrders:[],
+                cancelOrders:[]
             }
         },
         methods:{
@@ -70,30 +74,56 @@
                     console.log(response)
                 })
           },
-          delPartner(orderId){
+          addPartner(orderId,index){
 
-            this.$http.delete(this.apiurl+'/partner/orderId/'+orderId)
-                .then((response) => {
-                  if(response.data.statusCode==200){
-                  this.$alert(true,'剔除成功');
-                   timer = setTimeout(() => {
-                      window.location.reload()
-                    }, 2000);
-                }else{
-                  this.$alert(false,'剔除失败，请稍后重试')
-                }
-                })
-                .catch(function(response) {
-                    console.log(response)
-                })
+            // this.$http.delete(this.apiurl+'/partner/orderId/'+orderId)
+            //     .then((response) => {
+            //       if(response.data.statusCode==200){
+            //       this.$alert(true,'剔除成功');
+            //        timer = setTimeout(() => {
+            //           window.location.reload()
+            //         }, 2000);
+            //     }else{
+            //       this.$alert(false,'剔除失败，请稍后重试')
+            //     }
+            //     })
+            //     .catch(function(response) {
+            //         console.log(response)
+            //     })
+            // this.prepartnerList[index].tag=1;
+            var realName=this.prepartnerList[index].realName;
+            var buyCount=this.prepartnerList[index].buyCount;
+            var memo=this.prepartnerList[index].memo;
+            var phone=this.prepartnerList[index].phone;
+            var orderId=this.prepartnerList[index].orderId;
+            this.$set(this.prepartnerList,index,{tag:1,realName:realName,buyCount:buyCount,memo:memo,phone:phone,orderId:orderId});
+            this.boughtOrders.push(this.prepartnerList[index].orderId);
+            utils.removeByValue(this.cancelOrders,this.prepartnerList[index].orderId);
+            console.log(this.boughtOrders)
+            console.log(this.cancelOrders)
+          },
+          reducePartner(orderId,index){
+            var realName=this.prepartnerList[index].realName;
+            var buyCount=this.prepartnerList[index].buyCount;
+            var memo=this.prepartnerList[index].memo;
+            var phone=this.prepartnerList[index].phone;
+            var orderId=this.prepartnerList[index].orderId;
+            this.$set(this.prepartnerList,index,{tag:0,realName:realName,buyCount:buyCount,memo:memo,phone:phone,orderId:orderId});
+            this.cancelOrders.push(this.prepartnerList[index].orderId);
+            utils.removeByValue(this.boughtOrders,this.prepartnerList[index].orderId);
+            console.log(this.boughtOrders)
+            console.log(this.cancelOrders)
           },
           startup(status){
              let options={
                'projectId':this.projectId,
-               'status':status
+               'status':status,
+               'cancelOrders':this.cancelOrders,
+               'boughtOrders':this.boughtOrders
             }
             this.$http.post(this.apiurl+'/project/startup',options)
                 .then((response) => {
+                   if(response.data.statusCode==200){
                    this.$alert(true,'操作成功');
                    this.$store.state.showConfirm = false;
                    timer = setTimeout(() => {
@@ -101,6 +131,9 @@
                     name: 'promanage'
                 });
                     }, 1000);
+              }else{
+                this.$alert(false,'项目启动失败，请稍后重试')
+              }
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -117,7 +150,10 @@
                    this.prepartnerList=response.data.result.partnerIntentionList;
                    this.totalCount =response.data.result.totalCount;
                    this.buyTotalCount  =response.data.result.buyTotalCount ;
-                   console.log(this.prepartnerList)
+                   for( var i in this.prepartnerList){
+                    this.prepartnerList[i].tag=1;
+                    this.boughtOrders.push(this.prepartnerList[i].orderId);
+                   }
                 })
                 .catch(function(response) {
                     console.log(response)

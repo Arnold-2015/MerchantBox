@@ -2,10 +2,10 @@
     <div class="partner-bar">
     
      <div class="search-bar" >
-         <select>
-           <option value ="全部">全部</option>
-           <option value ="有效合伙人">有效合伙人</option>
-           <option value="已退出合伙">已退出合伙</option>
+         <select v-model='status'>
+           <option value =0 >全部</option>
+           <option value =1 >有效合伙人</option>
+           <option value=2 >退出合伙人</option>
          </select>
          <input  type="text" placeholder="输入姓名/卡号/手机号" v-model='realNameOrPhoneOrVipCardNo'>
          <div class="search" ><a  @click="search"></a></div>
@@ -103,6 +103,25 @@
           excel(){
              window.location.href=this.apiurl+'/partner/list/excel?projectId='+this.projectId+'&status='+this.status+'&realNameOrPhoneOrVipCardNo='+this.realNameOrPhoneOrVipCardNo;
                 
+          }
+        },
+        watch:{
+          status(){
+               let options={
+               'projectId':this.projectId,
+               'status':this.status,
+               'pageSize':10,
+               'pageNum':1
+            }
+            this.$http.post(this.apiurl+'/partner/list',options)
+                .then((response) => {
+                   this.partnerList=response.data.result.partnerLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
+                   console.log(this.partnerList)
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
           }
         },
         beforeMount(){

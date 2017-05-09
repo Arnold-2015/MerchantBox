@@ -100,6 +100,15 @@ exports.getProStatus = (status) => {
     
     return str;
 };
+// 删除数组中的指定数值元素
+exports.removeByValue=(arr, val)=> {
+  for(var i=0; i<arr.length; i++) {
+    if(arr[i] == val) {
+      arr.splice(i, 1);
+      break;
+    }
+  }
+};
 
 exports.getCheck = getCheck;
 exports.fmtDate = fmtDate;

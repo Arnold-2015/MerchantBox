@@ -45,7 +45,7 @@
                        ['bold', 'italic'],
                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                        [{ 'header': ['1','2','3','4','5','6']}],
-                       ['link', 'image'],
+                       [ 'image'],
                        [{ 'color': [] }], 
                        [{ 'font': [] }],
                        [{ 'align': [] }],

@@ -71,6 +71,12 @@
                      <option >6个月</option>
                      <option >12个月</option>
                      <option >18个月</option>
+                     <option >24个月</option>
+                     <option >30个月</option>
+                     <option >36个月</option>
+                     <option >42个月</option>
+                     <option >48个月</option>
+
                    </select> 
                    </div>
                  </div>
@@ -125,14 +131,14 @@
                    <label :class="{ radioActive:option.consumeRightVo.consumeType==2,radioNomal:option.consumeRightVo.consumeType!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.consumeRightVo.consumeType">本金消费</label>
                    <label :class="{ radioActive:option.consumeRightVo.consumeType==3,radioNomal:option.consumeRightVo.consumeType!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.consumeRightVo.consumeType">收益消费</label>
                    </div>
-                   <div class="info-item">
+                   <div class="info-item"  v-if='option.consumeRightVo.consumeType==1||option.consumeRightVo.consumeType==2'>
                    <span>本金消费折扣：</span>
                    <!-- <input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.principalConsumeDiscount'> -->
                    <input v-validate:principalConsumeDiscount="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('principalConsumeDiscount') }" name="principalConsumeDiscount" type="text" placeholder="1-10" v-model='option.consumeRightVo.principalConsumeDiscount'>
                    <!-- <input class="profit-info" type="text" placeholder="补充说明" v-model='option.consumeRightVo.principalConsumeMemo'> -->
                    <input v-validate:principalConsumeMemo="'required'" class="profit-info" :class="{'input': true, 'is-danger': errors.has('principalConsumeMemo') }"placeholder="补充说明"  name="principalConsumeMemo" type="text"  v-model='option.consumeRightVo.principalConsumeMemo'>
                    </div>
-                   <div class="info-item add-border">
+                   <div class="info-item " v-if='option.consumeRightVo.consumeType==1||option.consumeRightVo.consumeType==3'>
                    <span>收益消费折扣：</span>
                    <!-- <input class="return-info" type="text" placeholder="1-10" v-model='option.consumeRightVo.earningsDiscount '> -->
                    <input v-validate:earningsDiscount="'required'" class="return-info" :class="{'input': true, 'is-danger': errors.has('earningsDiscount') }" name="earningsDiscount" type="text" placeholder="1-10" v-model='option.consumeRightVo.earningsDiscount '>

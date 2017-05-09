@@ -13,12 +13,12 @@
                 <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='option.thirdPartyCode '></p>
                 <p><span>项目联系人姓名</span><input type="text" class="data" v-model='option.linkManName '></p>
                 <p><span>项目联系人手机号码</span><input type="text" class="data" v-model='option.linkManPhone'></p>
-                <!-- <p><span>商家角色</span>
-                <label :class="{ radioActive:option.role==1,radioNomal:option.role!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.role">正常</label>
-                <label :class="{ radioActive:option.role==2,radioNomal:option.role!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.role">冻结</label>
-                <label :class="{ radioActive:option.role==3,radioNomal:option.role!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.role">狗屎</label>
-                <label :class="{ radioActive:option.role==4,radioNomal:option.role!=4 }"><input type="radio" name="project-kind" value="4" v-model="option.role">狗屎</label>
-                </p> -->
+                <p><span>商家角色</span>
+                <label :class="{ radioActive:option.roleCode=='MERCHANT',radioNomal:option.roleCode!='MERCHANT' }"><input type="radio" name="project-kind" value="MERCHANT" v-model="option.roleCode">商家</label>
+                <label :class="{ radioActive:option.roleCode=='AGENT',radioNomal:option.roleCode!='AGENT' }"><input type="radio" name="project-kind" value="AGENT" v-model="option.roleCode">代理商</label>
+                <label :class="{ radioActive:option.roleCode=='ADMIN',radioNomal:option.roleCode!='ADMIN' }"><input type="radio" name="project-kind" value="ADMIN" v-model="option.roleCode">管理员</label>
+                <label :class="{ radioActive:option.roleCode=='ROOT',radioNomal:option.roleCode!='ROOT' }"><input type="radio" name="project-kind" value="ROOT" v-model="option.roleCode">超管</label>
+                </p>
                
                 
      
@@ -36,7 +36,8 @@
         data() {
             return {
                 option:{
-                  role:1
+                  roleCode:'MERCHANT',
+                  rolelist:null
                 }
             }
         },
@@ -62,6 +63,7 @@
                     console.log(response)
                 })
           }
+
         }
         
     }
@@ -135,6 +137,7 @@
                   line-height: 36px;
                   color:#666;
                   margin-right: 6px;
+                  font-size: 12px;
                   input{
                        width: 16px;
                        height: 36px;

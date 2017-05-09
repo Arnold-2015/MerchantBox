@@ -9,7 +9,7 @@
                             <span>{{customerdetail.realName}}</span>
                             <span>参与项目数 {{customerdetail.participateProjectNum }}</span>
                             <span>累计投资金额 {{customerdetail.investmentMoney }}</span>
-                            <span>类型 {{customerdetail.authStatus }}</span>
+                            <span>类型 {{customerdetail.authStatus |authStatus}}</span>
                             
                         </div>
                  </div>
@@ -21,7 +21,7 @@
                                 <td class="crowone">投资金额</td>
                                 <td class="crowone">卡号</td>
                                 <td class="crowone">本金金额</td>
-                                <td class="crowone">剩余占股</td>
+                                <!-- <td class="crowone">剩余占股</td> -->
                                 <td class="crowone">收益总额</td>
                                 <td class="crowone">消费总额</td>
                             </tr>
@@ -31,7 +31,7 @@
                                 <td class="crowone">{{item.principalBalance }}</td>
                                 <td class="crowone">{{item.vipCode }}</td>
                                 <td class="crowone">{{item.principal}}</td>
-                                <td class="crowone">{{item.totalShare }}</td>
+                                <!-- <td class="crowone">{{item.totalShare }}</td> -->
                                 <td class="crowone">{{item.earning }}</td>
                                 <td class="crowone">{{item.consumeTotal}}</td>
                             </tr>
@@ -46,9 +46,12 @@
 <script>
     require('../assets/list.scss')
     import paging from '../components/paging.vue'
+    import utils from '../modules/utils.js'
     export default {
         filters: {
-            
+            authStatus(value){
+                return value==1?'认证用户':'普通用户'
+            }
         },
         props: ['api'],
         data() {

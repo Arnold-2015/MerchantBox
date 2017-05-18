@@ -2,7 +2,9 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 创建项目</span>
+                 <span class="main-title">
+                  <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                 <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link> / <a href="javascript:;" >创建项目</a></span>
                  <div class="period-bar">
                      <ul>
                          <li class="li-active">项目介绍</li>
@@ -19,6 +21,7 @@
                    <span>项目类型：</span>
                    <label :class="{ radioActive:option.projectType==1,radioNomal:option.projectType!=1 }"><input type="radio" name="project-kind" value="1" v-model="option.projectType">股权投资</label>
                    <label :class="{ radioActive:option.projectType==2,radioNomal:option.projectType!=2 }"><input type="radio" name="project-kind" value="2" v-model="option.projectType">项目合作</label>
+                   <label :class="{ radioActive:option.projectType==3,radioNomal:option.projectType!=3 }"><input type="radio" name="project-kind" value="3" v-model="option.projectType">运营活动</label>
                    </div>                  
                    <!-- <div class="info-item">
                    <span>甲方(项目发起人)：</span><input class="base-info" type="text" placeholder="请填写甲方名称">
@@ -204,6 +207,7 @@
             return {
                 apiurl:this.api,
                 accepts:'image/jpeg,image/jpg,image/png',
+                role:localStorage.getItem('role'),
                 period:'6个月',
                 privilegeLogo:'',
                 privilegeBg :'',
@@ -235,6 +239,7 @@
           saleCount(val){
             this.option.unitPrice = this.totalMoney/this.saleCount;//新增tag的watch，监听变更并同步到isActive上
           }
+
          },
         methods:{
           add(){this.option.salesProjectVo.salesReachInfos.push({})},
@@ -285,7 +290,7 @@
                     name: 'creproforth'
                 });
                 }else{
-                  this.$alert(false,'系统错误，请稍后重试')
+                  this.$alert(false,response.data.result.msg)
                 }
               })
                 .catch(function(response) {
@@ -383,6 +388,9 @@ $base-color:#C49F59;
                 font-size: 12px;
                 color:#999;
                 background:#f6f6f6;
+                 a{
+                  color:#999;
+                }
             }
             .period-bar{
                 width: 100%;

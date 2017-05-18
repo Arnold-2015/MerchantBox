@@ -81,7 +81,7 @@
                     this.$store.state.showreviewmerchant = false;
                     window.location.reload()
                   }else{
-                    alert('审核失败，请重试')
+                    alert(response.data.result.msg)
                   }
                    
                 })

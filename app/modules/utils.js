@@ -1,25 +1,30 @@
 'use strict';
 
-let getCheck = {
-    checkEmail(val) {
-        var filter = /^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (filter.test(val)) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    checkPhone(val) {
-        var filter = /^1\d{10}$/;
 
-        if (filter.test(val)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-};
-
+// 获取手机验证码后相关处理
+const reGetCode = {
+            node:null,
+            count:60,
+            start:function(){
+                if(this.count > 0){
+                    this.node.innerHTML = "重新发送"+this.count--;
+                    var _this = this;
+                    setTimeout(function(){
+                        _this.start();
+                    },1000);
+                }else{
+                    this.node.removeAttribute("disabled");
+                    this.node.innerHTML = "重新发送";
+                    this.count = 60;
+                }
+            },
+            //初始化
+            init:function(node){
+                this.node = node;
+                this.node.setAttribute("disabled",true);
+                this.start();
+            }
+        };
 
 /**
  *   对Date的扩展，将 Date 转化为指定格式的String
@@ -90,7 +95,7 @@ exports.getProStatus = (status) => {
                 str = '确认中';
                 break;
             case 6:
-                str = '招募结束';
+                str = '履约中';
                 break;
             case 7:
                 str = '项目失败';
@@ -110,5 +115,5 @@ exports.removeByValue=(arr, val)=> {
   }
 };
 
-exports.getCheck = getCheck;
 exports.fmtDate = fmtDate;
+exports.reGetCode=reGetCode;

@@ -18,9 +18,9 @@
                 <p>消费金额<input type="text" class="data" v-model="consumeTotal" @keyup='calculateTopay'></p>
                 <p style="float:left">结算方式</p>
                 <div class="consume-choose">
-                <label :class="{ radioActive:consumeType==2,radioNomal:consumeType!=2 }"><input type="radio" name="project-kind" value="2" v-model="consumeType" @click='calculateTopay'>收益消费
+                <label :class="{ radioActive:consumeType==2,radioNomal:consumeType!=2 }" v-if='consume==1 || consume==2'><input type="radio" name="project-kind" value="2" v-model="consumeType" @click='calculateTopay'>收益消费
                 <span v-if='!changediscount'>{{incomdiscount}}折</span><span v-if='changediscount'><input type="text" v-model='incomdiscount' @blur='discount(0)'>折</span></label>
-                <label :class="{ radioActive:consumeType==3,radioNomal:consumeType!=3 }"><input type="radio" name="project-kind" value="3" v-model="consumeType" @click='calculateTopay'>本金消费
+                <label :class="{ radioActive:consumeType==3,radioNomal:consumeType!=3 }" v-if='consume==1 || consume==3'><input type="radio" name="project-kind" value="3" v-model="consumeType" @click='calculateTopay'>本金消费
                 <span v-if='!changediscount'>{{basediscount}}折</span><span v-if='changediscount'><input type="text" v-model='basediscount' @blur='discount(0)'>折</span></label>
                 <a href="javascript:;" @click='discount(1)'>修改折扣</a>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="deal-bar">
                     {{consumeType | consumeType}}   {{nowtopay}} 元<span v-if='showWarn'>收益余额不足,请提醒消费者使用其它消费方式</span>
                 </div>
-                <p>验证码<input type="text" class="data" v-model='verificationCode'><a href="javascript:;" class="getcode" id="getcode" @click='getcode'>获取验证码</a></p>
+                <p>验证码<input type="text" class="data" v-model='verificationCode'><button  class="getcode" id="getcode" @click='getcode'>获取验证码</button></p>
             </div>
             <div class="consume-over btn-yes" @click='goconsume'>确认消费</div>
     	</div>
@@ -36,8 +36,9 @@
 </template>
 
 <script> 
+import utils from '../modules/utils.js'
     export default {
-        filters: {
+        filters: {  
             consumeType:function(consumeType){
                 return consumeType==2?'收益消费':'本金消费'
             }
@@ -46,7 +47,7 @@
         data() {
             return {
                 isActive:1,
-                consumeType:2,
+                consume:1,
                 topay:0,
                 incomdiscount:0,
                 basediscount:0,
@@ -55,10 +56,18 @@
                 baseleft:0,
                 incomeleft:0,
                 nowtopay:0,
+                consumeType:1,
                 consumeTotal:null,
                 verificationCode:null,
                 realNameOrVipCodeOrUserPhone:null,
-                partnerInfo:{}
+                partnerInfo:{
+                  realName:'六度盒友',
+                  phone:'18679301010',
+                  vipCode:'621000704790001',
+                  earning:1000,
+                  principalBalance:1000
+
+                }
             }
         },
         methods:{
@@ -71,7 +80,18 @@
                    this.partnerInfo=response.data.result;
                    this.baseleft=this.partnerInfo.principalBalance;
                    this.incomeleft=this.partnerInfo.earning;
-                   if(this.partnerInfo.consumeRightList[0].consumeType==2){
+                   if(this.partnerInfo.consumeRightList.length==1){
+                      if(this.partnerInfo.consumeRightList[0].consumeType==2){
+                        this.consume=2
+                        this.consumeType=2
+                       this.incomdiscount=this.partnerInfo.consumeRightList[0].consumeDiscoun;
+                      }else{
+                        this.consume=3
+                        this.consumeType=3
+                       this.basediscount=this.partnerInfo.consumeRightList[0].consumeDiscoun
+                      }
+                   }else{
+                    if(this.partnerInfo.consumeRightList[0].consumeType==2){
                     this.incomdiscount=this.partnerInfo.consumeRightList[0].consumeDiscoun;
                    }else{
                     this.basediscount=this.partnerInfo.consumeRightList[0].consumeDiscoun
@@ -81,6 +101,9 @@
                    }else{
                     this.basediscount=this.partnerInfo.consumeRightList[1].consumeDiscoun
                    }
+                   }
+
+                   
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -138,7 +161,8 @@
             }
             this.$http.post(this.apiurl+'/consume/smsCode',options)
                 .then((response) => {
-                   
+                   var getcode=document.getElementById('getcode');
+                   utils.reGetCode.init(getcode);
                 })
                 .catch(function(response) {
                     console.log(response)
@@ -159,7 +183,7 @@
                    this.$store.state.showConsume = false;
                    this.$alert(true,'核销成功');
                   }else{
-                    this.$alert(false,'核销失败，请稍后重试');
+                    this.$alert(false,response.data.result.msg);
                   }
                 })
                 .catch(function(response) {

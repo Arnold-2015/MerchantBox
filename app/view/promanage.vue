@@ -3,7 +3,7 @@
          <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理</span>
+                 <span class="main-title"><a href="javascript:;" >项目管理</a></span>
                  <div class="main-nav">
                      <span>项目管理</span>
                      <router-link to="creprofirst" class="creat-new"><span></span>新建项目</router-link>
@@ -47,7 +47,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg' >
+                         <img :src='item.backgroundImg | backgroundImg' >
                      </div>
                 </div>
                      <!-- 项目审核中 -->
@@ -87,7 +87,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg' >
+                         <img :src='item.backgroundImg | backgroundImg' >
                      </div>
                 </div>
                     <!-- 项目审核失败 -->
@@ -127,7 +127,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg' >
+                         <img :src='item.backgroundImg | backgroundImg' >
                      </div>
                 </div>
                  
@@ -169,7 +169,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg' >
+                         <img :src='item.backgroundImg | backgroundImg'>
                      </div>
                 </div>
                  <!-- 招募中 -->
@@ -210,7 +210,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg' >
+                         <img :src='item.backgroundImg | backgroundImg' >
                      </div>
                 </div>
                  <!-- 履约中 -->
@@ -255,7 +255,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg'>
+                         <img :src='item.backgroundImg | backgroundImg'>
                      </div>
                  </div>
                    <!-- 项目失败 -->
@@ -293,7 +293,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src='item.backgroundImg' >
+                         <img :src='item.backgroundImg | backgroundImg' >
                      </div>
                 </div>
             </div>
@@ -311,7 +311,9 @@
     import paging from '../components/paging.vue'
     export default {
         filters: {
-            
+            backgroundImg(val){
+                return ''+val
+            }
         },
         props: ['api'],
            data() {
@@ -393,6 +395,9 @@ $base-color:#C49F59;
                 margin-left:40px;
                 color:#999;
                 font-size:12px;
+                 a{
+                  color:#999;
+                }
             }
             .main-nav{
                 width:100%;

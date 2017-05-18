@@ -11,7 +11,7 @@
             <input type="password" name="pw" v-model='password'>
             <a href="javascript:;" class="forget" @mouseover='changeforget(1)' @mouseleave='changeforget(0)'>忘记密码？</a>
             <p class="help" v-if='forget'>请联系 13345815600 (同是微信账号)</p>
-            <div class="login btn-yes" @click='login'>登录</div>
+            <a href="javascript:;" class="login btn-yes" @click='login'>登录</a>
             <a href="javascript:;" class="nocount" @mouseover='changenocount(1)' @mouseleave='changenocount(0)'>没有账号?</a>
             <p class="help" v-if='nocount'>请联系 13345815600 (同是微信账号)</p>
         </div>

@@ -42,7 +42,7 @@ $base-color:#C49F59;
         	top: 14px;
         	border: 1px solid #d7d7d7;
         	&:focus{
-                    border: 1px solid #C09D5B;
+                    border: 1px solid #d7d7d7;
                     outline:none;
                 }
         }
@@ -126,13 +126,22 @@ $base-color:#C49F59;
             	color: $base-color;
             	margin-left: 10px;
             }  
+            select{
+                font-weight:bold;
+                border: 1px solid #d7d7d7;
+                font-size:18px;
+                &:focus{
+                          border: 1px solid #d7d7d7;
+                          outline:none
+                      }
+            }
         }
-        .crowone{
-            width: 11%;
-        }
-        .crowtow{
-            width: 20%;
-        }
+        // .crowone{
+        //     width: 11%;
+        // }
+        // .crowtow{
+        //     width: 20%;
+        // }
         .active{
             background:#fff;
         }
@@ -185,7 +194,7 @@ $base-color:#C49F59;
             top: 14px;
             border: 1px solid #d7d7d7;
             &:focus{
-                    border: 1px solid #C09D5B;
+                    border: 1px solid #d7d7d7;
                     outline:none;
                 }
         }
@@ -269,13 +278,18 @@ $base-color:#C49F59;
                 color: $base-color;
                 margin-left: 10px;
             }  
+            select{
+                font-weight:bold;
+                border: 1px solid #d7d7d7;
+                font-size:12px;
+            }
         }
-        .crowone{
-            width: 11%;
-        }
-        .crowtow{
-            width: 20%;
-        }
+        // .crowone{
+        //     width: 11%;
+        // }
+        // .crowtow{
+        //     width: 20%;
+        // }
         .active{
             background:#fff;
         }

@@ -58,7 +58,7 @@
                 payRate:null,
                 frozenRate:null,
                 merchantId:null,
-                previewurl:'http://www.6dbox.cn/6dtest/page/projectDetail.html?projectId='+this.projectid
+                previewurl:'http://www.6dbox.cn/6dhezi/page/projectDetail.html?projectId='+this.projectid
             }
         },
         methods:{
@@ -81,7 +81,7 @@
                       window.location.reload()
                     }, 1000);
                  }else{
-                  this.$alert(false,'审核失败，请重试')
+                  this.$alert(false,response.data.result.msg)
                  }
                    
                 })
@@ -186,12 +186,12 @@
                  display: inline-block;
                 }
                 span{
-                  font-size: 18px;
+                  font-size: 16px;
                   color: #999;
                   height: 32px;
                   line-height: 32px;
                   a{
-                    font-size: 18px;
+                    font-size: 16px;
                     color:$base-color;
                   }
                 }
@@ -226,7 +226,7 @@
                         }
                  }
                  span{
-                  width: 300px;
+                  width: 240px;
                   color:#999;
                   display: inline-block;
                  }

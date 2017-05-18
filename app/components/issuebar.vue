@@ -59,7 +59,7 @@
                     this.$alert(true,'发布公告成功');
                   
                  }else{
-                 this.$alert(false,'发布公告失败，请重试');
+                 this.$alert(false,response.data.result.msg);
                  }
                 })
                 .catch(function(response) {

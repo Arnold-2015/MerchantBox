@@ -3,7 +3,9 @@
          <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 管理中心</span>
+                 <span class="main-title">
+                 <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                 <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link> / <a href="javascript:;" >管理中心</a></span>
                  
                  <!-- 招募中 -->
                  <div class="pro-item">
@@ -34,7 +36,7 @@
                                          <span class="key-word">收益总余额</span>
                                      </li>
                                      <li>
-                                         <span class="key-msg">{{projectInfo.cousumeTotalMoney }}元</span>
+                                         <span class="key-msg">{{projectInfo.consumeTotalMoney }}元</span>
                                          <span class="key-word">消费总金额</span>
                                      </li>
                                      <div>
@@ -45,7 +47,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src="projectInfo.projectBgImg" >
+                         <img :src="projectInfo.projectBgImg | backgroundImg" >
                      </div>
                  </div>
 
@@ -92,12 +94,15 @@
                 apiurl:this.api,
                 isActive:this.$store.state.isActive,
                 projectId:this.$route.query.projectId,
+                role:localStorage.getItem('role'),
                 projectInfo:{},
                 qrCode:null
             }
         },
         filters: {
-            
+            backgroundImg(val){
+                return ''+val
+            }
         },
         methods:{
           setActive(i){
@@ -162,6 +167,9 @@ $base-color:#C49F59;
                 margin-left:40px;
                 color:#999;
                 font-size:12px;
+                 a{
+                  color:#999;
+                }
             }
             .pro-item{
                 width: 100%;

@@ -3,9 +3,12 @@
          <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 管理中心 / 明细</span>
+                 <span class="main-title">
+                  <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                  <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link>
+                   / <a href="javascript:;" >管理中心</a>
+                   / <a href="javascript:;" >明细</a></span>
                  <div class="search-bar">
-                        <!-- <router-link class="toback" to="performing">返回</router-link> -->
                         <div class="info-bar">
                             <span class="title">{{profitDetail.dividendTime}} 分红明细</span>
                             <span>分红总金额 {{profitDetail.dividendTotalMoney}}元</span>
@@ -53,8 +56,9 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
-                projectId:'22e6b233d5b5f78bf81c11242c0cb046',
-                dividendId:'0bbc881586cf4ca71356e5bc24ee718b',
+                projectId:this.$route.query.projectId,
+                dividendId:this.$route.query.dividendId,
+                role:localStorage.getItem('role'),
                 profitDetail:{},
                 pages:null
             }
@@ -132,6 +136,9 @@ $base-color:#C49F59;
                 margin-left:40px;
                 color:#999;
                 font-size:12px;
+                 a{
+                  color:#999;
+                }
             }
              .search-bar  .info-bar {
                left:0;

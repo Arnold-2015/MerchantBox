@@ -2,7 +2,7 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理</span>
+                 <span class="main-title"><a href="javascript:;" > 项目管理</a></span>
                  <div class="main-nav">
                      <span>项目管理</span>
                      <router-link to="creprofirst" class="creat-new"><span></span>新建项目</router-link>
@@ -21,7 +21,18 @@
                     <td class="crowone">联系号码</td>
                     <td class="crowone">招募开始时间</td>
                     <td class="crowone">项目来源</td>
-                    <td class="crowone">状态</td>
+                    <td class="crowone">
+                        <select v-model='projectStatus' @change='search'>
+                          <option value=0 >全部</option>
+                          <option value=1 >草稿 </option>
+                          <option value=2 >待审核</option>
+                          <option value=3 >审核失败</option>
+                          <option value=4 >招募中</option>
+                          <option value=5 >确认中</option>
+                          <option value=6 >履约中</option>
+                          <option value=7 >项目失败</option>
+                        </select>
+                    </td>
                     <td class="crowtwo">操作</td>
                 </tr>
                 <tr v-for="(item,index) in projectList" :class='{active:active[index%2]}'>
@@ -103,6 +114,7 @@
           },
           search(){
             let options={
+                'projectStatus':this.projectStatus,
                 'projectNameOrMerchantNameOrMerchantPhone':this.projectNameOrMerchantNameOrMerchantPhone,
                 'pageSize':10,
                 'pageNum':1
@@ -110,6 +122,7 @@
             this.$http.post(this.apiurl+'/project/list',options)
                 .then((response) => {
                    this.projectList=response.data.result.projectLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.projectList)
                 })
                 .catch(function(response) {
@@ -127,6 +140,8 @@
           },
           getpage(){
             let options={
+                'projectStatus':this.projectStatus,
+                'projectNameOrMerchantNameOrMerchantPhone':this.projectNameOrMerchantNameOrMerchantPhone,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }
@@ -151,7 +166,7 @@
             this.$emit('changetag')
             this.$emit('changenv')
             let options={
-                // 'nickNameOrUserPhone':this.nickNameOrUserPhone,
+                'projectStatus':this.projectStatus,
                 'pageSize':10,
                 'pageNum':1
             }
@@ -192,8 +207,10 @@ $base-color:#C49F59;
                 height:60px;
                 line-height:60px;
                 margin-left:40px;
-                color:#999;
                 font-size:12px;
+                a{
+                  color:#999;
+                }
             }
             .main-nav{
                 width:100%;

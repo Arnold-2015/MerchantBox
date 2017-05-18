@@ -61,6 +61,7 @@
             this.$http.post(this.apiurl+'/consume/list',options)
                 .then((response) => {
                    this.consumeList=response.data.result.consumeLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.consumeList)
                 })
                 .catch(function(response) {
@@ -69,6 +70,7 @@
           },
           getpage(){
             let options={
+                'nickNameOrUserPhone':this.partnerNameOrCardNoOrPhone,
                 'projectId':this.projectId,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum

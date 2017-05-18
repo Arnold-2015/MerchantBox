@@ -8,7 +8,7 @@
                 <p><span>商家姓名（甲方)</span><input type="text" class="data" v-model='merchantinfo.nickName'></p>
                 <p><span>商家身份证号</span><input type="text" class="data" v-model='merchantinfo.idNo'></p>
                 <p><span>手机号码（账号)</span><input type="text" class="data" v-model='merchantinfo.userPhone'></p>
-                <p><span>账号密码</span><input type="password" class="data" v-model='merchantinfo.password'></p>
+                <p><span>账号密码</span><input type="password" class="data" value='123456'></p>
                 <p><span>丙方(甲方所属企业名称)</span><input type="text" class="data" v-model='merchantinfo.thirdPartyName'></p>
                 <p><span>丙方组织机构代码</span><input type="text" class="data" v-model='merchantinfo.thirdPartyCode'></p>
                 <p><span>项目联系人姓名</span><input type="text" class="data" v-model='merchantinfo.linkManName'></p>
@@ -31,7 +31,7 @@
         props: ['apiurl','merchantinfo'],
         data() {
             return {
-
+             
             }
         },
         methods:{
@@ -49,7 +49,7 @@
                       window.location.reload()
                     }, 1000);
                  }else{
-                  this.$alert(false,'修改失败，请重试')
+                  this.$alert(false,response.data.result.msg)
                  }
                 })
                 .catch(function(response) {

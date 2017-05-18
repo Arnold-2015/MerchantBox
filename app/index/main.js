@@ -24,7 +24,8 @@ var app = new Vue({
 		showLoading: false,
 		shownv:false,
 		// api:'http://test.6dbox.cn:8008',
-		api:'http://192.168.7.12:8080',
+		// api:'http://192.168.7.12:8080',
+		api:'http://xf.6dbox.cn:8008',	
 		avarta:localStorage.getItem('avarta'),
 		role:localStorage.getItem('role'),
 		menuTag:localStorage.getItem('menuTag')
@@ -57,10 +58,16 @@ Vue.http.interceptors.push((request, next) => {
   console.log(request.headers)
   next(response => {
   	app.showLoading=false;
-    if(response.data.errorCode==null) {return response}
+    if(response.data.statusCode==200) {return response}
     	else if(response.data.errorCode.code==3000){
-    		alert('登录信息已过期，请重新登录');
-    		window.location.href='http://test.6dbox.cn'
+    		app.$alert(false,'您的账户已在其它设备登录');
+    		 timer = setTimeout(() => {
+                this.$router.push({
+                    name: 'login'
+                });
+                    }, 1000);
+    	}else if(response.data.statusCode!=200&&response.data.errorCode.code!=3000){
+             app.$alert(false,response.data.errorCode.message);
     	}
 
   })

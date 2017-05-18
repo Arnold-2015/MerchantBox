@@ -2,7 +2,7 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 管理员账户</span>
+                 <span class="main-title"> 管理员账户</span>
                  <div class="main-nav">
                      <span>管理员账户列表</span>
                      <a @click='showManagerChange' class="creat-new"><span></span>新建管理员</a>

@@ -2,7 +2,9 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 创建项目</span>
+                 <span class="main-title">
+                 <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                 <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link> / <a href="javascript:;" >创建项目</a></span>
                  <div class="period-bar">
                      <ul>
                          <li class="li-active">项目介绍</li>
@@ -63,6 +65,7 @@
             return {
                 apiurl:this.api,
                 accepts:'application/pdf',
+                role:localStorage.getItem('role'),
                 option:{
                   projectId:this.$store.state.projectId,
                   contractUrl:''
@@ -91,8 +94,9 @@
                 .then((response) => {
                    this.$store.state.projectId=null;
                    this.$alert(true,'项目已提交审核')
+                   var _route=localStorage.getItem('role')=='ADMIN'?'superpromanage':'promanage';
                    this.$router.push({
-                    name: 'promanage'
+                    name: _route
                 });
                 })
                 .catch(function(response) {
@@ -149,6 +153,9 @@ $base-color:#C49F59;
                 font-size: 12px;
                 color:#999;
                 background:#f6f6f6;
+                 a{
+                  color:#999;
+                }
             }
             .period-bar{
                 width: 100%;

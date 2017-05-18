@@ -15,7 +15,7 @@
         props:['projectid','qrcode'],
         data(){
             return {
-                previewurl:'http://www.6dbox.cn/6dtest/page/projectDetail.html?projectId='+this.projectid
+                previewurl:'http://www.6dbox.cn/6dhezi/page/projectDetail.html?projectId='+this.projectid
             }
         },
         methods:{

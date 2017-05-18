@@ -8,7 +8,6 @@
                 <tr class='title'>
                     <td class="crowone">分红编号</td>
                     <td class="crowone">分红总金额</td>
-                    <td class="crowone">出让股份(%)</td>
                     <td class="crowone">分红人数</td>
                     <td class="crowone">发放时间</td>
                     <td class="crowtwo">分红说明</td>
@@ -17,11 +16,10 @@
                 <tr v-for="(item,index) in profitList" :class='{active:active[index%2]}'>
                     <td class="crowone">{{item.dividendCode}}</td>
                     <td class="crowone">{{item.totalMoney}}</td>
-                    <td class="crowone">{{item.totalMoney}}</td>
                     <td class="crowone">{{item.headCount}}</td>
                     <td class="crowone">{{item.dividendTime |fmtDate}}</td>
                     <td class="crowtwo">{{item.memo}}</td>
-                    <td class="crowone"><router-link to="profitdetail">明细</router-link></td>
+                    <td class="crowone"><router-link  :to="{ path: 'profitdetail', query: { projectId:projectId,dividendId:item.dividendId }}">明细</router-link></td>
                 </tr>
                 
     </table>

@@ -2,7 +2,7 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 用户管理</span>
+                 <span class="main-title"> 用户管理</span>
                  <div class="main-nav">
                      <span>用户管理</span>
                  </div>
@@ -81,6 +81,7 @@
             this.$http.post(this.apiurl+'/customer/list',options)
                 .then((response) => {
                    this.customerList=response.data.result.customerLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.customerList)
                 })
                 .catch(function(response) {
@@ -89,6 +90,7 @@
           },
           getpage(){
             let options={
+                'realNameOrUserPhoneOrIDNo':this.realNameOrUserPhoneOrIDNo,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }

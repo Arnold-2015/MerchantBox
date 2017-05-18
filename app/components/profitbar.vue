@@ -86,7 +86,7 @@
           goDevide(){
             let options={
                 'projectId':this.projectId,
-                'totalMoney':this.totalMoney,
+                'totalMoney':this.sumInfo.participateMoney,
                 'picUrl':this.picUrl,
                 'memo':this.memo,
                 'isSmsNotice':this.isSmsNotice
@@ -97,7 +97,7 @@
                     this.$store.state.showProfit = false;
                     this.$alert(true,'分红成功');
                    }else{
-                    this.$alert(false,'分红失败，请重试');
+                    this.$alert(false,response.data.result.msg);
                    }
                 })
                 .catch(function(response) {

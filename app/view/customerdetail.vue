@@ -3,7 +3,9 @@
          <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 用户管理 / 用户明细</span>
+                 <span class="main-title">
+                 <router-link to='customermanage' >用户管理</router-link>
+                  / <a href="javascript:;" >用户明细</a></span>
                  <div class="search-bar">
                         <div class="info-bar">
                             <span>{{customerdetail.realName}}</span>
@@ -127,6 +129,9 @@ $base-color:#C49F59;
                 margin-left:40px;
                 color:#999;
                 font-size:12px;
+                a{
+                  color:#999;
+                }
             }
            .search-bar  .info-bar {
                left:0;

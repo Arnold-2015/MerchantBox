@@ -2,7 +2,7 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 订单管理</span>
+                 <span class="main-title"> 订单管理</span>
                  <div class="main-nav">
                      <span>订单管理</span>
                  </div>
@@ -22,7 +22,15 @@
                     <td class="crowone">份数</td>
                     <td class="crowone">投资金额</td>
                     <td class="crowone">支付时间</td>
-                    <td class="crowone">状态</td>
+                    <td class="crowone">
+                        <select v-model='status' @change='search'>
+                          <option value=0 >全部</option>
+                          <option value=1 >待支付 </option>
+                          <option value=2 >已支付</option>
+                          <option value=3 >确认中</option>
+                          <option value=4 >已取消</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr v-for="(item,index) in orderList" :class='{active:active[index%2]}'>
                     <td class="crowone">{{item.orderCode}}</td>
@@ -50,8 +58,24 @@
     require('../assets/list.scss')
     export default {
         filters: {
-            status(value){
-                return value==1?'待支付':'已支付'
+            status(status){
+                let str = '';
+        switch (status) {
+            case 1:
+                str = '待支付 ';
+                break;
+            case 2:
+                str = '已支付';
+                break;
+            case 3:
+                str = '确认中';
+                break;
+            case 4:
+                str = '已取消';
+                break;
+            
+        }   
+            return str;          
             },
             fmtDate(date){
                 return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
@@ -74,6 +98,7 @@
           },
           search(){
             let options={
+                'status':this.status,
                 'realNameOrPhoneOrProjectName':this.realNameOrPhoneOrProjectName,
                 'pageSize':10,
                 'pageNum':1
@@ -81,6 +106,7 @@
             this.$http.post(this.apiurl+'/order/list',options)
                 .then((response) => {
                    this.orderList=response.data.result.orderLists ;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.orderList)
                 })
                 .catch(function(response) {
@@ -89,6 +115,8 @@
           },
           getpage(){
             let options={
+                'status':this.status,
+                'realNameOrPhoneOrProjectName':this.realNameOrPhoneOrProjectName,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }

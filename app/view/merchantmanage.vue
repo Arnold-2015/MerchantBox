@@ -2,7 +2,7 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 商家管理</span>
+                 <span class="main-title">商家管理</span>
                  <div class="main-nav">
                      <span>商家管理</span>
                      <a href="javascript:;" @click='showCreMerchantChange' class="creat-new btn-yes"><span></span>新建商家</a>
@@ -94,6 +94,7 @@
             this.$http.post(this.apiurl+'/merchant/list',options)
                 .then((response) => {
                    this.merchantList=response.data.result.merchantLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.merchantList)
                 })
                 .catch(function(response) {
@@ -102,6 +103,7 @@
           },
           getpage(){
             let options={
+                'nickNameOrUserPhone':this.nickNameOrUserPhone,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }

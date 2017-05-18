@@ -35,8 +35,24 @@
     import utils from '../modules/utils.js'
     export default {
         filters: {
-            status(value){
-                return value==1?'待支付':'已支付'
+            status(status){
+                let str = '';
+        switch (status) {
+            case 1:
+                str = '待支付 ';
+                break;
+            case 2:
+                str = '已支付';
+                break;
+            case 3:
+                str = '确认中';
+                break;
+            case 4:
+                str = '已取消';
+                break;
+            
+        }   
+            return str;          
             },
             fmtDate(date){
                 return utils.fmtDate(new Date(date),'yyyy-MM-dd hh:mm:ss')
@@ -64,6 +80,7 @@
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
                    this.prepartnerList=response.data.result.partnerIntentionList;
+                   this.pages=Math.ceil(response.data.result.totalCount /10);
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {
@@ -73,6 +90,7 @@
           getpage(){
             let options={
                 'projectId':this.projectId,
+                'realNameOrPhone':this.realNameOrPhone,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }
@@ -100,7 +118,7 @@
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
                    this.prepartnerList=response.data.result.partnerIntentionList;
-                   this.pages=Math.ceil(response.data.result.buyTotalCount /10);
+                   this.pages=Math.ceil(response.data.result.totalCount /10);
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {

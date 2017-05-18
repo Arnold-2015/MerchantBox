@@ -3,7 +3,11 @@
          <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 管理中心 /合伙人明细</span>
+                 <span class="main-title">
+                  <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                  <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link>
+                   / <a href="javascript:;" >管理中心</a>
+                   / <a href="javascript:;" >合伙人明细</a></span>
                  <div class="search-bar">
                         <!-- <router-link class="toback" to="performing">返回</router-link> -->
                         <div class="info-bar">
@@ -55,6 +59,7 @@
             return {
                 active:[false,true],
                 apiurl:this.api,
+                role:localStorage.getItem('role'),
                 partnerDetail:{}
             }
         },

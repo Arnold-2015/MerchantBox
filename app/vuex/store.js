@@ -6,6 +6,7 @@ const store = new Vuex.Store({
         isActive:1,
         shownv:false,
         showQr:false,
+        showps:false,
         showConsume:false,
         showProfit:false,
         showIssue:false,

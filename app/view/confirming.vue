@@ -3,7 +3,9 @@
          <!-- <nb></nb> -->
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 管理中心</span>
+                 <span class="main-title">
+                 <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                 <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link> / <a href="javascript:;" >管理中心</a></span>
                  
                  <!-- 招募中 -->
                  <div class="pro-item">
@@ -12,7 +14,7 @@
                              <div class="up-bar">
                                  <h1>{{projectInfo.projectName }}</h1>
                                  <span>确认中</span>
-                                 <a @click='showConfirmChange' class="creat-new btn-yes">待确认有效合伙人</a>
+                                 <a @click='showConfirmChange' class="creat-new btn-yes" href="javascript:;">待确认有效合伙人</a>
                              </div>
                              <div class="low-bar">
                                      <li>
@@ -26,6 +28,10 @@
                                      <li>
                                          <span class="key-msg">{{projectInfo.hadCrowdFundingMoney }}元</span>
                                          <span class="key-word">已募集总金额</span>
+                                     </li>
+                                      <li>
+                                         <span class="key-msg">{{projectInfo.totalMoney }}元</span>
+                                         <span class="key-word">目标总金额</span>
                                      </li>
                                      <li>
                                          <span class="key-msg">{{projectInfo.unitPrice }}元</span>
@@ -43,7 +49,7 @@
                          </div>
                      </div>
                      <div class="pro-icon">
-                         <img :src="projectInfo.projectBgImg"  >
+                         <img :src="projectInfo.projectBgImg | backgroundImg"  >
                      </div>
                  </div>
 
@@ -75,6 +81,9 @@
         filters: {
             fmtDate(date){
                 return utils.fmtDate(new Date(date),'yyyy-MM-dd')
+            },
+            backgroundImg(val){
+                return ''+val
             }
         },
         props: ['api'],
@@ -84,6 +93,7 @@
                 qrCode:null,
                 apiurl:this.api,
                 projectId:this.$route.query.projectId,
+                role:localStorage.getItem('role'),
                 projectInfo:{}
             }
         },
@@ -142,6 +152,9 @@ $base-color:#C49F59;
                 margin-left:40px;
                 color:#999;
                 font-size:12px;
+                 a{
+                  color:#999;
+                }
             }
             .pro-item{
                 width: 100%;

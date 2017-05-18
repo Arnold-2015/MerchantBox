@@ -2,7 +2,9 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 项目管理 / 创建项目</span>
+                 <span class="main-title">
+                 <router-link to='superpromanage' v-if='role=="ADMIN"'>项目管理</router-link>
+                 <router-link to='promanage' v-if='role!="ADMIN"'>项目管理</router-link> / <a href="javascript:;" >创建项目</a></span>
                  <div class="period-bar">
                      <ul>
                          <li class="li-active">项目介绍</li>
@@ -53,6 +55,7 @@ import Vue from 'Vue'
                 active:[false,true],
                 apiurl:this.api,
                 accepts:'image/jpeg,image/jpg,image/png',
+                role:localStorage.getItem('role'),
                 backgroundImg:'',
                 option:{
                   backgroundImg:'',
@@ -106,7 +109,7 @@ import Vue from 'Vue'
                     name: 'creprosecond'
                 });
                 }else{
-                  this.$alert(false,'系统错误，请稍后重试')
+                  this.$alert(false,response.data.result.msg)
                 }
               })
                 .catch(function(response) {
@@ -242,6 +245,9 @@ $base-color:#C49F59;
                 font-size: 12px;
                 color:#999;
                 background:#f6f6f6;
+                 a{
+                  color:#999;
+                }
             }
             .period-bar{
                 width: 100%;

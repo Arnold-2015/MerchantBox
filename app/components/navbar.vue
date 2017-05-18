@@ -2,7 +2,7 @@
     <div class="nav-bar">
       <span class="nav-icon"></span>
       <span class="nav-title">六度盒子商家版</span>
-      <img :src="avarta" class="user-avarta">
+      <img :src="avarta | backgroundImg" class="user-avarta">
       <span class="setting-icon" @mouseover='changeWillShow(true)' ></span>
       <div class="setting-bar" v-if='willShow'  @mouseleave='changeWillShow(false)'>
         <router-link to='setting' @click.native='changeWillShow'>账号设置</router-link>
@@ -27,6 +27,11 @@ Vue.http.interceptors.push((request, next) => {
 })
     export default {
       props: ['api','avarta'],
+      filters: {
+            backgroundImg(val){
+                return ''+val
+            }
+        },
         data() {
             return {
                 willShow:false,

@@ -50,7 +50,7 @@
                     this.$store.state.shownoverify = false;
                     window.location.reload()
                     }else{
-                      this.$alert(false,'操作失败，请稍后重试')
+                      this.$alert(false,response.data.result.msg)
                     }
                  
                    

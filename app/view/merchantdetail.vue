@@ -2,11 +2,13 @@
     <section>     
          <div class="content">
              <div class="main">
-                 <span class="main-title">主页 / 商家管理 / 商家明细</span>
+                 <span class="main-title">
+                 <router-link to='merchantmanage' >商家管理</router-link>
+                  / <a href="javascript:;" >商家明细</a></span>
                  <div class="search-bar">
                         <div class="info-bar">
                             <span>{{merchantdetail.nickName}}</span>
-                            <span>参与项目数 {{merchantdetail.projectCount  }}</span>
+                            <span>拥有项目数 {{merchantdetail.projectCount  }}</span>
                             <span>累计投资金额 {{merchantdetail.totalMoney  }}</span>
                             <span>累计分红 {{merchantdetail.dividendTotalMoney  }}</span>
                             
@@ -115,6 +117,9 @@ $base-color:#C49F59;
                 margin-left:40px;
                 color:#999;
                 font-size:12px;
+                 a{
+                  color:#999;
+                }
             }
            .search-bar  .info-bar {
                left:0;

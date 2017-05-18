@@ -68,6 +68,7 @@
             this.$http.post(this.apiurl+'/partner/list',options)
                 .then((response) => {
                    this.partnerList=response.data.result.partnerLists;
+                   this.pages=Math.ceil(response.data.result.totalCount/10);
                    console.log(this.partnerList)
                 })
                 .catch(function(response) {
@@ -86,6 +87,7 @@
           getpage(){
             let options={
                 'projectId':this.projectId,
+                'realNameOrPhoneOrVipCardNo':this.realNameOrPhoneOrVipCardNo,
                 'pageSize':10,
                 'pageNum':this.$store.state.pageNum
             }

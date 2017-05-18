@@ -6,9 +6,9 @@
                 <span @click='showConfirmChange'></span>    
             </div>
             <div class="search-bar">
-                <input  type="text" placeholder="输入姓名/卡号/手机号" >
+                <input  type="text" placeholder="输入姓名/卡号/手机号" v-model='realNameOrPhone'>
                 <div class="search"  style="left:291px" ><a  @click="search"></a></div>
-                <p>目标分数{{totalCount }}份,当前共{{buyTotalCount  }}份</p>
+                <p>目标份数{{totalCount }}份,当前共{{buyTotalCount  }}份</p>
             </div>
             <div class="confirm-list-bar">
                   <table class="confirm-list">
@@ -67,7 +67,10 @@
             this.$http.post(this.apiurl+'/partner/intention/list',options)
                 .then((response) => {
                    this.prepartnerList=response.data.result.partnerIntentionList;
-                   
+                   for( var i in this.prepartnerList){
+                    this.prepartnerList[i].tag=1;
+                    this.boughtOrders.push(this.prepartnerList[i].orderId);
+                   }
                    console.log(this.prepartnerList)
                 })
                 .catch(function(response) {
@@ -75,22 +78,6 @@
                 })
           },
           addPartner(orderId,index){
-
-            // this.$http.delete(this.apiurl+'/partner/orderId/'+orderId)
-            //     .then((response) => {
-            //       if(response.data.statusCode==200){
-            //       this.$alert(true,'剔除成功');
-            //        timer = setTimeout(() => {
-            //           window.location.reload()
-            //         }, 2000);
-            //     }else{
-            //       this.$alert(false,'剔除失败，请稍后重试')
-            //     }
-            //     })
-            //     .catch(function(response) {
-            //         console.log(response)
-            //     })
-            // this.prepartnerList[index].tag=1;
             var realName=this.prepartnerList[index].realName;
             var buyCount=this.prepartnerList[index].buyCount;
             var memo=this.prepartnerList[index].memo;
@@ -132,7 +119,7 @@
                 });
                     }, 1000);
               }else{
-                this.$alert(false,'项目启动失败，请稍后重试')
+                this.$alert(false,response.data.result.msg)
               }
                 })
                 .catch(function(response) {

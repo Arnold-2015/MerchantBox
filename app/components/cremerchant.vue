@@ -56,7 +56,7 @@
                       window.location.reload()
                     }, 1000);
                }else{
-                this.$alert(false,'创建失败，请重试')
+                this.$alert(false,response.data.result.msg)
                }
                 })
                 .catch(function(response) {
